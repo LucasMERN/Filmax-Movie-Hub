@@ -11,8 +11,8 @@ export const getTop10 = async () => {
     {
       method: "GET",
       headers: {
-        "X-RapidAPI-Key": "3fb342082dmsh2a8a85384ba7173p1b6315jsn6476e64d0796",
-        "X-RapidAPI-Host": "imdb188.p.rapidapi.com",
+        'X-RapidAPI-Key': 'a35ca79fe7msh8dcb3cad3ec1594p1543cejsn542bead5bd54',
+        'X-RapidAPI-Host': 'imdb188.p.rapidapi.com'
       },
     }
   );
