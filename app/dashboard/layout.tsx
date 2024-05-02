@@ -1,5 +1,3 @@
-import GraphQLProvider from '@/lib/provider';
-
 export default function DashboardLayout({
     children,
   }: {
@@ -7,7 +5,7 @@ export default function DashboardLayout({
   }) {
     return (
       <section className="absolute w-screen top-0">
-        <GraphQLProvider>{children}</GraphQLProvider>
+        {children}
       </section>
     )
   }

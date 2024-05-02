@@ -4,7 +4,7 @@ import { usePathname } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
 
-import Button from '@/Components/ui/Button'
+import { Button } from '@/Components/ui/Button'
  
 export default function Nav() {
   const pathname = usePathname()
@@ -70,8 +70,8 @@ export default function Nav() {
             </ul>
 
             <div className='flex gap-4 flex-row'>
-                <Button type="submit" intent="primary" size="medium">Premium</Button>
-                <Button type="submit" intent="secondary" size="medium">Sign Up</Button>
+                <Button type="submit" variant="default" size="sm">Premium</Button>
+                <Button type="submit" variant="secondary" size="sm">Sign Up</Button>
             </div>
         </div>
         
