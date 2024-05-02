@@ -1,5 +1,3 @@
-"use client";
-
 import Image from "next/image";
 import { getTop10 } from "@/lib/utils";
 import {
@@ -11,10 +9,12 @@ import {
 } from "@/Components/ui/carousel";
 import { Card, CardContent } from "@/Components/ui/card";
 
-export default function Hero() {
-  const top10 = getTop10();
+const Hero = async () => {
+  const top10 = await getTop10();
 
-  console.log(top10);
+  // top10.data.forEach((movie: { titleText: { text: any; }; }) => {
+  //   console.log(movie.titleText.text);
+  // });
 
   return (
     <div
@@ -57,3 +57,5 @@ export default function Hero() {
     </div>
   );
 }
+
+export default Hero;
