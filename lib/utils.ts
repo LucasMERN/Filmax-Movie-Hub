@@ -9,6 +9,8 @@ export const getTop10 = async () => {
   const res = await fetch(
     "https://imdb188.p.rapidapi.com/api/v1/getWeekTop10",
     {
+      cache: 'force-cache',
+      next: { revalidate: 30600 },
       method: "GET",
       headers: {
         'X-RapidAPI-Key': 'a35ca79fe7msh8dcb3cad3ec1594p1543cejsn542bead5bd54',
