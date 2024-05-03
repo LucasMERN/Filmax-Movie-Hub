@@ -3,5 +3,5 @@ export default function DashboardLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <section className="absolute w-screen top-0">{children}</section>;
+  return <section className="absolute w-full top-0">{children}</section>;
 }

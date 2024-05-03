@@ -12,10 +12,6 @@ import { Card, CardContent } from "@/Components/ui/card";
 const Hero = async () => {
   const top10 = await getTop10();
 
-  // top10.data.forEach((movie: { titleText: { text: any; }; }) => {
-  //   console.log(movie.titleText.text);
-  // });
-
   return (
     <div
       style={{ backgroundImage: `url()`, backgroundPosition: "center" }}
@@ -31,16 +27,19 @@ const Hero = async () => {
         </div>
         <Carousel
           opts={{
-            align: "start",
+            align: "end",
+            direction: "rtl",
+            loop: true,
+            duration: 40,
           }}
-          className="w-full max-w-sm mt-20"
+          className="w-full mt-20"
         >
           <CarouselContent>
-            {Array.from({ length: 5 }).map((_, index) => (
-              <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
+            {top10.data.map((movie: any, index: number) => {
+              <CarouselItem key={index} className="basis-1/3">
                 <div className="p-1">
                   <Card>
-                    <CardContent className="flex aspect-square items-center justify-center p-6">
+                  <CardContent style={{ backgroundImage: `url(${movie.primaryImage.imageUrl})`, backgroundPosition: "center" }} className="bg-cover bg-center w-full">
                       <span className="text-3xl font-semibold">
                         {index + 1}
                       </span>
@@ -48,7 +47,7 @@ const Hero = async () => {
                   </Card>
                 </div>
               </CarouselItem>
-            ))}
+            })}
           </CarouselContent>
           <CarouselPrevious />
           <CarouselNext />
