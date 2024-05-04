@@ -74,3 +74,17 @@
     @apply bg-background text-foreground;
   }
 }
+
+.dark-shadow {
+  text-shadow: 0 0 8px black;
+}
+
+.elevated {
+  transform: translateY(-20px);
+  transition: transform 1s ease-in-out;
+}
+
+.unelevated {
+  transform: translateY(0px);
+  transition: transform 1s ease-in-out;
+}
