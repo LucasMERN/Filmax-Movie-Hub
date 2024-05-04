@@ -6,18 +6,16 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export const getTop10 = async () => {
-  const res = await fetch(
-    "https://imdb188.p.rapidapi.com/api/v1/getWeekTop10",
-    {
-      cache: 'force-cache',
-      next: { revalidate: 30600 },
-      method: "GET",
-      headers: {
-        'X-RapidAPI-Key': 'a35ca79fe7msh8dcb3cad3ec1594p1543cejsn542bead5bd54',
-        'X-RapidAPI-Host': 'imdb188.p.rapidapi.com'
-      },
-    }
-  );
+  
+  const res = await fetch('https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&with_original_language=en', {
+    method: 'GET',
+    headers: {
+      accept: 'application/json',
+      Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxNTUwMjcxNzZiZTg1YjdjMTA4OTVkNWU1OGE4NDkyNSIsInN1YiI6IjY2MzU3YmU3YzkwNTRmMDEzMzhmNTY5OSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.tadzdTMpihLH4Y7z71fs06sO0PwTQyWaEFQY5aqr3Aw'
+    },
+    cache: 'force-cache',
+    next: { revalidate: 30600 }
+  });
 
   if (!res.ok) {
     throw new Error("Failed to fetch data");

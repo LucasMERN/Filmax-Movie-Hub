@@ -19,12 +19,12 @@ const Hero = () => {
   useEffect(() => {
     const fetchTop10 = async () => {
       try {
-        const results = await getTop10();
+        const movies = await getTop10();
 
-        if(results && results.data && Array.isArray(results.data)){
-          setTop10(results.data);
+        if(movies && movies.results && Array.isArray(movies.results)){
+          setTop10(movies.results.slice(0, 10));
         } else {
-          console.error('Data is not an array:', results);
+          console.error('Data is not an array:', movies);
         }
       }
       catch(error) {
@@ -35,26 +35,28 @@ const Hero = () => {
 
   }, []);
 
+  console.log(top10);
+
   function handlePreviousClick() {
-    setCurrentMovieIndex((prevIndex) => (prevIndex === 0 ? 10 : prevIndex - 1));
+    setCurrentMovieIndex((prevIndex) => (prevIndex === 0 ? top10.length : prevIndex - 1));
   }
   
   function handleNextClick() {
-    setCurrentMovieIndex((prevIndex) => (prevIndex === 10 ? 0 : prevIndex + 1));
+    setCurrentMovieIndex((prevIndex) => (prevIndex === top10.length ? 0 : prevIndex + 1));
   }
 
   return (
     <div
-      style={{ backgroundImage: `url(${top10[currentMovieIndex]['primaryImage'].imageUrl})`, backgroundPosition: "center" }}
+      style={{ backgroundImage: `url(https://image.tmdb.org/t/p/original/${top10[currentMovieIndex].backdrop_path})`, backgroundPosition: "center" }}
       className="w-full h-[1000px] bg-cover bg-center"
     > 
       <div className="container mx-auto pt-60 text-6xl text-white font-bold flex flex-col gap-6">
-        <h1>{top10[currentMovieIndex]['titleText'].text}</h1>
+        <h1>{top10[currentMovieIndex].original_title}</h1>
         <div className="flex flex-row gap-4 items-center">
           <span className="px-4 py-1 bg-amber-700 text-black text-xl rounded h-fit">
             IMDB
           </span>
-          <span className="text-3xl font-medium">{top10[currentMovieIndex]['ratingsSummary'].aggregateRating} / 10</span>
+          <span className="text-3xl font-medium">{top10[currentMovieIndex].vote_average} / 10</span>
         </div>
         <Carousel
           opts={{
@@ -69,7 +71,7 @@ const Hero = () => {
             {top10.map((movie: any, index: number) => (
               <CarouselItem key={index} className="basis-1/3">
                 <div className="p-1">
-                  <Card style={{ backgroundImage: `url(${movie.primaryImage.imageUrl})`, backgroundPosition: "center" }} className="bg-cover bg-center w-full">
+                  <Card style={{ backgroundImage: `url(https://image.tmdb.org/t/p/original/${movie.poster_path})`, backgroundPosition: "center" }} className="bg-cover bg-center w-full">
                   <CardContent>
                     {index}
                   </CardContent>
