@@ -81,10 +81,10 @@
 
 .elevated {
   transform: translateY(-20px);
-  transition: transform 1s ease-in-out;
+  transition: transform .5s ease-in-out;
 }
 
 .unelevated {
   transform: translateY(0px);
-  transition: transform 1s ease-in-out;
+  transition: transform .5s ease-in-out;
 }

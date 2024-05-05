@@ -7,7 +7,7 @@ import {
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-} from "@/Components/ui/carousel";
+} from "@/Components/ui/HeroCarousel";
 import React, { useState, useEffect } from "react";
 import { Card, CardContent } from "@/Components/ui/card";
 
@@ -17,7 +17,7 @@ const Hero = () => {
   useEffect(() => {
     const fetchTop10 = async () => {
       try {
-        const movies = await getTop10();
+        const movies = await getTop10('https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&with_original_language=en');
 
         if (Array.isArray(movies?.results)) {
           setTop10(movies.results.slice(0, 10));
@@ -32,9 +32,10 @@ const Hero = () => {
   }, []);
 
   const [currentMovieIndex, setCurrentMovieIndex] = useState(8);
+  const [isImageVisible, setIsImageVisible] = useState(true);
 
   function handlePreviousClick() {
-    setIsImageVisible(false); // Hide image
+    setIsImageVisible(false);
     setTimeout(() => {
       setCurrentMovieIndex((prevIndex) =>
         prevIndex === 0 ? top10.length - 1 : prevIndex - 1,
@@ -53,26 +54,24 @@ const Hero = () => {
     }, 1000);
   }
 
-  const [isImageVisible, setIsImageVisible] = useState(true);
-
   return (
     <>
-    <div
-      onTransitionEnd={() => setIsImageVisible(true)}
-      style={{
-        backgroundImage: `url(https://image.tmdb.org/t/p/original/${top10[currentMovieIndex]?.backdrop_path})`,
-        backgroundPosition: "center",
-        opacity: isImageVisible ? 1 : 0,
-        transition: "opacity 1s ease-in-out",
-        position: "absolute",
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        zIndex: -1,
-      }}
-      className="h-[800px] w-full bg-cover bg-center"
-    ></div>
+      <div
+        onTransitionEnd={() => setIsImageVisible(true)}
+        style={{
+          backgroundImage: `url(https://image.tmdb.org/t/p/original/${top10[currentMovieIndex]?.backdrop_path})`,
+          backgroundPosition: "center",
+          opacity: isImageVisible ? 1 : 0,
+          transition: "opacity 1s ease-in-out",
+          position: "absolute",
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          zIndex: -1,
+        }}
+        className="h-[800px] w-full bg-cover bg-center"
+      ></div>
       <div className="container mx-auto flex flex-col gap-6 pt-48 text-6xl font-bold text-white">
         <h1 className="dark-shadow">
           {top10[currentMovieIndex]?.original_title}
