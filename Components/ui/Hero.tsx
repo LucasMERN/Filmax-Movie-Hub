@@ -17,7 +17,7 @@ const Hero = () => {
   useEffect(() => {
     const fetchTop10 = async () => {
       try {
-        const movies = await getTop10('https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&with_original_language=en');
+        const movies = await getTop10('https://api.themoviedb.org/3/trending/all/week?language=en-US');
 
         if (Array.isArray(movies?.results)) {
           setTop10(movies.results.slice(0, 10));
@@ -72,9 +72,9 @@ const Hero = () => {
         }}
         className="h-[800px] w-full bg-cover bg-center"
       ></div>
-      <div className="container mx-auto flex flex-col gap-6 pt-48 text-6xl font-bold text-white">
-        <h1 className="dark-shadow">
-          {top10[currentMovieIndex]?.original_title}
+      <div className="container mx-auto flex flex-col gap-4 pt-36 text-6xl font-bold text-white">
+        <h1 className="dark-shadow tracking-widest">
+          {!top10[currentMovieIndex]?.original_title ? top10[currentMovieIndex]?.original_name : top10[currentMovieIndex]?.original_title}
         </h1>
         <div className="flex flex-row items-center gap-4">
           <span className="h-fit rounded bg-amber-700 px-4 py-1 text-xl text-black">
@@ -91,7 +91,7 @@ const Hero = () => {
             loop: true,
             duration: 40,
           }}
-          className="mt-8 w-full"
+          className="mt-4 w-full"
         >
           <CarouselContent>
             {top10.map((movie: any, index: number) => (
@@ -104,16 +104,18 @@ const Hero = () => {
                       backgroundImage: `url(https://image.tmdb.org/t/p/original/${movie?.poster_path})`,
                       backgroundPosition: "center",
                     }}
-                    className="w-full bg-cover bg-center shadow-lg border-4 border-white"
+                    className="w-full h-96 bg-cover bg-center shadow-lg border-4 border-white"
                   >
                     <CardContent />
                   </Card>
                   {index == currentMovieIndex ? (
                     <span className="dark-shadow break-words text-center text-lg">
-                      {movie?.original_title}
+                      {!movie?.original_title ? movie?.original_name : movie?.original_title}
                     </span>
                   ) : (
-                    ""
+                    <span className="dark-shadow break-words text-center text-lg opacity-0">
+                      {!movie?.original_title ? movie?.original_name : movie?.original_title}
+                    </span>
                   )}
                 </div>
               </CarouselItem>

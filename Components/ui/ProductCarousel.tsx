@@ -21,8 +21,9 @@ const ProductCarousel: React.FC<CarouselProps> = ({ data }) => {
         duration: 40,
       }}
       className="w-full"
+      orientation="horizontal"
     >
-      <CarouselContent>
+      <CarouselContent className="w-11/12 ml-11">
         {data.map((content: any, index: number) => (
           <CarouselItem key={index} className="basis-1/6">
             <div className="mt-6 flex flex-col items-center gap-2 p-1">
@@ -31,25 +32,25 @@ const ProductCarousel: React.FC<CarouselProps> = ({ data }) => {
                   backgroundImage: `url(https://image.tmdb.org/t/p/original/${content?.poster_path})`,
                   backgroundPosition: "center",
                 }}
-                className="w-full bg-cover bg-center shadow-lg"
+                className="h-96 w-full bg-cover bg-center shadow-lg"
               >
                 <CardContent />
               </Card>
-              {!content?.original_title ? (
+              {!content?.title ? (
                 <span className="break-words text-center text-white">
                   {content?.original_name}
                 </span>
               ) : (
                 <span className="break-words text-center text-white">
-                  {content?.original_title}
+                  {content?.title}
                 </span>
               )}
             </div>
           </CarouselItem>
         ))}
       </CarouselContent>
-      <CarouselPrevious className="hidden"/>
-      <CarouselNext className="hidden"/>
+      <CarouselPrevious className="hidden" />
+      <CarouselNext className="hidden" />
     </Carousel>
   );
 };

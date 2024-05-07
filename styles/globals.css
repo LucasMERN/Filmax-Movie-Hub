@@ -97,3 +97,11 @@
   transform: translateY(0px);
   transition: transform .5s ease-in-out;
 }
+
+.search-results .ml-11 {
+  margin-left: 0;
+}
+
+.search-results .ml-11 > div:first-child {
+  padding-left: 0;
+}

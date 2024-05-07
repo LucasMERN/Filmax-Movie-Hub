@@ -6,6 +6,7 @@ import ProductCarousel from "@/Components/ui/ProductCarousel";
 import CallToAction from "@/Components/ui/CallToAction";
 import { getNewMovies, getPopular, getAnimations, getNewTV } from "@/lib/utils";
 import { useState, useEffect } from "react";
+import SearchFilter from "@/Components/SearchFilter";
 
 export default function Dashboard() {
   const [newMovieData, setNewMovieData] = useState<any[]>([]);
@@ -21,10 +22,10 @@ export default function Dashboard() {
     const fetchData = async () => {
       try {
 
-        const newMovies = await getNewMovies(`https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&primary_release_date.lte=${formattedDate}&sort_by=primary_release_date.desc&vote_count.gte=100&with_original_language=en`);
-        const popularMovies = await getPopular('https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=2&sort_by=popularity.desc&vote_count.gte=20000&with_original_language=en');
+        const newMovies = await getNewMovies(`https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=2`);
+        const popularMovies = await getPopular('https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1');
         const animatedMovies = await getAnimations('https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&page=1&sort_by=popularity.asc&vote_count.gte=100&with_genres=16&with_original_language=en');
-        const newTV = await getNewTV(`https://api.themoviedb.org/3/discover/tv?&include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&first_air_date.gte=2022-11-01&first_air_date.lte=${formattedDate}&with_original_language=en`);
+        const newTV = await getNewTV(`https://api.themoviedb.org/3/discover/tv?&include_adult=false&include_video=false&language=en-US&page=2&sort_by=popularity.desc&first_air_date.gte=2022-11-01&first_air_date.lte=${formattedDate}&with_original_language=en`);
 
         if (Array.isArray(newMovies?.results)) {
           setNewMovieData(newMovies.results);
@@ -47,7 +48,7 @@ export default function Dashboard() {
 
   const CarouselHeader = ({title}: CarouselHeaderTypes) => {
     return (
-      <div className="text-white px-1 flex flex-row justify-between items-baseline -mb-4">
+      <div className="text-white px-1 flex flex-row justify-between items-baseline w-[93.5%] -mb-4 container">
         <h3 className="text-xl font-semibold">{title}</h3>
         <span className="text-sm font-extralight">View All</span>
       </div>
@@ -57,7 +58,10 @@ export default function Dashboard() {
   return (
     <main className="min-h-screen">
       <Hero />
-      <div className="flex flex-col gap-10 items-center container mx-auto mt-16">
+      <div className="flex flex-col gap-20 items-center -mt-6">
+        <div className="container">
+          <SearchFilter />
+        </div>
         <div>
           <CarouselHeader title={'New Movies'} />
           <ProductCarousel data={newMovieData} />
@@ -66,7 +70,7 @@ export default function Dashboard() {
           <CarouselHeader title={'Popular movies'} />
           <ProductCarousel data={popularMovieData}/>
         </div>
-        <CallToAction />
+        <CallToAction id={'95396'} color={'#00AC92'} media={'tv'}/>
         <div>
           <CarouselHeader title={'New TV Shows'} />
           <ProductCarousel data={newTVData}/>

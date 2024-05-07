@@ -10,7 +10,7 @@ export default function Nav() {
   const pathname = usePathname();
 
   return (
-    <nav className="pt-8 pb-20 bg-gradient-to-b from-neutral-600 z-10 fixed w-full">
+    <nav className="pt-8 pb-8 bg-gradient-to-b from-neutral-600 z-10 fixed w-full">
       <div className="container mx-auto flex-row flex justify-between items-center">
         <ul className="flex flex-row items-center gap-8">
           <li className="mr-12">
