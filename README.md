@@ -1,9 +1,28 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+This is a [Next.js](https://nextjs.org/) project using the TMBD movie API.
+
+![Filmax-Homepage](https://github.com/LucasMERN/Filmmax-Movie-Hub/assets/94091522/427ecb3e-7336-42ee-929b-3c4c67174d74)
 
 ## Getting Started
 
-First, run the development server:
+### 1. Clone the repository:
+```bash
+git clone <repo link>
+```
 
+### 2. Install dependancies:
+```bash
+npm install
+```
+
+### 3. Sign up for an api key and bearer token with [TMBD](https://www.themoviedb.org/)
+
+### 4. Create an .env file and give API_KEY and API_TOKEN the appropriate values from TMBD
+```bash
+API_KEY=your-key-here
+API_TOKEN=your-token-here
+```
+
+### 5. Start your development server:
 ```bash
 npm run dev
 # or
