@@ -29,18 +29,18 @@ export const getTop10 = async (url: string) => {
   return fetchData(url);
 };
 
-export const getNewMovies = async () => {
-  return fetchData('https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&with_original_language=en');
+export const getNewMovies = async (url: string) => {
+  return fetchData(url);
 };
 
-export const getNewTV = async () => {
-  return fetchData('https://api.themoviedb.org/3/discover/tv?&include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&first_air_date.gte=2022-11-01&first_air_date.lte=2023-05-01');
+export const getNewTV = async (url: string) => {
+  return fetchData(url);
 };
 
-export const getPopular = async () => {
-  return fetchData('https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&page=1&sort_by=popularity.desc&with_genres=16');
+export const getPopular = async (url: string) => {
+  return fetchData(url);
 };
 
-export const getAnimations = async () => {
-  return fetchData('https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&page=1&sort_by=popularity.desc&with_genres=16');
+export const getAnimations = async (url: string) => {
+  return fetchData(url);
 };

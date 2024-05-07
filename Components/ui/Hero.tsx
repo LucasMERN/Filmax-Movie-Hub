@@ -104,7 +104,7 @@ const Hero = () => {
                       backgroundImage: `url(https://image.tmdb.org/t/p/original/${movie?.poster_path})`,
                       backgroundPosition: "center",
                     }}
-                    className="w-full bg-cover bg-center shadow-lg"
+                    className="w-full bg-cover bg-center shadow-lg border-4 border-white"
                   >
                     <CardContent />
                   </Card>

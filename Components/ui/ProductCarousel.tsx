@@ -8,23 +8,23 @@ import {
 import { Card, CardContent } from "@/Components/ui/card";
 
 interface CarouselProps {
-    data: any[];
-  }
+  data: any[];
+}
 
 const ProductCarousel: React.FC<CarouselProps> = ({ data }) => {
   return (
     <Carousel
       opts={{
-        align: "end",
-        direction: "rtl",
+        align: "start",
+        direction: "ltr",
         loop: true,
         duration: 40,
       }}
-      className="mt-8 w-full"
+      className="w-full"
     >
       <CarouselContent>
         {data.map((content: any, index: number) => (
-          <CarouselItem key={index} className="basis-1/3">
+          <CarouselItem key={index} className="basis-1/6">
             <div className="mt-6 flex flex-col items-center gap-2 p-1">
               <Card
                 style={{
@@ -35,12 +35,21 @@ const ProductCarousel: React.FC<CarouselProps> = ({ data }) => {
               >
                 <CardContent />
               </Card>
+              {!content?.original_title ? (
+                <span className="break-words text-center text-white">
+                  {content?.original_name}
+                </span>
+              ) : (
+                <span className="break-words text-center text-white">
+                  {content?.original_title}
+                </span>
+              )}
             </div>
           </CarouselItem>
         ))}
       </CarouselContent>
-      <CarouselPrevious />
-      <CarouselNext />
+      <CarouselPrevious className="hidden"/>
+      <CarouselNext className="hidden"/>
     </Carousel>
   );
 };

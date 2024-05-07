@@ -33,6 +33,15 @@
     --ring: 222.2 84% 4.9%;
 
     --radius: 0.5rem;
+
+    --primary-1: #471dba;
+    --primary-2: #7660f2;
+    --accent: #60F2BE;
+    --bg-primary: #161616;
+    --bg-accent: #202020;
+    --green: #00A310;
+    --red: #FF0000;
+    --orange: #FF9900;
   }
 
   .dark {
