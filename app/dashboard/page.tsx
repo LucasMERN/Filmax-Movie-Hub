@@ -70,7 +70,7 @@ export default function Dashboard() {
           <CarouselHeader title={'Popular movies'} />
           <ProductCarousel data={popularMovieData}/>
         </div>
-        <CallToAction id={'95396'} color={'#00AC92'} media={'tv'}/>
+        <CallToAction id={'95396'} color={'#007D4D'} media={'tv'}/>
         <div>
           <CarouselHeader title={'New TV Shows'} />
           <ProductCarousel data={newTVData}/>
