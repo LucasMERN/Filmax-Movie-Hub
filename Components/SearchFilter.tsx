@@ -23,10 +23,14 @@ export default function SearchFilter() {
       );
 
       if (Array.isArray(searchResults?.results)) {
-        if (mediaType == "person") {
+        if (mediaType == "person" && searchResults.results.length > 0) {
           setSearchResultsList(searchResults.results[0].known_for);
         } else {
-          setSearchResultsList(searchResults.results);
+          setSearchResultsList([]);
+        }
+
+        if(mediaType != "person") {
+            setSearchResultsList(searchResults.results)
         }
       } else {
         console.error("Data is not an array:", searchResults);
