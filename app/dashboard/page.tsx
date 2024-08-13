@@ -1,7 +1,6 @@
 "use client"
 
 import Hero from "@/Components/ui/Hero";
-import FilterGrid from "@/Components/ui/FilterGrid";
 import ProductCarousel from "@/Components/ui/ProductCarousel";
 import CallToAction from "@/Components/ui/CallToAction";
 import { getNewMovies, getPopular, getAnimations, getNewTV } from "@/lib/utils";
