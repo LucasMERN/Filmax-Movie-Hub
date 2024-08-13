@@ -11,7 +11,7 @@ export const fetchData = async (url: string) => {
     headers: {
       accept: "application/json",
       Authorization:
-        "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxNTUwMjcxNzZiZTg1YjdjMTA4OTVkNWU1OGE4NDkyNSIsInN1YiI6IjY2MzU3YmU3YzkwNTRmMDEzMzhmNTY5OSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.tadzdTMpihLH4Y7z71fs06sO0PwTQyWaEFQY5aqr3Aw",
+        `Bearer ${process.env.NEXT_PUBLIC_API_KEY}`,
     },
     cache: "force-cache",
     next: { revalidate: 30600 },

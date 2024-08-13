@@ -18,8 +18,8 @@ npm install
 
 ### 4. Create an .env file and give API_KEY and API_TOKEN the appropriate values from TMBD
 ```bash
-API_KEY=your-key-here
-API_TOKEN=your-token-here
+NEXT_PUBLIC_API_KEY=your-key-here
+NEXT_PUBLIC_API_TOKEN=your-token-here
 ```
 
 ### 5. Start your development server:
