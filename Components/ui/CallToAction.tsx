@@ -39,7 +39,7 @@ const CallToAction = ({ id, color, media }: CallToActionTypes) => {
       }
     };
     fetchData();
-  }, [callToActionResults, id, media]);
+  }, [id, media]);
 
   return (
     <>

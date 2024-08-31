@@ -12,11 +12,10 @@ const BackgroundImage = ({src, alt}: BackgroundImageProps) => (
         quality={80}
         fill
         loading="lazy"
-        sizes="100vw"
+        sizes="100%"
         style={{
           objectFit: "cover",
         }}
-        className="!static"
       />
 );
 

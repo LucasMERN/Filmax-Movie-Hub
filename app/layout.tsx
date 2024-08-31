@@ -22,8 +22,8 @@ export default function RootLayout({
       <body className={`${inter.className} bg-background`}>
         <Nav />
         {children}
+        <Footer />
       </body>
-      <Footer />
     </html>
   );
 }
