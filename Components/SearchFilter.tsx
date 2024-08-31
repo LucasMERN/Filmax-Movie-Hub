@@ -42,8 +42,8 @@ export default function SearchFilter() {
 
   return (
     <div className="w-full rounded-3xl bg-foreground p-6">
-      <form onSubmit={handleSubmit} className="flex flex-col gap-4 lg:flex-row lg:gap-0 lg:justify-between">
-        <div className="flex flex-row gap-6 rounded-2xl bg-background p-4">
+      <form onSubmit={handleSubmit} className="flex flex-col gap-4 lg:flex-row lg:gap-8 lg:justify-between">
+        <div className="flex flex-row justify-between md:gap-6 rounded-2xl bg-background py-4 px-6">
           <Button
             variant={mediaType == "movie" ? "default" : "ghost"}
             onClick={() => setMediaType("movie")}
@@ -63,15 +63,15 @@ export default function SearchFilter() {
             Person
           </Button>
         </div>
-        <div className="flex flex-col gap-4 lg:flex-row lg:gap-6">
+        <div className="flex flex-col gap-4 lg:flex-row lg:gap-6 w-full">
           <input
             type="text"
             placeholder="Enter a keyword"
             value={searchTerm}
             onChange={handleSearchChange}
-            className="w-full h-[68px] lg:w-[400px] rounded-2xl bg-background px-6 text-white ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
+            className="w-full h-[68px] lg:h-auto rounded-2xl bg-background px-6 text-white ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
           />
-          <Button size="lg" className="w-1/2 lg:h-auto rounded-2xl" type="submit">
+          <Button size="lg" className="h-[68px] lg:h-auto rounded-2xl" type="submit">
             Search
           </Button>
         </div>

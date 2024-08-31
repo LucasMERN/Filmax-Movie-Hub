@@ -73,16 +73,28 @@ const Hero = () => {
         className="h-[800px] w-full bg-cover bg-center"
       ></div>
       <div className="container mx-auto flex flex-col gap-4 pt-36 text-3xl lg:text-6xl font-bold text-white">
-        <h1 className="dark-shadow tracking-widest">
+        <h1 className="dark-shadow tracking-widest" style={{
+          opacity: isImageVisible ? 1 : 0,
+          transition: "opacity 1s ease-in-out",
+        }}>
           {!top10[currentMovieIndex]?.original_title ? top10[currentMovieIndex]?.original_name : top10[currentMovieIndex]?.original_title}
         </h1>
         <div className="flex flex-row items-center gap-4">
           <span className="h-fit rounded bg-amber-700 px-4 py-1 text-xl text-black">
             IMDB
           </span>
-          <span className="dark-shadow text-2xl font-medium">
+          <span className="dark-shadow text-2xl font-medium" style={{
+          opacity: isImageVisible ? 1 : 0,
+          transition: "opacity 1s ease-in-out",
+        }}>
             {top10[currentMovieIndex]?.vote_average} / 10
           </span>
+        </div>
+        <div className="dark-shadow text-sm mt-24 -mb-72 bg-black/60 p-4 -m-4 rounded-2xl sm:w-1/2 lg:hidden" style={{
+          opacity: isImageVisible ? 1 : 0,
+          transition: "opacity 1s ease-in-out",
+        }}>
+          {top10[currentMovieIndex]?.overview}
         </div>
         <Carousel
           opts={{

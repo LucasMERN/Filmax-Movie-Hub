@@ -41,24 +41,11 @@ export default function Dashboard() {
     };
     fetchData();
   }, [formattedDate]);
-
-  interface CarouselHeaderTypes {
-    title: string
-  }
-
-  const CarouselHeader = ({title}: CarouselHeaderTypes) => {
-    return (
-      <div className="text-white px-1 pr-8 lg:pr-0 flex flex-row justify-between items-baseline -mb-4 relative z-10">
-        <h3 className="text-xl font-semibold">{title}</h3>
-        <Link href="#" className="text-sm font-extralight cursor-pointer">View All</Link>
-      </div>
-    )
-  }
   
   return (
-    <main className="min-h-screen">
+    <main className="min-h-screen overflow-hidden">
       <Hero />
-      <div className="flex flex-col gap-20 items-center -mt-6">
+      <div className="flex flex-col gap-20 items-center">
         <div className="container">
           <SearchFilter />
         </div>
@@ -82,4 +69,17 @@ export default function Dashboard() {
       </div>
     </main>
   );
+}
+
+interface CarouselHeaderTypes {
+  title: string
+}
+
+const CarouselHeader = ({title}: CarouselHeaderTypes) => {
+  return (
+    <div className="text-white px-1 pr-8 lg:pr-12 flex flex-row justify-between items-baseline -mb-4 relative z-10">
+      <h3 className="text-xl font-semibold">{title}</h3>
+      <Link href="#" className="text-sm font-extralight cursor-pointer">View All</Link>
+    </div>
+  )
 }

@@ -5,7 +5,7 @@ const Footer = () => {
   return (
     <footer className="container mx-auto flex flex-col gap-8 py-24 text-center">
       <div className="relative flex items-center justify-center">
-        <span className="absolute left-0 top-1/2 w-[40%] -translate-y-1/2 transform border-t border-white"></span>
+        <span className="absolute left-0 top-1/2 w-[25%] md:w-[40%] -translate-y-1/2 transform border-t border-white"></span>
         <ul className="z-10 flex gap-4">
           <li>
             <Github size={40} color="white" />
@@ -14,7 +14,7 @@ const Footer = () => {
             <Linkedin size={40} color="white" />
           </li>
         </ul>
-        <span className="absolute right-0 top-1/2 w-[40%] -translate-y-1/2 transform border-t border-white"></span>
+        <span className="absolute right-0 top-1/2 w-[25%] md:w-[40%] -translate-y-1/2 transform border-t border-white"></span>
       </div>
       <h3 className="text-xl font-medium text-white">
         Designed & Developed by{" "}
