@@ -6,6 +6,7 @@ import CallToAction from "@/Components/ui/CallToAction";
 import { getNewMovies, getPopular, getAnimations, getNewTV } from "@/lib/utils";
 import { useState, useEffect } from "react";
 import SearchFilter from "@/Components/SearchFilter";
+import Link from "next/link";
 
 export default function Dashboard() {
   const [newMovieData, setNewMovieData] = useState<any[]>([]);
@@ -47,9 +48,9 @@ export default function Dashboard() {
 
   const CarouselHeader = ({title}: CarouselHeaderTypes) => {
     return (
-      <div className="text-white px-1 flex flex-row justify-between items-baseline w-[93.5%] -mb-4 container">
+      <div className="text-white px-1 pr-8 lg:pr-0 flex flex-row justify-between items-baseline -mb-4 relative z-10">
         <h3 className="text-xl font-semibold">{title}</h3>
-        <span className="text-sm font-extralight">View All</span>
+        <Link href="#" className="text-sm font-extralight cursor-pointer">View All</Link>
       </div>
     )
   }
@@ -61,22 +62,22 @@ export default function Dashboard() {
         <div className="container">
           <SearchFilter />
         </div>
-        <div>
+        <div className="container pr-0">
           <CarouselHeader title={'New Movies'} />
-          <ProductCarousel data={newMovieData} />
+          <ProductCarousel data={newMovieData} width="md:basis-1/3 lg:basis-1/4 xl:basis-1/6"/>
         </div>
-        <div>
+        <div className="container pr-0">
           <CarouselHeader title={'Popular movies'} />
-          <ProductCarousel data={popularMovieData}/>
+          <ProductCarousel data={popularMovieData} width="md:basis-1/3 lg:basis-1/4 xl:basis-1/6"/>
         </div>
         <CallToAction id={'95396'} color={'#007D4D'} media={'tv'}/>
-        <div>
+        <div className="container pr-0">
           <CarouselHeader title={'New TV Shows'} />
-          <ProductCarousel data={newTVData}/>
+          <ProductCarousel data={newTVData} width="md:basis-1/3 lg:basis-1/4 xl:basis-1/6"/>
         </div>
-        <div>
+        <div className="container pr-0">
           <CarouselHeader title={'Animations'} />
-          <ProductCarousel data={animatedMovieData}/>
+          <ProductCarousel data={animatedMovieData} width="md:basis-1/3 lg:basis-1/4 xl:basis-1/6"/>
         </div>
       </div>
     </main>

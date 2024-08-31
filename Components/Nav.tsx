@@ -11,9 +11,9 @@ export default function Nav() {
 
   return (
     <nav className="pt-8 pb-8 bg-gradient-to-b from-neutral-600 z-10 fixed w-full">
-      <div className="container mx-auto flex-row flex justify-between items-center">
-        <ul className="flex flex-row items-center gap-8">
-          <li className="mr-12">
+      <div className="container mx-auto flex flex-col gap-4 md:flex-row md:justify-between md:gap-0 md:items-center ">
+        <ul className="flex flex-row items-center lg:gap-8 gap-2">
+          <li className="lg:mr-12 mr-4 w-6 md:w-12">
             <Link href="/">
               <Image
                 src="/logo.svg"
@@ -21,7 +21,7 @@ export default function Nav() {
                 height={50}
                 alt="Filmax Logo"
                 priority={true}
-                className="-mb-3"
+                className="-mb-1"
               />
             </Link>
           </li>
@@ -32,7 +32,7 @@ export default function Nav() {
                 pathname === "/dashboard"
                   ? "underline decoration-2 underline-offset-4"
                   : ""
-              } text-white`}
+              } text-white text-sm md:text-lg`}
               href="/dashboard"
             >
               Home
@@ -45,10 +45,10 @@ export default function Nav() {
                 pathname === "/dashboard/trending"
                   ? "underline decoration-2 underline-offset-4"
                   : ""
-              } text-white`}
+              } text-white text-sm md:text-lg`}
               href="/dashboard/trending"
             >
-              trending
+              Trending
             </Link>
           </li>
 
@@ -58,10 +58,10 @@ export default function Nav() {
                 pathname === "/dashboard/movies"
                   ? "underline decoration-2 underline-offset-4"
                   : ""
-              } text-white`}
+              } text-white text-sm md:text-lg`}
               href="/dashboard/movies"
             >
-              movies
+              Movies
             </Link>
           </li>
 
@@ -71,10 +71,10 @@ export default function Nav() {
                 pathname === "/dashboard/shows"
                   ? "underline decoration-2 underline-offset-4"
                   : ""
-              } text-white`}
+              } text-white text-sm md:text-lg`}
               href="/dashboard/shows"
             >
-              shows
+              Shows
             </Link>
           </li>
 
@@ -84,7 +84,7 @@ export default function Nav() {
                 pathname === "/dashboard/categories"
                   ? "underline decoration-2 underline-offset-4"
                   : ""
-              } text-white`}
+              } text-white text-sm md:text-lg`}
               href="/dashboard/categories"
             >
               Categories
@@ -92,7 +92,7 @@ export default function Nav() {
           </li>
         </ul>
 
-        <div className="flex gap-4 flex-row">
+        <div className="gap-4 flex-row hidden md:flex">
           <Button type="submit" variant="default" size="sm">
             Premium
           </Button>

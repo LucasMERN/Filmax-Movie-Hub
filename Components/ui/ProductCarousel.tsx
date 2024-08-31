@@ -1,3 +1,4 @@
+import Image from "next/image";
 import {
   Carousel,
   CarouselContent,
@@ -6,12 +7,14 @@ import {
   CarouselPrevious,
 } from "./carousel";
 import { Card, CardContent } from "@/Components/ui/card";
+import BackgroundImage from "./BackgroundImage";
 
 interface CarouselProps {
   data: any[];
+  width?: string;
 }
 
-const ProductCarousel: React.FC<CarouselProps> = ({ data }) => {
+const ProductCarousel: React.FC<CarouselProps> = ({ data, width = "basis-1/6" }) => {
   return (
     <Carousel
       opts={{
@@ -23,18 +26,12 @@ const ProductCarousel: React.FC<CarouselProps> = ({ data }) => {
       className="w-full"
       orientation="horizontal"
     >
-      <CarouselContent className="w-11/12 ml-11">
+      <CarouselContent className="w-11/12">
         {data.map((content: any, index: number) => (
-          <CarouselItem key={index} className="basis-1/6">
+          <CarouselItem key={index} className={width}>
             <div className="mt-6 flex flex-col items-center gap-2 p-1">
-              <Card
-                style={{
-                  backgroundImage: `url(https://image.tmdb.org/t/p/original/${content?.poster_path})`,
-                  backgroundPosition: "center",
-                }}
-                className="h-96 w-full bg-cover bg-center shadow-lg"
-              >
-                <CardContent />
+              <Card className="h-96 w-full bg-cover bg-center shadow-lg overflow-hidden">
+                <BackgroundImage src={`https://image.tmdb.org/t/p/original/${content?.poster_path}`} alt={`https://image.tmdb.org/t/p/original/${content?.overview}`} />
               </Card>
               {!content?.title ? (
                 <span className="break-words text-center text-white">

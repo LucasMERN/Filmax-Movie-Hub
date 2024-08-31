@@ -72,7 +72,7 @@ const Hero = () => {
         }}
         className="h-[800px] w-full bg-cover bg-center"
       ></div>
-      <div className="container mx-auto flex flex-col gap-4 pt-36 text-6xl font-bold text-white">
+      <div className="container mx-auto flex flex-col gap-4 pt-36 text-3xl lg:text-6xl font-bold text-white">
         <h1 className="dark-shadow tracking-widest">
           {!top10[currentMovieIndex]?.original_title ? top10[currentMovieIndex]?.original_name : top10[currentMovieIndex]?.original_title}
         </h1>
@@ -80,7 +80,7 @@ const Hero = () => {
           <span className="h-fit rounded bg-amber-700 px-4 py-1 text-xl text-black">
             IMDB
           </span>
-          <span className="dark-shadow text-3xl font-medium">
+          <span className="dark-shadow text-2xl font-medium">
             {top10[currentMovieIndex]?.vote_average} / 10
           </span>
         </div>
@@ -93,7 +93,7 @@ const Hero = () => {
           }}
           className="mt-4 w-full"
         >
-          <CarouselContent>
+          <CarouselContent className="invisible lg:visible">
             {top10.map((movie: any, index: number) => (
               <CarouselItem key={index} className="basis-1/3">
                 <div
