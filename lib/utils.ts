@@ -52,3 +52,7 @@ export const getAnimations = async (url: string) => {
 export const getCallToAction = async (url: string) => {
   return fetchData(url);
 };
+
+export const getHomepage = async (url: string) => {
+  return fetchData(url);
+};
