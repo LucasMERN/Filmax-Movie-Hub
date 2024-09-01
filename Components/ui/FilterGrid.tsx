@@ -17,7 +17,7 @@ const FilterGrid = () => {
   useEffect(() => {
     const fetchTop10 = async () => {
       try {
-        const movies = await getTop10('aADS');
+        const movies = await getTop10("aADS");
 
         if (Array.isArray(movies?.results)) {
           setTop10(movies.results.slice(0, 10));

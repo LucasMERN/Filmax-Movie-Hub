@@ -96,7 +96,7 @@ const CallToAction = ({ id, color, media }: CallToActionTypes) => {
           backgroundSize: "cover",
         }}
       >
-        <div className="container dark-shadow">
+        <div className="dark-shadow container">
           <div className="flex flex-col gap-8">
             <h3 className="text-2xl font-bold tracking-wider">
               {callToActionResults?.name}

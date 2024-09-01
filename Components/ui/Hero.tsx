@@ -17,7 +17,9 @@ const Hero = () => {
   useEffect(() => {
     const fetchTop10 = async () => {
       try {
-        const movies = await getTop10('https://api.themoviedb.org/3/trending/all/week?language=en-US');
+        const movies = await getTop10(
+          "https://api.themoviedb.org/3/trending/all/week?language=en-US",
+        );
 
         if (Array.isArray(movies?.results)) {
           setTop10(movies.results.slice(0, 10));
@@ -72,28 +74,39 @@ const Hero = () => {
         }}
         className="h-[800px] w-full bg-cover bg-center"
       ></div>
-      <div className="container mx-auto flex flex-col gap-4 pt-36 text-3xl lg:text-6xl font-bold text-white">
-        <h1 className="dark-shadow tracking-widest" style={{
-          opacity: isImageVisible ? 1 : 0,
-          transition: "opacity 1s ease-in-out",
-        }}>
-          {!top10[currentMovieIndex]?.original_title ? top10[currentMovieIndex]?.original_name : top10[currentMovieIndex]?.original_title}
+      <div className="container mx-auto flex flex-col gap-4 pt-36 text-3xl font-bold text-white lg:text-6xl">
+        <h1
+          className="dark-shadow tracking-widest"
+          style={{
+            opacity: isImageVisible ? 1 : 0,
+            transition: "opacity 1s ease-in-out",
+          }}
+        >
+          {!top10[currentMovieIndex]?.original_title
+            ? top10[currentMovieIndex]?.original_name
+            : top10[currentMovieIndex]?.original_title}
         </h1>
         <div className="flex flex-row items-center gap-4">
           <span className="h-fit rounded bg-amber-700 px-4 py-1 text-xl text-black">
             IMDB
           </span>
-          <span className="dark-shadow text-2xl font-medium" style={{
-          opacity: isImageVisible ? 1 : 0,
-          transition: "opacity 1s ease-in-out",
-        }}>
+          <span
+            className="dark-shadow text-2xl font-medium"
+            style={{
+              opacity: isImageVisible ? 1 : 0,
+              transition: "opacity 1s ease-in-out",
+            }}
+          >
             {top10[currentMovieIndex]?.vote_average} / 10
           </span>
         </div>
-        <div className="dark-shadow text-sm mt-24 -mb-72 bg-black/60 p-4 -m-4 rounded-2xl sm:w-1/2 lg:hidden" style={{
-          opacity: isImageVisible ? 1 : 0,
-          transition: "opacity 1s ease-in-out",
-        }}>
+        <div
+          className="dark-shadow -m-4 -mb-72 mt-24 rounded-2xl bg-black/60 p-4 text-sm sm:w-1/2 lg:hidden"
+          style={{
+            opacity: isImageVisible ? 1 : 0,
+            transition: "opacity 1s ease-in-out",
+          }}
+        >
           {top10[currentMovieIndex]?.overview}
         </div>
         <Carousel
@@ -116,17 +129,21 @@ const Hero = () => {
                       backgroundImage: `url(https://image.tmdb.org/t/p/original/${movie?.poster_path})`,
                       backgroundPosition: "center",
                     }}
-                    className="w-full h-96 bg-cover bg-center shadow-lg border-4 border-white"
+                    className="h-96 w-full border-4 border-white bg-cover bg-center shadow-lg"
                   >
                     <CardContent />
                   </Card>
                   {index == currentMovieIndex ? (
                     <span className="dark-shadow break-words text-center text-lg">
-                      {!movie?.original_title ? movie?.original_name : movie?.original_title}
+                      {!movie?.original_title
+                        ? movie?.original_name
+                        : movie?.original_title}
                     </span>
                   ) : (
                     <span className="dark-shadow break-words text-center text-lg opacity-0">
-                      {!movie?.original_title ? movie?.original_name : movie?.original_title}
+                      {!movie?.original_title
+                        ? movie?.original_name
+                        : movie?.original_title}
                     </span>
                   )}
                 </div>

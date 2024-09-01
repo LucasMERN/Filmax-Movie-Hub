@@ -10,10 +10,10 @@ export default function Nav() {
   const pathname = usePathname();
 
   return (
-    <nav className="pt-8 pb-8 bg-gradient-to-b from-neutral-600 z-10 fixed w-full">
-      <div className="container mx-auto flex flex-col gap-4 md:flex-row md:justify-between md:gap-0 md:items-center ">
-        <ul className="flex flex-row items-center lg:gap-8 gap-2">
-          <li className="lg:mr-12 mr-4 w-6 md:w-12">
+    <nav className="fixed z-10 w-full bg-gradient-to-b from-neutral-600 pb-8 pt-8">
+      <div className="container mx-auto flex flex-col gap-4 md:flex-row md:items-center md:justify-between md:gap-0 ">
+        <ul className="flex flex-row items-center gap-2 lg:gap-8">
+          <li className="mr-4 w-6 md:w-12 lg:mr-12">
             <Link href="/">
               <Image
                 src="/logo.svg"
@@ -32,7 +32,7 @@ export default function Nav() {
                 pathname === "/dashboard"
                   ? "underline decoration-2 underline-offset-4"
                   : ""
-              } text-white text-sm md:text-lg`}
+              } text-sm text-white md:text-lg`}
               href="/dashboard"
             >
               Home
@@ -45,7 +45,7 @@ export default function Nav() {
                 pathname === "/dashboard/trending"
                   ? "underline decoration-2 underline-offset-4"
                   : ""
-              } text-white text-sm md:text-lg`}
+              } text-sm text-white md:text-lg`}
               href="/dashboard/trending"
             >
               Trending
@@ -58,7 +58,7 @@ export default function Nav() {
                 pathname === "/dashboard/movies"
                   ? "underline decoration-2 underline-offset-4"
                   : ""
-              } text-white text-sm md:text-lg`}
+              } text-sm text-white md:text-lg`}
               href="/dashboard/movies"
             >
               Movies
@@ -71,7 +71,7 @@ export default function Nav() {
                 pathname === "/dashboard/shows"
                   ? "underline decoration-2 underline-offset-4"
                   : ""
-              } text-white text-sm md:text-lg`}
+              } text-sm text-white md:text-lg`}
               href="/dashboard/shows"
             >
               Shows
@@ -84,7 +84,7 @@ export default function Nav() {
                 pathname === "/dashboard/categories"
                   ? "underline decoration-2 underline-offset-4"
                   : ""
-              } text-white text-sm md:text-lg`}
+              } text-sm text-white md:text-lg`}
               href="/dashboard/categories"
             >
               Categories
@@ -92,7 +92,7 @@ export default function Nav() {
           </li>
         </ul>
 
-        <div className="gap-4 flex-row hidden md:flex">
+        <div className="hidden flex-row gap-4 md:flex">
           <Button type="submit" variant="default" size="sm">
             Premium
           </Button>

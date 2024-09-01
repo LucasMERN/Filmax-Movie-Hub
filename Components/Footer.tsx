@@ -3,18 +3,29 @@ import Link from "next/link";
 
 const Footer = () => {
   return (
-    <footer className="container mx-auto flex flex-col gap-8 pt-24 pb-12 text-center">
+    <footer className="container mx-auto flex flex-col gap-8 pb-12 pt-24 text-center">
       <div className="relative flex items-center justify-center">
         <span className="absolute left-0 top-1/2 w-[25%] -translate-y-1/2 transform border-t border-white md:w-[40%]"></span>
         <ul className="z-10 flex gap-8">
           <li>
             <Link href="https://github.com/LucasMERN" className="group">
-              <Github size={40} color="white" className="group-hover:scale-125" />
+              <Github
+                size={40}
+                color="white"
+                className="group-hover:scale-125"
+              />
             </Link>
           </li>
           <li>
-            <Link href="https://www.linkedin.com/in/lucaswinklerdev/" className="group">
-              <Linkedin size={40} color="white" className="group-hover:scale-125" />
+            <Link
+              href="https://www.linkedin.com/in/lucaswinklerdev/"
+              className="group"
+            >
+              <Linkedin
+                size={40}
+                color="white"
+                className="group-hover:scale-125"
+              />
             </Link>
           </li>
         </ul>

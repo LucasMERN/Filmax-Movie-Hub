@@ -29,8 +29,8 @@ export default function SearchFilter() {
           setSearchResultsList([]);
         }
 
-        if(mediaType != "person") {
-            setSearchResultsList(searchResults.results)
+        if (mediaType != "person") {
+          setSearchResultsList(searchResults.results);
         }
       } else {
         console.error("Data is not an array:", searchResults);
@@ -42,8 +42,11 @@ export default function SearchFilter() {
 
   return (
     <div className="w-full rounded-3xl bg-foreground p-6">
-      <form onSubmit={handleSubmit} className="flex flex-col gap-4 lg:flex-row lg:gap-8 lg:justify-between">
-        <div className="flex flex-row justify-between md:gap-6 rounded-2xl bg-background py-4 px-6">
+      <form
+        onSubmit={handleSubmit}
+        className="flex flex-col gap-4 lg:flex-row lg:justify-between lg:gap-8"
+      >
+        <div className="flex flex-row justify-between rounded-2xl bg-background px-6 py-4 md:gap-6">
           <Button
             variant={mediaType == "movie" ? "default" : "ghost"}
             onClick={() => setMediaType("movie")}
@@ -63,26 +66,35 @@ export default function SearchFilter() {
             Person
           </Button>
         </div>
-        <div className="flex flex-col gap-4 lg:flex-row lg:gap-6 w-full">
+        <div className="flex w-full flex-col gap-4 lg:flex-row lg:gap-6">
           <input
             type="text"
             placeholder="Enter a keyword"
             value={searchTerm}
             onChange={handleSearchChange}
-            className="w-full h-[68px] lg:h-auto rounded-2xl bg-background px-6 text-white ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
+            className="h-[68px] w-full rounded-2xl bg-background px-6 text-white ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 lg:h-auto"
           />
-          <Button size="lg" className="h-[68px] lg:h-auto rounded-2xl" type="submit">
+          <Button
+            size="lg"
+            className="h-[68px] rounded-2xl lg:h-auto"
+            type="submit"
+          >
             Search
           </Button>
         </div>
       </form>
       {searchResultsList.length > 0 ? (
-        <div className="overflow-hidden search-results">
-          <ProductCarousel data={searchResultsList} width="md:basis-1/3 lg:basis-1/4 xl:basis-1/6" />
+        <div className="search-results overflow-hidden">
+          <ProductCarousel
+            data={searchResultsList}
+            width="md:basis-1/3 lg:basis-1/4 xl:basis-1/6"
+          />
         </div>
-      ) : <div className=" pt-4 text-lg font-medium text-white">
-      No Results Found...
-    </div>}
+      ) : (
+        <div className=" pt-4 text-lg font-medium text-white">
+          No Results Found...
+        </div>
+      )}
     </div>
   );
 }
