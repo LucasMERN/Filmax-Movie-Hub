@@ -7,7 +7,7 @@ import {
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-} from "@/Components/HeroCarousel";
+} from "@/Components/ui/HeroCarousel";
 import React, { useState, useEffect } from "react";
 import { Card } from "@/Components/ui/card";
 import BackgroundImage from "@/Components/ui/BackgroundImage";
