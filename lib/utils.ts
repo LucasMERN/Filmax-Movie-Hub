@@ -52,6 +52,6 @@ export const getCallToAction = async (url: string) => {
   return fetchData(url);
 };
 
-export const getHomepage = async (url: string) => {
+export const getPromo = async (url: string) => {
   return fetchData(url);
 };

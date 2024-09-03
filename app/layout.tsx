@@ -4,6 +4,8 @@ import "@/styles/globals.css";
 
 import { Suspense } from "react";
 import Loading from "./loading";
+import Nav from "@/Components/Nav";
+import Footer from "@/Components/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,8 +21,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <link rel="icon" href="/logo.svg" type="image/svg+xml" />
+      </head>
       <body className={`${inter.className} bg-background`}>
         <Suspense fallback={<Loading />}>{children}</Suspense>
+        <Footer />
       </body>
     </html>
   );

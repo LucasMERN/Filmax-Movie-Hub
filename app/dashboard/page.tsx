@@ -1,12 +1,13 @@
 "use client";
 
-import Hero from "@/Components/ui/Hero";
-import ProductCarousel from "@/Components/ui/ProductCarousel";
-import CallToAction from "@/Components/ui/CallToAction";
+import Hero from "@/Components/Hero";
+import ProductCarousel from "@/Components/ProductCarousel";
+import CallToAction from "@/Components/CallToAction";
 import { getNewMovies, getPopular, getAnimations, getNewTV } from "@/lib/utils";
 import { useState, useEffect } from "react";
 import SearchFilter from "@/Components/SearchFilter";
 import Link from "next/link";
+import Promo from "@/Components/Promo";
 
 export default function Dashboard() {
   const [newMovieData, setNewMovieData] = useState<any[]>([]);
@@ -84,6 +85,7 @@ export default function Dashboard() {
             width="md:basis-1/3 lg:basis-1/4 xl:basis-1/6"
           />
         </div>
+        <Promo id="693134" color="#161616" media="movie"/>
       </div>
     </main>
   );

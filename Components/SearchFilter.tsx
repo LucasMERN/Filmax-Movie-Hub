@@ -1,7 +1,7 @@
 import { SetStateAction, useState } from "react";
 import { getSearchItems } from "@/lib/utils";
-import ProductCarousel from "./ui/ProductCarousel";
-import { Button } from "./ui/Button";
+import ProductCarousel from "@/Components/ProductCarousel";
+import { Button } from "@/Components/ui/Button";
 
 export default function SearchFilter() {
   const [searchResultsList, setSearchResultsList] = useState<any[]>([]);

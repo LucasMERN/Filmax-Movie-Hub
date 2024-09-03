@@ -7,9 +7,10 @@ import {
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-} from "@/Components/ui/HeroCarousel";
+} from "@/Components/HeroCarousel";
 import React, { useState, useEffect } from "react";
-import { Card, CardContent } from "@/Components/ui/card";
+import { Card } from "@/Components/ui/card";
+import BackgroundImage from "@/Components/ui/BackgroundImage";
 
 const Hero = () => {
   const [top10, setTop10] = useState<any[]>([]);
@@ -124,14 +125,12 @@ const Hero = () => {
                 <div
                   className={`${index === currentMovieIndex ? "elevated mt-6 flex flex-col items-center gap-2 p-1" : "unelevated mt-6 flex flex-col items-center gap-2 p-1"}`}
                 >
-                  <Card
-                    style={{
-                      backgroundImage: `url(https://image.tmdb.org/t/p/original/${movie?.poster_path})`,
-                      backgroundPosition: "center",
-                    }}
-                    className="h-96 w-full border-4 border-white bg-cover bg-center shadow-lg"
-                  >
-                    <CardContent />
+                  <Card className="relative h-96 w-full overflow-hidden border-4 border-white bg-cover bg-center shadow-lg">
+                    <BackgroundImage
+                      src={`https://image.tmdb.org/t/p/original/${movie?.poster_path}`}
+                      alt={`https://image.tmdb.org/t/p/original/${movie?.overview}`}
+                      lazy="eager"
+                    />
                   </Card>
                   {index == currentMovieIndex ? (
                     <span className="dark-shadow break-words text-center text-lg">

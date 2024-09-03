@@ -1,13 +1,12 @@
-import Image from "next/image";
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-} from "./carousel";
-import { Card, CardContent } from "@/Components/ui/card";
-import BackgroundImage from "./BackgroundImage";
+} from "@/Components/ui/carousel";
+import { Card } from "@/Components/ui/card";
+import BackgroundImage from "@/Components/ui/BackgroundImage";
 
 interface CarouselProps {
   data: any[];

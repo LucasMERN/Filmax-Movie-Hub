@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { getCallToAction } from "@/lib/utils";
-import { Button } from "./Button";
+import { Button } from "@/Components/ui/Button";
 
 interface CallToActionTypes {
   id: string;
@@ -32,10 +32,10 @@ const CallToAction = ({ id, color, media }: CallToActionTypes) => {
         if (data) {
           setCallToActionResults(data);
         } else {
-          console.error("Data is not an array:", data);
+          console.error("Data is not available:", data);
         }
       } catch (error) {
-        console.error("Error fetching top10:", error);
+        console.error("Error fetching CTA:", error);
       }
     };
     fetchData();
