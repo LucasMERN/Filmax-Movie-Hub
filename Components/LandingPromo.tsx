@@ -67,10 +67,10 @@ const LandingPromo = () => {
     <div className="relative h-[450px] w-full overflow-hidden lg:h-[700px]">
       <Image
         alt="backdrop image"
-        loading="lazy"
         decoding="async"
-        className="absolute inset-0 z-10 h-full w-full object-cover grayscale transition-all duration-1000 ease-in-out"
+        className="absolute inset-0 z-10 h-full w-full object-cover grayscale"
         fill
+        priority
         src={`https://image.tmdb.org/t/p/original/${top10[carousel[activeIndex].activeImage]?.backdrop_path}`}
         style={{
           opacity: isImageVisible ? 1 : 0,
@@ -84,9 +84,9 @@ const LandingPromo = () => {
             "linear-gradient(-145deg, rgba(139, 0, 0, 0.57) 50%, transparent 50.1%)",
         }}
       ></div>
-      <div className="container relative z-20 mx-auto flex h-full flex-col justify-between py-20 transition-opacity duration-1000 ease-in-out lg:py-28 xl:py-36">
+      <div className="container relative z-20 mx-auto flex h-full flex-col justify-between py-20 transition-opacity duration-1000 ease-in-out md:pl-32 lg:py-28 xl:py-36 xl:pl-64">
         <h3
-          className="text-3xl font-extrabold tracking-widest text-white/50 lg:text-6xl"
+          className="text-3xl font-extrabold tracking-widest text-white/70 lg:text-6xl"
           style={{
             translate: isImageVisible ? "0%" : "0% -200%",
             opacity: isImageVisible ? 1 : 0,
