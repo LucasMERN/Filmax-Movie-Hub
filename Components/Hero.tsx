@@ -12,7 +12,11 @@ import React, { useState, useEffect } from "react";
 import { Card } from "@/Components/ui/card";
 import BackgroundImage from "@/Components/ui/BackgroundImage";
 
-const Hero = () => {
+type HeroProps = {
+  mediaType?: "movie" | "tv" | "person";
+};
+
+const Hero = ({ mediaType = "movie" }: HeroProps) => {
   const [top10, setTop10] = useState<any[]>([]);
 
   useEffect(() => {
@@ -120,34 +124,49 @@ const Hero = () => {
           className="mt-4 w-full"
         >
           <CarouselContent className="invisible lg:visible">
-            {top10.map((movie: any, index: number) => (
-              <CarouselItem key={index} className="basis-1/3">
-                <div
-                  className={`${index === currentMovieIndex ? "elevated mt-6 flex flex-col items-center gap-2 p-1" : "unelevated mt-6 flex flex-col items-center gap-2 p-1"}`}
+            {top10.map((movie: any, index: number) => {
+              const formattedTitle = (
+                movie?.original_name ||
+                movie?.title ||
+                ""
+              )
+                .toLowerCase()
+                .replace(/[^\w\s]/gi, "")
+                .replace(/\s+/g, "-");
+
+              return (
+                <CarouselItem
+                  href={`${mediaType}/${movie?.id}/${formattedTitle}`}
+                  key={index}
+                  className="basis-1/3"
                 >
-                  <Card className="relative h-96 w-full overflow-hidden border-4 border-white bg-cover bg-center shadow-lg">
-                    <BackgroundImage
-                      src={`https://image.tmdb.org/t/p/original/${movie?.poster_path}`}
-                      alt={`https://image.tmdb.org/t/p/original/${movie?.overview}`}
-                      lazy="eager"
-                    />
-                  </Card>
-                  {index == currentMovieIndex ? (
-                    <span className="dark-shadow break-words text-center text-lg">
-                      {!movie?.original_title
-                        ? movie?.original_name
-                        : movie?.original_title}
-                    </span>
-                  ) : (
-                    <span className="dark-shadow break-words text-center text-lg opacity-0">
-                      {!movie?.original_title
-                        ? movie?.original_name
-                        : movie?.original_title}
-                    </span>
-                  )}
-                </div>
-              </CarouselItem>
-            ))}
+                  <div
+                    className={`${index === currentMovieIndex ? "elevated mt-6 flex flex-col items-center gap-2 p-1" : "unelevated mt-6 flex flex-col items-center gap-2 p-1"}`}
+                  >
+                    <Card className="relative h-96 w-full overflow-hidden border-4 border-white bg-cover bg-center shadow-lg">
+                      <BackgroundImage
+                        src={`https://image.tmdb.org/t/p/original/${movie?.poster_path}`}
+                        alt={`https://image.tmdb.org/t/p/original/${movie?.overview}`}
+                        lazy="eager"
+                      />
+                    </Card>
+                    {index == currentMovieIndex ? (
+                      <span className="dark-shadow break-words text-center text-lg">
+                        {!movie?.original_title
+                          ? movie?.original_name
+                          : movie?.original_title}
+                      </span>
+                    ) : (
+                      <span className="dark-shadow break-words text-center text-lg opacity-0">
+                        {!movie?.original_title
+                          ? movie?.original_name
+                          : movie?.original_title}
+                      </span>
+                    )}
+                  </div>
+                </CarouselItem>
+              );
+            })}
           </CarouselContent>
           <div onClick={handlePreviousClick}>
             <CarouselPrevious />

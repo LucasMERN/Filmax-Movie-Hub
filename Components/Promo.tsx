@@ -24,17 +24,17 @@ type Data = {
 type PromoTypes = {
   id: string;
   color: string;
-  media: string;
+  mediaType: string;
 };
 
-const Promo = ({ id, color, media }: PromoTypes) => {
+const Promo = ({ id, color, mediaType }: PromoTypes) => {
   const [data, setData] = useState<null | Data>(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const data = await getPromo(
-          `https://api.themoviedb.org/3/${media}/${id}?language=en-US`,
+          `https://api.themoviedb.org/3/${mediaType}/${id}?language=en-US`,
         );
 
         if (data) {
@@ -47,13 +47,13 @@ const Promo = ({ id, color, media }: PromoTypes) => {
       }
     };
     fetchData();
-  }, []);
+  }, [id, mediaType]);
 
   console.log(data);
 
   return (
     <section
-      className="text-garamond w-full py-24 md:py-44 xl:py-72 text-white lg:block"
+      className="text-garamond w-full py-24 text-white md:py-44 lg:block xl:py-96"
       style={{
         backgroundImage: `radial-gradient(ellipse at 0% 65%, #471dbaa8, transparent 35%),
         radial-gradient(ellipse at 90% 0%, #471dbaa8, transparent 35%),
@@ -64,8 +64,8 @@ const Promo = ({ id, color, media }: PromoTypes) => {
       }}
     >
       <section className="container relative text-black mix-blend-color-burn">
-        <div className="mx-12 flex flex-col items-center gap-8 sm:border sm:border-t-0 border-blue-400">
-          <div className="absolute -top-20 right-4 flex-col content-end gap-8 bg-white pb-8 hidden sm:flex">
+        <div className="mx-12 flex flex-col items-center gap-8 border-blue-400 sm:border sm:border-t-0">
+          <div className="absolute -top-20 right-4 hidden flex-col content-end gap-8 bg-white pb-8 sm:flex">
             <div className="flex flex-col text-center">
               <h2 className="text-xl font-light">Genre</h2>
               <span className="text-xl font-bold">{data?.genres[1].name}</span>
@@ -77,38 +77,38 @@ const Promo = ({ id, color, media }: PromoTypes) => {
               </span>
             </div>
           </div>
-          <div className="absolute -top-20 left-8 flex-col content-start gap-8 bg-white pb-8 hidden sm:flex">
+          <div className="absolute -top-20 left-8 hidden flex-col content-start gap-8 bg-white pb-8 sm:flex">
             <div className="flex flex-col text-center">
               <h2 className="text-xl font-light">Dune:</h2>
               <span className="text-xl font-extrabold">Part II</span>
             </div>
             <div className="flex flex-col text-center">
               <h2 className="text-xl font-light">Audience Score</h2>
-              <span className="text-xl font-extrabold">{data?.vote_average}/10</span>
+              <span className="text-xl font-extrabold">
+                {data?.vote_average}/10
+              </span>
             </div>
           </div>
           <div className="-mt-12 flex flex-col gap-2 text-center">
-            <h1 className="text-6xl font-bold capitalize w-min break-words">
+            <h1 className="w-min break-words text-6xl font-bold capitalize">
               {data?.tagline}
             </h1>
           </div>
           <div className="-mb-6 flex w-full justify-between">
-            <div className="invisible sm:visible flex w-1/3 flex-col pl-4">
+            <div className="invisible flex w-1/3 flex-col pl-4 sm:visible">
               <h3 className="text-sm font-medium">Premier on</h3>
               <span className="text-xl font-bold">27 Feb</span>
             </div>
             <div className="bg-white px-2">
               <Link
                 href="#"
-                className="mt-20 inline-flex h-11 items-center justify-center whitespace-nowrap rounded-md bg-primary px-8 text-xl font-bold text-white"
+                className="mt-20 inline-flex h-11 items-center justify-center whitespace-nowrap rounded-md bg-black px-8 text-xl font-bold tracking-widest text-white"
               >
                 ENTER
               </Link>
             </div>
-            <div className="invisible sm:visible flex w-1/3 flex-col pr-4">
-              <h3 className="text-end text-sm font-medium">
-                Available on
-              </h3>
+            <div className="invisible flex w-1/3 flex-col pr-4 sm:visible">
+              <h3 className="text-end text-sm font-medium">Available on</h3>
               <div className="-ml-3 -mt-3 flex items-center justify-end gap-2">
                 <Image
                   src={max}

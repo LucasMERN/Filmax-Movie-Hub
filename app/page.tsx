@@ -111,7 +111,7 @@ export default function Home() {
             width={300}
             className="relative z-10 md:w-[500px]"
           />
-          <div className="absolute top-3 flex w-full justify-center md:top-4">
+          <div className="absolute top-3 flex w-full justify-center md:top-6">
             <Image
               src={watchGIF}
               alt=""

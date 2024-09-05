@@ -59,6 +59,7 @@ export default function Dashboard() {
         <div className="container pr-0">
           <CarouselHeader title={"New Movies"} />
           <ProductCarousel
+            mediaType="movie"
             data={newMovieData}
             width="md:basis-1/3 lg:basis-1/4 xl:basis-1/6"
           />
@@ -66,6 +67,7 @@ export default function Dashboard() {
         <div className="container pr-0">
           <CarouselHeader title={"Popular movies"} />
           <ProductCarousel
+            mediaType="movie"
             data={popularMovieData}
             width="md:basis-1/3 lg:basis-1/4 xl:basis-1/6"
           />
@@ -74,6 +76,7 @@ export default function Dashboard() {
         <div className="container pr-0">
           <CarouselHeader title={"New TV Shows"} />
           <ProductCarousel
+            mediaType="tv"
             data={newTVData}
             width="md:basis-1/3 lg:basis-1/4 xl:basis-1/6"
           />
@@ -81,11 +84,12 @@ export default function Dashboard() {
         <div className="container pr-0">
           <CarouselHeader title={"Animations"} />
           <ProductCarousel
+            mediaType="movie"
             data={animatedMovieData}
             width="md:basis-1/3 lg:basis-1/4 xl:basis-1/6"
           />
         </div>
-        <Promo id="693134" color="#161616" media="movie"/>
+        <Promo id="693134" color="#161616" mediaType="movie" />
       </div>
     </main>
   );

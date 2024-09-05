@@ -5,7 +5,9 @@ import { Button } from "@/Components/ui/Button";
 
 export default function SearchFilter() {
   const [searchResultsList, setSearchResultsList] = useState<any[]>([]);
-  const [mediaType, setMediaType] = useState("movie");
+  const [mediaType, setMediaType] = useState<"movie" | "tv" | "person">(
+    "movie",
+  );
   const [searchTerm, setSearchTerm] = useState("");
 
   const handleSearchChange = (event: {
@@ -86,6 +88,7 @@ export default function SearchFilter() {
       {searchResultsList.length > 0 ? (
         <div className="search-results overflow-hidden">
           <ProductCarousel
+            mediaType={mediaType !== "tv" ? "movie" : "tv"}
             data={searchResultsList}
             width="md:basis-1/3 lg:basis-1/4 xl:basis-1/6"
           />

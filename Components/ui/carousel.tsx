@@ -173,13 +173,13 @@ const CarouselContent = React.forwardRef<
 CarouselContent.displayName = "CarouselContent";
 
 const CarouselItem = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => {
+  HTMLAnchorElement,
+  React.AnchorHTMLAttributes<HTMLAnchorElement>
+>(({ className, href, ...props }, ref) => {
   const { orientation } = useCarousel();
 
   return (
-    <div
+    <a
       ref={ref}
       role="group"
       aria-roledescription="slide"
@@ -188,6 +188,7 @@ const CarouselItem = React.forwardRef<
         orientation === "horizontal" ? "pl-4" : "pt-4",
         className,
       )}
+      href={href}
       {...props}
     />
   );
