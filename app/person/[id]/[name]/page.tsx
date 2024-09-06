@@ -1,26 +1,27 @@
 "use client";
 
-import { getPerson, getPersonCredit, getPersonExternalId, getPersonPoster } from "@/lib/utils";
+import {
+  getPerson,
+  getPersonCredit,
+  getPersonExternalId,
+  getPersonPoster,
+} from "@/lib/utils";
 import { useEffect, useState } from "react";
 
 type Data = {
-    biography: string;
-    birthday: string;
-    deathday: string | null;
-    gender: number;
-    homepage: string | null;
-    id: number;
-    known_for_department: string;
-    name: string;
-    place_of_birth: string;
-    profile_path: string;
+  biography: string;
+  birthday: string;
+  deathday: string | null;
+  gender: number;
+  homepage: string | null;
+  id: number;
+  known_for_department: string;
+  name: string;
+  place_of_birth: string;
+  profile_path: string;
 };
 
-const Person = ({
-  id,
-}: {
-  id: number;
-}) => {
+const Person = ({ id }: { id: number }) => {
   const [personData, setPersonData] = useState<null | Data>(null);
   const [personPoster, setPersonPoster] = useState<null | Data>(null);
   const [personCredit, setPersonCredit] = useState<null | Data>(null);
@@ -43,7 +44,7 @@ const Person = ({
           setPersonPoster(personPoster);
           setPersonCredit(personCredit);
           setPersonID(personID);
-          console.log(personPoster, personCredit, personID)
+          console.log(personPoster, personCredit, personID);
         } else {
           setError("No data available");
         }
@@ -69,11 +70,7 @@ const Person = ({
   );
 };
 
-export default function Page({
-  params,
-}: {
-  params: { id: number };
-}) {
+export default function Page({ params }: { params: { id: number } }) {
   const { id } = params;
   return <Person id={id} />;
 }

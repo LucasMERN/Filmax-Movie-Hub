@@ -24,7 +24,7 @@ export const fetchData = async (url: string) => {
   return data;
 };
 
-const apiUrl = 'https://api.themoviedb.org/3';
+const apiUrl = "https://api.themoviedb.org/3";
 
 export const getPerson = async (id: number) => {
   const url = `${apiUrl}/person/${id}`;
@@ -76,7 +76,11 @@ export const getNewMovie = async (media: string, page: number) => {
   return fetchData(url);
 };
 
-export const getNewTV = async (media: string, page: number, formattedDate: string) => {
+export const getNewTV = async (
+  media: string,
+  page: number,
+  formattedDate: string,
+) => {
   const url = `${apiUrl}/discover/${media}?&include_adult=false&include_video=false&language=en-US&page=${page}&sort_by=popularity.desc&first_air_date.gte=2022-11-01&first_air_date.lte=${formattedDate}&with_original_language=en`;
   return fetchData(url);
 };
@@ -91,25 +95,30 @@ export const getAnimated = async (media: string, page: number) => {
   return fetchData(url);
 };
 
-// Fetch media by genre
-export const getMediaByGenre = async (media: string, genreId: number, page: number) => {
+export const getMediaByGenre = async (
+  media: string,
+  genreId: number,
+  page: number,
+) => {
   const url = `${apiUrl}/discover/${media}?with_genres=${genreId}&page=${page}`;
   return fetchData(url);
 };
 
-// Fetch genre list
 export const getGenreList = async (media: string) => {
   const url = `${apiUrl}/genre/${media}/list`;
   return fetchData(url);
 };
 
-// Search for media by query
 export const searchMedia = async (query: string, page: number) => {
   const url = `${apiUrl}/search/multi?query=${query}&page=${page}`;
   return fetchData(url);
 };
 
-export const searchSpecificMedia = async (mediaType: string, query: string, page: number) => {
+export const searchSpecificMedia = async (
+  mediaType: string,
+  query: string,
+  page: number,
+) => {
   const url = `${apiUrl}/search/${mediaType}?query=${query}&page=${page}`;
   return fetchData(url);
 };

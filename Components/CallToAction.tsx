@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react";
 import { getSingle } from "@/lib/utils";
-import { Button } from "@/Components/ui/Button";
 import Link from "next/link";
 
 interface CallToActionTypes {
@@ -40,10 +39,7 @@ const CallToAction = ({ id, color, mediaType }: CallToActionTypes) => {
     fetchData();
   }, [id, mediaType]);
 
-  const formattedTitle = (
-    callToActionResults?.name ||
-    ""
-  )
+  const formattedTitle = (callToActionResults?.name || "")
     .toLowerCase()
     .replace(/[^\w\s]/gi, "")
     .replace(/\s+/g, "-");

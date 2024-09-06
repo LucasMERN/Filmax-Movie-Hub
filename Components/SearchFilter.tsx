@@ -24,14 +24,14 @@ export default function SearchFilter() {
 
       if (Array.isArray(searchResults?.results)) {
         if (mediaType == "person" && searchResults.results.length > 0) {
-          console.log(searchResults.results)
+          console.log(searchResults.results);
           setSearchResultsList(searchResults.results);
         } else {
           setSearchResultsList([]);
         }
 
         if (mediaType != "person") {
-          console.log(searchResults.results)
+          console.log(searchResults.results);
           setSearchResultsList(searchResults.results);
         }
       } else {
@@ -48,7 +48,7 @@ export default function SearchFilter() {
         onSubmit={handleSubmit}
         className="flex flex-col gap-4 lg:flex-row lg:justify-between lg:gap-8"
       >
-        <div className="flex flex-row justify-between rounded-2xl bg-background px-2 lg:px-6 py-4 md:gap-6">
+        <div className="flex flex-row justify-between rounded-2xl bg-background px-2 py-4 md:gap-6 lg:px-6">
           <Button
             variant={mediaType == "movie" ? "default" : "ghost"}
             onClick={() => setMediaType("movie")}

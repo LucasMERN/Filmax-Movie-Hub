@@ -12,7 +12,6 @@ import React, { useState, useEffect } from "react";
 import { Card } from "@/Components/ui/card";
 import BackgroundImage from "@/Components/ui/BackgroundImage";
 import Link from "next/link";
-import { Button } from "./ui/Button";
 
 type HeroProps = {
   mediaType?: "movie" | "tv" | "person";
@@ -135,7 +134,7 @@ const Hero = ({ mediaType = "movie" }: HeroProps) => {
           </p>
           <Link
             href={`${mediaType}/${top10[currentMovieIndex]?.id}/${formattedTitle}`}
-            className="w-fit hover:bg-secondary/80 inline-flex h-8 items-center justify-center whitespace-nowrap rounded-md bg-white px-4 text-base font-semibold text-secondary-foreground transition-colors"
+            className="hover:bg-secondary/80 inline-flex h-8 w-fit items-center justify-center whitespace-nowrap rounded-md bg-white px-4 text-base font-semibold text-secondary-foreground transition-colors"
           >
             Explore
           </Link>
