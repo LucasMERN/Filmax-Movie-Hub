@@ -3,7 +3,7 @@
 import Hero from "@/Components/Hero";
 import ProductCarousel from "@/Components/ProductCarousel";
 import CallToAction from "@/Components/CallToAction";
-import { getNewMovies, getPopular, getAnimations, getNewTV } from "@/lib/utils";
+import { getNewMovie, getPopular, getAnimated, getNewTV } from "@/lib/utils";
 import { useState, useEffect } from "react";
 import SearchFilter from "@/Components/SearchFilter";
 import Link from "next/link";
@@ -21,19 +21,10 @@ export default function Dashboard() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const newMovies = await getNewMovies(
-          `https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=2`,
-        );
-        const popularMovies = await getPopular(
-          "https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1",
-        );
-        const animatedMovies = await getAnimations(
-          "https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&page=1&sort_by=popularity.asc&vote_count.gte=100&with_genres=16&with_original_language=en",
-        );
-        const newTV = await getNewTV(
-          `https://api.themoviedb.org/3/discover/tv?&include_adult=false&include_video=false&language=en-US&page=2&sort_by=popularity.desc&first_air_date.gte=2022-11-01&first_air_date.lte=${formattedDate}&with_original_language=en`,
-        );
-
+        const newMovies = await getNewMovie("movie", 2);
+        const popularMovies = await getPopular("movie", 1);
+        const animatedMovies = await getAnimated("movie", 1);
+        const newTV = await getNewTV("tv", 2, formattedDate);
         if (Array.isArray(newMovies?.results)) {
           setNewMovieData(newMovies.results);
           setPopularMovieData(popularMovies.results);
@@ -72,7 +63,7 @@ export default function Dashboard() {
             width="md:basis-1/3 lg:basis-1/4 xl:basis-1/6"
           />
         </div>
-        <CallToAction id={"95396"} color={"#007D4D"} media={"tv"} />
+        <CallToAction id={95396} color={"#007D4D"} mediaType={"tv"} />
         <div className="container pr-0">
           <CarouselHeader title={"New TV Shows"} />
           <ProductCarousel
@@ -89,7 +80,7 @@ export default function Dashboard() {
             width="md:basis-1/3 lg:basis-1/4 xl:basis-1/6"
           />
         </div>
-        <Promo id="693134" color="#161616" mediaType="movie" />
+        {/* <Promo id={693134} color="#161616" mediaType="movie" /> */}
       </div>
     </main>
   );
@@ -101,7 +92,7 @@ interface CarouselHeaderTypes {
 
 const CarouselHeader = ({ title }: CarouselHeaderTypes) => {
   return (
-    <div className="relative z-10 -mb-4 flex flex-row items-baseline justify-between px-1 pr-8 text-white lg:pr-12">
+    <div className="relative z-10 -mb-4 flex flex-row gap-4 items-baseline px-1 pr-8 text-white lg:pr-12">
       <h3 className="text-xl font-semibold">{title}</h3>
       <Link href="#" className="cursor-pointer text-sm font-extralight">
         View All

@@ -1,6 +1,6 @@
 "use client";
 
-import { getTop10 } from "@/lib/utils";
+import { getTrending } from "@/lib/utils";
 import React, { useState, useEffect } from "react";
 import BackgroundImage from "@/Components/ui/BackgroundImage";
 import Image from "next/image";
@@ -14,9 +14,7 @@ const LandingPromo = () => {
   useEffect(() => {
     const fetchTop10 = async () => {
       try {
-        const movies = await getTop10(
-          "https://api.themoviedb.org/3/trending/all/week?language=en-US",
-        );
+        const movies = await getTrending("movie", 1);
 
         if (Array.isArray(movies?.results)) {
           setTop10(movies.results.slice(0, 3));

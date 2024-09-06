@@ -24,34 +24,92 @@ export const fetchData = async (url: string) => {
   return data;
 };
 
-export const getTop10 = async (url: string) => {
+const apiUrl = 'https://api.themoviedb.org/3';
+
+export const getPerson = async (id: number) => {
+  const url = `${apiUrl}/person/${id}`;
   return fetchData(url);
 };
 
-export const getSearchItems = async (url: string) => {
+export const getPersonPoster = async (id: number) => {
+  const url = `${apiUrl}/person/${id}/images`;
   return fetchData(url);
 };
 
-export const getNewMovies = async (url: string) => {
+export const getPersonCredit = async (id: number) => {
+  const url = `${apiUrl}/person/${id}/movie_credits`;
   return fetchData(url);
 };
 
-export const getNewTV = async (url: string) => {
+export const getPersonExternalId = async (id: number) => {
+  const url = `${apiUrl}/person/${id}/external_ids`;
   return fetchData(url);
 };
 
-export const getPopular = async (url: string) => {
+export const getRecommended = async (id: number, mediaType: string) => {
+  const url = `${apiUrl}/${mediaType}/${id}/recommendations`;
   return fetchData(url);
 };
 
-export const getAnimations = async (url: string) => {
+export const getTop10 = async () => {
+  const url = `${apiUrl}/trending/all/week?language=en-US`;
   return fetchData(url);
 };
 
-export const getCallToAction = async (url: string) => {
+export const getSingle = async (mediaType: string, id: number) => {
+  const url = `${apiUrl}/${mediaType}/${id}`;
   return fetchData(url);
 };
 
-export const getPromo = async (url: string) => {
+export const getTvShowEpisodes = async (id: number, season: number) => {
+  const url = `${apiUrl}/tv/${id}/season/${season}`;
+  return fetchData(url);
+};
+
+export const getTrending = async (media: string, page: number) => {
+  const url = `${apiUrl}/trending/${media}/week?page=${page}`;
+  return fetchData(url);
+};
+
+export const getNewMovie = async (media: string, page: number) => {
+  const url = `${apiUrl}/${media}/upcoming?language=en-US&page=${page}`;
+  return fetchData(url);
+};
+
+export const getNewTV = async (media: string, page: number, formattedDate: string) => {
+  const url = `${apiUrl}/discover/${media}?&include_adult=false&include_video=false&language=en-US&page=${page}&sort_by=popularity.desc&first_air_date.gte=2022-11-01&first_air_date.lte=${formattedDate}&with_original_language=en`;
+  return fetchData(url);
+};
+
+export const getPopular = async (media: string, page: number) => {
+  const url = `${apiUrl}/${media}/top_rated?language=en-US&page=${page}`;
+  return fetchData(url);
+};
+
+export const getAnimated = async (media: string, page: number) => {
+  const url = `${apiUrl}/discover/${media}?include_adult=false&include_video=false&page=${page}&sort_by=popularity.asc&vote_count.gte=100&with_genres=16&with_original_language=en`;
+  return fetchData(url);
+};
+
+// Fetch media by genre
+export const getMediaByGenre = async (media: string, genreId: number, page: number) => {
+  const url = `${apiUrl}/discover/${media}?with_genres=${genreId}&page=${page}`;
+  return fetchData(url);
+};
+
+// Fetch genre list
+export const getGenreList = async (media: string) => {
+  const url = `${apiUrl}/genre/${media}/list`;
+  return fetchData(url);
+};
+
+// Search for media by query
+export const searchMedia = async (query: string, page: number) => {
+  const url = `${apiUrl}/search/multi?query=${query}&page=${page}`;
+  return fetchData(url);
+};
+
+export const searchSpecificMedia = async (mediaType: string, query: string, page: number) => {
+  const url = `${apiUrl}/search/${mediaType}?query=${query}&page=${page}`;
   return fetchData(url);
 };

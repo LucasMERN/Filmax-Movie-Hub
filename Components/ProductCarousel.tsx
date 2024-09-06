@@ -45,12 +45,12 @@ const ProductCarousel: React.FC<CarouselProps> = ({
             <CarouselItem
               href={`/${mediaType}/${content?.id}/${formattedTitle}`}
               key={index}
-              className={width}
+              className={`${content?.profile_path == null && content?.poster_path == null ? "hidden" : "" } ${width}`}
             >
               <div className="mt-6 flex flex-col items-center gap-2 p-1">
-                <Card className="relative h-96 w-full overflow-hidden bg-cover bg-center shadow-lg">
+                <Card className="relative h-96 w-full overflow-hidden bg-cover bg-center shadow-lg hover:scale-105 transition-transform">
                   <BackgroundImage
-                    src={`https://image.tmdb.org/t/p/original/${content?.poster_path}`}
+                    src={`https://image.tmdb.org/t/p/original/${mediaType == "person" ? content?.profile_path : content?.poster_path}`}
                     alt={content?.overview || "Poster image"}
                   />
                 </Card>

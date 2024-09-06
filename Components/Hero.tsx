@@ -11,6 +11,8 @@ import {
 import React, { useState, useEffect } from "react";
 import { Card } from "@/Components/ui/card";
 import BackgroundImage from "@/Components/ui/BackgroundImage";
+import Link from "next/link";
+import { Button } from "./ui/Button";
 
 type HeroProps = {
   mediaType?: "movie" | "tv" | "person";
@@ -22,9 +24,7 @@ const Hero = ({ mediaType = "movie" }: HeroProps) => {
   useEffect(() => {
     const fetchTop10 = async () => {
       try {
-        const movies = await getTop10(
-          "https://api.themoviedb.org/3/trending/all/week?language=en-US",
-        );
+        const movies = await getTop10();
 
         if (Array.isArray(movies?.results)) {
           setTop10(movies.results.slice(0, 10));
@@ -40,6 +40,7 @@ const Hero = ({ mediaType = "movie" }: HeroProps) => {
 
   const [currentMovieIndex, setCurrentMovieIndex] = useState(8);
   const [isImageVisible, setIsImageVisible] = useState(true);
+  const [isDetailsExpanded, setIsDetailsExpanded] = useState(false);
 
   function handlePreviousClick() {
     setIsImageVisible(false);
@@ -61,6 +62,21 @@ const Hero = ({ mediaType = "movie" }: HeroProps) => {
     }, 1000);
   }
 
+  function truncateText(text: string, maxLength: number) {
+    if (!text) return "";
+    if (text.length <= maxLength) return text;
+    return text.slice(0, maxLength) + "...";
+  }
+
+  const formattedTitle = (
+    top10[currentMovieIndex]?.original_name ||
+    top10[currentMovieIndex]?.title ||
+    ""
+  )
+    .toLowerCase()
+    .replace(/[^\w\s]/gi, "")
+    .replace(/\s+/g, "-");
+
   return (
     <>
       <div
@@ -79,9 +95,9 @@ const Hero = ({ mediaType = "movie" }: HeroProps) => {
         }}
         className="h-[800px] w-full bg-cover bg-center"
       ></div>
-      <div className="container mx-auto flex flex-col gap-4 pt-36 text-3xl font-bold text-white lg:text-6xl">
+      <div className="container relative mx-auto h-[750px] pt-36 text-3xl font-bold text-white lg:text-6xl">
         <h1
-          className="dark-shadow tracking-widest"
+          className="dark-shadow mb-4 tracking-widest"
           style={{
             opacity: isImageVisible ? 1 : 0,
             transition: "opacity 1s ease-in-out",
@@ -106,13 +122,23 @@ const Hero = ({ mediaType = "movie" }: HeroProps) => {
           </span>
         </div>
         <div
-          className="dark-shadow -m-4 -mb-72 mt-24 rounded-2xl bg-black/60 p-4 text-sm sm:w-1/2 lg:hidden"
+          className="-m-4 -mb-72 mt-16 flex flex-col gap-4 rounded-2xl bg-black/60 p-4 sm:w-1/2 lg:hidden"
           style={{
             opacity: isImageVisible ? 1 : 0,
             transition: "opacity 1s ease-in-out",
           }}
         >
-          {top10[currentMovieIndex]?.overview}
+          <p className="dark-shadow text-sm">
+            {top10 && top10[currentMovieIndex]
+              ? truncateText(top10[currentMovieIndex].overview, 120)
+              : ""}
+          </p>
+          <Link
+            href={`${mediaType}/${top10[currentMovieIndex]?.id}/${formattedTitle}`}
+            className="w-fit hover:bg-secondary/80 inline-flex h-8 items-center justify-center whitespace-nowrap rounded-md bg-white px-4 text-base font-semibold text-secondary-foreground transition-colors"
+          >
+            Explore
+          </Link>
         </div>
         <Carousel
           opts={{

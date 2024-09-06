@@ -1,5 +1,5 @@
 import { SetStateAction, useState } from "react";
-import { getSearchItems } from "@/lib/utils";
+import { searchSpecificMedia } from "@/lib/utils";
 import ProductCarousel from "@/Components/ProductCarousel";
 import { Button } from "@/Components/ui/Button";
 
@@ -20,18 +20,18 @@ export default function SearchFilter() {
     event.preventDefault();
 
     try {
-      const searchResults = await getSearchItems(
-        `https://api.themoviedb.org/3/search/${mediaType}?query=${searchTerm}&include_adult=false&language=en-US&page=1`,
-      );
+      const searchResults = await searchSpecificMedia(mediaType, searchTerm, 1);
 
       if (Array.isArray(searchResults?.results)) {
         if (mediaType == "person" && searchResults.results.length > 0) {
-          setSearchResultsList(searchResults.results[0].known_for);
+          console.log(searchResults.results)
+          setSearchResultsList(searchResults.results);
         } else {
           setSearchResultsList([]);
         }
 
         if (mediaType != "person") {
+          console.log(searchResults.results)
           setSearchResultsList(searchResults.results);
         }
       } else {
@@ -48,7 +48,7 @@ export default function SearchFilter() {
         onSubmit={handleSubmit}
         className="flex flex-col gap-4 lg:flex-row lg:justify-between lg:gap-8"
       >
-        <div className="flex flex-row justify-between rounded-2xl bg-background px-6 py-4 md:gap-6">
+        <div className="flex flex-row justify-between rounded-2xl bg-background px-2 lg:px-6 py-4 md:gap-6">
           <Button
             variant={mediaType == "movie" ? "default" : "ghost"}
             onClick={() => setMediaType("movie")}
@@ -88,7 +88,7 @@ export default function SearchFilter() {
       {searchResultsList.length > 0 ? (
         <div className="search-results overflow-hidden">
           <ProductCarousel
-            mediaType={mediaType !== "tv" ? "movie" : "tv"}
+            mediaType={mediaType}
             data={searchResultsList}
             width="md:basis-1/3 lg:basis-1/4 xl:basis-1/6"
           />

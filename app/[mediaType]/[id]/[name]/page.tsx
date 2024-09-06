@@ -1,6 +1,6 @@
 "use client";
 
-import { getPromo } from "@/lib/utils";
+import { getSingle } from "@/lib/utils";
 import { useEffect, useState } from "react";
 
 type Data = {
@@ -33,7 +33,7 @@ const MovieOrTVShow = ({
   id,
   mediaType,
 }: {
-  id: string;
+  id: number;
   mediaType: "movie" | "tv";
 }) => {
   const [data, setData] = useState<null | Data>(null);
@@ -45,9 +45,7 @@ const MovieOrTVShow = ({
       setIsLoading(true);
       setError(null);
       try {
-        const data = await getPromo(
-          `https://api.themoviedb.org/3/${mediaType}/${id}?language=en-US`,
-        );
+        const data = await getSingle(mediaType, id);
 
         if (data) {
           setData(data);
@@ -79,7 +77,7 @@ const MovieOrTVShow = ({
 export default function Page({
   params,
 }: {
-  params: { mediaType: "movie" | "tv"; id: string };
+  params: { mediaType: "movie" | "tv"; id: number };
 }) {
   const { mediaType, id } = params;
   return <MovieOrTVShow id={id} mediaType={mediaType} />;

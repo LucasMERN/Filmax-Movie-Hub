@@ -1,6 +1,6 @@
 "use client";
 
-import { getPromo } from "@/lib/utils";
+import { getSingle } from "@/lib/utils";
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import netflix from "../public/netflix.png";
@@ -22,7 +22,7 @@ type Data = {
 };
 
 type PromoTypes = {
-  id: string;
+  id: number;
   color: string;
   mediaType: string;
 };
@@ -33,9 +33,7 @@ const Promo = ({ id, color, mediaType }: PromoTypes) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await getPromo(
-          `https://api.themoviedb.org/3/${mediaType}/${id}?language=en-US`,
-        );
+        const data = await getSingle(mediaType, id);
 
         if (data) {
           setData(data);

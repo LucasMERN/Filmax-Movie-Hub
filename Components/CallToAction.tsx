@@ -1,13 +1,14 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { getCallToAction } from "@/lib/utils";
+import { getSingle } from "@/lib/utils";
 import { Button } from "@/Components/ui/Button";
+import Link from "next/link";
 
 interface CallToActionTypes {
-  id: string;
+  id: number;
   color: string;
-  media: string;
+  mediaType: string;
 }
 
 interface CallToActionData {
@@ -18,16 +19,14 @@ interface CallToActionData {
   overview: string;
 }
 
-const CallToAction = ({ id, color, media }: CallToActionTypes) => {
+const CallToAction = ({ id, color, mediaType }: CallToActionTypes) => {
   const [callToActionResults, setCallToActionResults] =
     useState<CallToActionData | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await getCallToAction(
-          `https://api.themoviedb.org/3/${media}/${id}?language=en-US`,
-        );
+        const data = await getSingle(mediaType, id);
 
         if (data) {
           setCallToActionResults(data);
@@ -39,7 +38,15 @@ const CallToAction = ({ id, color, media }: CallToActionTypes) => {
       }
     };
     fetchData();
-  }, [id, media]);
+  }, [id, mediaType]);
+
+  const formattedTitle = (
+    callToActionResults?.name ||
+    ""
+  )
+    .toLowerCase()
+    .replace(/[^\w\s]/gi, "")
+    .replace(/\s+/g, "-");
 
   return (
     <>
@@ -57,10 +64,13 @@ const CallToAction = ({ id, color, media }: CallToActionTypes) => {
             <h3 className="text-2xl font-bold tracking-wider">
               {callToActionResults?.name}
             </h3>
-            <div className="flex flex-row items-center">
+            <div className="flex flex-row flex-wrap items-center">
               <span className="text-lg font-medium">Category:</span>
               {callToActionResults?.genres.map((genres: any, index: number) => (
-                <span key={index} className="border-r-2 px-2 leading-none">
+                <span
+                  key={index}
+                  className={`${callToActionResults.genres.length - 1 === index ? "" : "border-r-2"} px-2 leading-none`}
+                >
                   {genres.name}
                 </span>
               ))}
@@ -76,14 +86,12 @@ const CallToAction = ({ id, color, media }: CallToActionTypes) => {
               )}
             </div>
             <div className="w-1/2">{callToActionResults?.overview}</div>
-            <div className="flex flex-row gap-6">
-              <Button variant={"secondary"} size={"lg"}>
-                Play Online
-              </Button>
-              <Button variant={"link"} size={"lg"}>
-                More Details
-              </Button>
-            </div>
+            <Link
+              href={`${mediaType}/${id}/${formattedTitle}`}
+              className="hover:bg-secondary/80 inline-flex h-8 w-fit items-center justify-center whitespace-nowrap rounded-md bg-white px-4 text-base font-semibold text-secondary-foreground transition-colors"
+            >
+              Explore
+            </Link>
           </div>
         </div>
       </section>
@@ -96,38 +104,39 @@ const CallToAction = ({ id, color, media }: CallToActionTypes) => {
           backgroundSize: "cover",
         }}
       >
-        <div className="dark-shadow container">
+        <div className="container">
           <div className="flex flex-col gap-8">
-            <h3 className="text-2xl font-bold tracking-wider">
+            <h3 className="dark-shadow text-2xl font-bold tracking-wider">
               {callToActionResults?.name}
             </h3>
             <div className="flex flex-row items-center">
-              <span className="text-lg font-medium">Category:</span>
+              <span className="dark-shadow text-lg font-medium">Category:</span>
               {callToActionResults?.genres.map((genres: any, index: number) => (
-                <span key={index} className="border-r-2 px-2 leading-none">
+                <span
+                  key={index}
+                  className={`${callToActionResults.genres.length - 1 === index ? "" : "border-r-2"} dark-shadow px-2 leading-none`}
+                >
                   {genres.name}
                 </span>
               ))}
             </div>
             <div className="flex flex-row items-center">
-              <span className="text-lg font-medium">Director:</span>
+              <span className="dark-shadow text-lg font-medium">Director:</span>
               {callToActionResults?.created_by.map(
                 (director: any, index: number) => (
-                  <span key={index} className="px-2">
+                  <span key={index} className="dark-shadow px-2">
                     {director.name}
                   </span>
                 ),
               )}
             </div>
-            <div>{callToActionResults?.overview}</div>
-            <div className="flex flex-row gap-6">
-              <Button variant={"secondary"} size={"lg"}>
-                Play Online
-              </Button>
-              <Button variant={"link"} size={"lg"}>
-                More Details
-              </Button>
-            </div>
+            <div className="dark-shadow">{callToActionResults?.overview}</div>
+            <Link
+              href={`${mediaType}/${id}/${formattedTitle}`}
+              className="hover:bg-secondary/80 inline-flex h-8 w-fit items-center justify-center whitespace-nowrap rounded-md bg-white px-4 text-base font-semibold text-secondary-foreground transition-colors"
+            >
+              Explore
+            </Link>
           </div>
         </div>
       </section>
