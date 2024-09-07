@@ -309,7 +309,7 @@ const MovieOrTVShow = ({
             <h3 className="text-xl font-semibold">More Like This</h3>
           </div>
           <ProductCarousel
-            mediaType="tv"
+            mediaType={mediaType}
             data={recommendedData?.results}
             width="md:basis-1/3 lg:basis-1/4 xl:basis-1/6"
           />
