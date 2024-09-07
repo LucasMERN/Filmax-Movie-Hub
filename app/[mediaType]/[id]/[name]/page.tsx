@@ -21,6 +21,7 @@ import { Card, CardFooter, CardTitle } from "@/Components/ui/card";
 import React from "react";
 import Nav from "@/Components/Nav";
 import Footer from "@/Components/Footer";
+import Loader from "@/Components/Loader";
 
 type Data = {
   backdrop_path: string;
@@ -115,13 +116,17 @@ const MovieOrTVShow = ({
         console.error("Error fetching Promo Data:", error);
         setError("Failed to fetch data");
       } finally {
-        setIsLoading(false);
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 1000);
       }
     };
     fetchData();
   }, [id, mediaType]);
 
-  if (isLoading) return <div>Loading...</div>;
+  console.log(creditData);
+
+  if (isLoading) return <Loader />;
   if (error) return <div>Error: {error}</div>;
   if (!mediaData) return <div>No data available</div>;
 
@@ -150,7 +155,7 @@ const MovieOrTVShow = ({
           <div className="relative flex flex-row items-center gap-2">
             <Badge
               variant="outline"
-              className="mr-2 w-fit rounded-md border-white text-sm font-medium text-white/60 shadow-lg"
+              className="mr-2 w-fit rounded-md border-white text-sm font-medium text-white shadow-lg"
             >
               {mediaType !== "movie"
                 ? contentRatingData[0].rating || "PG"
@@ -173,7 +178,12 @@ const MovieOrTVShow = ({
                   key={index}
                   className="dark-shadow whitespace-nowrap text-sm font-semibold text-white/60"
                 >
-                  {index === 2 ? person.name : `${person.name}, `}
+                  <Link
+                    href={`/person/${person.id}/${person.name}`}
+                    className="hover:text-white"
+                  >
+                    {index === 2 ? person.name : `${person.name}, `}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -182,12 +192,12 @@ const MovieOrTVShow = ({
             </span>
             <Link
               href="#cast"
-              className="dark-shadow group flex items-center gap-1 text-sm font-semibold text-white/60"
+              className="dark-shadow group group flex items-center gap-1 text-sm font-semibold text-white/60 underline-offset-2 hover:text-white hover:underline"
             >
               See Full Cast{" "}
               <ChevronsRight
                 size={20}
-                className="dark-shadow mt-0.5 transition-transform group-hover:translate-x-2"
+                className="dark-shadow group-hover:animate-wiggle underline-offset-2 transition-transform group-hover:text-white group-hover:underline"
               />
             </Link>
             <RadialChart
@@ -205,7 +215,7 @@ const MovieOrTVShow = ({
         </section>
         <section className="container relative z-10 flex w-full flex-col gap-8 lg:flex-row lg:gap-6">
           <Image
-            className="hidden rounded-lg border border-white text-card-foreground shadow-2xl lg:block"
+            className="hidden rounded-lg border border-white text-card-foreground shadow-2xl transition-transform hover:rotate-3 hover:scale-105 lg:block"
             width={175}
             height={250}
             src={`https://image.tmdb.org/t/p/w370_and_h556_bestv2/${mediaData.poster_path}`}

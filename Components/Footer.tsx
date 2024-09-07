@@ -12,7 +12,7 @@ const Footer = () => {
               <Github
                 size={40}
                 color="white"
-                className="group-hover:scale-125"
+                className="transition-transform group-hover:scale-125"
               />
             </Link>
           </li>
@@ -24,7 +24,7 @@ const Footer = () => {
               <Linkedin
                 size={40}
                 color="white"
-                className="group-hover:scale-125"
+                className="transition-transform group-hover:scale-125"
               />
             </Link>
           </li>
@@ -35,7 +35,7 @@ const Footer = () => {
         Designed & Developed by{" "}
         <Link
           href="#"
-          className="underline decoration-dashed decoration-1 underline-offset-4"
+          className="underline decoration-dashed decoration-1 underline-offset-4 hover:font-bold transition-all"
         >
           Lucas Winkler
         </Link>

@@ -1,5 +1,6 @@
 "use client";
 
+import Loader from "@/Components/Loader";
 import {
   getPerson,
   getPersonCredit,
@@ -58,7 +59,7 @@ const Person = ({ id }: { id: number }) => {
     fetchData();
   }, [id]);
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <Loader />;
   if (error) return <div>Error: {error}</div>;
   if (!personData) return <div>No data available</div>;
 

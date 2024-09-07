@@ -7,19 +7,23 @@ import { getNewMovie, getPopular, getAnimated, getNewTV } from "@/lib/utils";
 import { useState, useEffect } from "react";
 import SearchFilter from "@/Components/SearchFilter";
 import Link from "next/link";
-import Promo from "@/Components/Promo";
+import Loader from "@/Components/Loader";
 
 export default function Dashboard() {
   const [newMovieData, setNewMovieData] = useState<any[]>([]);
   const [popularMovieData, setPopularMovieData] = useState<any[]>([]);
   const [animatedMovieData, setAnimatedMovieData] = useState<any[]>([]);
   const [newTVData, setNewTVData] = useState<any[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   const today = new Date();
   const formattedDate = today.toISOString().substring(0, 10);
 
   useEffect(() => {
     const fetchData = async () => {
+      setIsLoading(true);
+      setError(null);
       try {
         const newMovies = await getNewMovie("movie", 2);
         const popularMovies = await getPopular("movie", 1);
@@ -31,14 +35,22 @@ export default function Dashboard() {
           setAnimatedMovieData(animatedMovies.results);
           setNewTVData(newTV.results);
         } else {
-          console.error("Data is not an array:", newMovies);
+          setError("No data available");
         }
       } catch (error) {
-        console.error("Error fetching top10:", error);
+        console.error("Error fetching Promo Data:", error);
+        setError("Failed to fetch data");
+      } finally {
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 1000);
       }
     };
     fetchData();
   }, [formattedDate]);
+
+  if (isLoading) return <Loader />;
+  if (error) return <div>Error: {error}</div>;
 
   return (
     <main className="min-h-screen overflow-hidden">
@@ -80,7 +92,6 @@ export default function Dashboard() {
             width="md:basis-1/3 lg:basis-1/4 xl:basis-1/6"
           />
         </div>
-        {/* <Promo id={693134} color="#161616" mediaType="movie" /> */}
       </div>
     </main>
   );
