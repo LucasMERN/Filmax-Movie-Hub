@@ -11,6 +11,7 @@ import BackgroundImage from "@/Components/ui/BackgroundImage";
 interface CarouselProps {
   data: any[];
   width?: string;
+  loop?: boolean;
   mediaType: "tv" | "person" | "movie";
 }
 
@@ -18,14 +19,14 @@ const ProductCarousel: React.FC<CarouselProps> = ({
   data,
   width = "basis-1/6",
   mediaType,
+  loop = true
 }) => {
   return (
     <Carousel
       opts={{
         align: "start",
         direction: "ltr",
-        loop: true,
-        duration: 40,
+        loop: loop,
       }}
       className="w-full"
       orientation="horizontal"

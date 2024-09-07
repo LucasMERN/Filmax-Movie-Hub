@@ -154,6 +154,7 @@ const MovieOrTVShow = ({
           src={`https://image.tmdb.org/t/p/original/${mediaData?.backdrop_path}`}
           alt={mediaData.overview}
           lazy="eager"
+          priority
         />
         <section className="container relative z-10 mb-14 flex flex-col gap-6 border-b border-white pb-14 pt-24">
           <span className="dark-shadow -mb-6 text-sm font-semibold uppercase tracking-widest text-white/60">
@@ -298,7 +299,8 @@ const MovieOrTVShow = ({
           </div>
           <ProductCarousel
             mediaType="person"
-            data={creditData.cast}
+            loop={false}
+            data={creditData?.cast}
             width="md:basis-1/3 lg:basis-1/4 xl:basis-1/6"
           />
         </div>
