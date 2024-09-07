@@ -125,7 +125,7 @@ const LandingPromo = () => {
           }}
         >
           <BackgroundImage
-            src={`https://image.tmdb.org/t/p/original/${top10[carousel[activeIndex].activeImage]?.poster_path}`}
+            src={`https://image.tmdb.org/t/p/original/${top10[carousel[activeIndex].activeImage]?.backdrop_path}`}
             alt={`https://image.tmdb.org/t/p/original/${top10[carousel[activeIndex].activeImage]?.overview}`}
             lazy="eager"
           />

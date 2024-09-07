@@ -14,7 +14,7 @@ import BackgroundImage from "@/Components/ui/BackgroundImage";
 import Link from "next/link";
 
 type HeroProps = {
-  mediaType?: "movie" | "tv" | "person";
+  mediaType?: "movie" | "tv";
 };
 
 const Hero = ({ mediaType = "movie" }: HeroProps) => {
@@ -39,7 +39,6 @@ const Hero = ({ mediaType = "movie" }: HeroProps) => {
 
   const [currentMovieIndex, setCurrentMovieIndex] = useState(8);
   const [isImageVisible, setIsImageVisible] = useState(true);
-  const [isDetailsExpanded, setIsDetailsExpanded] = useState(false);
 
   function handlePreviousClick() {
     setIsImageVisible(false);
@@ -133,7 +132,7 @@ const Hero = ({ mediaType = "movie" }: HeroProps) => {
               : ""}
           </p>
           <Link
-            href={`${mediaType}/${top10[currentMovieIndex]?.id}/${formattedTitle}`}
+            href={`${top10[currentMovieIndex]?.media_type === "movie" ? `movie/${top10[currentMovieIndex]?.id}/${formattedTitle}` : `tv/${top10[currentMovieIndex]?.id}/${formattedTitle}`}`}
             className="hover:bg-secondary/80 inline-flex h-8 w-fit items-center justify-center whitespace-nowrap rounded-md bg-white px-4 text-base font-semibold text-secondary-foreground transition-colors"
           >
             Explore
@@ -161,7 +160,7 @@ const Hero = ({ mediaType = "movie" }: HeroProps) => {
 
               return (
                 <CarouselItem
-                  href={`${mediaType}/${movie?.id}/${formattedTitle}`}
+                  href={`${movie.media_type === "movie" ? `movie/${movie?.id}/${formattedTitle}` : `tv/${movie?.id}/${formattedTitle}`}`}
                   key={index}
                   className="basis-1/3"
                 >

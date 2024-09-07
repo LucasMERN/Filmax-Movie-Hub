@@ -12,7 +12,7 @@ export const fetchData = async (url: string) => {
       accept: "application/json",
       Authorization: `Bearer ${process.env.NEXT_PUBLIC_API_KEY}`,
     },
-    cache: "force-cache",
+    cache: "no-store",
     next: { revalidate: 30600 },
   });
 
@@ -53,6 +53,16 @@ export const getRecommended = async (id: number, mediaType: string) => {
 
 export const getTop10 = async () => {
   const url = `${apiUrl}/trending/all/week?language=en-US`;
+  return fetchData(url);
+};
+
+export const getRelease = async (mediaType: string, id: number) => {
+  const url = `${apiUrl}/${mediaType}/${id}/release_dates`;
+  return fetchData(url);
+};
+
+export const getContentRating = async (mediaType: string, id: number) => {
+  const url = `${apiUrl}/${mediaType}/${id}/content_ratings`;
   return fetchData(url);
 };
 
@@ -120,5 +130,25 @@ export const searchSpecificMedia = async (
   page: number,
 ) => {
   const url = `${apiUrl}/search/${mediaType}?query=${query}&page=${page}`;
+  return fetchData(url);
+};
+
+export const getExternalId = async (id: number, mediaType: string) => {
+  const url = `${apiUrl}/${mediaType}/${id}/external_ids`;
+  return fetchData(url);
+};
+
+export const getBackdrops = async (id: number, mediaType: string) => {
+  const url = `${apiUrl}/${mediaType}/${id}/images?api_key=${process.env.NEXT_PUBLIC_API_KEY}`;
+  return fetchData(url);
+};
+
+export const getYouTubeVideo = async (id: number, mediaType: string) => {
+  const url = `${apiUrl}/${mediaType}/${id}/videos`;
+  return fetchData(url);
+};
+
+export const getCredits = async (id: number, type: string) => {
+  const url = `${apiUrl}/${type}/${id}/credits`;
   return fetchData(url);
 };
