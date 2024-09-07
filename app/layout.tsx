@@ -4,6 +4,7 @@ import "@/styles/globals.css";
 
 import { Suspense } from "react";
 import Loading from "./loading";
+import BackToTopButton from "@/Components/BackToTop";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,7 +24,10 @@ export default function RootLayout({
         <link rel="icon" href="/logo.svg" type="image/svg+xml" />
       </head>
       <body className={`${inter.className} bg-background`}>
-        <Suspense fallback={<Loading />}>{children}</Suspense>
+        <Suspense fallback={<Loading />}>
+          <BackToTopButton />
+          {children}
+        </Suspense>
       </body>
     </html>
   );

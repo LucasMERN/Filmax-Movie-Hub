@@ -169,8 +169,8 @@ const Hero = ({ mediaType = "movie" }: HeroProps) => {
                   >
                     <Card className="relative h-96 w-full overflow-hidden border-4 border-white bg-cover bg-center shadow-lg">
                       <BackgroundImage
-                        src={`https://image.tmdb.org/t/p/original/${movie?.poster_path}`}
-                        alt={`https://image.tmdb.org/t/p/original/${movie?.overview}`}
+                        src={`https://image.tmdb.org/t/p/w370_and_h556_bestv2/${movie?.poster_path}`}
+                        alt={movie?.overview}
                         lazy="eager"
                       />
                     </Card>

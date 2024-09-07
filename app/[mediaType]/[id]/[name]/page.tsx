@@ -12,16 +12,26 @@ import {
   getSingle,
   getYouTubeVideo,
 } from "@/lib/utils";
-import { ChevronsRight, Dot, Plus } from "lucide-react";
+import {
+  ChevronsRight,
+  Clapperboard,
+  Dot,
+  Facebook,
+  Instagram,
+  Link2,
+  Plus,
+  TwitterIcon,
+} from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { RadialChart } from "@/Components/RadialChart";
-import { Card, CardFooter, CardTitle } from "@/Components/ui/card";
+import { Card, CardTitle } from "@/Components/ui/card";
 import React from "react";
 import Nav from "@/Components/Nav";
 import Footer from "@/Components/Footer";
 import Loader from "@/Components/Loader";
+import ProductCarousel from "@/Components/ProductCarousel";
 
 type Data = {
   backdrop_path: string;
@@ -61,7 +71,7 @@ const MovieOrTVShow = ({
   mediaType: "movie" | "tv";
 }) => {
   const [mediaData, setMediaData] = useState<null | Data>(null);
-  const [extrenalData, setExternalData] = useState<null | any>(null);
+  const [externalData, setExternalData] = useState<null | any>(null);
   const [videoData, setVideoData] = useState<null | any>(null);
   const [creditData, setCreditData] = useState<null | any>(null);
   const [recommendedData, setRecommendedData] = useState<null | any>(null);
@@ -152,6 +162,27 @@ const MovieOrTVShow = ({
           <h1 className="dark-shadow text-2xl font-bold tracking-wider text-white md:text-4xl">
             {mediaData.original_title || mediaData?.original_name}
           </h1>
+          <div className="flex items-center gap-4 text-white">
+            <Link
+              href={`https://www.facebook.com/${externalData?.facebook_id}`}
+            >
+              <Facebook />
+            </Link>
+            <Link href={`https://www.x.com/${externalData?.twitter_id}`}>
+              <TwitterIcon />
+            </Link>
+            <Link
+              href={`https://www.instagram.com/${externalData?.instagram_id}`}
+            >
+              <Instagram />
+            </Link>
+            <Link href={`https://www.imdb.com/title/${externalData?.imdb_id}`}>
+              <Clapperboard />
+            </Link>
+            <Link href={`${mediaData?.homepage}`}>
+              <Link2 />
+            </Link>
+          </div>
           <div className="relative flex flex-row items-center gap-2">
             <Badge
               variant="outline"
@@ -234,7 +265,7 @@ const MovieOrTVShow = ({
                 <Badge
                   key={index}
                   variant="outline"
-                  className="w-fit border-white text-sm font-medium text-white/60 shadow-lg"
+                  className="w-fit border-white text-sm font-medium text-white shadow-lg"
                 >
                   {name.name}
                 </Badge>
@@ -260,7 +291,30 @@ const MovieOrTVShow = ({
           )}
         </section>
       </section>
-      <div id="cast">cast</div>
+      <div className="flex flex-col items-center gap-20 pt-16">
+        <div className="container pr-0">
+          <div className="relative z-10 -mb-4 flex flex-row items-baseline gap-4 px-1 pr-8 text-white lg:pr-12">
+            <h3 className="text-xl font-semibold">Cast</h3>
+          </div>
+          <ProductCarousel
+            mediaType="person"
+            data={creditData.cast}
+            width="md:basis-1/3 lg:basis-1/4 xl:basis-1/6"
+          />
+        </div>
+      </div>
+      <div className="flex flex-col items-center gap-20 pt-16">
+        <div className="container pr-0">
+          <div className="relative z-10 -mb-4 flex flex-row items-baseline gap-4 px-1 pr-8 text-white lg:pr-12">
+            <h3 className="text-xl font-semibold">More Like This</h3>
+          </div>
+          <ProductCarousel
+            mediaType="tv"
+            data={recommendedData?.results}
+            width="md:basis-1/3 lg:basis-1/4 xl:basis-1/6"
+          />
+        </div>
+      </div>
       <Footer />
     </main>
   );
