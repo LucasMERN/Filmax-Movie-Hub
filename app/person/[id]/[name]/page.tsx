@@ -3,7 +3,6 @@
 import Footer from "@/Components/Footer";
 import Loader from "@/Components/Loader";
 import Nav from "@/Components/Nav";
-import BackgroundImage from "@/Components/ui/BackgroundImage";
 import { Button } from "@/Components/ui/Button";
 import { Card } from "@/Components/ui/card";
 import {
@@ -121,12 +120,12 @@ const Person = ({ id }: { id: number }) => {
             height={200}
             src={`https://image.tmdb.org/t/p/w370_and_h556_bestv2/${personData.profile_path}`}
             alt={`Professional headshot of ${personData.name}`}
-            className="float-left mr-3 lg:w-80"
+            className="float-left mr-3 lg:mr-8 lg:w-96 xl:mr-12"
           />
           <h1 className="hidden text-3xl font-bold text-white lg:mb-4 lg:block">
             {personData.name}
           </h1>
-          <p className="text-sm text-white lg:w-1/2 lg:text-base">
+          <p className="text-sm text-white lg:w-5/6 lg:text-base xl:w-2/3">
             {personData.biography}
           </p>
           <section className="mt-8 hidden gap-6 lg:flex">
@@ -224,7 +223,7 @@ const Person = ({ id }: { id: number }) => {
           PHOTOS
         </Button>
       </div>
-      <section className="container mt-8 grid grid-cols-3 gap-2 md:gap-4 lg:grid-cols-6">
+      <section className="container mt-8 grid grid-cols-3 gap-2 md:grid-cols-4 md:gap-4 lg:grid-cols-6 xl:grid-cols-8">
         {personCredit?.map(
           (movie: {
             id: number;
@@ -244,11 +243,14 @@ const Person = ({ id }: { id: number }) => {
                     href={`/movie/${movie.id}/${formattedTitle}`}
                     className="group overflow-hidden"
                   >
-                    <Card className="relative h-40 w-full transition-transform group-hover:scale-105 md:h-96">
-                      <BackgroundImage
+                    <Card className="relative transition-transform group-hover:scale-105">
+                      <Image
                         src={`https://image.tmdb.org/t/p/w370_and_h556_bestv2/${movie.poster_path}`}
                         alt={`Poster image for ${movie.original_title}`}
-                        lazy="lazy"
+                        loading="lazy"
+                        width={200}
+                        height={200}
+                        className="h-auto"
                       />
                     </Card>
                   </Link>

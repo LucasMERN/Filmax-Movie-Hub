@@ -165,22 +165,33 @@ const MovieOrTVShow = ({
           </h1>
           <div className="flex items-center gap-4 text-white">
             <Link
+              className={`${externalData?.facebook_id != null ? "" : "hidden"}`}
               href={`https://www.facebook.com/${externalData?.facebook_id}`}
             >
               <Facebook />
             </Link>
-            <Link href={`https://www.x.com/${externalData?.twitter_id}`}>
+            <Link
+              href={`https://www.x.com/${externalData?.twitter_id}`}
+              className={`${externalData?.twitter_id != null ? "" : "hidden"}`}
+            >
               <TwitterIcon />
             </Link>
             <Link
+              className={`${externalData?.instagram_id != null ? "" : "hidden"}`}
               href={`https://www.instagram.com/${externalData?.instagram_id}`}
             >
               <Instagram />
             </Link>
-            <Link href={`https://www.imdb.com/title/${externalData?.imdb_id}`}>
+            <Link
+              href={`https://www.imdb.com/title/${externalData?.imdb_id}`}
+              className={`${externalData?.imdb_id != null ? "" : "hidden"}`}
+            >
               <Clapperboard />
             </Link>
-            <Link href={`${mediaData?.homepage}`}>
+            <Link
+              href={`${mediaData?.homepage}`}
+              className={`${mediaData?.homepage != null ? "" : "hidden"}`}
+            >
               <Link2 />
             </Link>
           </div>
