@@ -47,7 +47,7 @@ const ProductCarousel: React.FC<CarouselProps> = ({
                 content?.poster_path !== null && (
                   <CarouselItem
                     href={`/${mediaType}/${content?.id}/${formattedTitle}`}
-                    key={index}
+                    key={content?.id}
                     className={`group ${width}`}
                   >
                     <div className="mt-6 flex flex-col items-center gap-2 p-1">

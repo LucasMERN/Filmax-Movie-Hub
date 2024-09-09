@@ -35,7 +35,7 @@ const Footer = () => {
         Designed & Developed by{" "}
         <Link
           href="#"
-          className="underline decoration-dashed decoration-1 underline-offset-4 hover:font-bold transition-all"
+          className="underline decoration-dashed decoration-1 underline-offset-4 transition-all hover:font-bold"
         >
           Lucas Winkler
         </Link>

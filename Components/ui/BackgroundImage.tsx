@@ -8,7 +8,13 @@ type BackgroundImageProps = {
   priority?: boolean;
 };
 
-const BackgroundImage = ({ src, alt, className, lazy = "lazy", priority = false }: BackgroundImageProps) => (
+const BackgroundImage = ({
+  src,
+  alt,
+  className,
+  lazy = "lazy",
+  priority = false,
+}: BackgroundImageProps) => (
   <Image
     alt={alt}
     src={src}

@@ -17,7 +17,7 @@ const LandingPromo = () => {
         const movieIDs = [1032823, 945961, 1226578];
 
         const movies = await Promise.all(
-          movieIDs.map((id) => getSingle("movie", id))
+          movieIDs.map((id) => getSingle("movie", id)),
         );
 
         setTop10(movies);

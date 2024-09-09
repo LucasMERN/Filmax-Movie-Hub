@@ -138,6 +138,8 @@ const MovieOrTVShow = ({
   if (error) return <div>Error: {error}</div>;
   if (!mediaData) return <div>No data available</div>;
 
+  console.log(recommendedData);
+
   return (
     <main className="relative min-h-screen">
       <Nav />
@@ -271,7 +273,7 @@ const MovieOrTVShow = ({
               ))}
             </div>
           </div>
-          {videoData.length > 0 ? (
+          {videoData.length > 0 && (
             <Card className="flex flex-col gap-2">
               <CardTitle className="dark-shadow p-0 text-lg font-semibold tracking-widest text-white">
                 Watch Trailer
@@ -285,36 +287,38 @@ const MovieOrTVShow = ({
                 />
               </React.Suspense>
             </Card>
-          ) : (
-            ""
           )}
         </section>
       </section>
-      <div className="flex flex-col items-center gap-20 pt-16 overflow-hidden">
-        <div className="container pr-0">
-          <div className="relative z-10 -mb-4 flex flex-row items-baseline gap-4 px-1 pr-8 text-white lg:pr-12">
-            <h3 className="text-xl font-semibold">Cast</h3>
+      {creditData?.cast.length > 0 && (
+        <div className="flex flex-col items-center gap-20 overflow-hidden pt-16">
+          <div className="container pr-0">
+            <div className="relative z-10 -mb-4 flex flex-row items-baseline gap-4 px-1 pr-8 text-white lg:pr-12">
+              <h3 className="text-xl font-semibold">Cast</h3>
+            </div>
+            <ProductCarousel
+              mediaType="person"
+              loop={false}
+              data={creditData?.cast}
+              width="md:basis-1/3 lg:basis-1/4 xl:basis-1/6"
+            />
           </div>
-          <ProductCarousel
-            mediaType="person"
-            loop={false}
-            data={creditData?.cast}
-            width="md:basis-1/3 lg:basis-1/4 xl:basis-1/6"
-          />
         </div>
-      </div>
-      <div className="flex flex-col items-center gap-20 pt-16 overflow-hidden">
-        <div className="container pr-0">
-          <div className="relative z-10 -mb-4 flex flex-row items-baseline gap-4 px-1 pr-8 text-white lg:pr-12">
-            <h3 className="text-xl font-semibold">More Like This</h3>
+      )}
+      {recommendedData?.results.length > 0 && (
+        <div className="flex flex-col items-center gap-20 overflow-hidden pt-16">
+          <div className="container pr-0">
+            <div className="relative z-10 -mb-4 flex flex-row items-baseline gap-4 px-1 pr-8 text-white lg:pr-12">
+              <h3 className="text-xl font-semibold">More Like This</h3>
+            </div>
+            <ProductCarousel
+              mediaType={mediaType}
+              data={recommendedData?.results}
+              width="md:basis-1/3 lg:basis-1/4 xl:basis-1/6"
+            />
           </div>
-          <ProductCarousel
-            mediaType={mediaType}
-            data={recommendedData?.results}
-            width="md:basis-1/3 lg:basis-1/4 xl:basis-1/6"
-          />
         </div>
-      </div>
+      )}
       <Footer />
     </main>
   );
