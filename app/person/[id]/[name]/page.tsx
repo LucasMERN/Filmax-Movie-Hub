@@ -1,6 +1,8 @@
 "use client";
 
+import Footer from "@/Components/Footer";
 import Loader from "@/Components/Loader";
+import Nav from "@/Components/Nav";
 import BackgroundImage from "@/Components/ui/BackgroundImage";
 import { Button } from "@/Components/ui/Button";
 import { Card } from "@/Components/ui/card";
@@ -106,7 +108,8 @@ const Person = ({ id }: { id: number }) => {
 
   return (
     <>
-      <div className="container mt-16 flex flex-col gap-4">
+      <Nav />
+      <div className="container flex flex-col gap-4 pt-28">
         <h1 className="text-xl font-semibold text-white lg:hidden">
           {personData.name}
         </h1>
@@ -221,7 +224,7 @@ const Person = ({ id }: { id: number }) => {
           PHOTOS
         </Button>
       </div>
-      <section className="container mt-8 grid grid-cols-3 gap-2 lg:grid-cols-6 lg:gap-4">
+      <section className="container mt-8 grid grid-cols-3 gap-2 md:gap-4 lg:grid-cols-6">
         {personCredit?.map(
           (movie: {
             id: number;
@@ -234,25 +237,28 @@ const Person = ({ id }: { id: number }) => {
               .replace(/\s+/g, "-");
 
             return (
-              <Link
-                key={movie.id}
-                href={`/movie/${movie.id}/${formattedTitle}`}
-                className="group overflow-hidden"
-              >
-                <Card
-                  className={`${movie.poster_path !== null ? "relative h-40 w-full transition-transform group-hover:scale-105 lg:h-96" : "hidden"}`}
-                >
-                  <BackgroundImage
-                    src={`https://image.tmdb.org/t/p/w370_and_h556_bestv2/${movie.poster_path}`}
-                    alt={`Poster image for ${movie.original_title}`}
-                    lazy="lazy"
-                  />
-                </Card>
-              </Link>
+              <>
+                {movie.poster_path !== null && (
+                  <Link
+                    key={movie.id}
+                    href={`/movie/${movie.id}/${formattedTitle}`}
+                    className="group overflow-hidden"
+                  >
+                    <Card className="relative h-40 w-full transition-transform group-hover:scale-105 md:h-96">
+                      <BackgroundImage
+                        src={`https://image.tmdb.org/t/p/w370_and_h556_bestv2/${movie.poster_path}`}
+                        alt={`Poster image for ${movie.original_title}`}
+                        lazy="lazy"
+                      />
+                    </Card>
+                  </Link>
+                )}
+              </>
             );
           },
         )}
       </section>
+      <Footer />
     </>
   );
 };
