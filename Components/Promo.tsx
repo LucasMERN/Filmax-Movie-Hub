@@ -47,8 +47,6 @@ const Promo = ({ id, color, mediaType }: PromoTypes) => {
     fetchData();
   }, [id, mediaType]);
 
-  console.log(data);
-
   return (
     <section
       className="text-garamond w-full py-24 text-white md:py-44 lg:block xl:py-96"

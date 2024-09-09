@@ -1,6 +1,6 @@
 "use client";
 
-import { getTrending } from "@/lib/utils";
+import { getSingle } from "@/lib/utils";
 import React, { useState, useEffect } from "react";
 import BackgroundImage from "@/Components/ui/BackgroundImage";
 import Image from "next/image";
@@ -14,13 +14,13 @@ const LandingPromo = () => {
   useEffect(() => {
     const fetchTop10 = async () => {
       try {
-        const movies = await getTrending("movie", 1);
+        const movieIDs = [1032823, 945961, 1226578];
 
-        if (Array.isArray(movies?.results)) {
-          setTop10(movies.results.slice(0, 3));
-        } else {
-          console.error("Data is not an array:", movies);
-        }
+        const movies = await Promise.all(
+          movieIDs.map((id) => getSingle("movie", id))
+        );
+
+        setTop10(movies);
       } catch (error) {
         console.error("Error fetching top10:", error);
       }

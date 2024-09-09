@@ -68,7 +68,7 @@ export default function Dashboard() {
           />
         </div>
         <div className="container pr-0">
-          <CarouselHeader title={"Popular movies"} />
+          <CarouselHeader title={"Popular Movies"} />
           <ProductCarousel
             mediaType="movie"
             data={popularMovieData}
@@ -85,7 +85,7 @@ export default function Dashboard() {
           />
         </div>
         <div className="container pr-0">
-          <CarouselHeader title={"Animations"} />
+          <CarouselHeader title={"Animated Movies"} />
           <ProductCarousel
             mediaType="movie"
             data={animatedMovieData}

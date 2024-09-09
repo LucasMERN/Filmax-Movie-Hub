@@ -24,14 +24,12 @@ export default function SearchFilter() {
 
       if (Array.isArray(searchResults?.results)) {
         if (mediaType == "person" && searchResults.results.length > 0) {
-          console.log(searchResults.results);
           setSearchResultsList(searchResults.results);
         } else {
           setSearchResultsList([]);
         }
 
         if (mediaType != "person") {
-          console.log(searchResults.results);
           setSearchResultsList(searchResults.results);
         }
       } else {
