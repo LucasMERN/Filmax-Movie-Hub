@@ -91,9 +91,9 @@ const Hero = ({ mediaType = "movie" }: HeroProps) => {
           bottom: 0,
           zIndex: -1,
         }}
-        className="h-[850px] w-full bg-cover bg-center"
+        className="h-[675px] w-full bg-cover bg-center lg:h-[850px]"
       ></div>
-      <div className="container relative mx-auto h-[790px] pt-36 text-3xl font-bold text-white lg:text-6xl">
+      <div className="container relative mx-auto h-[650px] pt-36 text-3xl font-bold text-white lg:h-[790px] lg:text-6xl">
         <h1
           className="dark-shadow mb-4 tracking-widest"
           style={{
@@ -149,11 +149,7 @@ const Hero = ({ mediaType = "movie" }: HeroProps) => {
         >
           <CarouselContent className="invisible lg:visible">
             {top10.map((movie: any, index: number) => {
-              const formattedTitle = (
-                movie?.name ||
-                movie?.title ||
-                ""
-              )
+              const formattedTitle = (movie?.name || movie?.title || "")
                 .toLowerCase()
                 .replace(/[^\w\s]/gi, "")
                 .replace(/\s+/g, "-");
@@ -176,15 +172,11 @@ const Hero = ({ mediaType = "movie" }: HeroProps) => {
                     </Card>
                     {index == currentMovieIndex ? (
                       <span className="dark-shadow break-words text-center text-lg">
-                        {!movie?.title
-                          ? movie?.name
-                          : movie?.title}
+                        {!movie?.title ? movie?.name : movie?.title}
                       </span>
                     ) : (
                       <span className="dark-shadow break-words text-center text-lg opacity-0">
-                        {!movie?.title
-                          ? movie?.name
-                          : movie?.title}
+                        {!movie?.title ? movie?.name : movie?.title}
                       </span>
                     )}
                   </div>

@@ -3,6 +3,7 @@
 import BackgroundImage from "@/Components/ui/BackgroundImage";
 import { Badge } from "@/Components/ui/badge";
 import { Button } from "@/Components/ui/Button";
+import Brokenimage from "@/public/brokenImage.jpg";
 import {
   getContentRating,
   getCredits,
@@ -38,7 +39,6 @@ import {
   SelectContent,
   SelectGroup,
   SelectItem,
-  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from "@/Components/ui/select";
@@ -71,6 +71,7 @@ type Data = {
   first_air_date: string;
   name: string;
   seasons: {
+    season_number: number;
     episode_count: number;
     name: string;
     id: number;
@@ -91,6 +92,7 @@ const MovieOrTVShow = ({
   const [recommendedData, setRecommendedData] = useState<null | any>(null);
   const [releaseData, setReleaseData] = useState<null | any>(null);
   const [contentRatingData, setContentRatingData] = useState<null | any>(null);
+  const [episodeData, setEpisodeData] = useState<null | any>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [activeSeason, setActiveSeason] = useState<string | undefined>();
@@ -113,16 +115,8 @@ const MovieOrTVShow = ({
         const videoData = await getYouTubeVideo(id, mediaType);
         const externalData = await getExternalId(id, mediaType);
         const recommendedData = await getRecommended(id, mediaType);
-        if (mediaType !== "tv") {
-          const releaseData = await getRelease(mediaType, id);
-          if (releaseData) {
-            setReleaseData(
-              releaseData?.results.filter(
-                (data: { iso_3166_1: string }) => data.iso_3166_1 === "US",
-              ),
-            );
-          }
-        } else {
+
+        if (mediaType === "tv") {
           const contentRatingData = await getContentRating(mediaType, id);
           if (contentRatingData) {
             setContentRatingData(
@@ -131,7 +125,22 @@ const MovieOrTVShow = ({
               ),
             );
           }
+          if (mediaData?.seasons.length) {
+            const lastSeason = mediaData.seasons[mediaData.seasons.length - 1];
+            setActiveSeason(lastSeason.name);
+            fetchEpisodes(mediaData.id, lastSeason.season_number);
+          }
+        } else {
+          const releaseData = await getRelease(mediaType, id);
+          if (releaseData) {
+            setReleaseData(
+              releaseData?.results.filter(
+                (data: { iso_3166_1: string }) => data.iso_3166_1 === "US",
+              ),
+            );
+          }
         }
+
         if (mediaData) {
           setMediaData(mediaData);
           setExternalData(externalData);
@@ -149,13 +158,31 @@ const MovieOrTVShow = ({
         console.error("Error fetching Promo Data:", error);
         setError("Failed to fetch data");
       } finally {
-        setTimeout(() => {
-          setIsLoading(false);
-        }, 1000);
+        setIsLoading(false);
       }
     };
     fetchData();
   }, [id, mediaType]);
+
+  useEffect(() => {
+    if (activeSeason && mediaData) {
+      const selectedSeason = mediaData.seasons.find(
+        (season) => season.name === activeSeason,
+      );
+      if (selectedSeason) {
+        fetchEpisodes(mediaData.id, selectedSeason.season_number);
+      }
+    }
+  }, [activeSeason, mediaData]);
+
+  const fetchEpisodes = async (showId: number, seasonNumber: number) => {
+    try {
+      const episodeData = await getTvShowEpisodes(showId, seasonNumber);
+      setEpisodeData(episodeData?.episodes);
+    } catch (error) {
+      console.error("Error fetching episodes:", error);
+    }
+  };
 
   if (isLoading) return <Loader />;
   if (error) return <div>Error: {error}</div>;
@@ -261,7 +288,7 @@ const MovieOrTVShow = ({
               See Full Cast{" "}
               <ChevronsRight
                 size={20}
-                className="dark-shadow group-hover:animate-wiggle underline-offset-2 transition-transform group-hover:text-white group-hover:underline"
+                className="dark-shadow underline-offset-2 transition-transform group-hover:animate-wiggle group-hover:text-white group-hover:underline"
               />
             </Link>
             {mediaData.vote_count > 0 && (
@@ -356,6 +383,63 @@ const MovieOrTVShow = ({
                 Episodes
               </span>
             </div>
+          </div>
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+            {episodeData &&
+              episodeData.length > 0 &&
+              episodeData.map(
+                (episode: {
+                  id: number;
+                  name: string;
+                  still_path: string;
+                  episode_number: number;
+                  overview: string;
+                  air_date: string;
+                }) => (
+                  <div
+                    key={episode.id}
+                    className="group flex flex-col gap-2 p-4 transition-colors hover:bg-primary"
+                  >
+                    {episode.still_path !== null ? (
+                      <Image
+                        src={`https://image.tmdb.org/t/p/w533_and_h300_bestv2/${episode.still_path}`}
+                        alt={`Thumbnail image for ${episode.name}`}
+                        width={300}
+                        height={200}
+                        className="aspect-video w-full"
+                      />
+                    ) : (
+                      <Image
+                        src={Brokenimage}
+                        alt={`This Image is not available`}
+                        width={300}
+                        height={200}
+                        className="aspect-video w-full"
+                      />
+                    )}
+                    <div className="flex gap-2">
+                      <span className="dark-shadow font-bold text-primary transition-colors group-hover:text-white">
+                        EP0{episode.episode_number}
+                      </span>
+                      <h4 className="text-white">
+                        {episode.name.split("").length > 29
+                          ? episode.name.split("").slice(0, 30).join("") + "..."
+                          : episode.name}
+                      </h4>
+                    </div>
+                    <p className="pt-4 text-sm text-white/60">
+                      {episode.overview}
+                    </p>
+                    <span className="text-sm text-white/20 transition-colors group-hover:text-white/40">
+                      {new Date(episode.air_date).toLocaleDateString("en-GB", {
+                        day: "numeric",
+                        month: "long",
+                        year: "numeric",
+                      })}
+                    </span>
+                  </div>
+                ),
+              )}
           </div>
         </section>
       )}
