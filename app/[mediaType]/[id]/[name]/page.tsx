@@ -10,6 +10,7 @@ import {
   getRecommended,
   getRelease,
   getSingle,
+  getTvShowEpisodes,
   getYouTubeVideo,
 } from "@/lib/utils";
 import {
@@ -32,6 +33,15 @@ import Nav from "@/Components/Nav";
 import Footer from "@/Components/Footer";
 import Loader from "@/Components/Loader";
 import ProductCarousel from "@/Components/ProductCarousel";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/Components/ui/select";
 
 type Data = {
   backdrop_path: string;
@@ -60,6 +70,11 @@ type Data = {
   last_air_date: string;
   first_air_date: string;
   name: string;
+  seasons: {
+    episode_count: number;
+    name: string;
+    id: number;
+  }[];
 };
 
 const MovieOrTVShow = ({
@@ -78,6 +93,15 @@ const MovieOrTVShow = ({
   const [contentRatingData, setContentRatingData] = useState<null | any>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [activeSeason, setActiveSeason] = useState<string | undefined>();
+
+  useEffect(() => {
+    if (mediaData?.seasons.length) {
+      setActiveSeason(
+        String(mediaData.seasons[mediaData.seasons.length - 1].name),
+      );
+    }
+  }, [mediaData?.seasons]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -132,8 +156,6 @@ const MovieOrTVShow = ({
     };
     fetchData();
   }, [id, mediaType]);
-
-  console.log(mediaData)
 
   if (isLoading) return <Loader />;
   if (error) return <div>Error: {error}</div>;
@@ -302,6 +324,41 @@ const MovieOrTVShow = ({
           )}
         </section>
       </section>
+      {mediaType === "tv" && mediaData?.seasons && (
+        <section className="container flex flex-col gap-4 pt-8">
+          <h3 className="text-2xl font-semibold tracking-widest text-white">
+            Episodes
+          </h3>
+          <div className="flex flex-col gap-4">
+            <div className="flex items-center gap-2">
+              <Select
+                defaultValue={activeSeason}
+                value={activeSeason}
+                onValueChange={(value) => setActiveSeason(value)}
+              >
+                <SelectTrigger className="w-[120px] text-white">
+                  <SelectValue>{activeSeason || `Select Season`}</SelectValue>
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectGroup>
+                    {mediaData.seasons.map((season, index) => (
+                      <SelectItem key={index} value={season.name}>
+                        {season.name}
+                      </SelectItem>
+                    ))}
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
+              <span className="text-white/60">
+                {mediaData.seasons.find(
+                  (season) => season.name === activeSeason,
+                )?.episode_count || "0"}{" "}
+                Episodes
+              </span>
+            </div>
+          </div>
+        </section>
+      )}
       {creditData?.cast.length > 0 && (
         <div className="flex flex-col items-center gap-20 overflow-hidden pt-16">
           <div className="container pr-0">
