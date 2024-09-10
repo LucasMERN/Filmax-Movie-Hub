@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { Menu } from "lucide-react";
-import { Button } from "@/Components/ui/Button";
+import Logo from '@/public/logo.svg';
 import {
   Sheet,
   SheetContent,
@@ -27,19 +27,19 @@ export default function Nav() {
               <Menu size={30} color="white" />
             </button>
           </SheetTrigger>
-          <SheetContent side="left">
+          <SheetContent side="left" className="flex flex-col justify-between h-full">
             <SheetHeader>
               <SheetTitle>FILMAX CINEMA HUB</SheetTitle>
               <SheetDescription>
-                Pick from our selection to navigate the site!
+                Pick from our route selection to navigate the site!
               </SheetDescription>
             </SheetHeader>
-            <ul className="mt-12 flex flex-col gap-8">
+            <ul className="-mt-32 flex flex-col gap-6">
               <li>
                 <Link
                   className={`link ${
                     pathname === "/dashboard" ? "text-white" : "text-white/40"
-                  } text-xl tracking-widest`}
+                  } tracking-widest`}
                   href="/dashboard"
                 >
                   Home
@@ -50,7 +50,7 @@ export default function Nav() {
                 <Link
                   className={`link ${
                     pathname === "/trending" ? "text-white" : "text-white/40"
-                  } text-xl tracking-widest`}
+                  } tracking-widest`}
                   href="/trending"
                 >
                   Trending
@@ -61,7 +61,7 @@ export default function Nav() {
                 <Link
                   className={`link ${
                     pathname === "/movies" ? "text-white" : "text-white/40"
-                  } text-xl tracking-widest`}
+                  } tracking-widest`}
                   href="/movies"
                 >
                   Movies
@@ -72,7 +72,7 @@ export default function Nav() {
                 <Link
                   className={`link ${
                     pathname === "/shows" ? "text-white" : "text-white/40"
-                  } text-xl tracking-widest`}
+                  } tracking-widest`}
                   href="/shows"
                 >
                   Shows
@@ -83,14 +83,19 @@ export default function Nav() {
                 <Link
                   className={`link ${
                     pathname === "/categories" ? "text-white" : "text-white/40"
-                  } text-xl tracking-widest`}
+                  } tracking-widest`}
                   href="/categories"
                 >
                   Categories
                 </Link>
               </li>
             </ul>
-            <SheetFooter></SheetFooter>
+            <SheetFooter>
+              <Image src={Logo} 
+                width={50}
+                height={50}
+                alt="Filmax Logo" />
+            </SheetFooter>
           </SheetContent>
         </Sheet>
 
@@ -98,7 +103,7 @@ export default function Nav() {
           <li className="mr-4 hidden md:block">
             <Link href="/" className="block h-12 w-12">
               <Image
-                src="/logo.svg"
+                src={Logo}
                 width={50}
                 height={50}
                 alt="Filmax Logo"
