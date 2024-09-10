@@ -37,7 +37,7 @@ export const getPersonPoster = async (id: number) => {
 };
 
 export const getPersonCredit = async (id: number) => {
-  const url = `${apiUrl}/person/${id}/movie_credits`;
+  const url = `${apiUrl}/person/${id}/combined_credits`;
   return fetchData(url);
 };
 

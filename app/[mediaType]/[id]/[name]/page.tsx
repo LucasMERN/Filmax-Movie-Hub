@@ -46,7 +46,6 @@ type Data = {
   }[];
   homepage: string;
   id: number;
-  original_title: string;
   title: string;
   overview: string;
   poster_path: string;
@@ -60,7 +59,7 @@ type Data = {
   vote_count: number;
   last_air_date: string;
   first_air_date: string;
-  original_name: string;
+  name: string;
 };
 
 const MovieOrTVShow = ({
@@ -134,11 +133,11 @@ const MovieOrTVShow = ({
     fetchData();
   }, [id, mediaType]);
 
+  console.log(mediaData)
+
   if (isLoading) return <Loader />;
   if (error) return <div>Error: {error}</div>;
   if (!mediaData) return <div>No data available</div>;
-
-  console.log(recommendedData);
 
   return (
     <main className="relative min-h-screen">
@@ -161,7 +160,7 @@ const MovieOrTVShow = ({
             {mediaType !== "movie" ? "tv series" : mediaType}
           </span>
           <h1 className="dark-shadow text-2xl font-bold tracking-wider text-white md:text-4xl">
-            {mediaData.original_title || mediaData?.original_name}
+            {mediaData.title || mediaData.name}
           </h1>
           <div className="flex items-center gap-4 text-white">
             <Link
@@ -201,8 +200,8 @@ const MovieOrTVShow = ({
               className="mr-2 w-fit rounded-md border-white text-sm font-medium text-white shadow-lg"
             >
               {mediaType !== "movie"
-                ? contentRatingData[0].rating || "PG"
-                : releaseData[0].release_dates[0].certification || "PG"}
+                ? contentRatingData[0]?.rating || "PG"
+                : releaseData[0]?.release_dates[0]?.certification || "PG"}
             </Badge>
             <span className="dark-shadow text-sm font-semibold text-white/60">
               {mediaType !== "movie" ? (
@@ -211,7 +210,7 @@ const MovieOrTVShow = ({
                   {mediaData?.last_air_date.split("-")[0]}
                 </span>
               ) : (
-                releaseData[0].release_dates[0].release_date.split("-")[0]
+                releaseData[0]?.release_dates[0]?.release_date.split("-")[0]
               )}
             </span>
             <Dot size={20} className="-mx-2 text-white/60" />
@@ -243,10 +242,12 @@ const MovieOrTVShow = ({
                 className="dark-shadow group-hover:animate-wiggle underline-offset-2 transition-transform group-hover:text-white group-hover:underline"
               />
             </Link>
-            <RadialChart
-              voteCount={mediaData.vote_count}
-              voteAverage={mediaData.vote_average}
-            />
+            {mediaData.vote_count > 0 && (
+              <RadialChart
+                voteCount={mediaData.vote_count}
+                voteAverage={mediaData.vote_average}
+              />
+            )}
           </div>
           <Button
             size="lg"

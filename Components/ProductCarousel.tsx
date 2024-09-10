@@ -5,6 +5,7 @@ import {
 } from "@/Components/ui/carousel";
 import { Card } from "@/Components/ui/card";
 import BackgroundImage from "@/Components/ui/BackgroundImage";
+import React from "react";
 
 interface CarouselProps {
   data: any[];
@@ -32,17 +33,13 @@ const ProductCarousel: React.FC<CarouselProps> = ({
     >
       <CarouselContent className="w-11/12">
         {data.map((content: any, index: number) => {
-          const formattedTitle = (
-            content?.original_name ||
-            content?.title ||
-            ""
-          )
+          const formattedTitle = (content?.name || content?.title || "")
             .toLowerCase()
             .replace(/[^\w\s]/gi, "")
             .replace(/\s+/g, "-");
 
           return (
-            <>
+            <React.Fragment key={index}>
               {content?.profile_path !== null &&
                 content?.poster_path !== null && (
                   <CarouselItem
@@ -59,12 +56,12 @@ const ProductCarousel: React.FC<CarouselProps> = ({
                         />
                       </Card>
                       <span className="break-words text-center text-white">
-                        {content?.title || content?.original_name}
+                        {content?.title || content?.name}
                       </span>
                     </div>
                   </CarouselItem>
                 )}
-            </>
+            </React.Fragment>
           );
         })}
       </CarouselContent>

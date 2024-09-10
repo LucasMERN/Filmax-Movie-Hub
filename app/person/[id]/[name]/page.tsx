@@ -20,6 +20,7 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import React from "react";
 import { useEffect, useState } from "react";
 import { useMemo } from "react";
 
@@ -98,8 +99,6 @@ const Person = ({ id }: { id: number }) => {
     };
     fetchData();
   }, [id]);
-
-  console.log(personData);
 
   if (isLoading) return <Loader />;
   if (error) return <div>Error: {error}</div>;
@@ -228,25 +227,27 @@ const Person = ({ id }: { id: number }) => {
           (movie: {
             id: number;
             poster_path: string;
-            original_title: string;
-          }) => {
-            const formattedTitle = (movie?.original_title || "")
+            title: string;
+            media_type: string;
+            name: string;
+          }, key: number) => {
+            const formattedTitle = (movie?.title || movie?.name)
               .toLowerCase()
               .replace(/[^\w\s]/gi, "")
               .replace(/\s+/g, "-");
 
             return (
-              <>
+              <React.Fragment key={key}>
                 {movie.poster_path !== null && (
                   <Link
                     key={movie.id}
-                    href={`/movie/${movie.id}/${formattedTitle}`}
+                    href={`${movie.media_type === "movie" ? `/movie/${movie.id}/${formattedTitle}` : `/tv/${movie.id}/${formattedTitle}`}`}
                     className="group overflow-hidden"
                   >
                     <Card className="relative transition-transform group-hover:scale-105">
                       <Image
                         src={`https://image.tmdb.org/t/p/w370_and_h556_bestv2/${movie.poster_path}`}
-                        alt={`Poster image for ${movie.original_title}`}
+                        alt={`Poster image for ${movie.title}`}
                         loading="lazy"
                         width={200}
                         height={200}
@@ -255,7 +256,7 @@ const Person = ({ id }: { id: number }) => {
                     </Card>
                   </Link>
                 )}
-              </>
+              </React.Fragment>
             );
           },
         )}

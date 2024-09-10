@@ -3,25 +3,107 @@
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-
+import { Menu } from "lucide-react";
 import { Button } from "@/Components/ui/Button";
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetFooter,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/Components/ui/sheet";
 
 export default function Nav() {
   const pathname = usePathname();
 
   return (
-    <nav className="fixed z-50 w-full bg-gradient-to-b from-neutral-600 pb-8 pt-8">
+    <nav className="fixed z-50 w-full bg-gradient-to-b from-black pb-20 pt-8">
       <div className="container mx-auto flex flex-col gap-4 md:flex-row md:items-center md:justify-between md:gap-0 ">
-        <ul className="flex flex-row items-center gap-2 lg:gap-8">
-          <li className="mr-4 w-6 md:w-12 lg:mr-12">
-            <Link href="/">
+        <Sheet>
+          <SheetTrigger asChild>
+            <button className="block w-fit md:hidden">
+              <Menu size={30} color="white" />
+            </button>
+          </SheetTrigger>
+          <SheetContent side="left">
+            <SheetHeader>
+              <SheetTitle>FILMAX CINEMA HUB</SheetTitle>
+              <SheetDescription>
+                Pick from our selection to navigate the site!
+              </SheetDescription>
+            </SheetHeader>
+            <ul className="mt-12 flex flex-col gap-8">
+              <li>
+                <Link
+                  className={`link ${
+                    pathname === "/dashboard" ? "text-white" : "text-white/40"
+                  } text-xl tracking-widest`}
+                  href="/dashboard"
+                >
+                  Home
+                </Link>
+              </li>
+
+              <li>
+                <Link
+                  className={`link ${
+                    pathname === "/trending" ? "text-white" : "text-white/40"
+                  } text-xl tracking-widest`}
+                  href="/trending"
+                >
+                  Trending
+                </Link>
+              </li>
+
+              <li>
+                <Link
+                  className={`link ${
+                    pathname === "/movies" ? "text-white" : "text-white/40"
+                  } text-xl tracking-widest`}
+                  href="/movies"
+                >
+                  Movies
+                </Link>
+              </li>
+
+              <li>
+                <Link
+                  className={`link ${
+                    pathname === "/shows" ? "text-white" : "text-white/40"
+                  } text-xl tracking-widest`}
+                  href="/shows"
+                >
+                  Shows
+                </Link>
+              </li>
+
+              <li>
+                <Link
+                  className={`link ${
+                    pathname === "/categories" ? "text-white" : "text-white/40"
+                  } text-xl tracking-widest`}
+                  href="/categories"
+                >
+                  Categories
+                </Link>
+              </li>
+            </ul>
+            <SheetFooter></SheetFooter>
+          </SheetContent>
+        </Sheet>
+
+        <ul className="hidden flex-row items-center gap-6 md:flex">
+          <li className="mr-4 hidden md:block">
+            <Link href="/" className="block h-12 w-12">
               <Image
                 src="/logo.svg"
                 width={50}
                 height={50}
                 alt="Filmax Logo"
-                priority={true}
-                className="-mb-1"
+                priority
+                className="mt-2"
               />
             </Link>
           </li>
@@ -29,10 +111,8 @@ export default function Nav() {
           <li>
             <Link
               className={`link ${
-                pathname === "/dashboard"
-                  ? "underline decoration-2 underline-offset-4"
-                  : ""
-              } text-sm text-white md:text-lg`}
+                pathname === "/dashboard" ? "text-white" : "text-white/40"
+              } text-sm tracking-widest hover:text-white`}
               href="/dashboard"
             >
               Home
@@ -42,11 +122,9 @@ export default function Nav() {
           <li>
             <Link
               className={`link ${
-                pathname === "/dashboard/trending"
-                  ? "underline decoration-2 underline-offset-4"
-                  : ""
-              } text-sm text-white md:text-lg`}
-              href="/dashboard/trending"
+                pathname === "/trending" ? "text-white" : "text-white/40"
+              } text-sm tracking-widest hover:text-white`}
+              href="/trending"
             >
               Trending
             </Link>
@@ -55,11 +133,9 @@ export default function Nav() {
           <li>
             <Link
               className={`link ${
-                pathname === "/dashboard/movies"
-                  ? "underline decoration-2 underline-offset-4"
-                  : ""
-              } text-sm text-white md:text-lg`}
-              href="/dashboard/movies"
+                pathname === "/movies" ? "text-white" : "text-white/40"
+              } text-sm tracking-widest hover:text-white`}
+              href="/movies"
             >
               Movies
             </Link>
@@ -68,11 +144,9 @@ export default function Nav() {
           <li>
             <Link
               className={`link ${
-                pathname === "/dashboard/shows"
-                  ? "underline decoration-2 underline-offset-4"
-                  : ""
-              } text-sm text-white md:text-lg`}
-              href="/dashboard/shows"
+                pathname === "/shows" ? "text-white" : "text-white/40"
+              } text-sm tracking-widest hover:text-white`}
+              href="/shows"
             >
               Shows
             </Link>
@@ -81,25 +155,14 @@ export default function Nav() {
           <li>
             <Link
               className={`link ${
-                pathname === "/dashboard/categories"
-                  ? "underline decoration-2 underline-offset-4"
-                  : ""
-              } text-sm text-white md:text-lg`}
-              href="/dashboard/categories"
+                pathname === "/categories" ? "text-white" : "text-white/40"
+              } text-sm tracking-widest hover:text-white`}
+              href="/categories"
             >
               Categories
             </Link>
           </li>
         </ul>
-
-        <div className="hidden flex-row gap-4 md:flex">
-          <Button type="submit" variant="default" size="sm">
-            Premium
-          </Button>
-          <Button type="submit" variant="secondary" size="sm">
-            Sign Up
-          </Button>
-        </div>
       </div>
     </nav>
   );

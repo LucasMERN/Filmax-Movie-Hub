@@ -57,7 +57,11 @@ export function RadialChart({
               className="first:fill-transparent last:fill-transparent"
               polarRadius={[86, 74]}
             />
-            <RadialBar dataKey="visitors" background={false} cornerRadius={10} />
+            <RadialBar
+              dataKey="visitors"
+              background={false}
+              cornerRadius={10}
+            />
             <PolarRadiusAxis tick={false} tickLine={false} axisLine={false}>
               <Label
                 content={({ viewBox }) => {

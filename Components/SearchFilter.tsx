@@ -9,6 +9,7 @@ export default function SearchFilter() {
     "movie",
   );
   const [searchTerm, setSearchTerm] = useState("");
+  const [isSearchClicked, setIsSearchClicked] = useState(false);
 
   const handleSearchChange = (event: {
     target: { value: SetStateAction<string> };
@@ -78,24 +79,27 @@ export default function SearchFilter() {
             size="lg"
             className="h-[68px] rounded-2xl lg:h-auto"
             type="submit"
+            onClick={() => setIsSearchClicked(true)}
           >
             Search
           </Button>
         </div>
       </form>
-      {searchResultsList.length > 0 ? (
-        <div className="search-results overflow-hidden">
-          <ProductCarousel
-            mediaType={mediaType}
-            data={searchResultsList}
-            width="md:basis-1/3 lg:basis-1/4 xl:basis-1/6"
-          />
-        </div>
-      ) : (
-        <div className=" pt-4 text-lg font-medium text-white">
-          No Results Found...
-        </div>
-      )}
+      {isSearchClicked && searchTerm.length > 0 ? (
+        searchResultsList.length > 0 ? (
+          <div className="search-results overflow-hidden">
+            <ProductCarousel
+              mediaType={mediaType}
+              data={searchResultsList}
+              width="md:basis-1/3 lg:basis-1/4 xl:basis-1/6"
+            />
+          </div>
+        ) : (
+          <div className="pt-4 text-lg font-medium text-white">
+            No Results Found...
+          </div>
+        )
+      ) : null}
     </div>
   );
 }

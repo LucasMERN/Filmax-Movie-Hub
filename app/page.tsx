@@ -80,7 +80,7 @@ export default function Home() {
                 </h4>
                 <span className="text-[#0071EB]">Downloading...</span>
               </div>
-              <Image src={loader} alt="" className="aspect-square h-11 w-11" />
+              <Image src={loader} alt="" className="aspect-square h-11 w-11" unoptimized />
             </div>
           </div>
         </div>
@@ -117,6 +117,7 @@ export default function Home() {
               alt=""
               width={185}
               className="h-[140px] md:h-[200px] md:w-[320px]"
+              unoptimized
             />
           </div>
         </div>

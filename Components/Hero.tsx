@@ -67,7 +67,7 @@ const Hero = ({ mediaType = "movie" }: HeroProps) => {
   }
 
   const formattedTitle = (
-    top10[currentMovieIndex]?.original_name ||
+    top10[currentMovieIndex]?.name ||
     top10[currentMovieIndex]?.title ||
     ""
   )
@@ -91,9 +91,9 @@ const Hero = ({ mediaType = "movie" }: HeroProps) => {
           bottom: 0,
           zIndex: -1,
         }}
-        className="h-[800px] w-full bg-cover bg-center"
+        className="h-[850px] w-full bg-cover bg-center"
       ></div>
-      <div className="container relative mx-auto h-[750px] pt-36 text-3xl font-bold text-white lg:text-6xl">
+      <div className="container relative mx-auto h-[790px] pt-36 text-3xl font-bold text-white lg:text-6xl">
         <h1
           className="dark-shadow mb-4 tracking-widest"
           style={{
@@ -101,9 +101,9 @@ const Hero = ({ mediaType = "movie" }: HeroProps) => {
             transition: "opacity 1s ease-in-out",
           }}
         >
-          {!top10[currentMovieIndex]?.original_title
-            ? top10[currentMovieIndex]?.original_name
-            : top10[currentMovieIndex]?.original_title}
+          {!top10[currentMovieIndex]?.title
+            ? top10[currentMovieIndex]?.name
+            : top10[currentMovieIndex]?.title}
         </h1>
         <div className="flex flex-row items-center gap-4">
           <span className="h-fit rounded bg-amber-700 px-4 py-1 text-xl text-black">
@@ -150,7 +150,7 @@ const Hero = ({ mediaType = "movie" }: HeroProps) => {
           <CarouselContent className="invisible lg:visible">
             {top10.map((movie: any, index: number) => {
               const formattedTitle = (
-                movie?.original_name ||
+                movie?.name ||
                 movie?.title ||
                 ""
               )
@@ -176,15 +176,15 @@ const Hero = ({ mediaType = "movie" }: HeroProps) => {
                     </Card>
                     {index == currentMovieIndex ? (
                       <span className="dark-shadow break-words text-center text-lg">
-                        {!movie?.original_title
-                          ? movie?.original_name
-                          : movie?.original_title}
+                        {!movie?.title
+                          ? movie?.name
+                          : movie?.title}
                       </span>
                     ) : (
                       <span className="dark-shadow break-words text-center text-lg opacity-0">
-                        {!movie?.original_title
-                          ? movie?.original_name
-                          : movie?.original_title}
+                        {!movie?.title
+                          ? movie?.name
+                          : movie?.title}
                       </span>
                     )}
                   </div>
