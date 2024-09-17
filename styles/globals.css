@@ -126,3 +126,11 @@
 .recharts-responsive-container .recharts-wrapper {
   max-height: 250px !important;
 }
+
+[data-next-video] img {
+  object-fit: cover !important;
+}
+
+mux-player::part(video) {
+  object-fit: cover !important;
+}

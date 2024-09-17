@@ -27,12 +27,7 @@ export const fetchData = async (url: string) => {
 const apiUrl = "https://api.themoviedb.org/3";
 
 export const getPerson = async (id: number) => {
-  const url = `${apiUrl}/person/${id}`;
-  return fetchData(url);
-};
-
-export const getPersonPoster = async (id: number) => {
-  const url = `${apiUrl}/person/${id}/images`;
+  const url = `${apiUrl}/person/${id}&append_to_response=combined_credits`;
   return fetchData(url);
 };
 
@@ -150,5 +145,10 @@ export const getYouTubeVideo = async (id: number, mediaType: string) => {
 
 export const getCredits = async (id: number, type: string) => {
   const url = `${apiUrl}/${type}/${id}/credits`;
+  return fetchData(url);
+};
+
+export const getWatchProviders = async (id: number) => {
+  const url = `${apiUrl}/movie/${id}/watch/providers`;
   return fetchData(url);
 };

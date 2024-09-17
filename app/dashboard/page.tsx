@@ -64,7 +64,7 @@ export default function Dashboard() {
           <ProductCarousel
             mediaType="movie"
             data={newMovieData}
-            width="md:basis-1/3 lg:basis-1/4 xl:basis-1/6"
+            width="min-[475px]:basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/6"
           />
         </div>
         <div className="container pr-0">
@@ -72,7 +72,7 @@ export default function Dashboard() {
           <ProductCarousel
             mediaType="movie"
             data={popularMovieData}
-            width="md:basis-1/3 lg:basis-1/4 xl:basis-1/6"
+            width="min-[475px]:basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/6"
           />
         </div>
         <CallToAction id={95396} color={"#007D4D"} mediaType={"tv"} />
@@ -81,7 +81,7 @@ export default function Dashboard() {
           <ProductCarousel
             mediaType="tv"
             data={newTVData}
-            width="md:basis-1/3 lg:basis-1/4 xl:basis-1/6"
+            width="min-[475px]:basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/6"
           />
         </div>
         <div className="container pr-0">
@@ -89,7 +89,7 @@ export default function Dashboard() {
           <ProductCarousel
             mediaType="movie"
             data={animatedMovieData}
-            width="md:basis-1/3 lg:basis-1/4 xl:basis-1/6"
+            width="min-[475px]:basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/6"
           />
         </div>
       </div>

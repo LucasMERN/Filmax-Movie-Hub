@@ -53,13 +53,12 @@ export default function Home() {
           <p className="dark-shadow -mb-2 text-sm font-light text-white lg:text-base">
             Ready to find your next binge?
           </p>
-          <Link
-            href="/dashboard"
-            className="inline-flex h-8 items-center justify-center whitespace-nowrap rounded-md bg-primary px-6 text-white lg:h-10 lg:px-8"
-          >
-            Get Started
-            <ChevronRight className="pl-1" size={25} />
-          </Link>
+          <Button asChild>
+            <Link href="/dashboard">
+              Enter Site
+              <ChevronRight className="-mr-1 pl-1" size={22} strokeWidth={3} />
+            </Link>
+          </Button>
         </div>
         <div
           className="absolute bottom-0 z-20 h-24 w-full"
@@ -80,7 +79,12 @@ export default function Home() {
                 </h4>
                 <span className="text-[#0071EB]">Downloading...</span>
               </div>
-              <Image src={loader} alt="" className="aspect-square h-11 w-11" unoptimized />
+              <Image
+                src={loader}
+                alt=""
+                className="aspect-square h-11 w-11"
+                unoptimized
+              />
             </div>
           </div>
         </div>

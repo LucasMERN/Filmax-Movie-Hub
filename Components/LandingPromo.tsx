@@ -5,6 +5,7 @@ import React, { useState, useEffect } from "react";
 import BackgroundImage from "@/Components/ui/BackgroundImage";
 import Image from "next/image";
 import { Button } from "@/Components/ui/Button";
+import Link from "next/link";
 
 const LandingPromo = () => {
   const [top10, setTop10] = useState<any[]>([]);
@@ -110,8 +111,9 @@ const LandingPromo = () => {
           <Button
             variant="secondary"
             className="mb-4 mt-4 w-fit !font-medium lg:mt-8"
+            asChild
           >
-            JOIN FREE
+            <Link href="/dashboard">ENTER SITE</Link>
           </Button>
         </div>
       </div>

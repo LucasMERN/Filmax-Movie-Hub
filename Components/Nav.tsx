@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { Menu } from "lucide-react";
-import Logo from '@/public/logo.svg';
+import Logo from "@/public/logo.svg";
 import {
   Sheet,
   SheetContent,
@@ -14,6 +14,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/Components/ui/sheet";
+import { Button } from "./ui/Button";
 
 export default function Nav() {
   const pathname = usePathname();
@@ -23,11 +24,14 @@ export default function Nav() {
       <div className="container mx-auto flex flex-col gap-4 md:flex-row md:items-center md:justify-between md:gap-0 ">
         <Sheet>
           <SheetTrigger asChild>
-            <button className="block w-fit md:hidden">
+            <Button variant="outline" size="icon" className="md:hidden">
               <Menu size={30} color="white" />
-            </button>
+            </Button>
           </SheetTrigger>
-          <SheetContent side="left" className="flex flex-col justify-between h-full">
+          <SheetContent
+            side="left"
+            className="flex h-full flex-col justify-between"
+          >
             <SheetHeader>
               <SheetTitle>FILMAX CINEMA HUB</SheetTitle>
               <SheetDescription>
@@ -91,26 +95,21 @@ export default function Nav() {
               </li>
             </ul>
             <SheetFooter>
-              <Image src={Logo} 
-                width={50}
-                height={50}
-                alt="Filmax Logo" />
+              <Image src={Logo} width={50} height={50} alt="Filmax Logo" />
             </SheetFooter>
           </SheetContent>
         </Sheet>
 
         <ul className="hidden flex-row items-center gap-6 md:flex">
-          <li className="mr-4 hidden md:block">
-            <Link href="/" className="block h-12 w-12">
-              <Image
-                src={Logo}
-                width={50}
-                height={50}
-                alt="Filmax Logo"
-                priority
-                className="mt-2"
-              />
-            </Link>
+          <li className="mr-4 hidden h-12 w-12 md:block">
+            <Image
+              src={Logo}
+              width={50}
+              height={50}
+              alt="Filmax Logo"
+              priority
+              className="mt-2"
+            />
           </li>
 
           <li>

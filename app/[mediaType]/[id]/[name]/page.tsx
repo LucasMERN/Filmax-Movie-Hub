@@ -26,7 +26,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { RadialChart } from "@/Components/RadialChart";
 import { Card, CardTitle } from "@/Components/ui/card";
 import React from "react";
@@ -96,6 +96,12 @@ const MovieOrTVShow = ({
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [activeSeason, setActiveSeason] = useState<string | undefined>();
+
+  const castSection = useRef<HTMLDivElement | null>(null);
+
+  const scrollToCast = () => {
+    castSection.current?.scrollIntoView({ behavior: "smooth" });
+  };
 
   useEffect(() => {
     if (mediaData?.seasons.length) {
@@ -281,8 +287,8 @@ const MovieOrTVShow = ({
             <span className="dark-shadow mb-[3px] hidden h-[1.2rem] overflow-hidden text-white/60 md:block">
               |
             </span>
-            <Link
-              href="#cast"
+            <button
+              onClick={scrollToCast}
               className="dark-shadow group group flex items-center gap-1 text-sm font-semibold text-white/60 underline-offset-2 hover:text-white hover:underline"
             >
               See Full Cast{" "}
@@ -290,7 +296,7 @@ const MovieOrTVShow = ({
                 size={20}
                 className="dark-shadow underline-offset-2 transition-transform group-hover:animate-wiggle group-hover:text-white group-hover:underline"
               />
-            </Link>
+            </button>
             {mediaData.vote_count > 0 && (
               <RadialChart
                 voteCount={mediaData.vote_count}
@@ -444,7 +450,10 @@ const MovieOrTVShow = ({
         </section>
       )}
       {creditData?.cast.length > 0 && (
-        <div className="flex flex-col items-center gap-20 overflow-hidden pt-16">
+        <div
+          className="flex flex-col items-center gap-20 overflow-hidden pt-16"
+          ref={castSection}
+        >
           <div className="container pr-0">
             <div className="relative z-10 -mb-4 flex flex-row items-baseline gap-4 px-1 pr-8 text-white lg:pr-12">
               <h3 className="text-xl font-semibold">Cast</h3>
@@ -453,7 +462,7 @@ const MovieOrTVShow = ({
               mediaType="person"
               loop={false}
               data={creditData?.cast}
-              width="md:basis-1/3 lg:basis-1/4 xl:basis-1/6"
+              width="min-[475px]:basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/6"
             />
           </div>
         </div>
@@ -467,7 +476,7 @@ const MovieOrTVShow = ({
             <ProductCarousel
               mediaType={mediaType}
               data={recommendedData?.results}
-              width="md:basis-1/3 lg:basis-1/4 xl:basis-1/6"
+              width="min-[475px]:basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/6"
             />
           </div>
         </div>

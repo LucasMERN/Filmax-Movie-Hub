@@ -5,12 +5,7 @@ import Loader from "@/Components/Loader";
 import Nav from "@/Components/Nav";
 import { Button } from "@/Components/ui/Button";
 import { Card } from "@/Components/ui/card";
-import {
-  getPerson,
-  getPersonCredit,
-  getPersonExternalId,
-  getPersonPoster,
-} from "@/lib/utils";
+import { getPerson, getPersonCredit, getPersonExternalId } from "@/lib/utils";
 import {
   Facebook,
   TwitterIcon,
@@ -32,7 +27,6 @@ function formatBirthday(birthday: string) {
   const month = date.toLocaleString("default", { month: "long" });
   const year = date.getFullYear();
 
-  // Calculate age
   const today = new Date();
   const age = today.getFullYear() - year;
   const hasHadBirthdayThisYear =
@@ -58,10 +52,7 @@ type Data = {
 };
 
 const Person = ({ id }: { id: number }) => {
-  const [activeTab, setActiveTab] = useState(1);
-
   const [personData, setPersonData] = useState<any | null | Data>(null);
-  const [personPoster, setPersonPoster] = useState<null | any>(null);
   const [personCredit, setPersonCredit] = useState<null | any>(null);
   const [personID, setPersonID] = useState<null | any>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -78,13 +69,11 @@ const Person = ({ id }: { id: number }) => {
       setError(null);
       try {
         const personData = await getPerson(id);
-        const personPoster = await getPersonPoster(id);
         const personCredit = await getPersonCredit(id);
         const personID = await getPersonExternalId(id);
 
         if (personData) {
           setPersonData(personData);
-          setPersonPoster(personPoster);
           setPersonCredit(personCredit.cast);
           setPersonID(personID);
         } else {
@@ -107,7 +96,7 @@ const Person = ({ id }: { id: number }) => {
   return (
     <>
       <Nav />
-      <div className="container flex flex-col gap-4 pt-28">
+      <div className="container flex flex-col gap-4 pt-36">
         <h1 className="text-xl font-semibold text-white lg:hidden">
           {personData.name}
         </h1>
@@ -119,7 +108,7 @@ const Person = ({ id }: { id: number }) => {
             height={200}
             src={`https://image.tmdb.org/t/p/w370_and_h556_bestv2/${personData.profile_path}`}
             alt={`Professional headshot of ${personData.name}`}
-            className="float-left mr-3 lg:mr-8 lg:w-96 xl:mr-12"
+            className="float-left mr-3 lg:mb-4 lg:mr-8 lg:w-72"
           />
           <h1 className="hidden text-3xl font-bold text-white lg:mb-4 lg:block">
             {personData.name}
@@ -139,34 +128,34 @@ const Person = ({ id }: { id: number }) => {
               <span>{personData?.place_of_birth}</span>
             </div>
           </section>
-          <div className="mt-8 flex items-center gap-8 text-white">
+          <div className="mt-8 hidden items-center gap-8 text-white lg:flex">
             <Link
               href={`https://www.facebook.com/${personID?.facebook_id}`}
-              className={`${personID?.facebook_id != null ? "" : "hidden"}`}
+              className={`${personID?.facebook_id != null ? "text-white transition hover:text-primary" : "hidden"}`}
             >
               <Facebook />
             </Link>
             <Link
               href={`https://www.x.com/${personID?.twitter_id}`}
-              className={`${personID?.twitter_id != null ? "" : "hidden"}`}
+              className={`${personID?.twitter_id != null ? "text-white transition hover:text-primary" : "hidden"}`}
             >
               <TwitterIcon />
             </Link>
             <Link
               href={`https://www.instagram.com/${personID?.instagram_id}`}
-              className={`${personID?.instagram_id != null ? "" : "hidden"}`}
+              className={`${personID?.instagram_id != null ? "text-white transition hover:text-primary" : "hidden"}`}
             >
               <Instagram />
             </Link>
             <Link
               href={`https://www.imdb.com/title/${personID?.imdb_id}`}
-              className={`${personID?.imdb_id != null ? "" : "hidden"}`}
+              className={`${personID?.imdb_id != null ? "text-white transition hover:text-primary" : "hidden"}`}
             >
               <Clapperboard />
             </Link>
             <Link
               href={`${personData?.homepage}`}
-              className={`${personID?.homepage != null ? "" : "hidden"}`}
+              className={`${personID?.homepage != null ? "text-white transition hover:text-primary" : "hidden"}`}
             >
               <Link2 />
             </Link>
@@ -184,53 +173,56 @@ const Person = ({ id }: { id: number }) => {
             <span>{personData?.place_of_birth}</span>
           </div>
         </section>
-        <div className="mt-8 flex items-center gap-8 text-white lg:hidden">
-          <Link href={`https://www.facebook.com/${personID?.facebook_id}`}>
+        <div className="mt-8 flex items-center gap-8 lg:hidden">
+          <Link
+            href={`https://www.facebook.com/${personID?.facebook_id}`}
+            className={`${personID?.facebook_id != null ? "text-white transition hover:text-primary" : "hidden"}`}
+          >
             <Facebook />
           </Link>
-          <Link href={`https://www.x.com/${personID?.twitter_id}`}>
+          <Link
+            href={`https://www.x.com/${personID?.twitter_id}`}
+            className={`${personID?.twitter_id != null ? "text-white transition hover:text-primary" : "hidden"}`}
+          >
             <TwitterIcon />
           </Link>
-          <Link href={`https://www.instagram.com/${personID?.instagram_id}`}>
+          <Link
+            href={`https://www.instagram.com/${personID?.instagram_id}`}
+            className={`${personID?.instagram_id != null ? "text-white transition hover:text-primary" : "hidden"}`}
+          >
             <Instagram />
           </Link>
-          <Link href={`https://www.imdb.com/title/${personID?.imdb_id}`}>
+          <Link
+            href={`https://www.imdb.com/title/${personID?.imdb_id}`}
+            className={`${personID?.imdb_id != null ? "text-white transition hover:text-primary" : "hidden"}`}
+          >
             <Clapperboard />
           </Link>
-          <Link href={`${personData?.homepage}`}>
+          <Link
+            href={`${personData?.homepage}`}
+            className={`${personID?.homepage != null ? "text-white transition hover:text-primary" : "hidden"}`}
+          >
             <Link2 />
           </Link>
         </div>
       </div>
-      <div className="container mt-8 flex w-full justify-between">
-        <Button
-          onClick={() => setActiveTab(1)}
-          className={`${activeTab === 1 ? "bg-primary" : "bg-transparent text-white/30"} w-1/3 rounded-none`}
-        >
-          KNOWN FOR
-        </Button>
-        <Button
-          onClick={() => setActiveTab(2)}
-          className={`${activeTab === 2 ? "bg-primary" : "bg-transparent text-white/30"} w-1/3 rounded-none`}
-        >
-          CREDITS
-        </Button>
-        <Button
-          onClick={() => setActiveTab(3)}
-          className={`${activeTab === 3 ? "bg-primary" : "bg-transparent text-white/30"} w-1/3 rounded-none`}
-        >
-          PHOTOS
-        </Button>
+      <div className="container mt-12 flex w-full justify-center border-t border-t-primary pt-12">
+        <h2 className="text-3xl font-semibold uppercase tracking-widest text-white">
+          Filmography
+        </h2>
       </div>
       <section className="container mt-8 grid grid-cols-3 gap-2 md:grid-cols-4 md:gap-4 lg:grid-cols-6 xl:grid-cols-8">
         {personCredit?.map(
-          (movie: {
-            id: number;
-            poster_path: string;
-            title: string;
-            media_type: string;
-            name: string;
-          }, key: number) => {
+          (
+            movie: {
+              id: number;
+              poster_path: string;
+              title: string;
+              media_type: string;
+              name: string;
+            },
+            key: number,
+          ) => {
             const formattedTitle = (movie?.title || movie?.name)
               .toLowerCase()
               .replace(/[^\w\s]/gi, "")
