@@ -77,7 +77,7 @@ export const getTrending = async (media: string, page: number) => {
 };
 
 export const getNewMovie = async (media: string, page: number) => {
-  const url = `${apiUrl}/${media}/upcoming?language=en-US&page=${page}`;
+  const url = `${apiUrl}/${media}/upcoming?include_adult=false&include_video=false&language=en-US&page=${page}`;
   return fetchData(url);
 };
 
@@ -91,7 +91,7 @@ export const getNewTV = async (
 };
 
 export const getPopular = async (media: string, page: number) => {
-  const url = `${apiUrl}/${media}/top_rated?language=en-US&page=${page}`;
+  const url = `${apiUrl}/${media}/top_rated?include_adult=false&include_video=false&language=en-US&page=${page}`;
   return fetchData(url);
 };
 
@@ -102,10 +102,10 @@ export const getAnimated = async (media: string, page: number) => {
 
 export const getMediaByGenre = async (
   media: string,
-  genreId: number,
+  genreId: string,
   page: number,
 ) => {
-  const url = `${apiUrl}/discover/${media}?with_genres=${genreId}&page=${page}`;
+  const url = `${apiUrl}/discover/${media}?include_adult=false&include_video=false&language=en-US&page=${page}&sort_by=popularity.desc&with_genres=${genreId}`;
   return fetchData(url);
 };
 

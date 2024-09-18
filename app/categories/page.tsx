@@ -1,7 +1,5 @@
 "use client";
 
-import Footer from "@/Components/Footer";
-import Nav from "@/Components/Nav";
 import React, { useRef, useState, useCallback } from "react";
 import Video from "next-video";
 import actionVideo from "@/videos/action.mp4";
@@ -23,7 +21,9 @@ import thrillerThumb from "@/public/thriller.jpg";
 import Link from "next/link";
 
 export default function Categories() {
-  const videoRefs = useRef<(HTMLVideoElement | null)[]>(new Array(8).fill(null));
+  const videoRefs = useRef<(HTMLVideoElement | null)[]>(
+    new Array(8).fill(null),
+  );
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
   const handleMouseEnter = useCallback((index: number) => {
@@ -47,50 +47,117 @@ export default function Categories() {
   }, [activeIndex]);
 
   const videos = [
-    { src: actionVideo, poster: actionThumb.src, blurData: actionThumb.blurDataURL, margin: '', alignment: '', title:'Action', url: '/action' },
-    { src: animatedVideo, poster: animatedThumb.src, blurData: animatedThumb.blurDataURL, margin: 'mt-12', alignment: '-mt-12', title:'Animated', url: '/animated' },
-    { src: scifiVideo, poster: scifiThumb.src, blurData: scifiThumb.blurDataURL, margin: 'mt-24', alignment: '-mt-24', title:'Fantasy', url: '/fantasy' },
-    { src: thrillerVideo, poster: thrillerThumb.src, blurData: thrillerThumb.blurDataURL, margin: 'mt-8', alignment: '-mt-8', title:'Thriller', url: '/thriller' },
-    { src: dramaVideo, poster: dramaThumb.src, blurData: dramaThumb.blurDataURL, margin: '-mt-4', alignment: 'mt-4', title:'Drama', url: '/drama' },
-    { src: crimeVideo, poster: crimeThumb.src, blurData: crimeThumb.blurDataURL, margin: 'mt-24', alignment: '-mt-24', title:'Crime', url: '/crime' },
-    { src: comedyVideo, poster: comedyThumb.src, blurData: comedyThumb.blurDataURL, margin: 'mt-12', alignment: '-mt-12', title:'Comedy', url: '/comedy' },
-    { src: horrorVideo, poster: horrorThumb.src, blurData: horrorThumb.blurDataURL, margin: '', alignment: '', title:'Horror', url: '/horror' },
+    {
+      src: actionVideo,
+      poster: actionThumb.src,
+      blurData: actionThumb.blurDataURL,
+      margin: "",
+      alignment: "",
+      title: "Action",
+      url: "/categories/28%2C12/action",
+    },
+    {
+      src: animatedVideo,
+      poster: animatedThumb.src,
+      blurData: animatedThumb.blurDataURL,
+      margin: "md:mt-12",
+      alignment: "-md:mt-12",
+      title: "Animated",
+      url: "/categories/16/animated",
+    },
+    {
+      src: scifiVideo,
+      poster: scifiThumb.src,
+      blurData: scifiThumb.blurDataURL,
+      margin: "md:mt-24",
+      alignment: "-md:mt-24",
+      title: "Fantasy",
+      url: "/categories/14%2C878/fantasy",
+    },
+    {
+      src: thrillerVideo,
+      poster: thrillerThumb.src,
+      blurData: thrillerThumb.blurDataURL,
+      margin: "md:mt-8",
+      alignment: "-md:mt-8",
+      title: "Thriller",
+      url: "/categories/53/thriller",
+    },
+    {
+      src: dramaVideo,
+      poster: dramaThumb.src,
+      blurData: dramaThumb.blurDataURL,
+      margin: "md:-mt-4",
+      alignment: "md:mt-4",
+      title: "Drama",
+      url: "/categories/18/drama",
+    },
+    {
+      src: crimeVideo,
+      poster: crimeThumb.src,
+      blurData: crimeThumb.blurDataURL,
+      margin: "md:mt-24",
+      alignment: "md:-mt-24",
+      title: "Crime",
+      url: "/categories/80/crime",
+    },
+    {
+      src: comedyVideo,
+      poster: comedyThumb.src,
+      blurData: comedyThumb.blurDataURL,
+      margin: "md:mt-12",
+      alignment: "md:-mt-12",
+      title: "Comedy",
+      url: "/categories/35/comedy",
+    },
+    {
+      src: horrorVideo,
+      poster: horrorThumb.src,
+      blurData: horrorThumb.blurDataURL,
+      margin: "",
+      alignment: "",
+      title: "Horror",
+      url: "/categories/27/horror",
+    },
   ];
 
   return (
-    <main>
-      <Nav />
-      <section
-        className={`${activeIndex !== null ? "lg:grid-cols-10" : "lg:grid-cols-8"} container grid gap-2 pt-48 transition-all`}
-      >
-        {videos.map((video, index) => (
-          <Link
-            key={index}
-            href={video.url}
-            className={`relative h-[500px] transition-all ${video.margin}
-              ${activeIndex === index ? "col-span-3" : activeIndex !== null ? "col-span-1" : ""}
+    <section className="container flex flex-col justify-between gap-4 pt-24 md:flex-row md:gap-0 md:pt-48">
+      {videos.map((video, index) => (
+        <Link
+          key={index}
+          href={video.url}
+          className={`relative w-full transition-all duration-300 ease-in-out md:h-[500px] ${video.margin}
+              ${
+                activeIndex === null
+                  ? "h-[12%] w-full md:w-[12%]"
+                  : activeIndex === index
+                    ? "h-[25%] w-full md:w-[25%]"
+                    : "h-[10%] w-full md:w-[10%]"
+              }
             `}
-            onMouseEnter={() => handleMouseEnter(index)}
-            onMouseLeave={handleMouseLeave}
+          onMouseEnter={() => handleMouseEnter(index)}
+          onMouseLeave={handleMouseLeave}
+        >
+          <Video
+            src={video.src}
+            controls={false}
+            autoPlay={false}
+            muted
+            className="absolute left-0 top-0 h-full w-full object-cover transition-all duration-300 ease-in-out"
+            ref={(el: HTMLVideoElement | null) => {
+              videoRefs.current[index] = el;
+            }}
+            poster={video.poster}
+            blurDataURL={video.blurData}
+          />
+          <span
+            className={`dark-shadow absolute top-1/2 ${video.alignment} w-full text-center text-xl font-semibold text-white transition-all duration-300 ease-in-out`}
           >
-            <Video
-              src={video.src}
-              controls={false}
-              autoPlay={false}
-              muted
-              className="absolute left-0 top-0 h-full w-full object-cover"
-              // @ts-ignore
-              ref={(el) => videoRefs.current[index] = el}
-              poster={video.poster}
-              blurDataURL={video.blurData}
-            />
-            <span className={`dark-shadow absolute top-1/2 ${video.alignment} w-full text-center text-xl font-semibold text-white`}>
-              {video.title}
-            </span>
-          </Link>
-        ))}
-      </section>
-      <Footer />
-    </main>
+            {video.title}
+          </span>
+        </Link>
+      ))}
+    </section>
   );
 }

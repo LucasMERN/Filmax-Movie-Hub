@@ -64,6 +64,17 @@ export default function Nav() {
               <li>
                 <Link
                   className={`link ${
+                    pathname === "/categories" ? "text-white" : "text-white/40"
+                  } tracking-widest`}
+                  href="/categories"
+                >
+                  Categories
+                </Link>
+              </li>
+
+              <li>
+                <Link
+                  className={`link ${
                     pathname === "/movies" ? "text-white" : "text-white/40"
                   } tracking-widest`}
                   href="/movies"
@@ -80,17 +91,6 @@ export default function Nav() {
                   href="/shows"
                 >
                   Shows
-                </Link>
-              </li>
-
-              <li>
-                <Link
-                  className={`link ${
-                    pathname === "/categories" ? "text-white" : "text-white/40"
-                  } tracking-widest`}
-                  href="/categories"
-                >
-                  Categories
                 </Link>
               </li>
             </ul>
@@ -137,6 +137,17 @@ export default function Nav() {
           <li>
             <Link
               className={`link ${
+                pathname === "/categories" ? "text-white" : "text-white/40"
+              } text-sm tracking-widest hover:text-white`}
+              href="/categories"
+            >
+              Categories
+            </Link>
+          </li>
+
+          <li>
+            <Link
+              className={`link ${
                 pathname === "/movies" ? "text-white" : "text-white/40"
               } text-sm tracking-widest hover:text-white`}
               href="/movies"
@@ -153,17 +164,6 @@ export default function Nav() {
               href="/shows"
             >
               Shows
-            </Link>
-          </li>
-
-          <li>
-            <Link
-              className={`link ${
-                pathname === "/categories" ? "text-white" : "text-white/40"
-              } text-sm tracking-widest hover:text-white`}
-              href="/categories"
-            >
-              Categories
             </Link>
           </li>
         </ul>
