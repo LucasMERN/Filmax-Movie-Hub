@@ -95,7 +95,7 @@ export default function Nav() {
               </li>
             </ul>
             <SheetFooter>
-              <Image src={Logo} width={50} height={50} alt="Filmax Logo" />
+              <Image src={Logo} width={50} height={50} alt="Filmax Logo" loading="eager" />
             </SheetFooter>
           </SheetContent>
         </Sheet>
@@ -109,6 +109,7 @@ export default function Nav() {
               alt="Filmax Logo"
               priority
               className="mt-2"
+              loading="eager"
             />
           </li>
 

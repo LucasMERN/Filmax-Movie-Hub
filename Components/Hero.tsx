@@ -12,13 +12,14 @@ import React, { useState, useEffect } from "react";
 import { Card } from "@/Components/ui/card";
 import BackgroundImage from "@/Components/ui/BackgroundImage";
 import Link from "next/link";
+import { Movie, TV } from "@/lib/types";
 
 type HeroProps = {
   mediaType?: "movie" | "tv";
 };
 
 const Hero = ({ mediaType = "movie" }: HeroProps) => {
-  const [top10, setTop10] = useState<any[]>([]);
+  const [top10, setTop10] = useState<Movie[] & TV[]>([]);
 
   useEffect(() => {
     const fetchTop10 = async () => {
@@ -166,7 +167,7 @@ const Hero = ({ mediaType = "movie" }: HeroProps) => {
                     <Card className="relative h-96 w-full overflow-hidden border-4 border-white bg-cover bg-center shadow-lg">
                       <BackgroundImage
                         src={`https://image.tmdb.org/t/p/w370_and_h556_bestv2/${movie?.poster_path}`}
-                        alt={movie?.overview}
+                        alt={`Poster image for ${movie?.title}`}
                         lazy="eager"
                       />
                     </Card>

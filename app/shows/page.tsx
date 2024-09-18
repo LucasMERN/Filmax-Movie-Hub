@@ -72,7 +72,7 @@ export default function Shows() {
             <React.Fragment key={index}>
               {item.poster_path !== null && (
                 <Link
-                  href={`/movie/${item.id}/${formattedTitle}`}
+                  href={`/tv/${item.id}/${formattedTitle}`}
                   key={index}
                   className="group w-full overflow-hidden"
                 >
@@ -82,6 +82,7 @@ export default function Shows() {
                     height={513}
                     className="h-full object-cover transition-transform group-hover:scale-105"
                     alt={`Poster image for ${item.title}`}
+                    loading="lazy"
                   />
                 </Link>
               )}

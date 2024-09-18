@@ -2,9 +2,10 @@ import { SetStateAction, useState } from "react";
 import { searchSpecificMedia } from "@/lib/utils";
 import ProductCarousel from "@/Components/ProductCarousel";
 import { Button } from "@/Components/ui/Button";
+import { Movie, Person, TV } from "@/lib/types";
 
 export default function SearchFilter() {
-  const [searchResultsList, setSearchResultsList] = useState<any[]>([]);
+  const [searchResultsList, setSearchResultsList] = useState<Movie[] & TV[] & Person[]>([]);
   const [mediaType, setMediaType] = useState<"movie" | "tv" | "person">(
     "movie",
   );

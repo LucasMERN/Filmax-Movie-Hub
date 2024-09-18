@@ -82,6 +82,7 @@ export default function Trending() {
                     height={513}
                     className="h-full object-cover transition-transform group-hover:scale-105"
                     alt={`Poster image for ${item.title}`}
+                    loading="lazy"
                   />
                 </Link>
               )}

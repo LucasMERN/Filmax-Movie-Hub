@@ -1,7 +1,7 @@
 "use client";
 
 import BackgroundImage from "@/Components/ui/BackgroundImage";
-import { Badge } from "@/Components/ui/badge";
+import { Badge, badgeVariants } from "@/Components/ui/badge";
 import { Button } from "@/Components/ui/Button";
 import Brokenimage from "@/public/brokenImage.jpg";
 import {
@@ -42,41 +42,16 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/Components/ui/select";
-
-type Data = {
-  backdrop_path: string;
-  belongs_to_collection: {
-    backdrop_path: string;
-    id: number;
-    name: string;
-    poster_path: string;
-  };
-  genres: {
-    name: string;
-  }[];
-  homepage: string;
-  id: number;
-  title: string;
-  overview: string;
-  poster_path: string;
-  production_companies: {
-    name: string;
-  }[];
-  release_date: string;
-  runtime: number;
-  tagline: string;
-  vote_average: number;
-  vote_count: number;
-  last_air_date: string;
-  first_air_date: string;
-  name: string;
-  seasons: {
-    season_number: number;
-    episode_count: number;
-    name: string;
-    id: number;
-  }[];
-};
+import {
+  ContentRating,
+  Credit,
+  ExternalID,
+  Movie,
+  ReleaseDate,
+  TV,
+  TvEpisode,
+  YouTubeVideo,
+} from "@/lib/types";
 
 const MovieOrTVShow = ({
   id,
@@ -85,14 +60,16 @@ const MovieOrTVShow = ({
   id: number;
   mediaType: "movie" | "tv";
 }) => {
-  const [mediaData, setMediaData] = useState<null | Data>(null);
-  const [externalData, setExternalData] = useState<null | any>(null);
-  const [videoData, setVideoData] = useState<null | any>(null);
-  const [creditData, setCreditData] = useState<null | any>(null);
-  const [recommendedData, setRecommendedData] = useState<null | any>(null);
-  const [releaseData, setReleaseData] = useState<null | any>(null);
-  const [contentRatingData, setContentRatingData] = useState<null | any>(null);
-  const [episodeData, setEpisodeData] = useState<null | any>(null);
+  const [mediaData, setMediaData] = useState<Movie & TV>();
+  const [externalData, setExternalData] = useState<ExternalID>();
+  const [videoData, setVideoData] = useState<YouTubeVideo[]>([]);
+  const [creditData, setCreditData] = useState<Credit>();
+  const [recommendedData, setRecommendedData] = useState<Movie[] & TV[]>();
+  const [releaseData, setReleaseData] = useState<ReleaseDate[]>([]);
+  const [contentRatingData, setContentRatingData] = useState<ContentRating[]>(
+    [],
+  );
+  const [episodeData, setEpisodeData] = useState<TvEpisode[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [activeSeason, setActiveSeason] = useState<string | undefined>();
@@ -100,16 +77,24 @@ const MovieOrTVShow = ({
   const castSection = useRef<HTMLDivElement | null>(null);
 
   const scrollToCast = () => {
-    castSection.current?.scrollIntoView({ behavior: "smooth" });
+    if (castSection.current) {
+      castSection.current.scrollIntoView({ behavior: "smooth" });
+    }
   };
 
+  let mediaDataSeasons;
+
+  if (mediaData !== undefined) {
+    mediaDataSeasons = mediaData.seasons;
+  }
+
   useEffect(() => {
-    if (mediaData?.seasons.length) {
+    if (mediaData !== undefined && mediaData.seasons?.length) {
       setActiveSeason(
-        String(mediaData.seasons[mediaData.seasons.length - 1].name),
+        String(mediaData.seasons[mediaData.seasons?.length - 1].name),
       );
     }
-  }, [mediaData?.seasons]);
+  }, [mediaData, mediaDataSeasons]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -126,12 +111,12 @@ const MovieOrTVShow = ({
           const contentRatingData = await getContentRating(mediaType, id);
           if (contentRatingData) {
             setContentRatingData(
-              contentRatingData?.results.filter(
+              contentRatingData.results.filter(
                 (data: { iso_3166_1: string }) => data.iso_3166_1 === "US",
               ),
             );
           }
-          if (mediaData?.seasons.length) {
+          if (mediaData.seasons.length) {
             const lastSeason = mediaData.seasons[mediaData.seasons.length - 1];
             setActiveSeason(lastSeason.name);
             fetchEpisodes(mediaData.id, lastSeason.season_number);
@@ -140,7 +125,7 @@ const MovieOrTVShow = ({
           const releaseData = await getRelease(mediaType, id);
           if (releaseData) {
             setReleaseData(
-              releaseData?.results.filter(
+              releaseData.results.filter(
                 (data: { iso_3166_1: string }) => data.iso_3166_1 === "US",
               ),
             );
@@ -148,15 +133,17 @@ const MovieOrTVShow = ({
         }
 
         if (mediaData) {
+          console.log(mediaData);
           setMediaData(mediaData);
           setExternalData(externalData);
           setVideoData(
-            videoData?.results.filter((data: { name: string }) =>
+            videoData.results.filter((data: { name: string }) =>
               data.name.split(" ").includes("Trailer"),
             ),
           );
           setCreditData(creditData);
-          setRecommendedData(recommendedData);
+          console.log(creditData);
+          setRecommendedData(recommendedData.results);
         } else {
           setError("No data available");
         }
@@ -184,7 +171,7 @@ const MovieOrTVShow = ({
   const fetchEpisodes = async (showId: number, seasonNumber: number) => {
     try {
       const episodeData = await getTvShowEpisodes(showId, seasonNumber);
-      setEpisodeData(episodeData?.episodes);
+      setEpisodeData(episodeData.episodes);
     } catch (error) {
       console.error("Error fetching episodes:", error);
     }
@@ -205,8 +192,8 @@ const MovieOrTVShow = ({
           }}
         ></div>
         <BackgroundImage
-          src={`https://image.tmdb.org/t/p/original/${mediaData?.backdrop_path}`}
-          alt={mediaData.overview}
+          src={`https://image.tmdb.org/t/p/original/${mediaData.backdrop_path}`}
+          alt={`Backdrop image for ${mediaData.title}`}
           lazy="eager"
           priority
         />
@@ -219,32 +206,32 @@ const MovieOrTVShow = ({
           </h1>
           <div className="flex items-center gap-4 text-white">
             <Link
-              className={`${externalData?.facebook_id != null ? "" : "hidden"}`}
-              href={`https://www.facebook.com/${externalData?.facebook_id}`}
+              className={`${externalData !== undefined && externalData.facebook_id !== null ? "" : "hidden"}`}
+              href={`https://www.facebook.com/${externalData !== undefined && externalData.facebook_id}`}
             >
               <Facebook />
             </Link>
             <Link
-              href={`https://www.x.com/${externalData?.twitter_id}`}
-              className={`${externalData?.twitter_id != null ? "" : "hidden"}`}
+              href={`https://www.x.com/${externalData !== undefined && externalData.twitter_id}`}
+              className={`${externalData !== undefined && externalData.twitter_id != null ? "" : "hidden"}`}
             >
               <TwitterIcon />
             </Link>
             <Link
-              className={`${externalData?.instagram_id != null ? "" : "hidden"}`}
-              href={`https://www.instagram.com/${externalData?.instagram_id}`}
+              className={`${externalData !== undefined && externalData.instagram_id != null ? "" : "hidden"}`}
+              href={`https://www.instagram.com/${externalData !== undefined && externalData.instagram_id}`}
             >
               <Instagram />
             </Link>
             <Link
-              href={`https://www.imdb.com/title/${externalData?.imdb_id}`}
-              className={`${externalData?.imdb_id != null ? "" : "hidden"}`}
+              href={`https://www.imdb.com/title/${externalData !== undefined && externalData.imdb_id}`}
+              className={`${externalData !== undefined && externalData.imdb_id != null ? "" : "hidden"}`}
             >
               <Clapperboard />
             </Link>
             <Link
-              href={`${mediaData?.homepage}`}
-              className={`${mediaData?.homepage != null ? "" : "hidden"}`}
+              href={`${mediaData.homepage}`}
+              className={`${mediaData.homepage != null ? "" : "hidden"}`}
             >
               <Link2 />
             </Link>
@@ -255,34 +242,41 @@ const MovieOrTVShow = ({
               className="mr-2 w-fit rounded-md border-white text-sm font-medium text-white shadow-lg"
             >
               {mediaType !== "movie"
-                ? contentRatingData[0]?.rating || "PG"
-                : releaseData[0]?.release_dates[0]?.certification || "PG"}
+                ? (contentRatingData !== null && contentRatingData[0].rating) ||
+                  "PG"
+                : (releaseData !== null &&
+                    releaseData[0].release_dates[0].certification) ||
+                  "PG"}
             </Badge>
             <span className="dark-shadow text-sm font-semibold text-white/60">
               {mediaType !== "movie" ? (
                 <span>
-                  {mediaData?.first_air_date.split("-")[0]} -{" "}
-                  {mediaData?.last_air_date.split("-")[0]}
+                  {mediaData.first_air_date.split("-")[0]} -{" "}
+                  {mediaData.last_air_date.split("-")[0]}
                 </span>
               ) : (
-                releaseData[0]?.release_dates[0]?.release_date.split("-")[0]
+                releaseData !== null &&
+                releaseData[0].release_dates[0].release_date.split("-")[0]
               )}
             </span>
             <Dot size={20} className="-mx-2 text-white/60" />
             <ul className="hidden flex-row gap-1 md:flex">
-              {creditData.cast.slice(0, 3).map((person: any, index: number) => (
-                <li
-                  key={index}
-                  className="dark-shadow whitespace-nowrap text-sm font-semibold text-white/60"
-                >
-                  <Link
-                    href={`/person/${person.id}/${person.name}`}
-                    className="hover:text-white"
-                  >
-                    {index === 2 ? person.name : `${person.name}, `}
-                  </Link>
-                </li>
-              ))}
+              {creditData !== undefined &&
+                creditData.cast
+                  .slice(0, 3)
+                  .map((person: any, index: number) => (
+                    <li
+                      key={index}
+                      className="dark-shadow whitespace-nowrap text-sm font-semibold text-white/60"
+                    >
+                      <Link
+                        href={`/person/${person.id}/${person.name}`}
+                        className="hover:text-white"
+                      >
+                        {index === 2 ? person.name : `${person.name}, `}
+                      </Link>
+                    </li>
+                  ))}
             </ul>
             <span className="dark-shadow mb-[3px] hidden h-[1.2rem] overflow-hidden text-white/60 md:block">
               |
@@ -318,8 +312,9 @@ const MovieOrTVShow = ({
             width={175}
             height={250}
             src={`https://image.tmdb.org/t/p/w370_and_h556_bestv2/${mediaData.poster_path}`}
-            alt={mediaData.overview}
+            alt={`Poster image for ${mediaData.title}`}
             priority
+            loading="eager"
           />
           <div className="flex flex-col gap-3 md:w-1/2">
             <h2 className="dark-shadow -mb-2 text-lg font-semibold tracking-widest text-white">
@@ -330,17 +325,17 @@ const MovieOrTVShow = ({
             </p>
             <div className="flex gap-2 lg:mt-4">
               {mediaData.genres.map((name, index) => (
-                <Badge
+                <Link
                   key={index}
-                  variant="outline"
-                  className="w-fit border-white text-sm font-medium text-white shadow-lg"
+                  href={`/categories/${name.id}/${name.name}`}
+                  className={`${badgeVariants({ variant: "outline" })} w-fit border-white px-3 py-1 text-sm font-medium text-white shadow-lg transition-all hover:bg-primary`}
                 >
                   {name.name}
-                </Badge>
+                </Link>
               ))}
             </div>
           </div>
-          {videoData.length > 0 && (
+          {videoData !== null && videoData.length > 0 && (
             <Card className="flex flex-col gap-2">
               <CardTitle className="dark-shadow p-0 text-lg font-semibold tracking-widest text-white">
                 Watch Trailer
@@ -357,7 +352,7 @@ const MovieOrTVShow = ({
           )}
         </section>
       </section>
-      {mediaType === "tv" && mediaData?.seasons && (
+      {mediaType === "tv" && mediaData.seasons && (
         <section className="container flex flex-col gap-4 pt-8">
           <h3 className="text-2xl font-semibold tracking-widest text-white">
             Episodes
@@ -393,63 +388,56 @@ const MovieOrTVShow = ({
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
             {episodeData &&
               episodeData.length > 0 &&
-              episodeData.map(
-                (episode: {
-                  id: number;
-                  name: string;
-                  still_path: string;
-                  episode_number: number;
-                  overview: string;
-                  air_date: string;
-                }) => (
-                  <div
-                    key={episode.id}
-                    className="group flex flex-col gap-2 p-4 transition-colors hover:bg-primary"
-                  >
-                    {episode.still_path !== null ? (
-                      <Image
-                        src={`https://image.tmdb.org/t/p/w533_and_h300_bestv2/${episode.still_path}`}
-                        alt={`Thumbnail image for ${episode.name}`}
-                        width={300}
-                        height={200}
-                        className="aspect-video w-full"
-                      />
-                    ) : (
-                      <Image
-                        src={Brokenimage}
-                        alt={`This Image is not available`}
-                        width={300}
-                        height={200}
-                        className="aspect-video w-full"
-                      />
-                    )}
-                    <div className="flex gap-2">
-                      <span className="dark-shadow font-bold text-primary transition-colors group-hover:text-white">
-                        EP0{episode.episode_number}
-                      </span>
-                      <h4 className="text-white">
-                        {episode.name.split("").length > 29
-                          ? episode.name.split("").slice(0, 30).join("") + "..."
-                          : episode.name}
-                      </h4>
-                    </div>
-                    <p className="pt-4 text-sm text-white/60">
-                      {episode.overview}
-                    </p>
-                    <span className="text-sm text-white/20 transition-colors group-hover:text-white/40">
-                      {new Date(episode.air_date).toLocaleDateString("en-GB", {
-                        day: "numeric",
-                        month: "long",
-                        year: "numeric",
-                      })}
+              episodeData.map((episode) => (
+                <div
+                  key={episode.id}
+                  className="group flex flex-col gap-2 p-4 transition-colors hover:bg-primary"
+                >
+                  {episode.still_path !== null ? (
+                    <Image
+                      src={`https://image.tmdb.org/t/p/w533_and_h300_bestv2/${episode.still_path}`}
+                      alt={`Thumbnail image for ${episode.name}`}
+                      width={300}
+                      height={200}
+                      className="aspect-video w-full"
+                      loading="lazy"
+                    />
+                  ) : (
+                    <Image
+                      src={Brokenimage}
+                      alt={`This Image is not available`}
+                      width={300}
+                      height={200}
+                      className="aspect-video w-full"
+                      loading="lazy"
+                    />
+                  )}
+                  <div className="flex gap-2">
+                    <span className="dark-shadow font-bold text-primary transition-colors group-hover:text-white">
+                      EP0{episode.episode_number}
                     </span>
+                    <h4 className="text-white">
+                      {episode.name.split("").length > 29
+                        ? episode.name.split("").slice(0, 30).join("") + "..."
+                        : episode.name}
+                    </h4>
                   </div>
-                ),
-              )}
+                  <p className="pt-4 text-sm text-white/60">
+                    {episode.overview}
+                  </p>
+                  <span className="text-sm text-white/20 transition-colors group-hover:text-white/40">
+                    {new Date(episode.air_date).toLocaleDateString("en-GB", {
+                      day: "numeric",
+                      month: "long",
+                      year: "numeric",
+                    })}
+                  </span>
+                </div>
+              ))}
           </div>
         </section>
       )}
-      {creditData?.cast.length > 0 && (
+      {creditData !== undefined && creditData.cast.length > 0 && (
         <div
           className="flex flex-col items-center gap-20 overflow-hidden pt-16"
           ref={castSection}
@@ -461,13 +449,13 @@ const MovieOrTVShow = ({
             <ProductCarousel
               mediaType="person"
               loop={false}
-              data={creditData?.cast}
+              data={creditData.cast}
               width="min-[475px]:basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/6"
             />
           </div>
         </div>
       )}
-      {recommendedData?.results.length > 0 && (
+      {recommendedData !== undefined && recommendedData.length > 0 && (
         <div className="flex flex-col items-center gap-20 overflow-hidden pt-16">
           <div className="container pr-0">
             <div className="relative z-10 -mb-4 flex flex-row items-baseline gap-4 px-1 pr-8 text-white lg:pr-12">
@@ -475,7 +463,7 @@ const MovieOrTVShow = ({
             </div>
             <ProductCarousel
               mediaType={mediaType}
-              data={recommendedData?.results}
+              data={recommendedData}
               width="min-[475px]:basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/6"
             />
           </div>

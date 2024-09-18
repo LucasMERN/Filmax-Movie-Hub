@@ -62,7 +62,7 @@ export default function CategoryPage({ title, genreID }: CategoryPageProps) {
 
   return (
     <main className="min-h-screen overflow-hidden">
-      <div className="container flex w-full flex-col pb-12 pt-48">
+      <div className="container flex w-full flex-col pb-12 pt-24 md:pt-48">
         <h1 className="text-4xl font-bold capitalize tracking-wider text-white">
           {title}
         </h1>
@@ -91,6 +91,7 @@ export default function CategoryPage({ title, genreID }: CategoryPageProps) {
                     height={513}
                     className="h-full object-cover transition-transform group-hover:scale-105"
                     alt={`Poster image for ${item.title}`}
+                    loading="lazy"
                   />
                 </Link>
               )}

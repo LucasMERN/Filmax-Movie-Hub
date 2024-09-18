@@ -6,9 +6,17 @@ import {
 import { Card } from "@/Components/ui/card";
 import BackgroundImage from "@/Components/ui/BackgroundImage";
 import React from "react";
+import { Movie, TV } from "@/lib/types";
 
 interface CarouselProps {
-  data: any[];
+  data:
+    | {
+        name: string;
+        profile_path: string;
+      }[]
+    | Movie[]
+    | TV[]
+    | null;
   width?: string;
   loop?: boolean;
   mediaType: "tv" | "person" | "movie";
@@ -32,38 +40,42 @@ const ProductCarousel: React.FC<CarouselProps> = ({
       orientation="horizontal"
     >
       <CarouselContent className="w-11/12">
-        {data.map((content: any, index: number) => {
-          const formattedTitle = (content?.name || content?.title || "")
-            .toLowerCase()
-            .replace(/[^\w\s]/gi, "")
-            .replace(/\s+/g, "-");
+        {data !== null &&
+          data.map((content: any, index: number) => {
+            const formattedTitle = (content?.name || content?.title || "")
+              .toLowerCase()
+              .replace(/[^\w\s]/gi, "")
+              .replace(/\s+/g, "-");
 
-          return (
-            <React.Fragment key={index}>
-              {content?.profile_path !== null &&
-                content?.poster_path !== null && (
-                  <CarouselItem
-                    href={`/${mediaType}/${content?.id}/${formattedTitle}`}
-                    key={content?.id}
-                    className={`group ${width}`}
-                  >
-                    <div className="mt-6 flex flex-col items-center gap-2 p-1">
-                      <Card className="relative h-96 w-full overflow-hidden bg-cover bg-center shadow-lg">
-                        <BackgroundImage
-                          src={`https://image.tmdb.org/t/p/w370_and_h556_bestv2/${mediaType == "person" ? content?.profile_path : content?.poster_path}`}
-                          alt={content?.overview || "Poster image"}
-                          className="transition-transform group-hover:scale-105"
-                        />
-                      </Card>
-                      <span className="break-words text-center text-white">
-                        {content?.title || content?.name}
-                      </span>
-                    </div>
-                  </CarouselItem>
-                )}
-            </React.Fragment>
-          );
-        })}
+            return (
+              <React.Fragment key={index}>
+                {content?.profile_path !== null &&
+                  content?.poster_path !== null && (
+                    <CarouselItem
+                      href={`/${mediaType}/${content?.id}/${formattedTitle}`}
+                      key={content?.id}
+                      className={`group ${width}`}
+                    >
+                      <div className="mt-6 flex flex-col items-center gap-2 p-1">
+                        <Card className="relative h-96 w-full overflow-hidden bg-cover bg-center shadow-lg">
+                          <BackgroundImage
+                            src={`https://image.tmdb.org/t/p/w370_and_h556_bestv2/${mediaType == "person" ? content?.profile_path : content?.poster_path}`}
+                            alt={
+                              "Poster image for" + content?.title ||
+                              "Poster image"
+                            }
+                            className="transition-transform group-hover:scale-105"
+                          />
+                        </Card>
+                        <span className="break-words text-center text-white">
+                          {content?.title || content?.name}
+                        </span>
+                      </div>
+                    </CarouselItem>
+                  )}
+              </React.Fragment>
+            );
+          })}
       </CarouselContent>
     </Carousel>
   );

@@ -109,11 +109,6 @@ export const getMediaByGenre = async (
   return fetchData(url);
 };
 
-export const getGenreList = async (media: string) => {
-  const url = `${apiUrl}/genre/${media}/list`;
-  return fetchData(url);
-};
-
 export const searchMedia = async (query: string, page: number) => {
   const url = `${apiUrl}/search/multi?query=${query}&page=${page}`;
   return fetchData(url);
@@ -130,11 +125,6 @@ export const searchSpecificMedia = async (
 
 export const getExternalId = async (id: number, mediaType: string) => {
   const url = `${apiUrl}/${mediaType}/${id}/external_ids`;
-  return fetchData(url);
-};
-
-export const getBackdrops = async (id: number, mediaType: string) => {
-  const url = `${apiUrl}/${mediaType}/${id}/images?api_key=${process.env.NEXT_PUBLIC_API_KEY}`;
   return fetchData(url);
 };
 

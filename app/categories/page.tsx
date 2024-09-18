@@ -33,7 +33,7 @@ export default function Categories() {
         video.pause();
       }
     });
-      videoRefs.current[index]?.play();
+    videoRefs.current[index]?.play();
   }, []);
 
   const handleMouseLeave = useCallback(() => {

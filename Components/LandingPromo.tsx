@@ -6,9 +6,10 @@ import BackgroundImage from "@/Components/ui/BackgroundImage";
 import Image from "next/image";
 import { Button } from "@/Components/ui/Button";
 import Link from "next/link";
+import { Movie } from "@/lib/types";
 
 const LandingPromo = () => {
-  const [top10, setTop10] = useState<any[]>([]);
+  const [top10, setTop10] = useState<Movie[]>([]);
   const [activeIndex, setActiveIndex] = useState(0);
   const [isImageVisible, setIsImageVisible] = useState(true);
 
@@ -65,11 +66,12 @@ const LandingPromo = () => {
   return (
     <div className="relative h-[450px] w-full overflow-hidden lg:h-[700px]">
       <Image
-        alt="backdrop image"
+        alt={`Backdrop image for ${top10[carousel[activeIndex].activeImage]?.title}`}
         decoding="async"
         className="absolute inset-0 z-10 h-full w-full object-cover grayscale"
         fill
         priority
+        loading="eager"
         src={`https://image.tmdb.org/t/p/original/${top10[carousel[activeIndex].activeImage]?.backdrop_path}`}
         style={{
           opacity: isImageVisible ? 1 : 0,
@@ -128,7 +130,7 @@ const LandingPromo = () => {
         >
           <BackgroundImage
             src={`https://image.tmdb.org/t/p/original/${top10[carousel[activeIndex].activeImage]?.backdrop_path}`}
-            alt={top10[carousel[activeIndex].activeImage]?.overview}
+            alt={`Poster image for ${top10[carousel[activeIndex].activeImage]?.title}`}
             lazy="eager"
           />
         </div>

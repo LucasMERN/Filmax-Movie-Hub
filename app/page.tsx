@@ -69,10 +69,10 @@ export default function Home() {
       </section>
       <section className="container flex flex-col items-center justify-center gap-10 py-24 lg:flex-row">
         <div className="relative">
-          <Image src={download} alt="" width={500} className="-mt-16" />
+          <Image src={download} alt="" width={500} className="-mt-16" loading="eager" />
           <div className="absolute bottom-4 flex w-full justify-center">
             <div className="flex items-center justify-between rounded-xl border border-primary bg-black p-2 shadow-lg lg:p-4">
-              <Image src={stranger} alt="" className="w-11 lg:w-14" />
+              <Image src={stranger} alt="" className="w-11 lg:w-14" loading="eager" />
               <div className="flex flex-col pl-4 pr-14">
                 <h4 className="whitespace-nowrap font-bold text-white">
                   Stranger Things
@@ -81,7 +81,7 @@ export default function Home() {
               </div>
               <Image
                 src={loader}
-                alt=""
+                alt="loading animation"
                 className="aspect-square h-11 w-11"
                 unoptimized
               />
@@ -111,14 +111,15 @@ export default function Home() {
         <div className="relative">
           <Image
             src={watch}
-            alt=""
+            alt="various devices for watching movies"
             width={300}
             className="relative z-10 md:w-[500px]"
+            loading="lazy"
           />
           <div className="absolute top-3 flex w-full justify-center md:top-6">
             <Image
               src={watchGIF}
-              alt=""
+              alt="gif of a man looking for osmething"
               width={185}
               className="h-[140px] md:h-[200px] md:w-[320px]"
               unoptimized

@@ -8,12 +8,13 @@ import { useState, useEffect } from "react";
 import SearchFilter from "@/Components/SearchFilter";
 import Loader from "@/Components/Loader";
 import CarouselHeader from "@/Components/CarouselHeader";
+import { Movie, TV } from "@/lib/types";
 
 export default function Dashboard() {
-  const [newMovieData, setNewMovieData] = useState<any[]>([]);
-  const [popularMovieData, setPopularMovieData] = useState<any[]>([]);
-  const [animatedMovieData, setAnimatedMovieData] = useState<any[]>([]);
-  const [newTVData, setNewTVData] = useState<any[]>([]);
+  const [newMovieData, setNewMovieData] = useState<Movie[]>([]);
+  const [popularMovieData, setPopularMovieData] = useState<Movie[]>([]);
+  const [animatedMovieData, setAnimatedMovieData] = useState<Movie[]>([]);
+  const [newTVData, setNewTVData] = useState<TV[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
