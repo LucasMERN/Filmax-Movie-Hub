@@ -55,7 +55,7 @@ export default function CategoryPage({ title, genreID }: CategoryPageProps) {
       }
     };
     fetchData();
-  }, [currentPage]);
+  }, [currentPage, genreID]);
 
   if (isLoading) return <Loader />;
   if (error) return <div>Error: {error}</div>;

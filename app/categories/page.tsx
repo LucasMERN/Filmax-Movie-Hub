@@ -33,15 +33,13 @@ export default function Categories() {
         video.pause();
       }
     });
-    if (videoRefs.current[index]) {
-      videoRefs.current[index].play();
-    }
+      videoRefs.current[index]?.play();
   }, []);
 
   const handleMouseLeave = useCallback(() => {
-    if (activeIndex !== null && videoRefs.current[activeIndex]) {
-      videoRefs.current[activeIndex].pause();
-      videoRefs.current[activeIndex].load();
+    if (activeIndex !== null) {
+      videoRefs.current[activeIndex]?.pause();
+      videoRefs.current[activeIndex]?.load();
     }
     setActiveIndex(null);
   }, [activeIndex]);
