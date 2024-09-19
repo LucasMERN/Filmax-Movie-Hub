@@ -240,7 +240,7 @@ const MovieOrTVShow = ({
               className="mr-2 w-fit rounded-md border-white text-sm font-medium text-white shadow-lg"
             >
               {mediaType !== "movie"
-                ? (contentRatingData !== null && contentRatingData[0].rating) ||
+                ? (contentRatingData !== null && contentRatingData[0]?.rating) ||
                   "PG"
                 : (releaseData !== null &&
                     releaseData[0]?.release_dates[0].certification) ||
