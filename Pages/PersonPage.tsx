@@ -61,7 +61,6 @@ export default function PersonPage({ id }: { id: number }) {
 
         if (personData) {
           setPersonData(personData);
-          console.log(personData)
           setPersonCredit(personCredit.cast);
           setPersonID(personID);
         } else {

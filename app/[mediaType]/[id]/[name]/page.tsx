@@ -133,7 +133,6 @@ const MovieOrTVShow = ({
         }
 
         if (mediaData) {
-          console.log(mediaData);
           setMediaData(mediaData);
           setExternalData(externalData);
           setVideoData(
@@ -142,7 +141,6 @@ const MovieOrTVShow = ({
             ),
           );
           setCreditData(creditData);
-          console.log(creditData);
           setRecommendedData(recommendedData.results);
         } else {
           setError("No data available");
@@ -245,7 +243,7 @@ const MovieOrTVShow = ({
                 ? (contentRatingData !== null && contentRatingData[0].rating) ||
                   "PG"
                 : (releaseData !== null &&
-                    releaseData[0].release_dates[0].certification) ||
+                    releaseData[0]?.release_dates[0].certification) ||
                   "PG"}
             </Badge>
             <span className="dark-shadow text-sm font-semibold text-white/60">
@@ -256,7 +254,7 @@ const MovieOrTVShow = ({
                 </span>
               ) : (
                 releaseData !== null &&
-                releaseData[0].release_dates[0].release_date.split("-")[0]
+                releaseData[0]?.release_dates[0].release_date.split("-")[0]
               )}
             </span>
             <Dot size={20} className="-mx-2 text-white/60" />
