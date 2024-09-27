@@ -41,7 +41,7 @@ import { useExternalData } from "@/hooks/useExternalData";
 import { useCreditData } from "@/hooks/useCreditData";
 import { useRecommendedData } from "@/hooks/useRecommendedData";
 
-const TVShow = ({ id, mediaType }: { id: number; mediaType: "tv" }) => {
+const TVShowPage = ({ id, mediaType }: { id: number; mediaType: "tv" }) => {
   const {
     mediaData,
     isLoading: mediaLoading,
@@ -460,5 +460,5 @@ const TVShow = ({ id, mediaType }: { id: number; mediaType: "tv" }) => {
 
 export default function Page({ params }: { params: { id: number } }) {
   const { id } = params;
-  return <TVShow id={id} mediaType="tv" />;
+  return <TVShowPage id={id} mediaType="tv" />;
 }

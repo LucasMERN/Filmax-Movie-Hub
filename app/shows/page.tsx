@@ -48,7 +48,6 @@ export default function Shows() {
     fetchData();
   }, [currentPage]);
 
-  if (isLoading) return <Loader />;
   if (error) return <div>Error: {error}</div>;
 
   return (
@@ -61,35 +60,39 @@ export default function Shows() {
           TV SERIES
         </span>
       </div>
-      <section className="container grid grid-cols-2 gap-6 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-7">
-        {showData?.map((item, index) => {
-          const formattedTitle = (item?.name || item?.title || "")
-            .toLowerCase()
-            .replace(/[^\w\s]/gi, "")
-            .replace(/\s+/g, "-");
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <section className="container grid grid-cols-2 gap-6 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-7">
+          {showData?.map((item, index) => {
+            const formattedTitle = (item?.name || item?.title || "")
+              .toLowerCase()
+              .replace(/[^\w\s]/gi, "")
+              .replace(/\s+/g, "-");
 
-          return (
-            <React.Fragment key={index}>
-              {item.poster_path !== null && (
-                <Link
-                  href={`/tv/${item.id}/${formattedTitle}`}
-                  key={index}
-                  className="group w-full overflow-hidden"
-                >
-                  <Image
-                    src={`https://image.tmdb.org/t/p/w370_and_h556_bestv2/${item.poster_path}`}
-                    width={342}
-                    height={513}
-                    className="h-full object-cover transition-transform group-hover:scale-105"
-                    alt={`Poster image for ${item.title}`}
-                    loading="lazy"
-                  />
-                </Link>
-              )}
-            </React.Fragment>
-          );
-        })}
-      </section>
+            return (
+              <React.Fragment key={index}>
+                {item.poster_path !== null && (
+                  <Link
+                    href={`/tv/${item.id}/${formattedTitle}`}
+                    key={index}
+                    className="group w-full overflow-hidden"
+                  >
+                    <Image
+                      src={`https://image.tmdb.org/t/p/w370_and_h556_bestv2/${item.poster_path}`}
+                      width={342}
+                      height={513}
+                      className="h-full object-cover transition-transform group-hover:scale-105"
+                      alt={`Poster image for ${item.title}`}
+                      loading="lazy"
+                    />
+                  </Link>
+                )}
+              </React.Fragment>
+            );
+          })}
+        </section>
+      )}
       <Pagination className="flex w-full justify-center pt-12">
         <PaginationContent>
           <PaginationItem>
