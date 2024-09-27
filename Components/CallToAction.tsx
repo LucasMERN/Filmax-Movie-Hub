@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { getSingle } from "@/lib/utils";
+import { getSingle } from "@/lib/api";
 import Link from "next/link";
 
 interface CallToActionTypes {

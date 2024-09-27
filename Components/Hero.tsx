@@ -1,18 +1,18 @@
 "use client";
 
-import { getTop10 } from "@/lib/utils";
+import { getTop10 } from "@/lib/api";
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-} from "@/Components/ui/HeroCarousel";
+} from "@/components/ui/heroCarousel";
 import React, { useState, useEffect } from "react";
-import { Card } from "@/Components/ui/card";
-import BackgroundImage from "@/Components/ui/BackgroundImage";
+import { Card } from "@/components/ui/card";
+import BackgroundImage from "@/components/ui/backgroundImage";
 import Link from "next/link";
-import { Movie, TV } from "@/lib/types";
+import { Movie, TV } from "@/types/api";
 
 type HeroProps = {
   mediaType?: "movie" | "tv";

@@ -2,14 +2,14 @@ import logo from "@/public/logo.svg";
 import Link from "next/link";
 import { ChevronRight } from "lucide-react";
 import Image from "next/image";
-import { Button } from "@/Components/ui/Button";
-import LandingPromo from "@/Components/LandingPromo";
+import { Button } from "@/components/ui/button";
+import LandingPromo from "@/components/landingPromo";
 import download from "@/public/landingdownload.jpg";
 import watch from "@/public/landingwatch.png";
 import watchGIF from "@/public/watchGIF.gif";
 import stranger from "@/public/stranger.png";
 import loader from "@/public/loader.gif";
-import Footer from "@/Components/Footer";
+import Footer from "@/components/footer";
 
 export default function Home() {
   return (
@@ -69,10 +69,21 @@ export default function Home() {
       </section>
       <section className="container flex flex-col items-center justify-center gap-10 py-24 lg:flex-row">
         <div className="relative">
-          <Image src={download} alt="" width={500} className="-mt-16" loading="eager" />
+          <Image
+            src={download}
+            alt=""
+            width={500}
+            className="-mt-16"
+            loading="eager"
+          />
           <div className="absolute bottom-4 flex w-full justify-center">
             <div className="flex items-center justify-between rounded-xl border border-primary bg-black p-2 shadow-lg lg:p-4">
-              <Image src={stranger} alt="" className="w-11 lg:w-14" loading="eager" />
+              <Image
+                src={stranger}
+                alt=""
+                className="w-11 lg:w-14"
+                loading="eager"
+              />
               <div className="flex flex-col pl-4 pr-14">
                 <h4 className="whitespace-nowrap font-bold text-white">
                   Stranger Things

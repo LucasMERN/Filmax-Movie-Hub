@@ -8,9 +8,9 @@ import {
   RadialBarChart,
 } from "recharts";
 
-import { Card, CardContent, CardTitle } from "@/Components/ui/card";
+import { Card, CardContent, CardTitle } from "@/components/ui/card";
 
-import { ChartConfig, ChartContainer } from "@/Components/ui/chart";
+import { ChartConfig, ChartContainer } from "@/components/ui/chart";
 
 export function RadialChart({
   voteCount,

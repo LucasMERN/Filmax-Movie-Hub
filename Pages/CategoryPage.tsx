@@ -1,9 +1,9 @@
 "use client";
 
-import { getMediaByGenre } from "@/lib/utils";
+import { getMediaByGenre } from "@/lib/api";
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import Loader from "@/Components/Loader";
+import Loader from "@/components/Loader";
 import Link from "next/link";
 import {
   Pagination,
@@ -12,7 +12,7 @@ import {
   PaginationLink,
   PaginationNext,
   PaginationPrevious,
-} from "@/Components/ui/pagination";
+} from "@/components/ui/pagination";
 
 type CategoryPageProps = {
   title: string;
@@ -64,7 +64,7 @@ export default function CategoryPage({ title, genreID }: CategoryPageProps) {
     <main className="min-h-screen overflow-hidden">
       <div className="container flex w-full flex-col pb-12 pt-24 md:pt-48">
         <h1 className="text-4xl font-bold capitalize tracking-wider text-white">
-          {title}
+          {title.split('%20').join(' ')}
         </h1>
         <span className="text-sm font-medium tracking-widest text-white/60">
           MOVIES

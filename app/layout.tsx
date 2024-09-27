@@ -6,7 +6,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/react";
 import { Suspense } from "react";
 import Loading from "./loading";
-import BackToTopButton from "@/Components/BackToTop";
+import BackToTopButton from "@/components/backToTop";
 
 const inter = Inter({ subsets: ["latin"] });
 

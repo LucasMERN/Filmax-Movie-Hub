@@ -2,21 +2,14 @@ import {
   Carousel,
   CarouselContent,
   CarouselItem,
-} from "@/Components/ui/carousel";
-import { Card } from "@/Components/ui/card";
-import BackgroundImage from "@/Components/ui/BackgroundImage";
+} from "@/components/ui/carousel";
+import { Card } from "@/components/ui/card";
+import BackgroundImage from "@/components/ui/backgroundImage";
 import React from "react";
-import { Movie, TV } from "@/lib/types";
+import { Movie, TV } from "@/types/api";
 
 interface CarouselProps {
-  data:
-    | {
-        name: string;
-        profile_path: string;
-      }[]
-    | Movie[]
-    | TV[]
-    | null;
+  data: any;
   width?: string;
   loop?: boolean;
   mediaType: "tv" | "person" | "movie";
@@ -54,9 +47,9 @@ const ProductCarousel: React.FC<CarouselProps> = ({
                     <CarouselItem
                       href={`/${mediaType}/${content?.id}/${formattedTitle}`}
                       key={content?.id}
-                      className={`group ${width}`}
+                      className={`group mt-6 ${width} h-fit`}
                     >
-                      <div className="mt-6 flex flex-col items-center gap-2 p-1">
+                      <div className="flex flex-col items-center gap-2 p-1">
                         <Card className="relative h-96 w-full overflow-hidden bg-cover bg-center shadow-lg">
                           <BackgroundImage
                             src={`https://image.tmdb.org/t/p/w370_and_h556_bestv2/${mediaType == "person" ? content?.profile_path : content?.poster_path}`}

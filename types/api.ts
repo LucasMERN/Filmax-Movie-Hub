@@ -39,36 +39,32 @@ export type ContentRating = {
   rating: string;
 };
 
-export type Movie = {
+export type BaseMedia = {
+  id: number;
+  overview: string;
+  poster_path: string;
   backdrop_path: string;
+  vote_average: number;
+  vote_count: number;
   genres: Genre[];
   homepage: string | null;
-  id: number;
-  imdb_id: string;
-  overview: string;
-  popularity: number;
-  poster_path: string;
-  release_date: string;
   tagline: string;
-  title: string;
-  vote_count: number;
-  vote_average: number;
   media_type: string;
+  popularity: number;
 };
 
-export type TV = {
-  backdrop_path: string;
-  first_air_date: string;
-  genres: Genre[];
-  homepage: string | null;
-  id: number;
-  last_air_date: string;
+export type Movie = BaseMedia & {
+  release_date: string;
+  imdb_id: string;
+  title: string;
+};
+
+export type TV = BaseMedia & {
   name: string;
+  first_air_date: string;
+  last_air_date: string;
   number_of_episodes: number;
   number_of_seasons: number;
-  overview: string;
-  popularity: number;
-  poster_path: string;
   seasons: {
     air_date: string;
     episode_count: number;
@@ -77,11 +73,9 @@ export type TV = {
     overview: string;
     season_number: number;
   }[];
-  tagline: string;
-  vote_count: number;
-  vote_average: number;
-  media_type: string;
 };
+
+export type MediaData = Movie | TV;
 
 export type TvEpisode = {
   id: number;
@@ -102,14 +96,8 @@ export type YouTubeVideo = {
   key: string;
 };
 
-export type Credit = {
+export type Cast = {
+  name: string;
+  profile_path: string;
   id: number;
-  cast: {
-    name: string;
-    profile_path: string;
-  }[];
 };
-
-// export type WatchProviders = {
-
-// };

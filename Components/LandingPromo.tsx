@@ -1,12 +1,12 @@
 "use client";
 
-import { getSingle } from "@/lib/utils";
+import { getSingle } from "@/lib/api";
 import React, { useState, useEffect } from "react";
-import BackgroundImage from "@/Components/ui/BackgroundImage";
+import BackgroundImage from "@/components/ui/backgroundImage";
 import Image from "next/image";
-import { Button } from "@/Components/ui/Button";
+import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { Movie } from "@/lib/types";
+import { Movie } from "@/types/api";
 
 const LandingPromo = () => {
   const [top10, setTop10] = useState<Movie[]>([]);

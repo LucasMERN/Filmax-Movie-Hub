@@ -13,8 +13,8 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "@/Components/ui/sheet";
-import { Button } from "./ui/Button";
+} from "@/components/ui/sheet";
+import { Button } from "./ui/button";
 
 export default function Nav() {
   const pathname = usePathname();
@@ -95,7 +95,13 @@ export default function Nav() {
               </li>
             </ul>
             <SheetFooter>
-              <Image src={Logo} width={50} height={50} alt="Filmax Logo" loading="eager" />
+              <Image
+                src={Logo}
+                width={50}
+                height={50}
+                alt="Filmax Logo"
+                loading="eager"
+              />
             </SheetFooter>
           </SheetContent>
         </Sheet>

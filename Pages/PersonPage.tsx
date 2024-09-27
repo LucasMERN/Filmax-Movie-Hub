@@ -1,11 +1,11 @@
 "use client";
 
-import Footer from "@/Components/Footer";
-import Loader from "@/Components/Loader";
-import Nav from "@/Components/Nav";
-import { Card } from "@/Components/ui/card";
-import { ExternalID, Person, PersonCredit } from "@/lib/types";
-import { getPerson, getPersonCredit, getPersonExternalId } from "@/lib/utils";
+import Footer from "@/components/footer";
+import Loader from "@/components/Loader";
+import Nav from "@/components/nav";
+import { Card } from "@/components/ui/card";
+import { ExternalID, Person, PersonCredit } from "@/types/api";
+import { getPerson, getPersonCredit, getPersonExternalId } from "@/lib/api";
 import {
   Facebook,
   TwitterIcon,
@@ -243,4 +243,4 @@ export default function PersonPage({ id }: { id: number }) {
       <Footer />
     </>
   );
-};
+}

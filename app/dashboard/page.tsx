@@ -1,14 +1,14 @@
 "use client";
 
-import Hero from "@/Components/Hero";
-import ProductCarousel from "@/Components/ProductCarousel";
-import CallToAction from "@/Components/CallToAction";
-import { getNewMovie, getPopular, getAnimated, getNewTV } from "@/lib/utils";
+import Hero from "@/components/hero";
+import ProductCarousel from "@/components/productCarousel";
+import CallToAction from "@/components/callToAction";
+import { getNewMovie, getPopular, getAnimated, getNewTV } from "@/lib/api";
 import { useState, useEffect } from "react";
-import SearchFilter from "@/Components/SearchFilter";
-import Loader from "@/Components/Loader";
-import CarouselHeader from "@/Components/CarouselHeader";
-import { Movie, TV } from "@/lib/types";
+import SearchFilter from "@/components/searchFilter";
+import Loader from "@/components/Loader";
+import CarouselHeader from "@/components/carouselHeader";
+import { Movie, TV } from "@/types/api";
 
 export default function Dashboard() {
   const [newMovieData, setNewMovieData] = useState<Movie[]>([]);
@@ -61,7 +61,7 @@ export default function Dashboard() {
           <SearchFilter />
         </div>
         <div className="container pr-0">
-          <CarouselHeader title={"New Movies"} />
+          <CarouselHeader title="New Movies" link="/movies/" />
           <ProductCarousel
             mediaType="movie"
             data={newMovieData}
@@ -69,16 +69,16 @@ export default function Dashboard() {
           />
         </div>
         <div className="container pr-0">
-          <CarouselHeader title={"Popular Movies"} />
+          <CarouselHeader title="Popular Movies" link="/movies" />
           <ProductCarousel
             mediaType="movie"
             data={popularMovieData}
             width="min-[475px]:basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/6"
           />
         </div>
-        <CallToAction id={95396} color={"#007D4D"} mediaType={"tv"} />
+        <CallToAction id={95396} color="#007D4D" mediaType={"tv"} />
         <div className="container pr-0">
-          <CarouselHeader title={"New TV Shows"} />
+          <CarouselHeader title="New TV Shows" link="/shows" />
           <ProductCarousel
             mediaType="tv"
             data={newTVData}
@@ -86,7 +86,10 @@ export default function Dashboard() {
           />
         </div>
         <div className="container pr-0">
-          <CarouselHeader title={"Animated Movies"} />
+          <CarouselHeader
+            title="Animated Movies"
+            link="categories/16/animated"
+          />
           <ProductCarousel
             mediaType="movie"
             data={animatedMovieData}

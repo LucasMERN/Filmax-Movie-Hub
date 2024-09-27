@@ -6,7 +6,7 @@ import useEmblaCarousel, {
 } from "embla-carousel-react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { Button } from "@/Components/ui/Button";
+import { Button } from "@/components/ui/button";
 
 type CarouselApi = UseEmblaCarouselType[1];
 type UseCarouselParameters = Parameters<typeof useEmblaCarousel>;
@@ -183,7 +183,7 @@ const CarouselItem = React.forwardRef<
       role="group"
       aria-roledescription="slide"
       className={cn(
-        "min-w-0 shrink-0 grow-0 basis-full shadow-black drop-shadow-lg",
+        "h-fit min-w-0 shrink-0 grow-0 basis-full shadow-black drop-shadow-lg",
         orientation === "horizontal" ? "pl-4 pr-4" : "pt-4",
         className,
       )}

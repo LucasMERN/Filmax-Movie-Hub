@@ -1,9 +1,9 @@
 "use client";
 
-import { getTrending } from "@/lib/utils";
+import { getTrending } from "@/lib/api";
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import Loader from "@/Components/Loader";
+import Loader from "@/components/Loader";
 import Link from "next/link";
 import {
   Pagination,
@@ -12,7 +12,7 @@ import {
   PaginationLink,
   PaginationNext,
   PaginationPrevious,
-} from "@/Components/ui/pagination";
+} from "@/components/ui/pagination";
 
 type Data = {
   id: number;
