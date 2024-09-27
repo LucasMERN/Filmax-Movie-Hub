@@ -3,7 +3,7 @@
 import { getPopular } from "@/lib/api";
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import Loader from "@/components/Loader";
+import Loader from "@/components/loader";
 import Link from "next/link";
 import {
   Pagination,
@@ -52,7 +52,7 @@ export default function Shows() {
 
   return (
     <main className="min-h-screen overflow-hidden">
-      <div className="container flex w-full flex-col pb-12 pt-24 md:pt-48">
+      <div className="container flex w-full flex-col gap-2 pb-12 pt-24 md:pt-48">
         <h1 className="text-4xl font-bold capitalize tracking-wider text-white">
           Popular
         </h1>

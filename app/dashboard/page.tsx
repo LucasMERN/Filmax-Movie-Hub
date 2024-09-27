@@ -6,7 +6,7 @@ import CallToAction from "@/components/callToAction";
 import { getNewMovie, getPopular, getAnimated, getNewTV } from "@/lib/api";
 import { useState, useEffect } from "react";
 import SearchFilter from "@/components/searchFilter";
-import Loader from "@/components/Loader";
+import Loader from "@/components/loader";
 import CarouselHeader from "@/components/carouselHeader";
 import { Movie, TV } from "@/types/api";
 

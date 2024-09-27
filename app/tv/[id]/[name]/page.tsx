@@ -22,7 +22,7 @@ import { Card, CardTitle } from "@/components/ui/card";
 import React from "react";
 import Nav from "@/components/nav";
 import Footer from "@/components/footer";
-import Loader from "@/components/Loader";
+import Loader from "@/components/loader";
 import ProductCarousel from "@/components/productCarousel";
 import {
   Select,

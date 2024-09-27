@@ -1,7 +1,7 @@
 "use client";
 
 import Footer from "@/components/footer";
-import Loader from "@/components/Loader";
+import Loader from "@/components/loader";
 import Nav from "@/components/nav";
 import { Card } from "@/components/ui/card";
 import { ExternalID, Person, PersonCredit } from "@/types/api";

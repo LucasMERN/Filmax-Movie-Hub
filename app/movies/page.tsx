@@ -3,7 +3,7 @@
 import { getPopular } from "@/lib/api";
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import Loader from "@/components/Loader";
+import Loader from "@/components/loader";
 import Link from "next/link";
 import {
   Pagination,
