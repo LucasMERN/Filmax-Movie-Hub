@@ -1,3 +1,5 @@
+"use client";
+
 import { SetStateAction, useState } from "react";
 import { searchSpecificMedia } from "@/lib/api";
 import ProductCarousel from "@/components/productCarousel";

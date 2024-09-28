@@ -1,7 +1,3 @@
-"use client";
-
-import React, { useRef, useState, useCallback } from "react";
-import Video from "next-video";
 import actionVideo from "@/videos/action.mp4";
 import animatedVideo from "@/videos/animated.mp4";
 import comedyVideo from "@/videos/comedy.mp4";
@@ -18,32 +14,15 @@ import horrorThumb from "@/public/horror.jpg";
 import scifiThumb from "@/public/scifi.jpg";
 import dramaThumb from "@/public/drama.jpg";
 import thrillerThumb from "@/public/thriller.jpg";
-import Link from "next/link";
+import VideoTiles from "@/components/videoTiles";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Filmax | Categories",
+  description: "Filmax Categories Page for choosing movie categories",
+};
 
 export default function Categories() {
-  const videoRefs = useRef<(HTMLVideoElement | null)[]>(
-    new Array(8).fill(null),
-  );
-  const [activeIndex, setActiveIndex] = useState<number | null>(null);
-
-  const handleMouseEnter = useCallback((index: number) => {
-    setActiveIndex(index);
-    videoRefs.current.forEach((video, i) => {
-      if (i !== index && video) {
-        video.pause();
-      }
-    });
-    videoRefs.current[index]?.play();
-  }, []);
-
-  const handleMouseLeave = useCallback(() => {
-    if (activeIndex !== null) {
-      videoRefs.current[activeIndex]?.pause();
-      videoRefs.current[activeIndex]?.load();
-    }
-    setActiveIndex(null);
-  }, [activeIndex]);
-
   const videos = [
     {
       src: actionVideo,
@@ -120,42 +99,6 @@ export default function Categories() {
   ];
 
   return (
-    <section className="container flex flex-col justify-between gap-4 pt-24 md:flex-row md:gap-0 md:pt-48">
-      {videos.map((video, index) => (
-        <Link
-          key={index}
-          href={video.url}
-          className={`relative w-full transition-all duration-300 ease-in-out md:h-[500px] ${video.margin}
-              ${
-                activeIndex === null
-                  ? "h-[12%] w-full md:w-[12%]"
-                  : activeIndex === index
-                    ? "h-[25%] w-full md:w-[25%]"
-                    : "h-[10%] w-full md:w-[10%]"
-              }
-            `}
-          onMouseEnter={() => handleMouseEnter(index)}
-          onMouseLeave={handleMouseLeave}
-        >
-          <Video
-            src={video.src}
-            controls={false}
-            autoPlay={false}
-            muted
-            className="absolute left-0 top-0 h-full w-full object-cover transition-all duration-300 ease-in-out"
-            ref={(el: HTMLVideoElement | null) => {
-              videoRefs.current[index] = el;
-            }}
-            poster={video.poster}
-            blurDataURL={video.blurData}
-          />
-          <span
-            className={`dark-shadow absolute top-1/2 ${video.alignment} w-full text-center text-xl font-semibold text-white transition-all duration-300 ease-in-out`}
-          >
-            {video.title}
-          </span>
-        </Link>
-      ))}
-    </section>
+    <VideoTiles data={videos} />
   );
 }

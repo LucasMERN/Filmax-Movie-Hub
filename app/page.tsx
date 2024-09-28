@@ -10,6 +10,12 @@ import watchGIF from "@/public/watchGIF.gif";
 import stranger from "@/public/stranger.png";
 import loader from "@/public/loader.gif";
 import Footer from "@/components/footer";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Welcome to Filmax Cinema Hub",
+  description: "Landing page for Filmax Cinema Hub",
+};
 
 export default function Home() {
   return (
