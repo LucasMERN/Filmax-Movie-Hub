@@ -240,7 +240,7 @@ const TVShowPage = ({ id, mediaType }: { id: number; mediaType: "tv" }) => {
                 >
                   {(contentRatingData !== null &&
                     contentRatingData[0]?.rating) ||
-                    "PG"}
+                    "NR"}
                 </Badge>
                 <span className="dark-shadow text-sm font-semibold text-white/60">
                   {

@@ -1,6 +1,6 @@
 "use client";
 
-import { SetStateAction, useState } from "react";
+import { useEffect, SetStateAction, useState } from "react";
 import { searchSpecificMedia } from "@/lib/api";
 import ProductCarousel from "@/components/productCarousel";
 import { Button } from "@/components/ui/button";
@@ -22,51 +22,46 @@ export default function SearchFilter() {
     setSearchTerm(event.target.value);
   };
 
-  const handleSubmit = async (event: { preventDefault: () => void }) => {
-    event.preventDefault();
-
+  const handleSubmit = async () => {
+    if (!searchTerm) return;
     try {
       const searchResults = await searchSpecificMedia(mediaType, searchTerm, 1);
-
       if (Array.isArray(searchResults?.results)) {
-        if (mediaType == "person" && searchResults.results.length > 0) {
-          setSearchResultsList(searchResults.results);
-        } else {
-          setSearchResultsList([]);
-        }
-
-        if (mediaType != "person") {
-          setSearchResultsList(searchResults.results);
-        }
+        setSearchResultsList(searchResults.results);
       } else {
         console.error("Data is not an array:", searchResults);
+        setSearchResultsList([]);
       }
     } catch (error) {
       console.error("Error fetching search results:", error);
+      setSearchResultsList([]);
     }
   };
 
+  useEffect(() => {
+    if (isSearchClicked) {
+      handleSubmit();
+    }
+  }, [isSearchClicked, mediaType]);
+
   return (
     <div className="w-full rounded-3xl bg-foreground p-6">
-      <form
-        onSubmit={handleSubmit}
-        className="flex flex-col gap-4 lg:flex-row lg:justify-between lg:gap-8"
-      >
+      <div className="flex flex-col gap-4 lg:flex-row lg:justify-between lg:gap-8">
         <div className="flex flex-row justify-between rounded-2xl bg-background px-2 py-4 md:gap-6 lg:px-6">
           <Button
-            variant={mediaType == "movie" ? "default" : "ghost"}
+            variant={mediaType === "movie" ? "default" : "ghost"}
             onClick={() => setMediaType("movie")}
           >
             Movies
           </Button>
           <Button
-            variant={mediaType == "tv" ? "default" : "ghost"}
+            variant={mediaType === "tv" ? "default" : "ghost"}
             onClick={() => setMediaType("tv")}
           >
             Series
           </Button>
           <Button
-            variant={mediaType == "person" ? "default" : "ghost"}
+            variant={mediaType === "person" ? "default" : "ghost"}
             onClick={() => setMediaType("person")}
           >
             Person
@@ -78,19 +73,22 @@ export default function SearchFilter() {
             placeholder="Enter a keyword"
             value={searchTerm}
             onChange={handleSearchChange}
+            onKeyDown={(e) =>
+              e.key === "Enter" ? setIsSearchClicked(true) : null
+            }
             className="h-[68px] w-full rounded-2xl bg-background px-6 text-white ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 lg:h-auto"
           />
           <Button
             size="lg"
             className="h-[68px] rounded-2xl lg:h-auto"
-            type="submit"
             onClick={() => setIsSearchClicked(true)}
           >
             Search
           </Button>
         </div>
-      </form>
-      {isSearchClicked && searchTerm.length > 0 ? (
+      </div>
+
+      {searchTerm && isSearchClicked ? (
         searchResultsList.length > 0 ? (
           <div className="search-results overflow-hidden">
             <ProductCarousel

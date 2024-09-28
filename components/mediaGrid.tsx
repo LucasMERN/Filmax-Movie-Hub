@@ -27,6 +27,7 @@ type Data = {
   poster_path: string;
   name: string;
   title: string;
+  adult: boolean;
 };
 
 const MediaGrid = ({ title, fetchType, genreID, subtitle, mediaType = "movie" }: MediaGridProps) => {
@@ -122,7 +123,7 @@ const GridItems = ({ data, mediaType }: { data: Data[], mediaType: "movie" | "tv
 
         return (
           <React.Fragment key={index}>
-            {item.poster_path !== null && (
+            {item.poster_path !== null && item.adult !== true && (
               <Link
                 href={`/${mediaType}/${item.id}/${formattedTitle}`}
                 className="group w-full overflow-hidden"

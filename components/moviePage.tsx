@@ -195,7 +195,7 @@ const MoviePage = ({ id, mediaType }: { id: number; mediaType: "movie" }) => {
                 >
                   {(releaseData !== null &&
                     releaseData[0]?.release_dates[0]?.certification) ||
-                    "PG"}
+                    "NR"}
                 </Badge>
                 <span className="dark-shadow text-sm font-semibold text-white/60">
                   {releaseData !== null &&

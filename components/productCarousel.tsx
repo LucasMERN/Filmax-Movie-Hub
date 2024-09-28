@@ -33,7 +33,7 @@ const ProductCarousel: React.FC<CarouselProps> = ({
       orientation="horizontal"
     >
       <CarouselContent className="w-11/12">
-        {data !== null &&
+        {data !== null && data?.adult !== true &&
           data.map((content: any, index: number) => {
             const formattedTitle = (content?.name || content?.title || "")
               .toLowerCase()

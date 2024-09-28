@@ -206,6 +206,7 @@ const PersonPage = ({ id }: { id: number }) => {
               (
                 movie: {
                   id: number;
+                  adult: boolean;
                   poster_path: string;
                   title: string;
                   media_type: string;
@@ -220,7 +221,7 @@ const PersonPage = ({ id }: { id: number }) => {
 
                 return (
                   <React.Fragment key={key}>
-                    {movie.poster_path !== null && (
+                    {movie.poster_path !== null && movie.adult !== true && (
                       <Link
                         key={movie.id}
                         href={`${movie.media_type === "movie" ? `/movie/${movie.id}/${formattedTitle}` : `/tv/${movie.id}/${formattedTitle}`}`}
