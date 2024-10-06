@@ -24,14 +24,12 @@ function EpisodeSelect({ mediaData, id }: { mediaData: TV; id: number }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (mediaData?.seasons && mediaData.seasons.length > 0) {
-      const lastSeason = mediaData.seasons[mediaData.seasons.length - 1]?.name;
-      setActiveSeason(lastSeason);
-    }
+    const lastSeason = mediaData.seasons[mediaData.seasons.length - 1]?.name;
+    setActiveSeason(lastSeason);
   }, [mediaData]);
 
   useEffect(() => {
-    if (mediaData?.seasons && activeSeason) {
+    if (activeSeason) {
       const selectedSeason = mediaData.seasons.find(
         (s) => s.name === activeSeason,
       );
@@ -55,9 +53,7 @@ function EpisodeSelect({ mediaData, id }: { mediaData: TV; id: number }) {
       }
     }
 
-    if (episodeActiveSeason !== null) {
-      fetchEpisodes();
-    }
+    fetchEpisodes();
   }, [id, episodeActiveSeason]);
 
   if (!mediaData) {
@@ -73,7 +69,7 @@ function EpisodeSelect({ mediaData, id }: { mediaData: TV; id: number }) {
             value={activeSeason}
             onValueChange={(value) => setActiveSeason(value)}
           >
-            <SelectTrigger className="w-[120px] text-white">
+            <SelectTrigger className="w-[120px] text-left text-white">
               <SelectValue>{activeSeason || `Select Season`}</SelectValue>
             </SelectTrigger>
             <SelectContent>

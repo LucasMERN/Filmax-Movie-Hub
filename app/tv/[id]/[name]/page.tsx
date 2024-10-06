@@ -23,7 +23,6 @@ export default async function Page({ params }: { params: { id: number } }) {
   try {
     const { id } = params;
     const mediaData = await getSingle("tv", id);
-    console.log(mediaData);
     return (
       <main className="relative min-h-screen">
         <Nav />

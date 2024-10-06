@@ -1,7 +1,7 @@
 import Footer from "@/components/footer";
 import MediaPage from "@/components/mediaPage";
 import Nav from "@/components/nav";
-import { getCredits } from "@/lib/api";
+import { getCredits, getSingle } from "@/lib/api";
 import type { Metadata } from "next";
 
 export async function generateMetadata({
@@ -21,12 +21,12 @@ export async function generateMetadata({
 
 export default async function Page({ params }: { params: { id: number } }) {
   try {
-    const castData = await getCredits(params.id, "movie");
     const { id } = params;
+    const mediaData = await getSingle("movie", id);
     return (
       <main className="relative min-h-screen">
         <Nav />
-        <MediaPage mediaType="movie" id={id} castData={castData?.cast} />
+        <MediaPage mediaType="movie" id={id} mediaData={mediaData} />
         <Footer />
       </main>
     );

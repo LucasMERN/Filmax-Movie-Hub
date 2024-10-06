@@ -44,16 +44,6 @@ async function MediaPageHeader({
     const creditData = await getCredits(id, mediaType);
     const youtubeData = await getYouTubeVideo(id, mediaType);
 
-    if (
-      !mediaData ||
-      !externalData ||
-      !ratingData ||
-      !creditData ||
-      !youtubeData
-    ) {
-      return <div>No data available</div>;
-    }
-
     const rating =
       mediaType === "tv"
         ? ratingData?.results?.[0]?.rating
@@ -69,6 +59,16 @@ async function MediaPageHeader({
     const trailerVideo = youtubeData?.results.filter((data: { name: string }) =>
       data?.name.split(" ").includes("Trailer"),
     );
+
+    if (
+      !mediaData ||
+      !externalData ||
+      !ratingData ||
+      !creditData ||
+      !youtubeData
+    ) {
+      return <div>No data available</div>;
+    }
 
     return (
       <section className="relative border-b-2 border-primary pb-14 pt-16">
