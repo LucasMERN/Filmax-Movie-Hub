@@ -1,6 +1,5 @@
 "use client";
 
-import { getTop10 } from "@/lib/api";
 import {
   Carousel,
   CarouselContent,
@@ -8,35 +7,13 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/heroCarousel";
-import React, { useState, useEffect } from "react";
+import React, { useState} from "react";
 import { Card } from "@/components/ui/card";
 import BackgroundImage from "@/components/ui/backgroundImage";
 import Link from "next/link";
 import { Movie, TV } from "@/types/api";
 
-type HeroProps = {
-  mediaType?: "movie" | "tv";
-};
-
-const Hero = ({ mediaType = "movie" }: HeroProps) => {
-  const [top10, setTop10] = useState<Movie[] & TV[]>([]);
-
-  useEffect(() => {
-    const fetchTop10 = async () => {
-      try {
-        const movies = await getTop10();
-
-        if (Array.isArray(movies?.results)) {
-          setTop10(movies.results.slice(0, 10));
-        } else {
-          console.error("Data is not an array:", movies);
-        }
-      } catch (error) {
-        console.error("Error fetching top10:", error);
-      }
-    };
-    fetchTop10();
-  }, []);
+const Hero = ({ data }: { data: Movie[] & TV[] }) => {
 
   const [currentMovieIndex, setCurrentMovieIndex] = useState(8);
   const [isImageVisible, setIsImageVisible] = useState(true);
@@ -45,7 +22,7 @@ const Hero = ({ mediaType = "movie" }: HeroProps) => {
     setIsImageVisible(false);
     setTimeout(() => {
       setCurrentMovieIndex((prevIndex) =>
-        prevIndex === 0 ? top10.length - 1 : prevIndex - 1,
+        prevIndex === 0 ? data.length - 1 : prevIndex - 1,
       );
       setIsImageVisible(true);
     }, 1000);
@@ -55,7 +32,7 @@ const Hero = ({ mediaType = "movie" }: HeroProps) => {
     setIsImageVisible(false);
     setTimeout(() => {
       setCurrentMovieIndex((prevIndex) =>
-        prevIndex === top10.length - 1 ? 0 : prevIndex + 1,
+        prevIndex === data.length - 1 ? 0 : prevIndex + 1,
       );
       setIsImageVisible(true);
     }, 1000);
@@ -68,8 +45,8 @@ const Hero = ({ mediaType = "movie" }: HeroProps) => {
   }
 
   const formattedTitle = (
-    top10[currentMovieIndex]?.name ||
-    top10[currentMovieIndex]?.title ||
+    data[currentMovieIndex]?.name ||
+    data[currentMovieIndex]?.title ||
     ""
   )
     .toLowerCase()
@@ -81,7 +58,7 @@ const Hero = ({ mediaType = "movie" }: HeroProps) => {
       <div
         onTransitionEnd={() => setIsImageVisible(true)}
         style={{
-          backgroundImage: `url(https://image.tmdb.org/t/p/original/${top10[currentMovieIndex]?.backdrop_path})`,
+          backgroundImage: `url(https://image.tmdb.org/t/p/original/${data[currentMovieIndex]?.backdrop_path})`,
           backgroundPosition: "center",
           opacity: isImageVisible ? 1 : 0,
           transition: "opacity 1s ease-in-out",
@@ -102,9 +79,9 @@ const Hero = ({ mediaType = "movie" }: HeroProps) => {
             transition: "opacity 1s ease-in-out",
           }}
         >
-          {!top10[currentMovieIndex]?.title
-            ? top10[currentMovieIndex]?.name
-            : top10[currentMovieIndex]?.title}
+          {!data[currentMovieIndex]?.title
+            ? data[currentMovieIndex]?.name
+            : data[currentMovieIndex]?.title}
         </h1>
         <div className="flex flex-row items-center gap-4">
           <span className="h-fit rounded bg-amber-700 px-4 py-1 text-xl text-black">
@@ -117,7 +94,7 @@ const Hero = ({ mediaType = "movie" }: HeroProps) => {
               transition: "opacity 1s ease-in-out",
             }}
           >
-            {top10[currentMovieIndex]?.vote_average} / 10
+            {data[currentMovieIndex]?.vote_average} / 10
           </span>
         </div>
         <div
@@ -128,12 +105,12 @@ const Hero = ({ mediaType = "movie" }: HeroProps) => {
           }}
         >
           <p className="dark-shadow text-sm">
-            {top10 && top10[currentMovieIndex]
-              ? truncateText(top10[currentMovieIndex].overview, 120)
+            {data && data[currentMovieIndex]
+              ? truncateText(data[currentMovieIndex].overview, 120)
               : ""}
           </p>
           <Link
-            href={`${top10[currentMovieIndex]?.media_type === "movie" ? `movie/${top10[currentMovieIndex]?.id}/${formattedTitle}` : `tv/${top10[currentMovieIndex]?.id}/${formattedTitle}`}`}
+            href={`${data[currentMovieIndex]?.media_type === "movie" ? `movie/${data[currentMovieIndex]?.id}/${formattedTitle}` : `tv/${data[currentMovieIndex]?.id}/${formattedTitle}`}`}
             className="hover:bg-secondary/80 inline-flex h-8 w-fit items-center justify-center whitespace-nowrap rounded-md bg-white px-4 text-base font-semibold text-secondary-foreground transition-colors"
           >
             Explore
@@ -149,7 +126,7 @@ const Hero = ({ mediaType = "movie" }: HeroProps) => {
           className="mt-4 w-full"
         >
           <CarouselContent className="invisible lg:visible">
-            {top10.map((movie: any, index: number) => {
+            {data.map((movie: any, index: number) => {
               const formattedTitle = (movie?.name || movie?.title || "")
                 .toLowerCase()
                 .replace(/[^\w\s]/gi, "")

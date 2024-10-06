@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, SetStateAction, useState } from "react";
+import { useEffect, SetStateAction, useState, useCallback } from "react";
 import { searchSpecificMedia } from "@/lib/api";
 import ProductCarousel from "@/components/productCarousel";
 import { Button } from "@/components/ui/button";
@@ -22,7 +22,7 @@ export default function SearchFilter() {
     setSearchTerm(event.target.value);
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = useCallback(async () => {
     if (!searchTerm) return;
     try {
       const searchResults = await searchSpecificMedia(mediaType, searchTerm, 1);
@@ -36,13 +36,13 @@ export default function SearchFilter() {
       console.error("Error fetching search results:", error);
       setSearchResultsList([]);
     }
-  };
+  }, [mediaType, searchTerm]);
 
   useEffect(() => {
     if (isSearchClicked) {
       handleSubmit();
     }
-  }, [isSearchClicked, mediaType]);
+  }, [isSearchClicked, handleSubmit]);
 
   return (
     <div className="w-full rounded-3xl bg-foreground p-6">

@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Movie } from "@/types/api";
 
-const LandingPromo = () => {
+const LandingPromo = ({id1, id2, id3, color}: {id1: number; id2: number; id3: number; color: string;}) => {
   const [top10, setTop10] = useState<Movie[]>([]);
   const [activeIndex, setActiveIndex] = useState(0);
   const [isImageVisible, setIsImageVisible] = useState(true);
@@ -16,7 +16,7 @@ const LandingPromo = () => {
   useEffect(() => {
     const fetchTop10 = async () => {
       try {
-        const movieIDs = [1032823, 945961, 1226578];
+        const movieIDs = [id1, id2, id3];
 
         const movies = await Promise.all(
           movieIDs.map((id) => getSingle("movie", id)),
@@ -28,7 +28,7 @@ const LandingPromo = () => {
       }
     };
     fetchTop10();
-  }, []);
+  }, [id1, id2, id3]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -82,7 +82,7 @@ const LandingPromo = () => {
         className="absolute inset-0 z-10"
         style={{
           background:
-            "linear-gradient(-145deg, rgba(139, 0, 0, 0.57) 50%, transparent 50.1%)",
+            `linear-gradient(-145deg, ${color} 50%, transparent 50.1%)`,
         }}
       ></div>
       <div className="container relative z-20 mx-auto flex h-full flex-col justify-between py-20 transition-opacity duration-1000 ease-in-out md:pl-32 lg:py-28 xl:py-36 xl:pl-64">

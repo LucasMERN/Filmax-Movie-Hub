@@ -98,7 +98,5 @@ export default function Categories() {
     },
   ];
 
-  return (
-    <VideoTiles data={videos} />
-  );
+  return <VideoTiles data={videos} />;
 }

@@ -14,9 +14,7 @@ export const useCreditData = (mediaType: "movie" | "tv", id: number) => {
       setError(null);
       try {
         const data = await getCredits(id, mediaType);
-        if (Array.isArray(data.cast)) {
-          setCreditData(data.cast);
-        }
+        setCreditData(data?.cast);
       } catch (error) {
         console.error("Error fetching Credit data:", error);
         setError("Failed to fetch data");

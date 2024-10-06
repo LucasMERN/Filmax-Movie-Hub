@@ -1,6 +1,5 @@
 "use client";
 
-import Loader from "@/components/loader";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
@@ -19,7 +18,7 @@ type MediaGridProps = {
   fetchType: "genre" | "popular" | "trending";
   genreID?: string;
   subtitle: string;
-  mediaType?: "movie" | 'tv'
+  mediaType?: "movie" | "tv";
 };
 
 type Data = {
@@ -28,49 +27,74 @@ type Data = {
   name: string;
   title: string;
   adult: boolean;
+  currentPage: string;
 };
 
-const MediaGrid = ({ title, fetchType, genreID, subtitle, mediaType = "movie" }: MediaGridProps) => {
+const MediaGrid = ({
+  title,
+  fetchType,
+  genreID,
+  subtitle,
+  mediaType = "movie",
+}: MediaGridProps) => {
   const [mediaData, setMediaData] = useState<Data[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     const fetchData = async () => {
-      setIsLoading(true);
       setError(null);
+
+      const startPage = (currentPage - 1) * 4 + 1;
+      const pagesToFetch = [
+        startPage,
+        startPage + 1,
+        startPage + 2,
+        startPage + 3,
+      ];
+
       try {
-        let media;
-        if (fetchType === "genre" && genreID) {
-          media = await getMediaByGenre(mediaType, genreID, currentPage);
-        } else if (fetchType === "popular") {
-          media = await getPopular(mediaType, currentPage);
-        } else if (fetchType === "trending") {
-          media = await getTrending(mediaType, currentPage);
-        }
-        
-        if (Array.isArray(media?.results)) {
-          setMediaData(media.results);
+        const fetchPromises = pagesToFetch.map((page) => {
+          if (fetchType === "genre" && genreID) {
+            return getMediaByGenre(mediaType, genreID, page);
+          } else if (fetchType === "popular") {
+            return getPopular(mediaType, page);
+          } else if (fetchType === "trending") {
+            return getTrending(mediaType, page);
+          } else {
+            return Promise.resolve({ results: [] });
+          }
+        });
+
+        const mediaResponses = await Promise.all(fetchPromises);
+
+        const combinedResults = mediaResponses.reduce((acc, media) => {
+          if (Array.isArray(media?.results)) {
+            return [...acc, ...media.results];
+          }
+          return acc;
+        }, []);
+
+        if (combinedResults.length > 0) {
+          setMediaData(combinedResults);
         } else {
           setError("No data available");
         }
       } catch (error) {
         console.error("Error fetching Media Data:", error);
         setError("Failed to fetch data");
-      } finally {
-        setIsLoading(false);
       }
     };
+
     fetchData();
-  }, [currentPage, fetchType, genreID]);
+  }, [currentPage, fetchType, genreID, mediaType]);
 
   if (error) return <div>Error: {error}</div>;
 
   return (
     <>
       <GridHeader title={title} subtitle={subtitle} />
-      {isLoading ? <Loader /> : <GridItems data={mediaData} mediaType={mediaType} />}
+      <GridItems data={mediaData} mediaType={mediaType} />
       <Pagination className="flex w-full justify-center pt-12">
         <PaginationContent>
           <PaginationItem>
@@ -112,7 +136,13 @@ const MediaGrid = ({ title, fetchType, genreID, subtitle, mediaType = "movie" }:
   );
 };
 
-const GridItems = ({ data, mediaType }: { data: Data[], mediaType: "movie" | "tv" }) => {
+const GridItems = ({
+  data,
+  mediaType,
+}: {
+  data: Data[];
+  mediaType: "movie" | "tv";
+}) => {
   return (
     <section className="container grid grid-cols-2 gap-6 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-7">
       {data?.map((item, index) => {
@@ -145,7 +175,13 @@ const GridItems = ({ data, mediaType }: { data: Data[], mediaType: "movie" | "tv
   );
 };
 
-const GridHeader = ({ title, subtitle }: { title: string; subtitle: string }) => {
+const GridHeader = ({
+  title,
+  subtitle,
+}: {
+  title: string;
+  subtitle: string;
+}) => {
   return (
     <div className="container flex w-full flex-col gap-2 pb-12 pt-24 md:pt-48">
       <h1 className="text-4xl font-bold capitalize tracking-wider text-white">

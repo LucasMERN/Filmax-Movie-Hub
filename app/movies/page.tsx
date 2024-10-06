@@ -7,7 +7,6 @@ export const metadata: Metadata = {
 };
 
 export default function Movies() {
-
   return (
     <main className="min-h-screen overflow-hidden">
       <MediaGrid title="Popular" subtitle="movies" fetchType="popular" />

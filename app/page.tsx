@@ -145,7 +145,7 @@ export default function Home() {
         </div>
       </section>
       <section className="border-b-4 border-t-4 border-primary">
-        <LandingPromo />
+        <LandingPromo id1={1032823} id2={945961} id3={1226578} color="rgba(139, 0, 0, 0.57)" />
       </section>
       <section className="bg-black">
         <Footer />

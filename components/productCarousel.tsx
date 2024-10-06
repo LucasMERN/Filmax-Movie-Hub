@@ -6,7 +6,6 @@ import {
 import { Card } from "@/components/ui/card";
 import BackgroundImage from "@/components/ui/backgroundImage";
 import React from "react";
-import { Movie, TV } from "@/types/api";
 
 interface CarouselProps {
   data: any;
