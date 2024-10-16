@@ -44,7 +44,7 @@ function EpisodeSelect({ mediaData, id }: { mediaData: TV; id: number }) {
       if (episodeActiveSeason !== null) {
         try {
           const episodes = await getTvShowEpisodes(id, episodeActiveSeason);
-          setEpisodeData(episodes?.episodes || []);
+          setEpisodeData(episodes?.episodes);
         } catch (error) {
           console.error("Error fetching episodes:", error);
         } finally {
@@ -54,7 +54,7 @@ function EpisodeSelect({ mediaData, id }: { mediaData: TV; id: number }) {
     }
 
     fetchEpisodes();
-  }, [id, episodeActiveSeason]);
+  }, [mediaData, id, episodeActiveSeason]);
 
   if (!mediaData) {
     return <div>Loading media data...</div>;
@@ -74,7 +74,7 @@ function EpisodeSelect({ mediaData, id }: { mediaData: TV; id: number }) {
             </SelectTrigger>
             <SelectContent>
               <SelectGroup>
-                {mediaData.seasons.map((season, index) => (
+                {mediaData?.seasons.map((season, index) => (
                   <SelectItem key={index} value={season?.name}>
                     {season?.name}
                   </SelectItem>

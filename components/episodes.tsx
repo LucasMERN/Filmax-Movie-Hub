@@ -27,6 +27,7 @@ const Episodes = ({ episodes, id }: EpisodesProps) => {
                   height={200}
                   className="aspect-video w-full"
                   loading="lazy"
+                  unoptimized
                 />
               ) : (
                 <Image
@@ -36,6 +37,7 @@ const Episodes = ({ episodes, id }: EpisodesProps) => {
                   height={200}
                   className="aspect-video w-full"
                   loading="lazy"
+                  unoptimized
                 />
               )}
               <div className="flex gap-2">
