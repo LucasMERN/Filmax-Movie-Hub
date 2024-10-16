@@ -18,7 +18,6 @@ interface CallToActionData {
 async function CallToAction({ id, color, mediaType }: CallToActionTypes) {
   try {
     const mediaData = await getSingle(mediaType, id);
-
     const formattedTitle = (
       mediaType === "tv" ? mediaData?.name : mediaData?.title
     )
@@ -95,12 +94,13 @@ async function CallToAction({ id, color, mediaType }: CallToActionTypes) {
                   Category:
                 </span>
                 {mediaData?.genres.map((genres: any, index: number) => (
-                  <span
+                  <Link
                     key={index}
-                    className={`${mediaData?.genres.length - 1 === index ? "" : "border-r-2"} dark-shadow px-2 leading-none`}
+                    href={`/categories/${genres.id}/${genres.name}`}
+                    className={`${mediaData.genres.length - 1 === index ? "" : "border-r-2"} px-2 leading-none hover:underline`}
                   >
                     {genres.name}
-                  </span>
+                  </Link>
                 ))}
               </div>
               <div className="flex flex-row items-center">

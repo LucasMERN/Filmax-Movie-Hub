@@ -6,7 +6,9 @@ export async function generateMetadata({
 }: {
   params: { genre: string };
 }): Promise<Metadata> {
-  const formattedTitle = decodeURIComponent(params.genre.charAt(0).toUpperCase() + params.genre.slice(1));
+  const formattedTitle = decodeURIComponent(
+    params.genre.charAt(0).toUpperCase() + params.genre.slice(1),
+  );
   return {
     title: `Filmax | ${formattedTitle}`,
     description: `List of titles under the '${formattedTitle}' category`,
@@ -20,9 +22,15 @@ export default function Page({
 }) {
   const { id, genre } = params;
   const formattedGenre = decodeURIComponent(genre);
+  console.log(id);
   return (
     <main className="min-h-screen overflow-hidden">
-      <MediaGrid title={formattedGenre} fetchType="genre" subtitle="movies" genreID={id} />
+      <MediaGrid
+        title={formattedGenre}
+        fetchType="genre"
+        subtitle="movies"
+        genreID={id}
+      />
     </main>
-  )
+  );
 }

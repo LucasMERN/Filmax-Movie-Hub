@@ -8,7 +8,11 @@ const Footer = () => {
         <span className="absolute left-0 top-1/2 w-[25%] -translate-y-1/2 transform border-t border-white md:w-[40%]"></span>
         <ul className="z-10 flex gap-8">
           <li>
-            <Link href="https://github.com/LucasMERN" className="group">
+            <Link
+              href="https://github.com/LucasMERN"
+              className="group"
+              target="_blank"
+            >
               <Github
                 size={40}
                 color="white"
@@ -20,6 +24,7 @@ const Footer = () => {
             <Link
               href="https://www.linkedin.com/in/lucaswinklerdev/"
               className="group"
+              target="_blank"
             >
               <Linkedin
                 size={40}

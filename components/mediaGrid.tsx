@@ -56,7 +56,11 @@ const MediaGrid = ({
       try {
         const fetchPromises = pagesToFetch.map((page) => {
           if (fetchType === "genre" && genreID) {
-            return getMediaByGenre(mediaType, genreID, page);
+            if (genreID === "10765") {
+              return getMediaByGenre(mediaType, "878", page);
+            } else {
+              return getMediaByGenre(mediaType, genreID, page);
+            }
           } else if (fetchType === "popular") {
             return getPopular(mediaType, page);
           } else if (fetchType === "trending") {

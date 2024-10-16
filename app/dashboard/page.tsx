@@ -10,7 +10,6 @@ import {
   getPopular,
   getTop10,
 } from "@/lib/api";
-import { Movie, TV } from "@/types/api";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {

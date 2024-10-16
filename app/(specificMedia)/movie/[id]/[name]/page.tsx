@@ -23,35 +23,31 @@ export async function generateMetadata({
     .join(" ");
   return {
     title: `Filmax | ${formattedTitle}`,
-    description: `TV Series page for '${formattedTitle}'`,
+    description: `Movie page for '${formattedTitle}'`,
   };
 }
 
 export default async function Page({ params }: { params: { id: number } }) {
   try {
     const { id } = params;
-    const mediaData = await getSingle("tv", id);
-    const recommendedShows = await getRecommended(id, "tv");
-    const castData = await getCredits(id, "tv");
-    const ratingData = await getContentRating("tv", id);
-    const externalData = await getExternalId(id, "tv");
-    const youtubeData = await getYouTubeVideo(id, "tv");
+    const mediaData = await getSingle("movie", id);
+    const recommendedMovies = await getRecommended(id, "movie");
+    const castData = await getCredits(id, "movie");
+    const releaseData = await getRelease("movie", id);
+    const externalData = await getExternalId(id, "movie");
+    const youtubeData = await getYouTubeVideo(id, "movie");
 
     return (
-      <main className="relative min-h-screen">
-        <Nav />
-        <MediaPage
-          mediaType="tv"
-          id={id}
-          mediaData={mediaData}
-          recommendedShows={recommendedShows?.results}
-          cast={castData?.cast}
-          tvRatingData={ratingData?.results}
-          externalData={externalData}
-          youtubeData={youtubeData?.results}
-        />
-        <Footer />
-      </main>
+      <MediaPage
+        mediaType="movie"
+        id={id}
+        mediaData={mediaData}
+        recommendedMovies={recommendedMovies?.results}
+        cast={castData?.cast}
+        movieRatingData={releaseData?.results}
+        externalData={externalData}
+        youtubeData={youtubeData?.results}
+      />
     );
   } catch (error) {
     console.error("Error fetching Data:", error);

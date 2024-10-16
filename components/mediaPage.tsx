@@ -127,30 +127,35 @@ function MediaPage({
             <Link
               className={`${externalData?.facebook_id ? "" : "hidden"}`}
               href={`https://www.facebook.com/${externalData?.facebook_id}`}
+              target="_blank"
             >
               <Facebook />
             </Link>
             <Link
               href={`https://www.x.com/${externalData?.twitter_id}`}
               className={`${externalData?.twitter_id ? "" : "hidden"}`}
+              target="_blank"
             >
               <TwitterIcon />
             </Link>
             <Link
               className={`${externalData?.instagram_id ? "" : "hidden"}`}
               href={`https://www.instagram.com/${externalData?.instagram_id}`}
+              target="_blank"
             >
               <Instagram />
             </Link>
             <Link
               href={`https://www.imdb.com/title/${externalData?.imdb_id}`}
               className={`${externalData?.imdb_id ? "" : "hidden"}`}
+              target="_blank"
             >
               <Clapperboard />
             </Link>
             <Link
               href={`${mediaData?.homepage}`}
               className={`${mediaData?.homepage ? "" : "hidden"}`}
+              target="_blank"
             >
               <Link2 />
             </Link>
@@ -218,6 +223,7 @@ function MediaPage({
             alt={`Poster image for ${mediaType === "tv" ? mediaData?.title : mediaData?.name}`}
             priority
             loading="eager"
+            unoptimized
           />
           <div className="flex flex-col gap-3 md:w-1/2">
             <h2 className="dark-shadow -mb-2 text-lg font-semibold tracking-widest text-white">
