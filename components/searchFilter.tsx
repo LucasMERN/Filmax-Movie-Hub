@@ -45,7 +45,7 @@ export default function SearchFilter() {
   }, [isSearchClicked, handleSubmit]);
 
   return (
-    <div className="relative z-50 w-full rounded-3xl bg-foreground p-6">
+    <div className="w-full rounded-3xl bg-foreground p-6">
       <div className="flex flex-col gap-4 lg:flex-row lg:justify-between lg:gap-8">
         <div className="flex flex-row justify-between rounded-2xl bg-background px-2 py-4 md:gap-6 lg:px-6">
           <Button
