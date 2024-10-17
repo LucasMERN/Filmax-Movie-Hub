@@ -4,7 +4,7 @@ import React, { useRef, useState, useCallback, useEffect } from "react";
 import Video from "next-video";
 import Link from "next/link";
 import clsx from "clsx";
-import VideoTilesSkeleton from "./skeletons/videoTilesSkeleton";
+import VideoTilesSkeleton from "@/components/skeletons/videoTilesSkeleton";
 import { Asset } from "next-video/dist/assets.js";
 
 type VideoTilesProps = {

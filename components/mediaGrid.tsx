@@ -12,7 +12,7 @@ import {
   PaginationNext,
 } from "@/components/ui/pagination";
 import { getMediaByGenre, getPopular, getTrending } from "@/lib/api";
-import MediaGridSkeleton from "./skeletons/mediaGridSkeleton";
+import MediaGridSkeleton from "@/components/skeletons/mediaGridSkeleton";
 
 type MediaGridProps = {
   title: string;
