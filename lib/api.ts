@@ -116,3 +116,8 @@ export const getWatchProviders = async (id: number) => {
   const url = `${apiUrl}/movie/${id}/watch/providers`;
   return await fetchData(url);
 };
+
+export const getRequestToken = async () => {
+  const url = `${apiUrl}/authentication/token/new`;
+  return await fetchData(url);
+};

@@ -12,6 +12,7 @@ import {
   PaginationNext,
 } from "@/components/ui/pagination";
 import { getMediaByGenre, getPopular, getTrending } from "@/lib/api";
+import MediaGridSkeleton from "./skeletons/mediaGridSkeleton";
 
 type MediaGridProps = {
   title: string;
@@ -40,10 +41,12 @@ const MediaGrid = ({
   const [mediaData, setMediaData] = useState<Data[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
       setError(null);
+      setLoading(true);
 
       const startPage = (currentPage - 1) * 4 + 1;
       const pagesToFetch = [
@@ -58,6 +61,8 @@ const MediaGrid = ({
           if (fetchType === "genre" && genreID) {
             if (genreID === "10765") {
               return getMediaByGenre(mediaType, "878", page);
+            } else if (genreID === "10759") {
+              return getMediaByGenre(mediaType, "28", page);
             } else {
               return getMediaByGenre(mediaType, genreID, page);
             }
@@ -81,6 +86,9 @@ const MediaGrid = ({
 
         if (combinedResults.length > 0) {
           setMediaData(combinedResults);
+          setTimeout(() => {
+            setLoading(false);
+          }, 350);
         } else {
           setError("No data available");
         }
@@ -98,7 +106,11 @@ const MediaGrid = ({
   return (
     <>
       <GridHeader title={title} subtitle={subtitle} />
-      <GridItems data={mediaData} mediaType={mediaType} />
+      {loading ? (
+        <MediaGridSkeleton />
+      ) : (
+        <GridItems data={mediaData} mediaType={mediaType} />
+      )}
       <Pagination className="flex w-full justify-center pt-12">
         <PaginationContent>
           <PaginationItem>

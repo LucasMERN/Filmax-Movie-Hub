@@ -11,13 +11,14 @@ import stranger from "@/public/stranger.png";
 import loader from "@/public/loader.gif";
 import Footer from "@/components/footer";
 import type { Metadata } from "next";
+import SignInButton from "@/components/signInButton";
 
 export const metadata: Metadata = {
   title: "Welcome to Filmax Cinema Hub",
   description: "Landing page for Filmax Cinema Hub",
 };
 
-export default function Home() {
+export default async function Home() {
   return (
     <main className="min-h-screen bg-black">
       <nav className="absolute z-20 w-full bg-gradient-to-b from-black pb-8 pt-8">
@@ -32,14 +33,7 @@ export default function Home() {
               loading="eager"
             />
           </Link>
-          <Button
-            type="submit"
-            variant="secondary"
-            size="sm"
-            className="h-8 px-2 lg:h-10 lg:px-4"
-          >
-            Sign In
-          </Button>
+          <SignInButton />
         </div>
       </nav>
       <section
@@ -145,7 +139,12 @@ export default function Home() {
         </div>
       </section>
       <section className="border-b-4 border-t-4 border-primary">
-        <LandingPromo id1={1032823} id2={945961} id3={1226578} color="rgba(139, 0, 0, 0.57)" />
+        <LandingPromo
+          id1={1032823}
+          id2={945961}
+          id3={1226578}
+          color="rgba(139, 0, 0, 0.57)"
+        />
       </section>
       <section className="bg-black">
         <Footer />
