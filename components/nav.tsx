@@ -24,7 +24,7 @@ export default function Nav() {
       className="fixed z-50 w-full pb-8 pt-8 md:pb-12"
       style={{
         background:
-          "linear-gradient(180deg, rgba(0,0,0,1) 10%, rgba(0,0,0,0.8071603641456583) 55%, rgba(252,176,69,0) 100%)",
+          "linear-gradient(180deg, rgba(0, 0, 0, 1) 10%, rgb(0 0 0 / 76%) 54%, rgb(0 0 0 / 38%) 86%, rgba(255, 255, 255, 0) 100%)",
       }}
     >
       <div className="container mx-auto flex flex-col gap-4 md:flex-row md:items-center md:justify-between md:gap-0 ">
