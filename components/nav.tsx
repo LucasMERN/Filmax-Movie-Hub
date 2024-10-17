@@ -20,7 +20,13 @@ export default function Nav() {
   const pathname = usePathname();
 
   return (
-    <nav className="fixed z-50 w-full bg-gradient-to-b from-black pb-8 pt-8 md:pb-20">
+    <nav
+      className="fixed z-50 w-full pb-8 pt-8 md:pb-12"
+      style={{
+        background:
+          "linear-gradient(180deg, rgba(0,0,0,1) 10%, rgba(0,0,0,0.8071603641456583) 55%, rgba(252,176,69,0) 100%)",
+      }}
+    >
       <div className="container mx-auto flex flex-col gap-4 md:flex-row md:items-center md:justify-between md:gap-0 ">
         <Sheet>
           <SheetTrigger asChild>
