@@ -75,6 +75,7 @@ export default async function Home() {
             width={500}
             className="-mt-16"
             loading="eager"
+            unoptimized
           />
           <div className="absolute bottom-4 flex w-full justify-center">
             <div className="flex items-center justify-between rounded-xl border border-primary bg-black p-2 shadow-lg lg:p-4">
@@ -83,6 +84,7 @@ export default async function Home() {
                 alt=""
                 className="w-11 lg:w-14"
                 loading="eager"
+                unoptimized
               />
               <div className="flex flex-col pl-4 pr-14">
                 <h4 className="whitespace-nowrap font-bold text-white">
@@ -126,6 +128,7 @@ export default async function Home() {
             width={300}
             className="relative z-10 md:w-[500px]"
             loading="lazy"
+            unoptimized
           />
           <div className="absolute top-3 flex w-full justify-center md:top-6">
             <Image

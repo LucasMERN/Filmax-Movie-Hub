@@ -4,8 +4,6 @@ import "@/styles/globals.css";
 
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/react";
-import { Suspense } from "react";
-import Loading from "./loading";
 import BackToTopButton from "@/components/backToTop";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -26,12 +24,10 @@ export default function RootLayout({
         <link rel="icon" href="/logo.svg" type="image/svg+xml" />
       </head>
       <body className={`${inter.className} bg-background`}>
-        <Suspense fallback={<Loading />}>
-          <BackToTopButton />
-          {children}
-          <SpeedInsights />
-          <Analytics />
-        </Suspense>
+        <BackToTopButton />
+        {children}
+        <SpeedInsights />
+        <Analytics />
       </body>
     </html>
   );

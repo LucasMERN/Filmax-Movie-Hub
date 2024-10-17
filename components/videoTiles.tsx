@@ -56,7 +56,7 @@ const VideoTiles = ({ data }: VideoTilesProps) => {
       <VideoTilesSkeleton className={clsx(isLoading ? "" : "hidden")} />
       <section
         className={clsx(
-          "container flex flex-col justify-between gap-4 pt-24 md:flex-row md:gap-0 md:pt-48",
+          "container flex flex-row flex-wrap gap-3 pt-24 md:flex-nowrap md:justify-between md:gap-0 md:pt-48",
           isLoading ? "opacity-0" : "opacity-100",
           "transition-opacity",
         )}
@@ -66,13 +66,13 @@ const VideoTiles = ({ data }: VideoTilesProps) => {
             key={index}
             href={video.url}
             className={clsx(
-              "relative w-full transition-all duration-300 ease-in-out md:h-[500px]",
+              "relative h-[500px] w-[30%] transition-all duration-300 ease-in-out",
               video.margin,
               activeIndex === null
-                ? "h-[12%] w-full md:w-[12%]"
+                ? "h-[12%] md:w-[12%]"
                 : activeIndex === index
-                  ? "h-[25%] w-full md:w-[25%]"
-                  : "h-[10%] w-full md:w-[10%]",
+                  ? "h-[25%] md:w-[25%]"
+                  : "h-[10%] md:w-[10%]",
             )}
             onMouseEnter={() => handleMouseEnter(index)}
             onMouseLeave={handleMouseLeave}
@@ -91,7 +91,7 @@ const VideoTiles = ({ data }: VideoTilesProps) => {
             />
             <span
               className={clsx(
-                "dark-shadow absolute top-1/2 w-full text-center text-xl font-semibold text-white transition-all duration-300 ease-in-out",
+                "dark-shadow absolute top-1/2 w-full text-center text-sm font-semibold text-white transition-all duration-300 ease-in-out md:text-xl",
                 video.alignment,
               )}
             >

@@ -18,7 +18,7 @@ function SignInButton() {
           const { request_token } = await getRequestToken();
           if (request_token) {
             router.push(
-              `https://www.themoviedb.org/authenticate/${request_token}`,
+              `https://www.themoviedb.org/authenticate/${request_token}?redirect_to=${encodeURIComponent(window.location.origin + "/")}`,
             );
           }
         } catch (error) {

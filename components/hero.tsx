@@ -7,14 +7,13 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/heroCarousel";
-import React, { useState} from "react";
+import React, { useState } from "react";
 import { Card } from "@/components/ui/card";
 import BackgroundImage from "@/components/ui/backgroundImage";
 import Link from "next/link";
 import { Movie, TV } from "@/types/api";
 
 const Hero = ({ data }: { data: Movie[] & TV[] }) => {
-
   const [currentMovieIndex, setCurrentMovieIndex] = useState(8);
   const [isImageVisible, setIsImageVisible] = useState(true);
 
@@ -148,12 +147,8 @@ const Hero = ({ data }: { data: Movie[] & TV[] }) => {
                         lazy="eager"
                       />
                     </Card>
-                    {index == currentMovieIndex ? (
-                      <span className="dark-shadow break-words text-center text-lg">
-                        {!movie?.title ? movie?.name : movie?.title}
-                      </span>
-                    ) : (
-                      <span className="dark-shadow break-words text-center text-lg opacity-0">
+                    {index == currentMovieIndex && (
+                      <span className="dark-shadow break-words text-center text-base">
                         {!movie?.title ? movie?.name : movie?.title}
                       </span>
                     )}

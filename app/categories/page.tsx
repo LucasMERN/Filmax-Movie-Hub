@@ -16,6 +16,8 @@ import dramaThumb from "@/public/drama.jpg";
 import thrillerThumb from "@/public/thriller.jpg";
 import VideoTiles from "@/components/videoTiles";
 import type { Metadata } from "next";
+import { Suspense } from "react";
+import VideoTilesSkeleton from "@/components/skeletons/videoTilesSkeleton";
 
 export const metadata: Metadata = {
   title: "Filmax | Categories",
@@ -38,7 +40,7 @@ export default function Categories() {
       poster: animatedThumb.src,
       blurData: animatedThumb.blurDataURL,
       margin: "md:mt-12",
-      alignment: "-md:mt-12",
+      alignment: "md:-mt-12",
       title: "Animated",
       url: "/categories/16/animated",
     },
@@ -47,7 +49,7 @@ export default function Categories() {
       poster: scifiThumb.src,
       blurData: scifiThumb.blurDataURL,
       margin: "md:mt-24",
-      alignment: "-md:mt-24",
+      alignment: "md:-mt-24",
       title: "Fantasy",
       url: "/categories/14%2C878/fantasy",
     },
@@ -56,7 +58,7 @@ export default function Categories() {
       poster: thrillerThumb.src,
       blurData: thrillerThumb.blurDataURL,
       margin: "md:mt-8",
-      alignment: "-md:mt-8",
+      alignment: "md:-mt-8",
       title: "Thriller",
       url: "/categories/53/thriller",
     },
@@ -98,5 +100,9 @@ export default function Categories() {
     },
   ];
 
-  return <VideoTiles data={videos} />;
+  return (
+    <Suspense fallback={<VideoTilesSkeleton />}>
+      <VideoTiles data={videos} />
+    </Suspense>
+  );
 }
