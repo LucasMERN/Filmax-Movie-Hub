@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import LoadingSkeleton from "./loading";
+import Loading from "./loading";
 import Nav from "@/components/nav";
 import Footer from "@/components/footer";
 
@@ -11,7 +11,7 @@ export default function DashboardLayout({
   return (
     <section className="w-full">
       <Nav />
-      <Suspense fallback={<LoadingSkeleton />}>{children}</Suspense>
+      <Suspense fallback={<Loading />}>{children}</Suspense>
       <Footer />
     </section>
   );
