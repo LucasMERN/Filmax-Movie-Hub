@@ -59,6 +59,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 - Add user authentication to allow users to rate, add content to lists, and favorite items - branch name: /feature/auth-pipeline
 - Add watch providers to movie and tv show pages to allow users to find out what platforms they can watch the specific media on - branch name: /feature/watch-providers
 - Add reviews section to movie and tv show pages to give more insight into the media they are currently viewing - branch name: /feature/reviews
+- Add search params for pagination (?page=2) with useSearchParams - branch name: /feature/pagination-params
 
 ## Contribution Guidelines
 
