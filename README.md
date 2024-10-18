@@ -53,3 +53,14 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+## TODO
+
+- Add user authentication to allow users to rate, add content to lists, and favorite items - branch name: /feature/auth-pipeline
+- Add watch providers to movie and tv show pages to allow users to find out what platforms they can watch the specific media on - branch name: /feature/watch-providers
+- Add reviews section to movie and tv show pages to give more insight into the media they are currently viewing - branch name: /feature/reviews
+
+## Contribution Guidelines
+
+I am always open to accepting contributions. If you are interested in tackling any of the TODO items listed above, please clone the repo, create a feature branch with the todo item branch name, commit your changes and open a PR to the main branch.
+If you have contributions that are not listed in the TODO section, please open an issue with a detailed description of the proposed changes and I will reach out in the comments!
