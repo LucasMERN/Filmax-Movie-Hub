@@ -1,5 +1,7 @@
 This is a [Next.js](https://nextjs.org/) project using the TMBD movie API.
 
+Visit the live site: [Click Here!](https://movie-api-fe.vercel.app/)
+
 ![Filmax-Homepage](https://github.com/LucasMERN/Filmmax-Movie-Hub/assets/94091522/427ecb3e-7336-42ee-929b-3c4c67174d74)
 
 ## Getting Started
