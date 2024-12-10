@@ -276,7 +276,7 @@ function MediaPage({
           />
         </div>
       </div>
-      {recommendedShows.length > 0 || recommendedMovies.length > 0 ? (
+      {(recommendedShows && recommendedShows.length > 0) || (recommendedMovies && recommendedMovies.length > 0) ? (
         <div className="flex flex-col items-center gap-20 overflow-hidden pt-16">
           <div className="container pr-0">
             <div className="relative z-10 -mb-4 flex flex-row items-baseline gap-4 px-1 pr-8 text-white lg:pr-12">
