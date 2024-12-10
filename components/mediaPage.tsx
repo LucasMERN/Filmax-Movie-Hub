@@ -276,18 +276,20 @@ function MediaPage({
           />
         </div>
       </div>
-      <div className="flex flex-col items-center gap-20 overflow-hidden pt-16">
-        <div className="container pr-0">
-          <div className="relative z-10 -mb-4 flex flex-row items-baseline gap-4 px-1 pr-8 text-white lg:pr-12">
-            <h3 className="text-xl font-semibold">More Like This</h3>
+      {recommendedShows.length > 0 || recommendedMovies.length > 0 ? (
+        <div className="flex flex-col items-center gap-20 overflow-hidden pt-16">
+          <div className="container pr-0">
+            <div className="relative z-10 -mb-4 flex flex-row items-baseline gap-4 px-1 pr-8 text-white lg:pr-12">
+              <h3 className="text-xl font-semibold">More Like This</h3>
+            </div>
+            <ProductCarousel
+              mediaType={mediaType}
+              data={mediaType === "tv" ? recommendedShows : recommendedMovies}
+              width="min-[475px]:basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/6"
+            />
           </div>
-          <ProductCarousel
-            mediaType={mediaType}
-            data={mediaType === "tv" ? recommendedShows : recommendedMovies}
-            width="min-[475px]:basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/6"
-          />
-        </div>
-      </div>
+        </div>) : (
+      null)}
     </>
   );
 }
