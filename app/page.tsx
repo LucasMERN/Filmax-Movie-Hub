@@ -11,7 +11,7 @@ import stranger from "@/public/stranger.png";
 import loader from "@/public/loader.gif";
 import Footer from "@/components/footer";
 import type { Metadata } from "next";
-import SignInButton from "@/components/signInButton";
+import AuthButton from "@/components/AuthButton";
 
 export const metadata: Metadata = {
   title: "Welcome to Filmax Cinema Hub",
@@ -33,7 +33,7 @@ export default async function Home() {
               loading="eager"
             />
           </Link>
-          <SignInButton />
+          <AuthButton />
         </div>
       </nav>
       <section

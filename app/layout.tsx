@@ -4,6 +4,7 @@ import "@/styles/globals.css";
 
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/react";
+import { ClerkProvider } from "@clerk/nextjs";
 import BackToTopButton from "@/components/backToTop";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -19,16 +20,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <head>
-        <link rel="icon" href="/logo.svg" type="image/svg+xml" />
-      </head>
-      <body className={`${inter.className} bg-background`}>
-        <BackToTopButton />
-        {children}
-        <SpeedInsights />
-        <Analytics />
-      </body>
-    </html>
+    <ClerkProvider>
+      <html lang="en">
+        <head>
+          <link rel="icon" href="/logo.svg" type="image/svg+xml" />
+        </head>
+        <body className={`${inter.className} bg-background`}>
+          <BackToTopButton />
+          {children}
+          <SpeedInsights />
+          <Analytics />
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }

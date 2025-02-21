@@ -15,6 +15,8 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
+import AuthButton from "./AuthButton";
+import { SignedIn } from "@clerk/nextjs";
 
 export default function Nav() {
   const pathname = usePathname();
@@ -179,7 +181,21 @@ export default function Nav() {
               Shows
             </Link>
           </li>
+
+          <SignedIn>
+            <li>
+              <Link
+                className={`link ${
+                  pathname === "/watchlist" ? "text-white" : "text-white/40"
+                } text-sm tracking-widest hover:text-white`}
+                href="/watchlist"
+              >
+                Watchlist
+              </Link>
+            </li>
+          </SignedIn>
         </ul>
+        <AuthButton />
       </div>
     </nav>
   );

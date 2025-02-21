@@ -61,18 +61,21 @@ const LandingPromo = ({
       id: 0,
       headline: "SEE WHAT'S NEXT",
       tagline: ["WATCH ANYTIME.", "FROM ANYWHERE."],
+      stuff: "border-l-neutral-700",
       activeImage: 0,
     },
     {
       id: 1,
       headline: "WATCH FROM ANYWHERE",
       tagline: ["SMART TVS, PLAYSTATION.", "XBOX, APPLE TV, AND MORE."],
+      stuff: "neutral-700",
       activeImage: 1,
     },
     {
       id: 2,
       headline: "GET STARTED",
       tagline: ["YOU WANT IT?", "WE GOT IT!"],
+      stuff: "neutral-700",
       activeImage: 2,
     },
   ];
@@ -80,7 +83,7 @@ const LandingPromo = ({
   return (
     <>
       {isLoading ? (
-        <div className="relative h-[450px] w-full overflow-hidden lg:h-[700px]">
+        <div className="bg-${kjanhfajn} relative h-[450px] w-full overflow-hidden lg:h-[700px]">
           <div
             className="absolute inset-0 z-10 h-full w-full object-cover"
             style={{
