@@ -20,13 +20,13 @@ const LandingPromo = ({
   id3: number;
   color: string;
 }) => {
-  const [top10, setTop10] = useState<Movie[]>([]);
+  const [promoMovies, setPromoMovies] = useState<Movie[]>([]);
   const [activeIndex, setActiveIndex] = useState(0);
   const [isImageVisible, setIsImageVisible] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const fetchTop10 = async () => {
+    const fetchPromoMovies = async () => {
       try {
         setIsLoading(true);
         const movieIDs = [id1, id2, id3];
@@ -35,13 +35,13 @@ const LandingPromo = ({
           movieIDs.map((id) => getSingle("movie", id)),
         );
 
-        setTop10(movies);
+        setPromoMovies(movies);
         setIsLoading(false);
       } catch (error) {
         console.error("Error fetching top10:", error);
       }
     };
-    fetchTop10();
+    fetchPromoMovies();
   }, [id1, id2, id3]);
 
   useEffect(() => {
@@ -132,13 +132,13 @@ const LandingPromo = ({
       ) : (
         <div className="relative h-[450px] w-full overflow-hidden lg:h-[700px]">
           <Image
-            alt={`Backdrop image for ${top10[carousel[activeIndex].activeImage]?.title}`}
+            alt={`Backdrop image for ${promoMovies[carousel[activeIndex].activeImage]?.title}`}
             decoding="async"
             className="absolute inset-0 z-10 h-full w-full object-cover grayscale"
             fill
             priority
             loading="eager"
-            src={`https://image.tmdb.org/t/p/original/${top10[carousel[activeIndex].activeImage]?.backdrop_path}`}
+            src={`https://image.tmdb.org/t/p/original/${promoMovies[carousel[activeIndex].activeImage]?.backdrop_path}`}
             style={{
               opacity: isImageVisible ? 1 : 0,
               transition: "opacity 1s ease-in-out",
@@ -195,8 +195,8 @@ const LandingPromo = ({
               }}
             >
               <BackgroundImage
-                src={`https://image.tmdb.org/t/p/original/${top10[carousel[activeIndex].activeImage]?.backdrop_path}`}
-                alt={`Poster image for ${top10[carousel[activeIndex].activeImage]?.title}`}
+                src={`https://image.tmdb.org/t/p/original/${promoMovies[carousel[activeIndex].activeImage]?.backdrop_path}`}
+                alt={`Poster image for ${promoMovies[carousel[activeIndex].activeImage]?.title}`}
                 lazy="eager"
               />
             </div>

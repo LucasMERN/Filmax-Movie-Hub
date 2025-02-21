@@ -143,8 +143,8 @@ export default async function Home() {
       </section>
       <section className="border-b-4 border-t-4 border-primary">
         <LandingPromo
-          id1={1032823}
-          id2={945961}
+          id1={604685}
+          id2={1084199}
           id3={1226578}
           color="rgba(139, 0, 0, 0.57)"
         />
