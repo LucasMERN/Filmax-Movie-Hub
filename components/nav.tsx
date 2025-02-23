@@ -101,6 +101,21 @@ export default function Nav() {
                   Shows
                 </Link>
               </li>
+              <SignedIn>
+                <li>
+                  <Link
+                    className={`link ${
+                      pathname === "/shows" ? "text-white" : "text-white/40"
+                    } text-sm tracking-widest hover:text-white`}
+                    href="/shows"
+                  >
+                    Watchlist
+                  </Link>
+                </li>
+              </SignedIn>
+              <li>
+                <AuthButton />
+              </li>
             </ul>
             <SheetFooter>
               <Image
@@ -186,16 +201,18 @@ export default function Nav() {
             <li>
               <Link
                 className={`link ${
-                  pathname === "/watchlist" ? "text-white" : "text-white/40"
+                  pathname === "/shows" ? "text-white" : "text-white/40"
                 } text-sm tracking-widest hover:text-white`}
-                href="/watchlist"
+                href="/shows"
               >
                 Watchlist
               </Link>
             </li>
           </SignedIn>
         </ul>
-        <AuthButton />
+        <div className="hidden md:block">
+          <AuthButton />
+        </div>
       </div>
     </nav>
   );
