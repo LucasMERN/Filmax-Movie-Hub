@@ -30,6 +30,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardTitle } from "@/components/ui/card";
 import Image from "next/image";
 import Link from "next/link";
+import AddToWatchlist from "./addToWatchlistButton";
 
 function MediaPage({
   mediaType,
@@ -61,6 +62,14 @@ function MediaPage({
       castSectionRef.current.scrollIntoView({ behavior: "smooth" });
     }
   };
+
+  const formattedTitle =
+    mediaType === "tv"
+      ? mediaData?.name
+      : mediaData?.title
+          .toLowerCase()
+          .replace(/[^\w\s]/gi, "")
+          .replace(/\s+/g, "-");
 
   let rating;
 
@@ -121,7 +130,7 @@ function MediaPage({
             {mediaType === "tv" ? "tv series" : "movie"}
           </span>
           <h1 className="dark-shadow text-2xl font-bold tracking-wider text-white md:text-4xl">
-            {mediaType === "tv" ? mediaData?.title : mediaData?.name}
+            {mediaType === "movie" ? mediaData?.title : mediaData?.name}
           </h1>
           <div className="flex items-center gap-4 text-white">
             <Link
@@ -206,13 +215,13 @@ function MediaPage({
               />
             )}
           </div>
-          <Button
-            size="lg"
-            variant="outline"
-            className="flex w-fit items-center gap-2 px-3 shadow-lg"
-          >
-            Add to watchlist <Plus size={18} strokeWidth={3} />
-          </Button>
+          <AddToWatchlist
+            item={{
+              title: mediaType === "movie" ? mediaData?.title : mediaData?.name,
+              poster_image: mediaData?.poster_path,
+              link: `/${mediaType}/${mediaData?.id}/${formattedTitle}`,
+            }}
+          />
         </section>
         <section className="container relative z-10 flex w-full flex-col gap-8 lg:flex-row lg:gap-6">
           <Image
@@ -276,7 +285,8 @@ function MediaPage({
           />
         </div>
       </div>
-      {(recommendedShows && recommendedShows.length > 0) || (recommendedMovies && recommendedMovies.length > 0) ? (
+      {(recommendedShows && recommendedShows.length > 0) ||
+      (recommendedMovies && recommendedMovies.length > 0) ? (
         <div className="flex flex-col items-center gap-20 overflow-hidden pt-16">
           <div className="container pr-0">
             <div className="relative z-10 -mb-4 flex flex-row items-baseline gap-4 px-1 pr-8 text-white lg:pr-12">
@@ -288,8 +298,8 @@ function MediaPage({
               width="min-[475px]:basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/6"
             />
           </div>
-        </div>) : (
-      null)}
+        </div>
+      ) : null}
     </>
   );
 }

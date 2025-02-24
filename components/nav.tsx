@@ -133,15 +133,17 @@ export default function Nav() {
 
         <ul className="hidden flex-row items-center gap-6 md:flex">
           <li className="mr-4 hidden h-12 w-12 md:block">
-            <Image
-              src={Logo}
-              width={50}
-              height={50}
-              alt="Filmax Logo"
-              priority
-              className="mt-2"
-              loading="eager"
-            />
+            <Link href="/dashboard">
+              <Image
+                src={Logo}
+                width={50}
+                height={50}
+                alt="Filmax Logo"
+                priority
+                className="mt-2"
+                loading="eager"
+              />
+            </Link>
           </li>
 
           <li>

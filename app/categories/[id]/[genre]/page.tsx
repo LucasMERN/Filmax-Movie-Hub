@@ -22,7 +22,6 @@ export default function Page({
 }) {
   const { id, genre } = params;
   const formattedGenre = decodeURIComponent(genre);
-  console.log(id);
   return (
     <main className="min-h-screen overflow-hidden">
       <MediaGrid
