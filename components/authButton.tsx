@@ -2,14 +2,21 @@
 
 import React from "react";
 import { Button } from "@/components/ui/button";
-import { useRouter } from "next/navigation";
-import { buttonVariants } from "@/components/ui/button";
-import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
+import {
+  SignInButton,
+  SignedIn,
+  SignedOut,
+  UserButton,
+  useUser,
+} from "@clerk/nextjs";
 
 function AuthButton() {
-  const router = useRouter();
+  const { user } = useUser();
+
+  console.log(user?.firstName);
   return (
-    <>
+    <div className="flex items-center gap-4 text-white">
+      {!user ? null : <div>Welcome, {user.firstName}</div>}
       <SignedOut>
         <SignInButton
           mode="modal"
@@ -41,7 +48,7 @@ function AuthButton() {
           }}
         />
       </SignedIn>
-    </>
+    </div>
   );
 }
 

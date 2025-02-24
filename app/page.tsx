@@ -11,7 +11,7 @@ import stranger from "@/public/stranger.png";
 import loader from "@/public/loader.gif";
 import Footer from "@/components/footer";
 import type { Metadata } from "next";
-import AuthButton from "@/components/AuthButton";
+import AuthButton from "@/components/authButton";
 
 export const metadata: Metadata = {
   title: "Welcome to Filmax Cinema Hub",
