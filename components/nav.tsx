@@ -29,7 +29,7 @@ export default function Nav() {
           "linear-gradient(180deg, rgba(0, 0, 0, 1) 10%, rgb(0 0 0 / 76%) 54%, rgb(0 0 0 / 38%) 86%, rgba(255, 255, 255, 0) 100%)",
       }}
     >
-      <div className="container mx-auto flex flex-col gap-4 md:flex-row md:items-center md:justify-between md:gap-0 ">
+      <div className="container mx-auto flex flex-row items-center justify-between gap-4 md:gap-0 ">
         <Sheet>
           <SheetTrigger asChild>
             <Button variant="outline" size="icon" className="md:hidden">
@@ -112,21 +112,7 @@ export default function Nav() {
                     Watchlist
                   </Link>
                 </li>
-                <li>
-                  <UserButton
-                    appearance={{
-                      elements: {
-                        avatarBox: "w-9 h-9 border-2 border-primary",
-                      },
-                    }}
-                  />
-                </li>
               </SignedIn>
-              <li>
-                <SignedOut>
-                  <AuthButton />
-                </SignedOut>
-              </li>
             </ul>
             <SheetFooter>
               <Image
@@ -139,6 +125,21 @@ export default function Nav() {
             </SheetFooter>
           </SheetContent>
         </Sheet>
+        <div className="md:hidden">
+          <SignedIn>
+            <UserButton
+              appearance={{
+                elements: {
+                  avatarBox: "w-9 h-9 border-2 border-primary",
+                },
+              }}
+            />
+          </SignedIn>
+
+          <SignedOut>
+            <AuthButton />
+          </SignedOut>
+        </div>
 
         <ul className="hidden flex-row items-center gap-6 md:flex">
           <li className="mr-4 hidden h-12 w-12 md:block">
