@@ -1,17 +1,19 @@
 This is a [Next.js](https://nextjs.org/) project using the TMBD movie API.
 
-Visit the live site: [Click Here!](https://movie-api-fe.vercel.app/)
+Visit the live site: [Click Here!](https://filmaxcinemahub.com/)
 
 ![Filmax-Homepage](https://github.com/LucasMERN/Filmmax-Movie-Hub/assets/94091522/427ecb3e-7336-42ee-929b-3c4c67174d74)
 
 ## Getting Started
 
 ### 1. Clone the repository:
+
 ```bash
 git clone <repo link>
 ```
 
 ### 2. Install dependancies:
+
 ```bash
 npm install
 ```
@@ -19,12 +21,14 @@ npm install
 ### 3. Sign up for an api key and bearer token with [TMBD](https://www.themoviedb.org/)
 
 ### 4. Create an .env file and give API_KEY and API_TOKEN the appropriate values from TMBD
+
 ```bash
-NEXT_PUBLIC_API_KEY=your-key-here
-NEXT_PUBLIC_API_TOKEN=your-token-here
+TMDB_ACCESS_TOKEN=your-token-here
+TMDB_API_KEY=your-key-here
 ```
 
 ### 5. Start your development server:
+
 ```bash
 npm run dev
 # or
@@ -58,7 +62,6 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 ## TODO
 
-- Add user authentication to allow users to rate, add content to lists, and favorite items - branch name: /feature/auth-pipeline
 - Add watch providers to movie and tv show pages to allow users to find out what platforms they can watch the specific media on - branch name: /feature/watch-providers
 - Add reviews section to movie and tv show pages to give more insight into the media they are currently viewing - branch name: /feature/reviews
 - Add search params for pagination (?page=2) with useSearchParams - branch name: /feature/pagination-params
