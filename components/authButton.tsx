@@ -15,7 +15,9 @@ function AuthButton() {
 
   return (
     <div className="flex items-center gap-4 text-white">
-      {!user ? null : <div>Welcome, {user.firstName}</div>}
+      {!user ? null : (
+        <div className="hidden lg:block">Welcome, {user.firstName}</div>
+      )}
       <SignedOut>
         <SignInButton
           mode="modal"

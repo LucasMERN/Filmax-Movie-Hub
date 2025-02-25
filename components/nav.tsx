@@ -15,7 +15,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
-import { SignedIn, SignedOut } from "@clerk/nextjs";
+import { SignedIn, SignedOut, SignOutButton, UserButton } from "@clerk/nextjs";
 import AuthButton from "@/components/authButton";
 
 export default function Nav() {
@@ -46,7 +46,7 @@ export default function Nav() {
                 Pick from our route selection to navigate the site!
               </SheetDescription>
             </SheetHeader>
-            <ul className="-mt-32 flex flex-col gap-6">
+            <ul className="flex flex-col gap-6">
               <li>
                 <Link
                   className={`link ${
@@ -111,6 +111,15 @@ export default function Nav() {
                   >
                     Watchlist
                   </Link>
+                </li>
+                <li>
+                  <UserButton
+                    appearance={{
+                      elements: {
+                        avatarBox: "w-9 h-9 border-2 border-primary",
+                      },
+                    }}
+                  />
                 </li>
               </SignedIn>
               <li>

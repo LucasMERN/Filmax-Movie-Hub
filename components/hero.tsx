@@ -6,8 +6,9 @@ import {
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
+  type CarouselApi,
 } from "@/components/ui/heroCarousel";
-import React, { useState } from "react";
+import React, { useState, useCallback, useEffect, useRef } from "react";
 import { Card } from "@/components/ui/card";
 import BackgroundImage from "@/components/ui/backgroundImage";
 import Link from "next/link";
@@ -16,6 +17,44 @@ import { Movie, TV } from "@/types/api";
 const Hero = ({ data }: { data: Movie[] & TV[] }) => {
   const [currentMovieIndex, setCurrentMovieIndex] = useState(8);
   const [isImageVisible, setIsImageVisible] = useState(true);
+  const [emblaApi, setEmblaApi] = useState<CarouselApi | null>(null);
+
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  const debouncedUpdateCurrentMovieIndex = useCallback(() => {
+    if (!emblaApi) return;
+    let newIndex = emblaApi.selectedScrollSnap();
+    newIndex = (newIndex - 2 + data.length) % data.length;
+
+    setIsImageVisible(false);
+
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+
+    timeoutRef.current = setTimeout(() => {
+      setCurrentMovieIndex(newIndex);
+      setIsImageVisible(true);
+    }, 500);
+  }, [data.length, emblaApi]);
+
+  const setApi = (api: CarouselApi) => {
+    setEmblaApi(api);
+  };
+
+  useEffect(() => {
+    if (!emblaApi) return;
+
+    const handleSettle = () => {
+      debouncedUpdateCurrentMovieIndex();
+    };
+
+    emblaApi.on("settle", handleSettle);
+
+    return () => {
+      emblaApi.off("settle", handleSettle);
+    };
+  }, [emblaApi, debouncedUpdateCurrentMovieIndex]);
 
   function handlePreviousClick() {
     setIsImageVisible(false);
@@ -123,6 +162,7 @@ const Hero = ({ data }: { data: Movie[] & TV[] }) => {
             duration: 40,
           }}
           className="mt-4 w-full"
+          setApi={setApi}
         >
           <CarouselContent className="invisible lg:visible">
             {data.map((movie: any, index: number) => {
