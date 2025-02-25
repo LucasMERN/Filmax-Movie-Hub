@@ -45,11 +45,12 @@ export const getWatchlist = async (id?: string) => {
   const records = await prisma.watchlist.findMany({
     where: { userId: id },
     select: {
+      id: true,
       link: true,
       title: true,
       poster_image: true,
     },
-    distinct: ["link"],
+    distinct: ["id"],
     orderBy: {
       createdAt: "desc",
     },

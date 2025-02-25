@@ -25,12 +25,12 @@ import {
 import { RadialChart } from "@/components/radialChart";
 import BackgroundImage from "@/components/ui/backgroundImage";
 import { badgeVariants } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardTitle } from "@/components/ui/card";
 import Image from "next/image";
 import Link from "next/link";
-import AddToWatchlist from "./addToWatchlistButton";
+import { AddToWatchlist } from "@/components/watchlistButton";
+import { useUser } from "@clerk/nextjs";
 
 function MediaPage({
   mediaType,
@@ -55,6 +55,7 @@ function MediaPage({
   youtubeData: YouTubeVideo[];
   externalData: ExternalID;
 }) {
+  const userId = useUser();
   const castSectionRef = useRef<HTMLDivElement | null>(null);
 
   const scrollToCast = () => {
@@ -76,12 +77,18 @@ function MediaPage({
   switch (mediaType) {
     case "tv":
       if (tvRatingData !== undefined) {
-        rating = tvRatingData[0]?.rating;
+        tvRatingData.filter((item) => {
+          item.iso_3166_1 === "US" ? (rating = item.rating) : undefined;
+        });
       }
       break;
     case "movie":
       if (movieRatingData !== undefined) {
-        rating = movieRatingData[0]?.release_dates?.[0]?.certification;
+        movieRatingData.filter((item) => {
+          item.iso_3166_1 === "US"
+            ? (rating = item.release_dates[0].certification)
+            : undefined;
+        });
       }
       break;
     default:
@@ -221,6 +228,7 @@ function MediaPage({
               poster_image: mediaData?.poster_path,
               link: `/${mediaType}/${mediaData?.id}/${formattedTitle}`,
             }}
+            userId={userId.user?.id}
           />
         </section>
         <section className="container relative z-10 flex w-full flex-col gap-8 lg:flex-row lg:gap-6">

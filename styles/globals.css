@@ -40,7 +40,7 @@
     --bg-primary: #161616;
     --bg-accent: #202020;
     --green: #00a310;
-    --red: #ff0000;
+    --red: 255, 0, 0;
     --orange: #ff9900;
 
     --chart-1: 12 76% 61%;

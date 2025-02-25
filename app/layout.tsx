@@ -7,7 +7,7 @@ import { Analytics } from "@vercel/analytics/react";
 import { ClerkProvider } from "@clerk/nextjs";
 import BackToTopButton from "@/components/backToTop";
 import { currentUser } from "@clerk/nextjs/server";
-import { syncUserDBs } from "@/actions/user.action";
+import { syncUserDBs } from "@/app/actions/user.action";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,8 +21,6 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const user = await currentUser();
-  if (user) await syncUserDBs();
   return (
     <ClerkProvider>
       <html lang="en">

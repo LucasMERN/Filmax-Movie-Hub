@@ -1,7 +1,8 @@
-import { getUserID, getWatchlist } from "@/actions/user.action";
+import { getUserID, getWatchlist } from "@/app/actions/user.action";
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
+import { RemoveFromWatchlist } from "@/components/watchlistButton";
 
 export const metadata: Metadata = {
   title: "Filmax | Watchlist",
@@ -23,23 +24,31 @@ export default async function Watchlist() {
         </span>
       </div>
       <section className="container grid grid-cols-2 gap-6 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-7">
-        {records.map((item, index) => (
-          <Link
-            key={index}
-            href={item.link}
-            className="group w-full overflow-hidden"
-          >
-            <Image
-              src={`https://image.tmdb.org/t/p/w370_and_h556_bestv2/${item.poster_image}`}
-              width={342}
-              height={513}
-              className="h-full object-cover transition-transform group-hover:scale-105"
-              alt={`Poster image for ${item.title}`}
-              loading="lazy"
-              unoptimized
-            />
-          </Link>
-        ))}
+        {records.length > 0 &&
+          records.map((item, index) => (
+            <div className="group relative w-full overflow-hidden" key={index}>
+              <Link href={item.link}>
+                <Image
+                  src={`https://image.tmdb.org/t/p/w370_and_h556_bestv2/${item.poster_image}`}
+                  width={342}
+                  height={513}
+                  className="h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  alt={`Poster image for ${item.title}`}
+                  loading="lazy"
+                  unoptimized
+                />
+              </Link>
+              <RemoveFromWatchlist item={item} userId={id} />
+            </div>
+          ))}
+        {records.length === 0 && (
+          <div className="col-span-full flex flex-col items-center justify-center gap-4">
+            <h2 className="text-2xl font-bold text-white">No Items Found</h2>
+            <p className="text-lg text-white/60">
+              Add items to your watchlist to get started.
+            </p>
+          </div>
+        )}
       </section>
     </main>
   );
