@@ -35,7 +35,6 @@ export default async function Watchlist() {
                   className="h-full object-cover transition-transform duration-500 group-hover:scale-105"
                   alt={`Poster image for ${item.title}`}
                   loading="lazy"
-                  unoptimized
                 />
               </Link>
               <RemoveFromWatchlist item={item} userId={id} />

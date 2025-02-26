@@ -146,7 +146,6 @@ const LandingPromo = ({
               opacity: isImageVisible ? 1 : 0,
               transition: "opacity 1s ease-in-out",
             }}
-            unoptimized
           />
           <div
             className="absolute inset-0 z-10"

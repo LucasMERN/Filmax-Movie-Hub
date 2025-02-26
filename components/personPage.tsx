@@ -66,7 +66,6 @@ const PersonPage = ({
             src={`https://image.tmdb.org/t/p/w370_and_h556_bestv2/${personData.profile_path}`}
             alt={`Professional headshot of ${personData.name}`}
             className="float-left mr-3 lg:mb-4 lg:mr-8 lg:w-72"
-            unoptimized
           />
           <h1 className="hidden text-3xl font-bold text-white lg:mb-4 lg:block">
             {personData.name}
@@ -215,7 +214,6 @@ const PersonPage = ({
                             width={200}
                             height={200}
                             className="h-auto"
-                            unoptimized
                           />
                         </Card>
                       </Link>

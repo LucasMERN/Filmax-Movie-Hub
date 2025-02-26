@@ -27,7 +27,6 @@ const BackgroundImage = ({
       objectFit: "cover",
     }}
     className={className}
-    unoptimized
   />
 );
 

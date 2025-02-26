@@ -240,7 +240,6 @@ function MediaPage({
             alt={`Poster image for ${mediaType === "tv" ? mediaData?.title : mediaData?.name}`}
             priority
             loading="eager"
-            unoptimized
           />
           <div className="flex flex-col gap-3 md:w-1/2">
             <h2 className="dark-shadow -mb-2 text-lg font-semibold tracking-widest text-white">
