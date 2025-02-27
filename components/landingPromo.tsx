@@ -141,6 +141,7 @@ const LandingPromo = ({
             fill
             priority
             loading="eager"
+            unoptimized
             src={`https://image.tmdb.org/t/p/original/${promoMovies[carousel[activeIndex].activeImage]?.backdrop_path}`}
             style={{
               opacity: isImageVisible ? 1 : 0,

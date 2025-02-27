@@ -116,6 +116,7 @@ const EpisodeGrid = ({ mediaData, id }: { mediaData: TV; id: number }) => {
                         height={200}
                         className="aspect-video w-full"
                         loading="lazy"
+                        unoptimized
                       />
                     ) : (
                       <Image
@@ -125,6 +126,7 @@ const EpisodeGrid = ({ mediaData, id }: { mediaData: TV; id: number }) => {
                         height={200}
                         className="aspect-video w-full"
                         loading="lazy"
+                        unoptimized
                       />
                     )}
                     <div className="flex gap-2">

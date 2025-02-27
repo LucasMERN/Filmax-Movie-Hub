@@ -121,6 +121,7 @@ export default function Nav() {
                 height={50}
                 alt="Filmax Logo"
                 loading="eager"
+                unoptimized
               />
             </SheetFooter>
           </SheetContent>
@@ -152,6 +153,7 @@ export default function Nav() {
                 priority
                 className="mt-2"
                 loading="eager"
+                unoptimized
               />
             </Link>
           </li>
