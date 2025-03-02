@@ -179,7 +179,7 @@ const GridItems = ({
                   width={342}
                   height={513}
                   className="h-full object-cover transition-transform group-hover:scale-105"
-                  alt={`Poster image for ${item.title}`}
+                  alt={`Poster image for ${item.title ?? item.name}`}
                   loading="lazy"
                   unoptimized
                 />

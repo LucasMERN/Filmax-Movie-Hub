@@ -237,7 +237,7 @@ function MediaPage({
             width={175}
             height={250}
             src={`https://image.tmdb.org/t/p/w370_and_h556_bestv2/${mediaData?.poster_path}`}
-            alt={`Poster image for ${mediaType === "tv" ? mediaData?.title : mediaData?.name}`}
+            alt={`Poster image for ${mediaType === "movie" ? mediaData?.title : mediaData?.name}`}
             priority
             loading="eager"
             unoptimized

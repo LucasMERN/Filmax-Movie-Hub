@@ -54,8 +54,9 @@ const ProductCarousel: React.FC<CarouselProps> = ({
                           <BackgroundImage
                             src={`https://image.tmdb.org/t/p/w370_and_h556_bestv2/${mediaType == "person" ? content?.profile_path : content?.poster_path}`}
                             alt={
-                              "Poster image for" + content?.title ||
-                              "Poster image"
+                              content?.title !== undefined
+                                ? "Poster image for" + content?.title
+                                : "Poster image for" + content?.name
                             }
                             className="transition-transform group-hover:scale-105"
                           />
