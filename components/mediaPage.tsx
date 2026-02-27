@@ -236,7 +236,7 @@ function MediaPage({
             className="hidden rounded-lg border border-white text-card-foreground shadow-2xl transition-transform hover:rotate-3 hover:scale-105 lg:block"
             width={175}
             height={250}
-            src={`https://image.tmdb.org/t/p/w370_and_h556_bestv2/${mediaData?.poster_path}`}
+            src={`https://image.tmdb.org/t/p/w342/${mediaData?.poster_path}`}
             alt={`Poster image for ${mediaType === "movie" ? mediaData?.title : mediaData?.name}`}
             priority
             loading="eager"

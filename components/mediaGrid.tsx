@@ -175,7 +175,7 @@ const GridItems = ({
                 className="group w-full overflow-hidden"
               >
                 <Image
-                  src={`https://image.tmdb.org/t/p/w370_and_h556_bestv2/${item.poster_path}`}
+                  src={`https://image.tmdb.org/t/p/w342/${item.poster_path}`}
                   width={342}
                   height={513}
                   className="h-full object-cover transition-transform group-hover:scale-105"

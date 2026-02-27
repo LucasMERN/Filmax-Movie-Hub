@@ -6,8 +6,9 @@ export async function generateMetadata({
 }: {
   params: { genre: string };
 }): Promise<Metadata> {
+  const { genre } = await params;
   const formattedTitle = decodeURIComponent(
-    params.genre.charAt(0).toUpperCase() + params.genre.slice(1),
+    genre.charAt(0).toUpperCase() + genre.slice(1),
   );
   return {
     title: `Filmax | ${formattedTitle}`,
@@ -15,12 +16,12 @@ export async function generateMetadata({
   };
 }
 
-export default function Page({
+export default async function Page({
   params,
 }: {
   params: { id: string; genre: string };
 }) {
-  const { id, genre } = params;
+  const { id, genre } = await params;
   const formattedGenre = decodeURIComponent(genre);
   return (
     <main className="min-h-screen overflow-hidden">

@@ -52,7 +52,7 @@ const ProductCarousel: React.FC<CarouselProps> = ({
                       <div className="flex flex-col items-center gap-2 p-1">
                         <Card className="relative h-96 w-full overflow-hidden bg-cover bg-center shadow-lg">
                           <BackgroundImage
-                            src={`https://image.tmdb.org/t/p/w370_and_h556_bestv2/${mediaType == "person" ? content?.profile_path : content?.poster_path}`}
+                            src={`https://image.tmdb.org/t/p/w342/${mediaType == "person" ? content?.profile_path : content?.poster_path}`}
                             alt={
                               content?.title !== undefined
                                 ? "Poster image for" + content?.title

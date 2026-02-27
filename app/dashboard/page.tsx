@@ -39,6 +39,8 @@ export default async function Dashboard() {
       return <div>No data available</div>;
     }
 
+    console.log(data?.results.slice(0, 10));
+
     return (
       <main className="min-h-screen overflow-hidden">
         <Hero data={data?.results.slice(0, 10)} />

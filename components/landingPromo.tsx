@@ -51,7 +51,7 @@ const LandingPromo = ({
         setActiveIndex((prevIndex) => (prevIndex + 1) % 3);
         setIsImageVisible(true);
       }, 1000);
-    }, 3000);
+    }, 5000);
 
     return () => clearInterval(interval);
   }, []);
@@ -83,7 +83,7 @@ const LandingPromo = ({
   return (
     <>
       {isLoading ? (
-        <div className="bg-${kjanhfajn} relative h-[450px] w-full overflow-hidden lg:h-[700px]">
+        <div className="relative h-[450px] w-full overflow-hidden lg:h-[700px]">
           <div
             className="absolute inset-0 z-10 h-full w-full object-cover"
             style={{

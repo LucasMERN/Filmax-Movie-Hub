@@ -17,7 +17,8 @@ export async function generateMetadata({
 }: {
   params: { name: string };
 }): Promise<Metadata> {
-  const formattedTitle = params.name
+  const { name } = await params;
+  const formattedTitle = name
     .split("-")
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
     .join(" ");
@@ -27,15 +28,21 @@ export async function generateMetadata({
   };
 }
 
-export default async function Page({ params }: { params: { id: number } }) {
+export default async function Page({
+  params,
+}: {
+  params: { name: string; id: number };
+}) {
   try {
-    const { id } = params;
+    const { id } = await params;
     const mediaData = await getSingle("tv", id);
     const recommendedShows = await getRecommended(id, "tv");
     const castData = await getCredits(id, "tv");
     const ratingData = await getContentRating("tv", id);
     const externalData = await getExternalId(id, "tv");
     const youtubeData = await getYouTubeVideo(id, "tv");
+
+    console.log(params.name);
 
     return (
       <MediaPage

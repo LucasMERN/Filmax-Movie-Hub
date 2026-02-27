@@ -63,7 +63,7 @@ const PersonPage = ({
             loading="eager"
             width={150}
             height={200}
-            src={`https://image.tmdb.org/t/p/w370_and_h556_bestv2/${personData.profile_path}`}
+            src={`https://image.tmdb.org/t/p/w342/${personData.profile_path}`}
             alt={`Professional headshot of ${personData.name}`}
             className="float-left mr-3 lg:mb-4 lg:mr-8 lg:w-72"
             unoptimized
@@ -207,14 +207,14 @@ const PersonPage = ({
                         href={`${movie.media_type === "movie" ? `/movie/${movie.id}/${formattedTitle}` : `/tv/${movie.id}/${formattedTitle}`}`}
                         className="group overflow-hidden"
                       >
-                        <Card className="relative transition-transform group-hover:scale-105">
+                        <Card className="relative h-full transition-transform group-hover:scale-105">
                           <Image
-                            src={`https://image.tmdb.org/t/p/w370_and_h556_bestv2/${movie.poster_path}`}
+                            src={`https://image.tmdb.org/t/p/w342/${movie.poster_path}`}
                             alt={`Poster image for ${movie.title}`}
                             loading="lazy"
                             width={200}
                             height={200}
-                            className="h-auto"
+                            className="h-full"
                             unoptimized
                           />
                         </Card>

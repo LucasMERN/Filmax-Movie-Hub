@@ -17,7 +17,8 @@ export async function generateMetadata({
 }: {
   params: { name: string };
 }): Promise<Metadata> {
-  const formattedTitle = params.name
+  const { name } = await params;
+  const formattedTitle = name
     .split("-")
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
     .join(" ");
@@ -29,7 +30,7 @@ export async function generateMetadata({
 
 export default async function Page({ params }: { params: { id: number } }) {
   try {
-    const { id } = params;
+    const { id } = await params;
     const mediaData = await getSingle("movie", id);
     const recommendedMovies = await getRecommended(id, "movie");
     const castData = await getCredits(id, "movie");

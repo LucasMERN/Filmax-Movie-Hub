@@ -29,7 +29,7 @@ export default async function Watchlist() {
             <div className="group relative w-full overflow-hidden" key={index}>
               <Link href={item.link}>
                 <Image
-                  src={`https://image.tmdb.org/t/p/w370_and_h556_bestv2/${item.poster_image}`}
+                  src={`https://image.tmdb.org/t/p/w342/${item.poster_image}`}
                   width={342}
                   height={513}
                   className="h-full object-cover transition-transform duration-500 group-hover:scale-105"

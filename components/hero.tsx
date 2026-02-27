@@ -182,7 +182,7 @@ const Hero = ({ data }: { data: Movie[] & TV[] }) => {
                   >
                     <Card className="relative h-96 w-full overflow-hidden border-4 border-white bg-cover bg-center shadow-lg">
                       <BackgroundImage
-                        src={`https://image.tmdb.org/t/p/w370_and_h556_bestv2/${movie?.poster_path}`}
+                        src={`https://image.tmdb.org/t/p/w342/${movie?.poster_path}`}
                         alt={`Poster image for ${movie?.title}`}
                         lazy="eager"
                       />

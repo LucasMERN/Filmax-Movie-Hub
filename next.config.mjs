@@ -1,6 +1,7 @@
 import { withNextVideo } from "next-video/process";
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  turbopack: {},
   images: {
     remotePatterns: [
       {
@@ -9,6 +10,7 @@ const nextConfig = {
         port: "",
       },
     ],
+    qualities: [25, 50, 75, 80],
   },
 };
 
