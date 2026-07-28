@@ -1,10 +1,10 @@
-import Image, { StaticImageData } from "next/image";
+import Image, { StaticImageData } from 'next/image';
 
 type BackgroundImageProps = {
   src: string | StaticImageData;
   alt: string;
   className?: string;
-  lazy?: "lazy" | "eager";
+  lazy?: 'lazy' | 'eager';
   priority?: boolean;
 };
 
@@ -12,7 +12,7 @@ const BackgroundImage = ({
   src,
   alt,
   className,
-  lazy = "lazy",
+  lazy = 'lazy',
   priority = false,
 }: BackgroundImageProps) => (
   <Image
@@ -24,7 +24,7 @@ const BackgroundImage = ({
     priority={priority}
     sizes="100%"
     style={{
-      objectFit: "cover",
+      objectFit: 'cover',
     }}
     className={className}
     unoptimized

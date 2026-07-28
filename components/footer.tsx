@@ -1,18 +1,14 @@
-import { Github, Linkedin } from "lucide-react";
-import Link from "next/link";
+import { Github, Linkedin } from 'lucide-react';
+import Link from 'next/link';
 
 const Footer = () => {
   return (
-    <footer className="container mx-auto flex flex-col gap-8 pb-12 pt-24 text-center">
+    <footer className="gap-8 pb-12 pt-24 container mx-auto flex flex-col text-center">
       <div className="relative flex items-center justify-center">
-        <span className="absolute left-0 top-1/2 w-[25%] -translate-y-1/2 transform border-t border-white md:w-[40%]"></span>
-        <ul className="z-10 flex gap-8">
+        <span className="left-0 border-white md:w-[40%] absolute top-1/2 w-[25%] -translate-y-1/2 transform border-t"></span>
+        <ul className="gap-8 z-10 flex">
           <li>
-            <Link
-              href="https://github.com/LucasMERN"
-              className="group"
-              target="_blank"
-            >
+            <Link href="https://github.com/LucasMERN" className="group" target="_blank">
               <Github
                 size={40}
                 color="white"
@@ -34,13 +30,13 @@ const Footer = () => {
             </Link>
           </li>
         </ul>
-        <span className="absolute right-0 top-1/2 w-[25%] -translate-y-1/2 transform border-t border-white md:w-[40%]"></span>
+        <span className="right-0 border-white md:w-[40%] absolute top-1/2 w-[25%] -translate-y-1/2 transform border-t"></span>
       </div>
       <h3 className="text-xl font-medium text-white">
-        Designed & Developed by{" "}
+        Designed & Developed by{' '}
         <Link
           href="#"
-          className="underline decoration-dashed decoration-1 underline-offset-4 transition-all hover:font-bold"
+          className="hover:font-bold underline decoration-dashed decoration-1 underline-offset-4 transition-all"
         >
           Lucas Winkler
         </Link>

@@ -1,6 +1,6 @@
 export default function Loader() {
   return (
-    <div className="container mx-auto flex min-h-screen flex-col items-center justify-center gap-8">
+    <div className="gap-8 container mx-auto flex min-h-screen flex-col items-center justify-center">
       <h1 className="text-4xl font-bold text-white">Loading...</h1>
       <div role="status">
         <svg

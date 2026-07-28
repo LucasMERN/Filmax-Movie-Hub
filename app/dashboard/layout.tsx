@@ -1,13 +1,9 @@
-import { Suspense } from "react";
-import Loading from "./loading";
-import Nav from "@/components/nav";
-import Footer from "@/components/footer";
+import { Suspense } from 'react';
+import Loading from './loading';
+import Nav from '@/components/nav';
+import Footer from '@/components/footer';
 
-export default function DashboardLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   return (
     <section className="w-full">
       <Nav />

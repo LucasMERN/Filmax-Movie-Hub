@@ -1,8 +1,8 @@
-"use server";
+'use server';
 
-import prisma from "@/lib/prisma";
-import { auth } from "@clerk/nextjs/server";
-import { revalidatePath } from "next/cache";
+import prisma from '@/lib/prisma';
+import { auth } from '@clerk/nextjs/server';
+import { revalidatePath } from 'next/cache';
 
 export async function addToWatchlist({
   title,
@@ -16,7 +16,7 @@ export async function addToWatchlist({
   const { userId } = await auth();
 
   if (!userId) {
-    throw new Error("Unauthorized"); // Or handle this more gracefully
+    throw new Error('Unauthorized');
   }
 
   try {
@@ -39,11 +39,11 @@ export async function addToWatchlist({
       },
     });
 
-    revalidatePath("/watchlist");
+    revalidatePath('/watchlist');
     return { success: true };
   } catch (error) {
-    console.error("Failed to add to watchlist:", error);
-    return { error: "Failed to add to watchlist" };
+    console.error('Failed to add to watchlist:', error);
+    return { error: 'Failed to add to watchlist' };
   }
 }
 
@@ -51,7 +51,7 @@ export async function removeFromWatchlist(link: string) {
   const { userId } = await auth();
 
   if (!userId) {
-    throw new Error("Unauthorized");
+    throw new Error('Unauthorized');
   }
 
   try {
@@ -60,7 +60,7 @@ export async function removeFromWatchlist(link: string) {
     });
 
     if (!user) {
-      return { error: "User not found" };
+      return { error: 'User not found' };
     }
 
     await prisma.watchlist.deleteMany({
@@ -70,18 +70,15 @@ export async function removeFromWatchlist(link: string) {
       },
     });
 
-    revalidatePath("/watchlist");
+    revalidatePath('/watchlist');
     return { success: true };
   } catch (error) {
-    console.error("Failed to remove from watchlist:", error);
-    return { error: "Failed to remove from watchlist" };
+    console.error('Failed to remove from watchlist:', error);
+    return { error: 'Failed to remove from watchlist' };
   }
 }
 
-export async function checkIfItemInWatchlist(
-  userId: string,
-  link: string,
-): Promise<boolean> {
+export async function checkIfItemInWatchlist(userId: string, link: string): Promise<boolean> {
   try {
     if (!userId) {
       return false;
@@ -103,7 +100,7 @@ export async function checkIfItemInWatchlist(
     });
     return !!existingWatchlistItem;
   } catch (error) {
-    console.error("Error checking watchlist:", error);
+    console.error('Error checking watchlist:', error);
     return false;
   }
 }

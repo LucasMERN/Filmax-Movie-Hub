@@ -29,3 +29,4 @@ export const fetchData = async (url: string) => {
 };
 
 export const apiUrl = 'https://api.themoviedb.org/3';
+

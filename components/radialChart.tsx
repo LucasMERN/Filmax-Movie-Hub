@@ -1,16 +1,10 @@
-"use client";
+'use client';
 
-import {
-  Label,
-  PolarGrid,
-  PolarRadiusAxis,
-  RadialBar,
-  RadialBarChart,
-} from "recharts";
+import { Label, PolarGrid, PolarRadiusAxis, RadialBar, RadialBarChart } from 'recharts';
 
-import { Card, CardContent, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardTitle } from '@/components/ui/card';
 
-import { ChartConfig, ChartContainer } from "@/components/ui/chart";
+import { ChartConfig, ChartContainer } from '@/components/ui/chart';
 
 export function RadialChart({
   voteCount,
@@ -19,26 +13,24 @@ export function RadialChart({
   voteCount: number;
   voteAverage: number;
 }) {
-  const chartData = [
-    { browser: "safari", visitors: voteAverage, fill: "var(--color-safari)" },
-  ];
+  const chartData = [{ browser: 'safari', visitors: voteAverage, fill: 'var(--color-safari)' }];
 
   const chartConfig = {
     visitors: {
-      label: "Visitors",
+      label: 'Visitors',
     },
     safari: {
-      label: "Safari",
-      color: "hsl(var(--chart-2))",
+      label: 'Safari',
+      color: 'hsl(var(--chart-2))',
     },
   } satisfies ChartConfig;
 
   return (
-    <Card className="absolute -top-24 right-0 hidden flex-col shadow-none lg:flex">
-      <CardTitle className="dark-shadow pb-2 text-center text-lg font-semibold text-white">
+    <Card className="-top-24 right-0 lg:flex absolute hidden flex-col shadow-none">
+      <CardTitle className="dark-shadow pb-2 text-lg font-semibold text-white text-center">
         Audience Score
       </CardTitle>
-      <CardContent className="flex-1 pb-0">
+      <CardContent className="pb-0 flex-1">
         <ChartContainer
           config={chartConfig}
           className="mx-auto aspect-square max-h-[250px] min-h-[180px]"
@@ -57,15 +49,11 @@ export function RadialChart({
               className="first:fill-transparent last:fill-transparent"
               polarRadius={[86, 74]}
             />
-            <RadialBar
-              dataKey="visitors"
-              background={false}
-              cornerRadius={10}
-            />
+            <RadialBar dataKey="visitors" background={false} cornerRadius={10} />
             <PolarRadiusAxis tick={false} tickLine={false} axisLine={false}>
               <Label
                 content={({ viewBox }) => {
-                  if (viewBox && "cx" in viewBox && "cy" in viewBox) {
+                  if (viewBox && 'cx' in viewBox && 'cy' in viewBox) {
                     return (
                       <text
                         x={viewBox.cx}
@@ -80,11 +68,7 @@ export function RadialChart({
                         >
                           {voteAverage}
                         </tspan>
-                        <tspan
-                          x={viewBox.cx}
-                          y={(viewBox.cy || 0) + 24}
-                          className="fill-white"
-                        >
+                        <tspan x={viewBox.cx} y={(viewBox.cy || 0) + 24} className="fill-white">
                           {voteCount}
                         </tspan>
                       </text>

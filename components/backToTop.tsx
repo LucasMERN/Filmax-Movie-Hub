@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import React, { useState, useEffect } from "react";
-import { ArrowUp } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import React, { useState, useEffect } from 'react';
+import { ArrowUp } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 export default function BackToTopButton() {
   const [isVisible, setIsVisible] = useState(false);
@@ -18,14 +18,14 @@ export default function BackToTopButton() {
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
-      behavior: "smooth",
+      behavior: 'smooth',
     });
   };
 
   useEffect(() => {
-    window.addEventListener("scroll", toggleVisibility);
+    window.addEventListener('scroll', toggleVisibility);
     return () => {
-      window.removeEventListener("scroll", toggleVisibility);
+      window.removeEventListener('scroll', toggleVisibility);
     };
   }, []);
 
@@ -34,7 +34,7 @@ export default function BackToTopButton() {
       <Button
         onClick={scrollToTop}
         variant="outline"
-        className="fixed bottom-24 right-8 z-50 animate-bounce rounded-full border border-primary bg-primary px-3 py-6 text-primary text-white shadow-lg focus:outline-none lg:right-20"
+        className="bottom-24 right-8 animate-bounce px-3 py-6 text-white shadow-lg lg:right-20 fixed z-50 rounded-full border border-primary bg-primary text-primary focus:outline-none"
         aria-label="click to return to the top of the page"
       >
         <ArrowUp size={24} />

@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import Image from "next/image";
-import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import Image from 'next/image';
+import Link from 'next/link';
+import React, { useEffect, useState } from 'react';
 import {
   Pagination,
   PaginationContent,
@@ -10,16 +10,16 @@ import {
   PaginationPrevious,
   PaginationLink,
   PaginationNext,
-} from "@/components/ui/pagination";
-import { getMediaByGenre, getPopular, getTrending } from "@/lib/api";
-import MediaGridSkeleton from "@/components/skeletons/mediaGridSkeleton";
+} from '@/components/ui/pagination';
+import { getMediaByGenre, getPopular, getTrending } from '@/lib/api';
+import MediaGridSkeleton from '@/components/skeletons/mediaGridSkeleton';
 
 type MediaGridProps = {
   title: string;
-  fetchType: "genre" | "popular" | "trending";
+  fetchType: 'genre' | 'popular' | 'trending';
   genreID?: string;
   subtitle: string;
-  mediaType?: "movie" | "tv";
+  mediaType?: 'movie' | 'tv';
 };
 
 type Data = {
@@ -36,7 +36,7 @@ const MediaGrid = ({
   fetchType,
   genreID,
   subtitle,
-  mediaType = "movie",
+  mediaType = 'movie',
 }: MediaGridProps) => {
   const [mediaData, setMediaData] = useState<Data[]>([]);
   const [error, setError] = useState<string | null>(null);
@@ -49,26 +49,21 @@ const MediaGrid = ({
       setLoading(true);
 
       const startPage = (currentPage - 1) * 4 + 1;
-      const pagesToFetch = [
-        startPage,
-        startPage + 1,
-        startPage + 2,
-        startPage + 3,
-      ];
+      const pagesToFetch = [startPage, startPage + 1, startPage + 2, startPage + 3];
 
       try {
         const fetchPromises = pagesToFetch.map((page) => {
-          if (fetchType === "genre" && genreID) {
-            if (genreID === "10765") {
-              return getMediaByGenre(mediaType, "878", page);
-            } else if (genreID === "10759") {
-              return getMediaByGenre(mediaType, "28", page);
+          if (fetchType === 'genre' && genreID) {
+            if (genreID === '10765') {
+              return getMediaByGenre(mediaType, '878', page);
+            } else if (genreID === '10759') {
+              return getMediaByGenre(mediaType, '28', page);
             } else {
               return getMediaByGenre(mediaType, genreID, page);
             }
-          } else if (fetchType === "popular") {
+          } else if (fetchType === 'popular') {
             return getPopular(mediaType, page);
-          } else if (fetchType === "trending") {
+          } else if (fetchType === 'trending') {
             return getTrending(mediaType, page);
           } else {
             return Promise.resolve({ results: [] });
@@ -90,11 +85,11 @@ const MediaGrid = ({
             setLoading(false);
           }, 350);
         } else {
-          setError("No data available");
+          setError('No data available');
         }
       } catch (error) {
-        console.error("Error fetching Media Data:", error);
-        setError("Failed to fetch data");
+        console.error('Error fetching Media Data:', error);
+        setError('Failed to fetch data');
       }
     };
 
@@ -106,16 +101,12 @@ const MediaGrid = ({
   return (
     <>
       <GridHeader title={title} subtitle={subtitle} />
-      {loading ? (
-        <MediaGridSkeleton />
-      ) : (
-        <GridItems data={mediaData} mediaType={mediaType} />
-      )}
-      <Pagination className="flex w-full justify-center pt-12">
+      {loading ? <MediaGridSkeleton /> : <GridItems data={mediaData} mediaType={mediaType} />}
+      <Pagination className="pt-12 flex w-full justify-center">
         <PaginationContent>
           <PaginationItem>
             <PaginationPrevious
-              className={`${currentPage === 1 ? "pointer-events-none opacity-50" : "cursor-pointer opacity-100"} transition-all`}
+              className={`${currentPage === 1 ? 'pointer-events-none opacity-50' : 'cursor-pointer opacity-100'} transition-all`}
               onClick={() => setCurrentPage((prev) => prev - 1)}
             />
           </PaginationItem>
@@ -126,14 +117,11 @@ const MediaGrid = ({
               const isVisible = Math.abs(currentPage - pageIndex) <= 1;
 
               return (
-                <PaginationItem
-                  key={index}
-                  className={`${!isVisible ? "hidden" : ""} md:block`}
-                >
+                <PaginationItem key={index} className={`${!isVisible ? 'hidden' : ''} md:block`}>
                   <PaginationLink
                     isActive={currentPage === index + 1}
                     onClick={() => setCurrentPage(index + 1)}
-                    className={`${currentPage === index + 1 ? "pointer-events-none opacity-50" : "cursor-pointer opacity-100"} transition-all`}
+                    className={`${currentPage === index + 1 ? 'pointer-events-none opacity-50' : 'cursor-pointer opacity-100'} transition-all`}
                   >
                     {index + 1}
                   </PaginationLink>
@@ -142,7 +130,7 @@ const MediaGrid = ({
             })}
           <PaginationItem>
             <PaginationNext
-              className={`${currentPage === 10 ? "pointer-events-none opacity-50" : "cursor-pointer opacity-100"} transition-all`}
+              className={`${currentPage === 10 ? 'pointer-events-none opacity-50' : 'cursor-pointer opacity-100'} transition-all`}
               onClick={() => setCurrentPage((prev) => prev + 1)}
             />
           </PaginationItem>
@@ -152,20 +140,14 @@ const MediaGrid = ({
   );
 };
 
-const GridItems = ({
-  data,
-  mediaType,
-}: {
-  data: Data[];
-  mediaType: "movie" | "tv";
-}) => {
+const GridItems = ({ data, mediaType }: { data: Data[]; mediaType: 'movie' | 'tv' }) => {
   return (
-    <section className="container grid grid-cols-2 gap-6 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-7">
+    <section className="gap-6 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-7 container grid grid-cols-2">
       {data?.map((item, index) => {
-        const formattedTitle = (item?.name || item?.title || "")
+        const formattedTitle = (item?.name || item?.title || '')
           .toLowerCase()
-          .replace(/[^\w\s]/gi, "")
-          .replace(/\s+/g, "-");
+          .replace(/[^\w\s]/gi, '')
+          .replace(/\s+/g, '-');
 
         return (
           <React.Fragment key={index}>
@@ -192,19 +174,13 @@ const GridItems = ({
   );
 };
 
-const GridHeader = ({
-  title,
-  subtitle,
-}: {
-  title: string;
-  subtitle: string;
-}) => {
+const GridHeader = ({ title, subtitle }: { title: string; subtitle: string }) => {
   return (
-    <div className="container flex w-full flex-col gap-2 pb-12 pt-24 md:pt-48">
-      <h1 className="text-4xl font-bold capitalize tracking-wider text-white">
-        {title.split("%20").join(" ")}
+    <div className="gap-2 pb-12 pt-24 md:pt-48 container flex w-full flex-col">
+      <h1 className="text-4xl font-bold tracking-wider text-white capitalize">
+        {title.split('%20').join(' ')}
       </h1>
-      <span className="text-sm font-medium uppercase tracking-widest text-white/60">
+      <span className="text-sm font-medium tracking-widest text-white/60 uppercase">
         {subtitle}
       </span>
     </div>

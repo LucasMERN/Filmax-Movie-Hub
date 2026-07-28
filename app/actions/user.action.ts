@@ -1,7 +1,7 @@
-"use server";
+'use server';
 
-import prisma from "@/lib/prisma";
-import { auth, currentUser } from "@clerk/nextjs/server";
+import prisma from '@/lib/prisma';
+import { auth, currentUser } from '@clerk/nextjs/server';
 
 export async function syncUserDBs() {
   try {
@@ -24,7 +24,7 @@ export async function syncUserDBs() {
 
     return dbUser;
   } catch (error) {
-    console.error("Error syncing user:", error);
+    console.error('Error syncing user:', error);
   }
 }
 
@@ -50,9 +50,9 @@ export const getWatchlist = async (id?: string) => {
       title: true,
       poster_image: true,
     },
-    distinct: ["id"],
+    distinct: ['id'],
     orderBy: {
-      createdAt: "desc",
+      createdAt: 'desc',
     },
   });
 

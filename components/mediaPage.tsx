@@ -1,17 +1,9 @@
-"use client";
+'use client';
 
-import React, { useRef } from "react";
-import EpisodeGrid from "@/components/episodeGrid";
-import {
-  Cast,
-  ContentRating,
-  ExternalID,
-  Movie,
-  ReleaseDate,
-  TV,
-  YouTubeVideo,
-} from "@/types/api";
-import ProductCarousel from "@/components/productCarousel";
+import React, { useRef } from 'react';
+import EpisodeGrid from '@/components/episodeGrid';
+import { Cast, ContentRating, ExternalID, Movie, ReleaseDate, TV, YouTubeVideo } from '@/types/api';
+import ProductCarousel from '@/components/productCarousel';
 import {
   Facebook,
   TwitterIcon,
@@ -21,16 +13,16 @@ import {
   Dot,
   Plus,
   ChevronsRight,
-} from "lucide-react";
-import { RadialChart } from "@/components/radialChart";
-import BackgroundImage from "@/components/ui/backgroundImage";
-import { badgeVariants } from "@/components/ui/badge";
-import { Badge } from "@/components/ui/badge";
-import { Card, CardTitle } from "@/components/ui/card";
-import Image from "next/image";
-import Link from "next/link";
-import { AddToWatchlist } from "@/components/watchlistButton";
-import { useUser } from "@clerk/nextjs";
+} from 'lucide-react';
+import { RadialChart } from '@/components/radialChart';
+import BackgroundImage from '@/components/ui/backgroundImage';
+import { badgeVariants } from '@/components/ui/badge';
+import { Badge } from '@/components/ui/badge';
+import { Card, CardTitle } from '@/components/ui/card';
+import Image from 'next/image';
+import Link from 'next/link';
+import { AddToWatchlist } from '@/components/watchlistButton';
+import { useUser } from '@clerk/nextjs';
 
 function MediaPage({
   mediaType,
@@ -44,7 +36,7 @@ function MediaPage({
   youtubeData,
   externalData,
 }: {
-  mediaType: "movie" | "tv";
+  mediaType: 'movie' | 'tv';
   id: number;
   mediaData: TV & Movie;
   cast: Cast[];
@@ -60,34 +52,32 @@ function MediaPage({
 
   const scrollToCast = () => {
     if (castSectionRef.current) {
-      castSectionRef.current.scrollIntoView({ behavior: "smooth" });
+      castSectionRef.current.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
   const formattedTitle =
-    mediaType === "tv"
+    mediaType === 'tv'
       ? mediaData?.name
       : mediaData?.title
           .toLowerCase()
-          .replace(/[^\w\s]/gi, "")
-          .replace(/\s+/g, "-");
+          .replace(/[^\w\s]/gi, '')
+          .replace(/\s+/g, '-');
 
   let rating;
 
   switch (mediaType) {
-    case "tv":
+    case 'tv':
       if (tvRatingData !== undefined) {
         tvRatingData.filter((item) => {
-          item.iso_3166_1 === "US" ? (rating = item.rating) : undefined;
+          item.iso_3166_1 === 'US' ? (rating = item.rating) : undefined;
         });
       }
       break;
-    case "movie":
+    case 'movie':
       if (movieRatingData !== undefined) {
         movieRatingData.filter((item) => {
-          item.iso_3166_1 === "US"
-            ? (rating = item.release_dates[0].certification)
-            : undefined;
+          item.iso_3166_1 === 'US' ? (rating = item.release_dates[0].certification) : undefined;
         });
       }
       break;
@@ -98,50 +88,49 @@ function MediaPage({
   let releaseYear;
 
   switch (mediaType) {
-    case "tv":
-      const firstAirDate = mediaData.first_air_date?.split("-")[0] || "N/A";
-      const lastAirDate = mediaData.last_air_date?.split("-")[0] || "Present";
+    case 'tv':
+      const firstAirDate = mediaData.first_air_date?.split('-')[0] || 'N/A';
+      const lastAirDate = mediaData.last_air_date?.split('-')[0] || 'Present';
       releaseYear = `${firstAirDate} - ${lastAirDate}`;
       break;
-    case "movie":
+    case 'movie':
       if (movieRatingData !== undefined) {
-        releaseYear =
-          movieRatingData[0]?.release_dates?.[0]?.release_date?.split("-")[0];
+        releaseYear = movieRatingData[0]?.release_dates?.[0]?.release_date?.split('-')[0];
       }
       break;
     default:
-      releaseYear = "N/A";
+      releaseYear = 'N/A';
   }
 
   const trailerVideo = youtubeData.filter((data: { name: string }) =>
-    data?.name.split(" ").includes("Trailer"),
+    data?.name.split(' ').includes('Trailer')
   );
 
   return (
     <>
-      <section className="relative border-b-2 border-primary pb-14 pt-16">
+      <section className="pb-14 pt-16 relative border-b-2 border-primary">
         <div
-          className="absolute left-0 top-0 z-[9] h-full w-full"
+          className="left-0 top-0 absolute z-[9] h-full w-full"
           style={{
-            background: "linear-gradient(to top, black 0%, transparent 100%)",
+            background: 'linear-gradient(to top, black 0%, transparent 100%)',
           }}
         ></div>
         <BackgroundImage
           src={`https://image.tmdb.org/t/p/original/${mediaData?.backdrop_path}`}
-          alt={`Backdrop image for ${mediaType === "movie" ? mediaData?.title : mediaData?.name}`}
+          alt={`Backdrop image for ${mediaType === 'movie' ? mediaData?.title : mediaData?.name}`}
           lazy="eager"
           priority
         />
-        <section className="container relative z-10 mb-14 flex flex-col gap-6 border-b border-white pb-14 pt-24">
-          <span className="dark-shadow -mb-6 text-sm font-semibold uppercase tracking-widest text-white/60">
-            {mediaType === "tv" ? "tv series" : "movie"}
+        <section className="mb-14 gap-6 border-white pb-14 pt-24 relative z-10 container flex flex-col border-b">
+          <span className="dark-shadow -mb-6 text-sm font-semibold tracking-widest text-white/60 uppercase">
+            {mediaType === 'tv' ? 'tv series' : 'movie'}
           </span>
           <h1 className="dark-shadow text-2xl font-bold tracking-wider text-white md:text-4xl">
-            {mediaType === "movie" ? mediaData?.title : mediaData?.name}
+            {mediaType === 'movie' ? mediaData?.title : mediaData?.name}
           </h1>
-          <div className="flex items-center gap-4 text-white">
+          <div className="gap-4 text-white flex items-center">
             <Link
-              className={`${externalData?.facebook_id ? "" : "hidden"}`}
+              className={`${externalData?.facebook_id ? '' : 'hidden'}`}
               href={`https://www.facebook.com/${externalData?.facebook_id}`}
               target="_blank"
             >
@@ -149,13 +138,13 @@ function MediaPage({
             </Link>
             <Link
               href={`https://www.x.com/${externalData?.twitter_id}`}
-              className={`${externalData?.twitter_id ? "" : "hidden"}`}
+              className={`${externalData?.twitter_id ? '' : 'hidden'}`}
               target="_blank"
             >
               <TwitterIcon />
             </Link>
             <Link
-              className={`${externalData?.instagram_id ? "" : "hidden"}`}
+              className={`${externalData?.instagram_id ? '' : 'hidden'}`}
               href={`https://www.instagram.com/${externalData?.instagram_id}`}
               target="_blank"
             >
@@ -163,56 +152,51 @@ function MediaPage({
             </Link>
             <Link
               href={`https://www.imdb.com/title/${externalData?.imdb_id}`}
-              className={`${externalData?.imdb_id ? "" : "hidden"}`}
+              className={`${externalData?.imdb_id ? '' : 'hidden'}`}
               target="_blank"
             >
               <Clapperboard />
             </Link>
             <Link
               href={`${mediaData?.homepage}`}
-              className={`${mediaData?.homepage ? "" : "hidden"}`}
+              className={`${mediaData?.homepage ? '' : 'hidden'}`}
               target="_blank"
             >
               <Link2 />
             </Link>
           </div>
-          <div className="relative flex flex-row items-center gap-2">
+          <div className="gap-2 relative flex flex-row items-center">
             <Badge
               variant="outline"
-              className="mr-2 w-fit rounded-md border-white text-sm font-medium text-white shadow-lg"
+              className="mr-2 border-white text-sm font-medium text-white shadow-lg w-fit rounded-md"
             >
-              {rating || "NR"}
+              {rating || 'NR'}
             </Badge>
-            <span className="dark-shadow text-sm font-semibold text-white/60">
-              {releaseYear}
-            </span>
+            <span className="dark-shadow text-sm font-semibold text-white/60">{releaseYear}</span>
             <Dot size={20} className="-mx-2 text-white/60" />
-            <ul className="hidden flex-row gap-1 md:flex">
+            <ul className="gap-1 md:flex hidden flex-row">
               {cast.slice(0, 3).map((person: any, index: number) => (
                 <li
                   key={index}
-                  className="dark-shadow whitespace-nowrap text-sm font-semibold text-white/60"
+                  className="dark-shadow text-sm font-semibold text-white/60 whitespace-nowrap"
                 >
-                  <Link
-                    href={`/person/${person?.id}/${person?.name}`}
-                    className="hover:text-white"
-                  >
+                  <Link href={`/person/${person?.id}/${person?.name}`} className="hover:text-white">
                     {index === 2 ? person?.name : `${person?.name}, `}
                   </Link>
                 </li>
               ))}
             </ul>
-            <span className="dark-shadow mb-[3px] hidden h-[1.2rem] overflow-hidden text-white/60 md:block">
+            <span className="dark-shadow text-white/60 md:block mb-[3px] hidden h-[1.2rem] overflow-hidden">
               |
             </span>
             <button
               onClick={scrollToCast}
-              className="dark-shadow group group flex items-center gap-1 text-sm font-semibold text-white/60 underline-offset-2 hover:text-white hover:underline"
+              className="dark-shadow group group gap-1 text-sm font-semibold text-white/60 hover:text-white flex items-center underline-offset-2 hover:underline"
             >
-              See Full Cast{" "}
+              See Full Cast{' '}
               <ChevronsRight
                 size={20}
-                className="dark-shadow underline-offset-2 transition-transform group-hover:animate-wiggle group-hover:text-white group-hover:underline"
+                className="dark-shadow group-hover:animate-wiggle group-hover:text-white underline-offset-2 transition-transform group-hover:underline"
               />
             </button>
             {mediaData?.vote_count > 0 && (
@@ -224,37 +208,35 @@ function MediaPage({
           </div>
           <AddToWatchlist
             item={{
-              title: mediaType === "movie" ? mediaData?.title : mediaData?.name,
+              title: mediaType === 'movie' ? mediaData?.title : mediaData?.name,
               poster_image: mediaData?.poster_path,
               link: `/${mediaType}/${mediaData?.id}/${formattedTitle}`,
             }}
             userId={userId.user?.id}
           />
         </section>
-        <section className="container relative z-10 flex w-full flex-col gap-8 lg:flex-row lg:gap-6">
+        <section className="gap-8 lg:flex-row lg:gap-6 relative z-10 container flex w-full flex-col">
           <Image
-            className="hidden rounded-lg border border-white text-card-foreground shadow-2xl transition-transform hover:rotate-3 hover:scale-105 lg:block"
+            className="border-white shadow-2xl lg:block hidden rounded-lg border text-card-foreground transition-transform hover:scale-105 hover:rotate-3"
             width={175}
             height={250}
             src={`https://image.tmdb.org/t/p/w342/${mediaData?.poster_path}`}
-            alt={`Poster image for ${mediaType === "movie" ? mediaData?.title : mediaData?.name}`}
+            alt={`Poster image for ${mediaType === 'movie' ? mediaData?.title : mediaData?.name}`}
             priority
             loading="eager"
             unoptimized
           />
-          <div className="flex flex-col gap-3 md:w-1/2">
+          <div className="gap-3 md:w-1/2 flex flex-col">
             <h2 className="dark-shadow -mb-2 text-lg font-semibold tracking-widest text-white">
               Description
             </h2>
-            <p className="dark-shadow dark-shadow text-white/60 md:w-2/3">
-              {mediaData?.overview}
-            </p>
-            <div className="flex gap-2 lg:mt-4">
+            <p className="dark-shadow dark-shadow text-white/60 md:w-2/3">{mediaData?.overview}</p>
+            <div className="gap-2 lg:mt-4 flex">
               {mediaData?.genres.map((name: any, index: number) => (
                 <Link
                   key={index}
                   href={`/categories/${name?.id}/${name?.name}`}
-                  className={`${badgeVariants({ variant: "outline" })} w-fit border-white px-3 py-1 text-sm font-medium text-white shadow-lg transition-all hover:bg-primary`}
+                  className={`${badgeVariants({ variant: 'outline' })} border-white px-3 py-1 text-sm font-medium text-white shadow-lg w-fit transition-all hover:bg-primary`}
                 >
                   {name?.name}
                 </Link>
@@ -262,7 +244,7 @@ function MediaPage({
             </div>
           </div>
           {trailerVideo !== null && trailerVideo.length > 0 && (
-            <Card className="flex flex-col gap-2">
+            <Card className="gap-2 flex flex-col">
               <CardTitle className="dark-shadow p-0 text-lg font-semibold tracking-widest text-white">
                 Watch Trailer
               </CardTitle>
@@ -270,19 +252,16 @@ function MediaPage({
                 src={`https://www.youtube.com/embed/${trailerVideo[0]?.key}`}
                 loading="eager"
                 title={trailerVideo[0]?.name}
-                className="aspect-video w-full rounded-lg border border-white object-contain shadow-lg md:w-1/2 lg:w-[400px]"
+                className="aspect-video border-white shadow-lg md:w-1/2 lg:w-[400px] w-full rounded-lg border object-contain"
               />
             </Card>
           )}
         </section>
       </section>
-      {mediaType === "tv" && <EpisodeGrid id={id} mediaData={mediaData} />}
-      <div
-        className="flex flex-col items-center gap-20 overflow-hidden pt-16"
-        ref={castSectionRef}
-      >
-        <div className="container pr-0">
-          <div className="relative z-10 -mb-4 flex flex-row items-baseline gap-4 px-1 pr-8 text-white lg:pr-12">
+      {mediaType === 'tv' && <EpisodeGrid id={id} mediaData={mediaData} />}
+      <div className="gap-20 pt-16 flex flex-col items-center overflow-hidden" ref={castSectionRef}>
+        <div className="pr-0 container">
+          <div className="-mb-4 gap-4 px-1 pr-8 text-white lg:pr-12 relative z-10 flex flex-row items-baseline">
             <h3 className="text-xl font-semibold">Cast</h3>
           </div>
           <ProductCarousel
@@ -295,14 +274,14 @@ function MediaPage({
       </div>
       {(recommendedShows && recommendedShows.length > 0) ||
       (recommendedMovies && recommendedMovies.length > 0) ? (
-        <div className="flex flex-col items-center gap-20 overflow-hidden pt-16">
-          <div className="container pr-0">
-            <div className="relative z-10 -mb-4 flex flex-row items-baseline gap-4 px-1 pr-8 text-white lg:pr-12">
+        <div className="gap-20 pt-16 flex flex-col items-center overflow-hidden">
+          <div className="pr-0 container">
+            <div className="-mb-4 gap-4 px-1 pr-8 text-white lg:pr-12 relative z-10 flex flex-row items-baseline">
               <h3 className="text-xl font-semibold">More Like This</h3>
             </div>
             <ProductCarousel
               mediaType={mediaType}
-              data={mediaType === "tv" ? recommendedShows : recommendedMovies}
+              data={mediaType === 'tv' ? recommendedShows : recommendedMovies}
               width="min-[475px]:basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/6"
             />
           </div>

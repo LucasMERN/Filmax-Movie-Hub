@@ -1,6 +1,6 @@
-import PersonPage from "@/components/personPage";
-import { getPerson, getPersonCredit, getPersonExternalId } from "@/lib/api";
-import type { Metadata } from "next";
+import PersonPage from '@/components/personPage';
+import { getPerson, getPersonCredit, getPersonExternalId } from '@/lib/api';
+import type { Metadata } from 'next';
 
 export async function generateMetadata({
   params,
@@ -9,9 +9,9 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { name } = await params;
   const formattedTitle = name
-    .split("-")
+    .split('-')
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(" ");
+    .join(' ');
   return {
     title: `Filmax | ${formattedTitle}`,
     description: `Biography page for '${formattedTitle}'`,
@@ -26,13 +26,9 @@ export default async function Page({ params }: { params: { id: number } }) {
     const personID = await getPersonExternalId(id);
 
     return (
-      <PersonPage
-        personData={personData}
-        personCredit={personCredit?.cast}
-        personID={personID}
-      />
+      <PersonPage personData={personData} personCredit={personCredit?.cast} personID={personID} />
     );
   } catch (error) {
-    console.error("Error fetching Data:", error);
+    console.error('Error fetching Data:', error);
   }
 }

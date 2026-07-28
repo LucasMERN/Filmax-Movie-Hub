@@ -1,18 +1,17 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "@/styles/globals.css";
+import type { Metadata } from 'next';
+import { Inter } from 'next/font/google';
+import '@/styles/globals.css';
 
-import { SpeedInsights } from "@vercel/speed-insights/next";
-import { Analytics } from "@vercel/analytics/react";
-import { ClerkProvider } from "@clerk/nextjs";
-import BackToTopButton from "@/components/backToTop";
+import { SpeedInsights } from '@vercel/speed-insights/next';
+import { Analytics } from '@vercel/analytics/react';
+import { ClerkProvider } from '@clerk/nextjs';
+import BackToTopButton from '@/components/backToTop';
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: "Filmax Cinema Hub",
-  description:
-    "Welcome to Filmax Cinema Hub! Browse Movies and TV Shows and find your next watch!",
+  title: 'Filmax Cinema Hub',
+  description: 'Welcome to Filmax Cinema Hub! Browse Movies and TV Shows and find your next watch!',
 };
 
 export default async function RootLayout({

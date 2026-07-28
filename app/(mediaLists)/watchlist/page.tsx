@@ -1,12 +1,12 @@
-import { getUserID, getWatchlist } from "@/app/actions/user.action";
-import type { Metadata } from "next";
-import Link from "next/link";
-import Image from "next/image";
-import { RemoveFromWatchlist } from "@/components/watchlistButton";
+import { getUserID, getWatchlist } from '@/app/actions/user.action';
+import type { Metadata } from 'next';
+import Link from 'next/link';
+import Image from 'next/image';
+import { RemoveFromWatchlist } from '@/components/watchlistButton';
 
 export const metadata: Metadata = {
-  title: "Filmax | Watchlist",
-  description: "Add Media to Your Watchlist",
+  title: 'Filmax | Watchlist',
+  description: 'Add Media to Your Watchlist',
 };
 
 export default async function Watchlist() {
@@ -15,15 +15,13 @@ export default async function Watchlist() {
 
   return (
     <main className="min-h-screen overflow-hidden">
-      <div className="container flex w-full flex-col gap-2 pb-12 pt-24 md:pt-48">
-        <h1 className="text-4xl font-bold capitalize tracking-wider text-white">
-          Watchlist
-        </h1>
-        <span className="text-sm font-medium uppercase tracking-widest text-white/60">
+      <div className="gap-2 pb-12 pt-24 md:pt-48 container flex w-full flex-col">
+        <h1 className="text-4xl font-bold tracking-wider text-white capitalize">Watchlist</h1>
+        <span className="text-sm font-medium tracking-widest text-white/60 uppercase">
           Movies & TV
         </span>
       </div>
-      <section className="container grid grid-cols-2 gap-6 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-7">
+      <section className="gap-6 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-7 container grid grid-cols-2">
         {records.length > 0 &&
           records.map((item, index) => (
             <div className="group relative w-full overflow-hidden" key={index}>
@@ -42,11 +40,9 @@ export default async function Watchlist() {
             </div>
           ))}
         {records.length === 0 && (
-          <div className="col-span-full flex flex-col items-center justify-center gap-4">
+          <div className="gap-4 col-span-full flex flex-col items-center justify-center">
             <h2 className="text-2xl font-bold text-white">No Items Found</h2>
-            <p className="text-lg text-white/60">
-              Add items to your watchlist to get started.
-            </p>
+            <p className="text-lg text-white/60">Add items to your watchlist to get started.</p>
           </div>
         )}
       </section>

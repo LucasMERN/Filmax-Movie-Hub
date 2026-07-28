@@ -1,4 +1,4 @@
-import { apiUrl, fetchData } from "./utils";
+import { apiUrl, fetchData } from './utils';
 
 export const getPerson = async (id: number) => {
   const url = `${apiUrl}/person/${id}&append_to_response=combined_credits`;
@@ -55,11 +55,7 @@ export const getNewMovie = async (media: string, page: number) => {
   return await fetchData(url);
 };
 
-export const getNewTV = async (
-  media: string,
-  page: number,
-  formattedDate: string,
-) => {
+export const getNewTV = async (media: string, page: number, formattedDate: string) => {
   const url = `${apiUrl}/discover/${media}?&include_adult=false&include_video=false&language=en-US&page=${page}&sort_by=popularity.desc&first_air_date.gte=2022-11-01&first_air_date.lte=${formattedDate}&with_original_language=en`;
   return await fetchData(url);
 };
@@ -74,11 +70,7 @@ export const getAnimated = async (media: string, page: number) => {
   return await fetchData(url);
 };
 
-export const getMediaByGenre = async (
-  media: string,
-  genreId: string,
-  page: number,
-) => {
+export const getMediaByGenre = async (media: string, genreId: string, page: number) => {
   const url = `${apiUrl}/discover/${media}?include_adult=false&include_video=false&language=en-US&page=${page}&sort_by=popularity.desc&with_genres=${genreId}`;
   return await fetchData(url);
 };
@@ -88,11 +80,7 @@ export const searchMedia = async (query: string, page: number) => {
   return await fetchData(url);
 };
 
-export const searchSpecificMedia = async (
-  mediaType: string,
-  query: string,
-  page: number,
-) => {
+export const searchSpecificMedia = async (mediaType: string, query: string, page: number) => {
   const url = `${apiUrl}/search/${mediaType}?query=${query}&page=${page}`;
   return await fetchData(url);
 };

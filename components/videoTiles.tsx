@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import React, { useRef, useState, useCallback, useEffect } from "react";
-import Video from "next-video";
-import Link from "next/link";
-import clsx from "clsx";
-import VideoTilesSkeleton from "@/components/skeletons/videoTilesSkeleton";
-import { Asset } from "next-video/dist/assets.js";
+import React, { useRef, useState, useCallback, useEffect } from 'react';
+import Video from 'next-video';
+import Link from 'next/link';
+import clsx from 'clsx';
+import VideoTilesSkeleton from '@/components/skeletons/videoTilesSkeleton';
+import { Asset } from 'next-video/dist/assets.js';
 
 type VideoTilesProps = {
   data: {
@@ -20,9 +20,7 @@ type VideoTilesProps = {
 };
 
 const VideoTiles = ({ data }: VideoTilesProps) => {
-  const videoRefs = useRef<(HTMLVideoElement | null)[]>(
-    new Array(data.length).fill(null),
-  );
+  const videoRefs = useRef<(HTMLVideoElement | null)[]>(new Array(data.length).fill(null));
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -53,12 +51,12 @@ const VideoTiles = ({ data }: VideoTilesProps) => {
 
   return (
     <div className="relative">
-      <VideoTilesSkeleton className={clsx(isLoading ? "" : "hidden")} />
+      <VideoTilesSkeleton className={clsx(isLoading ? '' : 'hidden')} />
       <section
         className={clsx(
-          "container flex flex-row flex-wrap gap-3 pt-24 md:flex-nowrap md:justify-between md:gap-0 md:pt-48",
-          isLoading ? "opacity-0" : "opacity-100",
-          "transition-opacity",
+          'gap-3 pt-24 md:flex-nowrap md:justify-between md:gap-0 md:pt-48 container flex flex-row flex-wrap',
+          isLoading ? 'opacity-0' : 'opacity-100',
+          'transition-opacity'
         )}
       >
         {data.map((video, index) => (
@@ -66,13 +64,13 @@ const VideoTiles = ({ data }: VideoTilesProps) => {
             key={index}
             href={video.url}
             className={clsx(
-              "relative h-[500px] w-[30%] transition-all duration-300 ease-in-out",
+              'ease-in-out relative h-[500px] w-[30%] transition-all duration-300',
               video.margin,
               activeIndex === null
-                ? "h-[12%] md:w-[12%]"
+                ? 'md:w-[12%] h-[12%]'
                 : activeIndex === index
-                  ? "h-[25%] md:w-[25%]"
-                  : "h-[10%] md:w-[10%]",
+                  ? 'md:w-[25%] h-[25%]'
+                  : 'md:w-[10%] h-[10%]'
             )}
             onMouseEnter={() => handleMouseEnter(index)}
             onMouseLeave={handleMouseLeave}
@@ -82,7 +80,7 @@ const VideoTiles = ({ data }: VideoTilesProps) => {
               controls={false}
               autoPlay={false}
               muted
-              className="absolute left-0 top-0 h-full w-full object-cover transition-all duration-300 ease-in-out"
+              className="left-0 top-0 ease-in-out absolute h-full w-full object-cover transition-all duration-300"
               ref={(el: HTMLVideoElement | null) => {
                 videoRefs.current[index] = el;
               }}
@@ -91,8 +89,8 @@ const VideoTiles = ({ data }: VideoTilesProps) => {
             />
             <span
               className={clsx(
-                "dark-shadow absolute top-1/2 w-full text-center text-sm font-semibold text-white transition-all duration-300 ease-in-out md:text-xl",
-                video.alignment,
+                'dark-shadow text-sm font-semibold text-white ease-in-out md:text-xl absolute top-1/2 w-full text-center transition-all duration-300',
+                video.alignment
               )}
             >
               {video.title}

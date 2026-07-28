@@ -1,31 +1,30 @@
-import logo from "@/public/logo.svg";
-import Link from "next/link";
-import { ChevronRight } from "lucide-react";
-import Image from "next/image";
-import { Button } from "@/components/ui/button";
-import LandingPromo from "@/components/landingPromo";
-import download from "@/public/landingdownload.jpg";
-import watch from "@/public/landingwatch.png";
-import watchGIF from "@/public/watchGIF.gif";
-import stranger from "@/public/stranger.png";
-import loader from "@/public/loader.gif";
-import Footer from "@/components/footer";
-import type { Metadata } from "next";
-import AuthButton from "@/components/authButton";
+import Link from 'next/link';
+import { ChevronRight } from 'lucide-react';
+import Image from 'next/image';
+import { Button } from '@/components/ui/button';
+import LandingPromo from '@/components/landingPromo';
+import download from '@/assets/landingdownload.jpg';
+import watch from '@/assets/landingwatch.png';
+import watchGIF from '@/assets/watchGIF.gif';
+import stranger from '@/assets/stranger.png';
+import loader from '@/assets/loader.gif';
+import Footer from '@/components/footer';
+import type { Metadata } from 'next';
+import AuthButton from '@/components/authButton';
 
 export const metadata: Metadata = {
-  title: "Welcome to Filmax Cinema Hub",
-  description: "Landing page for Filmax Cinema Hub",
+  title: 'Welcome to Filmax Cinema Hub',
+  description: 'Landing page for Filmax Cinema Hub',
 };
 
 export default async function Home() {
   return (
-    <main className="min-h-screen bg-black">
-      <nav className="absolute z-20 w-full bg-gradient-to-b from-black pb-8 pt-8">
+    <main className="bg-black min-h-screen">
+      <nav className="from-black pb-8 pt-8 absolute z-20 w-full bg-linear-to-b">
         <div className="container mx-auto flex justify-between">
           <Link href="/">
             <Image
-              src={logo}
+              src="/logo.svg"
               width={50}
               alt="Filmax Logo"
               priority={true}
@@ -38,12 +37,12 @@ export default async function Home() {
         </div>
       </nav>
       <section
-        className="relative h-[450px] w-full overflow-hidden border-b-4 border-primary lg:h-[650px]"
+        className="lg:h-[650px] relative h-[450px] w-full overflow-hidden border-b-4 border-primary"
         style={{
           background: `linear-gradient(180deg, rgba(0, 0, 0, 0.80) 0%, rgba(0, 0, 0, 0.00) 43.75%, rgba(0, 0, 0, 0.80) 100%), url('/homehero.png') lightgray 50% / cover no-repeat`,
         }}
       >
-        <div className="relative z-10 flex flex-col items-center gap-4 pt-36 text-center lg:pt-52">
+        <div className="gap-4 pt-36 lg:pt-52 relative z-10 flex flex-col items-center text-center">
           <h1 className="dark-shadow text-2xl font-bold tracking-wider text-white lg:text-6xl lg:font-extrabold">
             Unlimited movies, all the <br />
             TV shows and more.
@@ -62,47 +61,32 @@ export default async function Home() {
           </Button>
         </div>
         <div
-          className="absolute bottom-0 z-20 h-24 w-full"
+          className="bottom-0 h-24 absolute z-20 w-full"
           style={{
-            background: "linear-gradient(to top, black 0%, transparent 100%)",
+            background: 'linear-gradient(to top, black 0%, transparent 100%)',
           }}
         ></div>
       </section>
-      <section className="container flex flex-col items-center justify-center gap-10 py-24 lg:flex-row">
+      <section className="gap-10 py-24 lg:flex-row container flex flex-col items-center justify-center">
         <div className="relative">
-          <Image
-            src={download}
-            alt=""
-            width={500}
-            className="-mt-16"
-            loading="eager"
-            unoptimized
-          />
-          <div className="absolute bottom-4 flex w-full justify-center">
-            <div className="flex items-center justify-between rounded-xl border border-primary bg-black p-2 shadow-lg lg:p-4">
-              <Image
-                src={stranger}
-                alt=""
-                className="w-11 lg:w-14"
-                loading="eager"
-                unoptimized
-              />
-              <div className="flex flex-col pl-4 pr-14">
-                <h4 className="whitespace-nowrap font-bold text-white">
-                  Stranger Things
-                </h4>
+          <Image src={download} alt="" width={500} className="-mt-16" loading="eager" unoptimized />
+          <div className="bottom-4 absolute flex w-full justify-center">
+            <div className="bg-black p-2 shadow-lg lg:p-4 flex items-center justify-between rounded-xl border border-primary">
+              <Image src={stranger} alt="" className="w-11 lg:w-14" loading="eager" unoptimized />
+              <div className="pl-4 pr-14 flex flex-col">
+                <h4 className="font-bold text-white whitespace-nowrap">Stranger Things</h4>
                 <span className="text-[#0071EB]">Downloading...</span>
               </div>
               <Image
                 src={loader}
                 alt="loading animation"
-                className="aspect-square h-11 w-11"
+                className="h-11 w-11 aspect-square"
                 unoptimized
               />
             </div>
           </div>
         </div>
-        <div className="flex flex-col gap-5 text-white">
+        <div className="gap-5 text-white flex flex-col">
           <h3 className="text-2xl font-bold lg:text-5xl">
             Download your shows
             <br /> to watch offline.
@@ -114,12 +98,12 @@ export default async function Home() {
         </div>
       </section>
       <div className="w-full border-t-4 border-primary"></div>
-      <section className="container flex flex-col items-center justify-center gap-10 py-24 lg:flex-row">
-        <div className="flex flex-col gap-5 text-white">
+      <section className="gap-10 py-24 lg:flex-row container flex flex-col items-center justify-center">
+        <div className="gap-5 text-white flex flex-col">
           <h3 className="text-2xl font-bold lg:text-5xl">Watch Everywhere.</h3>
           <p className="lg:text-2xl">
-            Stream unlimited movies and TV shows on <br /> your phone, tablet,
-            laptop, and TV without <br /> paying more.
+            Stream unlimited movies and TV shows on <br /> your phone, tablet, laptop, and TV
+            without <br /> paying more.
           </p>
         </div>
         <div className="relative">
@@ -127,28 +111,23 @@ export default async function Home() {
             src={watch}
             alt="various devices for watching movies"
             width={300}
-            className="relative z-10 md:w-[500px]"
+            className="md:w-[500px] relative z-10"
             loading="lazy"
             unoptimized
           />
-          <div className="absolute top-3 flex w-full justify-center md:top-6">
+          <div className="top-3 md:top-6 absolute flex w-full justify-center">
             <Image
               src={watchGIF}
               alt="gif of a man looking for osmething"
               width={185}
-              className="h-[140px] md:h-[200px] md:w-[320px]"
+              className="md:h-[200px] md:w-[320px] h-[140px]"
               unoptimized
             />
           </div>
         </div>
       </section>
-      <section className="border-b-4 border-t-4 border-primary">
-        <LandingPromo
-          id1={604685}
-          id2={1084199}
-          id3={1226578}
-          color="rgba(139, 0, 0, 0.57)"
-        />
+      <section className="border-t-4 border-b-4 border-primary">
+        <LandingPromo id1={604685} id2={1084199} id3={1226578} color="rgba(139, 0, 0, 0.57)" />
       </section>
       <section className="bg-black">
         <Footer />

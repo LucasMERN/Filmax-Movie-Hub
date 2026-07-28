@@ -1,10 +1,9 @@
-"use client";
+'use client';
 
-import { usePathname } from "next/navigation";
-import Link from "next/link";
-import Image from "next/image";
-import { Menu } from "lucide-react";
-import Logo from "@/public/logo.svg";
+import { usePathname } from 'next/navigation';
+import Link from 'next/link';
+import Image from 'next/image';
+import { Menu } from 'lucide-react';
 import {
   Sheet,
   SheetContent,
@@ -13,44 +12,41 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "@/components/ui/sheet";
-import { Button } from "@/components/ui/button";
-import { SignedIn, SignedOut, SignOutButton, UserButton } from "@clerk/nextjs";
-import AuthButton from "@/components/authButton";
+} from '@/components/ui/sheet';
+import { Button } from '@/components/ui/button';
+import { SignedIn, SignedOut, SignOutButton, UserButton } from '@clerk/nextjs';
+import AuthButton from '@/components/authButton';
 
 export default function Nav() {
   const pathname = usePathname();
 
   return (
     <nav
-      className="fixed z-50 w-full pb-8 pt-8 md:pb-12"
+      className="pb-8 pt-8 md:pb-12 fixed z-50 w-full"
       style={{
         background:
-          "linear-gradient(180deg, rgba(0, 0, 0, 1) 10%, rgb(0 0 0 / 76%) 54%, rgb(0 0 0 / 38%) 86%, rgba(255, 255, 255, 0) 100%)",
+          'linear-gradient(180deg, rgba(0, 0, 0, 1) 10%, rgb(0 0 0 / 76%) 54%, rgb(0 0 0 / 38%) 86%, rgba(255, 255, 255, 0) 100%)',
       }}
     >
-      <div className="container mx-auto flex flex-row items-center justify-between gap-4 md:gap-0 ">
+      <div className="gap-4 md:gap-0 container mx-auto flex flex-row items-center justify-between">
         <Sheet>
           <SheetTrigger asChild>
             <Button variant="outline" size="icon" className="md:hidden">
               <Menu size={30} color="white" />
             </Button>
           </SheetTrigger>
-          <SheetContent
-            side="left"
-            className="flex h-full flex-col justify-between"
-          >
+          <SheetContent side="left" className="flex h-full flex-col justify-between">
             <SheetHeader>
               <SheetTitle>FILMAX CINEMA HUB</SheetTitle>
               <SheetDescription>
                 Pick from our route selection to navigate the site!
               </SheetDescription>
             </SheetHeader>
-            <ul className="flex flex-col gap-6">
+            <ul className="gap-6 flex flex-col">
               <li>
                 <Link
                   className={`link ${
-                    pathname === "/dashboard" ? "text-white" : "text-white/40"
+                    pathname === '/dashboard' ? 'text-white' : 'text-white/40'
                   } tracking-widest`}
                   href="/dashboard"
                 >
@@ -61,7 +57,7 @@ export default function Nav() {
               <li>
                 <Link
                   className={`link ${
-                    pathname === "/trending" ? "text-white" : "text-white/40"
+                    pathname === '/trending' ? 'text-white' : 'text-white/40'
                   } tracking-widest`}
                   href="/trending"
                 >
@@ -72,7 +68,7 @@ export default function Nav() {
               <li>
                 <Link
                   className={`link ${
-                    pathname === "/categories" ? "text-white" : "text-white/40"
+                    pathname === '/categories' ? 'text-white' : 'text-white/40'
                   } tracking-widest`}
                   href="/categories"
                 >
@@ -83,7 +79,7 @@ export default function Nav() {
               <li>
                 <Link
                   className={`link ${
-                    pathname === "/movies" ? "text-white" : "text-white/40"
+                    pathname === '/movies' ? 'text-white' : 'text-white/40'
                   } tracking-widest`}
                   href="/movies"
                 >
@@ -94,7 +90,7 @@ export default function Nav() {
               <li>
                 <Link
                   className={`link ${
-                    pathname === "/shows" ? "text-white" : "text-white/40"
+                    pathname === '/shows' ? 'text-white' : 'text-white/40'
                   } tracking-widest`}
                   href="/shows"
                 >
@@ -105,7 +101,7 @@ export default function Nav() {
                 <li>
                   <Link
                     className={`link ${
-                      pathname === "/watchlist" ? "text-white" : "text-white/40"
+                      pathname === '/watchlist' ? 'text-white' : 'text-white/40'
                     } text-sm tracking-widest hover:text-white`}
                     href="/watchlist"
                   >
@@ -116,7 +112,7 @@ export default function Nav() {
             </ul>
             <SheetFooter>
               <Image
-                src={Logo}
+                src="/logo.svg"
                 width={50}
                 height={50}
                 alt="Filmax Logo"
@@ -131,7 +127,7 @@ export default function Nav() {
             <UserButton
               appearance={{
                 elements: {
-                  avatarBox: "w-9 h-9 border-2 border-primary",
+                  avatarBox: 'w-9 h-9 border-2 border-primary',
                 },
               }}
             />
@@ -142,11 +138,11 @@ export default function Nav() {
           </SignedOut>
         </div>
 
-        <ul className="hidden flex-row items-center gap-6 md:flex">
-          <li className="mr-4 hidden h-12 w-12 md:block">
+        <ul className="gap-6 md:flex hidden flex-row items-center">
+          <li className="mr-4 h-12 w-12 md:block hidden">
             <Link href="/dashboard">
               <Image
-                src={Logo}
+                src="/logo.svg"
                 width={50}
                 height={50}
                 alt="Filmax Logo"
@@ -161,7 +157,7 @@ export default function Nav() {
           <li>
             <Link
               className={`link ${
-                pathname === "/dashboard" ? "text-white" : "text-white/40"
+                pathname === '/dashboard' ? 'text-white' : 'text-white/40'
               } text-sm tracking-widest hover:text-white`}
               href="/dashboard"
             >
@@ -172,7 +168,7 @@ export default function Nav() {
           <li>
             <Link
               className={`link ${
-                pathname === "/trending" ? "text-white" : "text-white/40"
+                pathname === '/trending' ? 'text-white' : 'text-white/40'
               } text-sm tracking-widest hover:text-white`}
               href="/trending"
             >
@@ -183,7 +179,7 @@ export default function Nav() {
           <li>
             <Link
               className={`link ${
-                pathname === "/categories" ? "text-white" : "text-white/40"
+                pathname === '/categories' ? 'text-white' : 'text-white/40'
               } text-sm tracking-widest hover:text-white`}
               href="/categories"
             >
@@ -194,7 +190,7 @@ export default function Nav() {
           <li>
             <Link
               className={`link ${
-                pathname === "/movies" ? "text-white" : "text-white/40"
+                pathname === '/movies' ? 'text-white' : 'text-white/40'
               } text-sm tracking-widest hover:text-white`}
               href="/movies"
             >
@@ -205,7 +201,7 @@ export default function Nav() {
           <li>
             <Link
               className={`link ${
-                pathname === "/shows" ? "text-white" : "text-white/40"
+                pathname === '/shows' ? 'text-white' : 'text-white/40'
               } text-sm tracking-widest hover:text-white`}
               href="/shows"
             >
@@ -217,7 +213,7 @@ export default function Nav() {
             <li>
               <Link
                 className={`link ${
-                  pathname === "/watchlist" ? "text-white" : "text-white/40"
+                  pathname === '/watchlist' ? 'text-white' : 'text-white/40'
                 } text-sm tracking-widest hover:text-white`}
                 href="/watchlist"
               >
@@ -226,7 +222,7 @@ export default function Nav() {
             </li>
           </SignedIn>
         </ul>
-        <div className="hidden md:block">
+        <div className="md:block hidden">
           <AuthButton />
         </div>
       </div>

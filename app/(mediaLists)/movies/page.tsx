@@ -1,9 +1,9 @@
-import MediaGrid from "@/components/mediaGrid";
-import type { Metadata } from "next";
+import MediaGrid from '@/components/mediaGrid';
+import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: "Filmax | Popular Movies",
-  description: "Filmax Popular Movies page",
+  title: 'Filmax | Popular Movies',
+  description: 'Filmax Popular Movies page',
 };
 
 export default function Movies() {
