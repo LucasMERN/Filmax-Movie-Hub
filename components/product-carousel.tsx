@@ -1,6 +1,6 @@
 import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel';
 import { Card } from '@/components/ui/card';
-import BackgroundImage from '@/components/ui/backgroundImage';
+import BackgroundImage from '@/components/ui/background-image';
 import React from 'react';
 
 interface CarouselProps {
@@ -44,8 +44,8 @@ const ProductCarousel: React.FC<CarouselProps> = ({
                     key={content?.id}
                     className={`group mt-6 ${width} h-fit`}
                   >
-                    <div className="gap-2 p-1 flex flex-col items-center">
-                      <Card className="h-96 shadow-lg relative w-full overflow-hidden bg-cover bg-center">
+                    <div className="flex flex-col items-center gap-2 p-1">
+                      <Card className="relative h-96 w-full overflow-hidden bg-cover bg-center shadow-lg">
                         <BackgroundImage
                           src={`https://image.tmdb.org/t/p/w342/${mediaType == 'person' ? content?.profile_path : content?.poster_path}`}
                           alt={
@@ -56,7 +56,7 @@ const ProductCarousel: React.FC<CarouselProps> = ({
                           className="transition-transform group-hover:scale-105"
                         />
                       </Card>
-                      <span className="text-white text-center wrap-break-word">
+                      <span className="text-center wrap-break-word text-white">
                         {content?.title || content?.name}
                       </span>
                     </div>

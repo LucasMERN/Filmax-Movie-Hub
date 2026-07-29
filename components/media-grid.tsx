@@ -12,7 +12,7 @@ import {
   PaginationNext,
 } from '@/components/ui/pagination';
 import { getMediaByGenre, getPopular, getTrending } from '@/lib/api';
-import MediaGridSkeleton from '@/components/skeletons/mediaGridSkeleton';
+import MediaGridSkeleton from '@/components/skeletons/media-grid-skeleton';
 
 type MediaGridProps = {
   title: string;
@@ -102,7 +102,7 @@ const MediaGrid = ({
     <>
       <GridHeader title={title} subtitle={subtitle} />
       {loading ? <MediaGridSkeleton /> : <GridItems data={mediaData} mediaType={mediaType} />}
-      <Pagination className="pt-12 flex w-full justify-center">
+      <Pagination className="flex w-full justify-center pt-12">
         <PaginationContent>
           <PaginationItem>
             <PaginationPrevious
@@ -142,7 +142,7 @@ const MediaGrid = ({
 
 const GridItems = ({ data, mediaType }: { data: Data[]; mediaType: 'movie' | 'tv' }) => {
   return (
-    <section className="gap-6 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-7 container grid grid-cols-2">
+    <section className="container grid grid-cols-2 gap-6 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-7">
       {data?.map((item, index) => {
         const formattedTitle = (item?.name || item?.title || '')
           .toLowerCase()
@@ -176,7 +176,7 @@ const GridItems = ({ data, mediaType }: { data: Data[]; mediaType: 'movie' | 'tv
 
 const GridHeader = ({ title, subtitle }: { title: string; subtitle: string }) => {
   return (
-    <div className="gap-2 pb-12 pt-24 md:pt-48 container flex w-full flex-col">
+    <div className="container flex w-full flex-col gap-2 pt-24 pb-12 md:pt-48">
       <h1 className="text-4xl font-bold tracking-wider text-white capitalize">
         {title.split('%20').join(' ')}
       </h1>

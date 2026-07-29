@@ -1,12 +1,9 @@
-import Footer from '@/components/footer';
-import MediaPage from '@/components/mediaPage';
-import Nav from '@/components/nav';
+import MediaPage from '@/components/media-page';
 import {
   getContentRating,
   getCredits,
   getExternalId,
   getRecommended,
-  getRelease,
   getSingle,
   getYouTubeVideo,
 } from '@/lib/api';
@@ -15,7 +12,7 @@ import type { Metadata } from 'next';
 export async function generateMetadata({
   params,
 }: {
-  params: { name: string };
+  params: Promise<{ name: string }>;
 }): Promise<Metadata> {
   const { name } = await params;
   const formattedTitle = name
@@ -28,9 +25,9 @@ export async function generateMetadata({
   };
 }
 
-export default async function Page({ params }: { params: { name: string; id: number } }) {
+export default async function Page({ params }: { params: Promise<{ name: string; id: string }> }) {
   try {
-    const { id } = await params;
+    const { id, name } = await params;
     const mediaData = await getSingle('tv', id);
     const recommendedShows = await getRecommended(id, 'tv');
     const castData = await getCredits(id, 'tv');
@@ -38,7 +35,7 @@ export default async function Page({ params }: { params: { name: string; id: num
     const externalData = await getExternalId(id, 'tv');
     const youtubeData = await getYouTubeVideo(id, 'tv');
 
-    console.log(params.name);
+    console.log(name);
 
     return (
       <MediaPage

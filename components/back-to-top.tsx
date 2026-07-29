@@ -34,10 +34,10 @@ export default function BackToTopButton() {
       <Button
         onClick={scrollToTop}
         variant="outline"
-        className="bottom-24 right-8 animate-bounce px-3 py-6 text-white shadow-lg lg:right-20 fixed z-50 rounded-full border border-primary bg-primary text-primary focus:outline-none"
+        className="fixed right-8 bottom-24 z-50 size-12 animate-bounce rounded-full border border-primary bg-primary text-white shadow-lg focus:outline-none lg:right-20"
         aria-label="click to return to the top of the page"
       >
-        <ArrowUp size={24} />
+        <ArrowUp className="size-6" />
       </Button>
     )
   );

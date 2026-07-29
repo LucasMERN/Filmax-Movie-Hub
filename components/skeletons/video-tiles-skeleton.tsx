@@ -21,14 +21,14 @@ export default function VideoTilesSkeleton({ className }: VideoTilesSkeletonProp
   return (
     <section
       className={clsx(
-        'gap-4 pt-24 md:flex-row md:gap-0 md:pt-48 pointer-events-none container flex flex-col justify-between',
+        'pointer-events-none container flex flex-col justify-between gap-4 pt-24 md:flex-row md:gap-0 md:pt-48',
         className
       )}
     >
       {marginClasses.map((marginClass, index) => (
         <Skeleton
           key={index}
-          className={clsx(marginClass, 'md:w-[12%] h-[500px] w-full rounded-none')}
+          className={clsx(marginClass, 'h-125 w-full rounded-none md:w-[12%]')}
         />
       ))}
     </section>

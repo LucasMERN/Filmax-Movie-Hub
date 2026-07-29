@@ -1,8 +1,5 @@
-import Footer from '@/components/footer';
-import MediaPage from '@/components/mediaPage';
-import Nav from '@/components/nav';
+import MediaPage from '@/components/media-page';
 import {
-  getContentRating,
   getCredits,
   getExternalId,
   getRecommended,
@@ -15,7 +12,7 @@ import type { Metadata } from 'next';
 export async function generateMetadata({
   params,
 }: {
-  params: { name: string };
+  params: Promise<{ name: string }>;
 }): Promise<Metadata> {
   const { name } = await params;
   const formattedTitle = name
@@ -28,7 +25,7 @@ export async function generateMetadata({
   };
 }
 
-export default async function Page({ params }: { params: { id: number } }) {
+export default async function Page({ params }: { params: Promise<{ id: string }> }) {
   try {
     const { id } = await params;
     const mediaData = await getSingle('movie', id);

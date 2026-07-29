@@ -65,7 +65,7 @@ const AddToWatchlist = ({ item, userId }: AddToWatchlistProps) => {
         <Button
           size="lg"
           variant="outline"
-          className="gap-2 px-3 shadow-lg flex w-fit items-center"
+          className="flex w-fit items-center gap-2 bg-transparent px-3 text-white shadow-lg"
           disabled={true}
         >
           Loading...
@@ -75,7 +75,7 @@ const AddToWatchlist = ({ item, userId }: AddToWatchlistProps) => {
         <Button
           size="lg"
           variant="destructive"
-          className="gap-2 px-3 shadow-lg flex w-fit items-center"
+          className="flex w-fit items-center gap-2 border-white bg-transparent px-3 text-white shadow-lg"
           onClick={handleRemoveFromWatchlist}
           disabled={isPending}
         >
@@ -95,7 +95,7 @@ const AddToWatchlist = ({ item, userId }: AddToWatchlistProps) => {
         <Button
           size="lg"
           variant="outline"
-          className="gap-2 px-3 shadow-lg flex w-fit items-center"
+          className="flex w-fit items-center gap-2 bg-transparent px-3 text-white shadow-lg"
           onClick={handleAddToWatchlist}
           disabled={isPending}
         >
@@ -132,11 +132,11 @@ const RemoveFromWatchlist = ({ item, userId }: AddToWatchlistProps) => {
 
   return (
     <div
-      className={`bottom-0 from-black absolute z-10 flex w-full justify-center bg-transparent transition-all duration-200 group-hover:bg-linear-to-t ${isPending ? 'from-black bg-linear-to-t' : ''}`}
+      className={`absolute bottom-0 z-10 flex w-full justify-center bg-transparent from-black transition-all duration-200 group-hover:bg-linear-to-t ${isPending ? 'bg-linear-to-t from-black' : ''}`}
     >
       <Button
         variant="destructive"
-        className={`h-10 w-10 animate-bounce p-0 group-hover:mb-8 rounded-full bg-destructive opacity-0 transition-all duration-500 group-hover:opacity-100 ${isPending ? 'mb-8 opacity-100' : ''}`}
+        className={`h-10 w-10 animate-bounce rounded-full bg-destructive p-0 opacity-0 transition-all duration-500 group-hover:mb-8 group-hover:opacity-100 ${isPending ? 'mb-8 opacity-100' : ''}`}
         onClick={handleRemoveFromWatchlist}
         disabled={isPending}
       >

@@ -7,10 +7,10 @@ import {
   CarouselNext,
   CarouselPrevious,
   type CarouselApi,
-} from '@/components/ui/heroCarousel';
+} from '@/components/ui/hero-carousel';
 import React, { useState, useCallback, useEffect, useRef } from 'react';
 import { Card } from '@/components/ui/card';
-import BackgroundImage from '@/components/ui/backgroundImage';
+import BackgroundImage from '@/components/ui/background-image';
 import Link from 'next/link';
 import { Movie, TV } from '@/types/api';
 
@@ -99,9 +99,9 @@ const Hero = ({ data }: { data: Movie[] & TV[] }) => {
           bottom: 0,
           zIndex: -1,
         }}
-        className="lg:h-[850px] h-[675px] w-full bg-cover bg-center"
+        className="h-168.75 w-full bg-cover bg-center lg:h-212.5"
       ></div>
-      <div className="pt-36 text-3xl font-bold text-white lg:h-[790px] lg:text-6xl relative container mx-auto h-[650px]">
+      <div className="relative container mx-auto h-162.5 pt-36 text-3xl font-bold text-white lg:h-197.5 lg:text-6xl">
         <h1
           className="dark-shadow mb-4 tracking-widest"
           style={{
@@ -113,8 +113,8 @@ const Hero = ({ data }: { data: Movie[] & TV[] }) => {
             ? data[currentMovieIndex]?.name
             : data[currentMovieIndex]?.title}
         </h1>
-        <div className="gap-4 flex flex-row items-center">
-          <span className="rounded bg-amber-700 px-4 py-1 text-xl text-black h-fit">IMDB</span>
+        <div className="flex flex-row items-center gap-4">
+          <span className="h-fit rounded bg-amber-700 px-4 py-1 text-xl text-black">IMDB</span>
           <span
             className="dark-shadow text-2xl font-medium"
             style={{
@@ -126,7 +126,7 @@ const Hero = ({ data }: { data: Movie[] & TV[] }) => {
           </span>
         </div>
         <div
-          className="-m-4 -mb-72 mt-16 gap-4 bg-black/60 p-4 sm:w-1/2 lg:hidden flex flex-col rounded-2xl"
+          className="-m-4 mt-16 -mb-72 flex flex-col gap-4 rounded-2xl bg-black/60 p-4 sm:w-1/2 lg:hidden"
           style={{
             opacity: isImageVisible ? 1 : 0,
             transition: 'opacity 1s ease-in-out',
@@ -139,7 +139,7 @@ const Hero = ({ data }: { data: Movie[] & TV[] }) => {
           </p>
           <Link
             href={`${data[currentMovieIndex]?.media_type === 'movie' ? `movie/${data[currentMovieIndex]?.id}/${formattedTitle}` : `tv/${data[currentMovieIndex]?.id}/${formattedTitle}`}`}
-            className="h-8 bg-white px-4 text-base font-semibold inline-flex w-fit items-center justify-center rounded-md whitespace-nowrap text-secondary-foreground transition-colors hover:bg-secondary/80"
+            className="inline-flex h-8 w-fit items-center justify-center rounded-md bg-white px-4 text-base font-semibold whitespace-nowrap text-secondary-foreground transition-colors hover:bg-secondary/80"
           >
             Explore
           </Link>
@@ -154,7 +154,7 @@ const Hero = ({ data }: { data: Movie[] & TV[] }) => {
           className="mt-4 w-full"
           setApi={setApi}
         >
-          <CarouselContent className="lg:visible invisible">
+          <CarouselContent className="invisible lg:visible">
             {data.map((movie: any, index: number) => {
               const formattedTitle = (movie?.name || movie?.title || '')
                 .toLowerCase()
@@ -168,9 +168,9 @@ const Hero = ({ data }: { data: Movie[] & TV[] }) => {
                   className="basis-1/3"
                 >
                   <div
-                    className={`${index === currentMovieIndex ? 'elevated mt-6 gap-2 p-1 flex flex-col items-center' : 'unelevated mt-6 gap-2 p-1 flex flex-col items-center'}`}
+                    className={`${index === currentMovieIndex ? 'elevated mt-6 flex flex-col items-center gap-2 p-1' : 'unelevated mt-6 flex flex-col items-center gap-2 p-1'}`}
                   >
-                    <Card className="h-96 border-white shadow-lg relative w-full overflow-hidden border-4 bg-cover bg-center">
+                    <Card className="relative h-96 w-full overflow-hidden border-4 border-white bg-cover bg-center shadow-lg">
                       <BackgroundImage
                         src={`https://image.tmdb.org/t/p/w342/${movie?.poster_path}`}
                         alt={`Poster image for ${movie?.title}`}
@@ -178,7 +178,7 @@ const Hero = ({ data }: { data: Movie[] & TV[] }) => {
                       />
                     </Card>
                     {index == currentMovieIndex && (
-                      <span className="dark-shadow text-center wrap-break-word">
+                      <span className="dark-shadow text-center text-base wrap-break-word">
                         {!movie?.title ? movie?.name : movie?.title}
                       </span>
                     )}

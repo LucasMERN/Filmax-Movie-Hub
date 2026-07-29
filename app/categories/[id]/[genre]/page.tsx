@@ -1,10 +1,10 @@
-import MediaGrid from '@/components/mediaGrid';
+import MediaGrid from '@/components/media-grid';
 import type { Metadata } from 'next';
 
 export async function generateMetadata({
   params,
 }: {
-  params: { genre: string };
+  params: Promise<{ genre: string }>;
 }): Promise<Metadata> {
   const { genre } = await params;
   const formattedTitle = decodeURIComponent(genre.charAt(0).toUpperCase() + genre.slice(1));
@@ -14,7 +14,7 @@ export async function generateMetadata({
   };
 }
 
-export default async function Page({ params }: { params: { id: string; genre: string } }) {
+export default async function Page({ params }: { params: Promise<{ id: string; genre: string }> }) {
   const { id, genre } = await params;
   const formattedGenre = decodeURIComponent(genre);
   return (

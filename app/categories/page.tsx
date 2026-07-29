@@ -14,10 +14,10 @@ import horrorThumb from '@/assets/horror.jpg';
 import scifiThumb from '@/assets/scifi.jpg';
 import dramaThumb from '@/assets/drama.jpg';
 import thrillerThumb from '@/assets/thriller.jpg';
-import VideoTiles from '@/components/videoTiles';
+import VideoTiles from '@/components/video-tiles';
 import type { Metadata } from 'next';
 import { Suspense } from 'react';
-import VideoTilesSkeleton from '@/components/skeletons/videoTilesSkeleton';
+import VideoTilesSkeleton from '@/components/skeletons/video-tiles-skeleton';
 
 export const metadata: Metadata = {
   title: 'Filmax | Categories',

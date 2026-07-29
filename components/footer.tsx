@@ -3,10 +3,10 @@ import Link from 'next/link';
 
 const Footer = () => {
   return (
-    <footer className="gap-8 pb-12 pt-24 container mx-auto flex flex-col text-center">
+    <footer className="container mx-auto flex flex-col gap-8 pt-24 pb-12 text-center">
       <div className="relative flex items-center justify-center">
-        <span className="left-0 border-white md:w-[40%] absolute top-1/2 w-[25%] -translate-y-1/2 transform border-t"></span>
-        <ul className="gap-8 z-10 flex">
+        <span className="absolute top-1/2 left-0 w-[25%] -translate-y-1/2 transform border-t border-white md:w-[40%]"></span>
+        <ul className="z-10 flex gap-8">
           <li>
             <Link href="https://github.com/LucasMERN" className="group" target="_blank">
               <Github
@@ -30,13 +30,13 @@ const Footer = () => {
             </Link>
           </li>
         </ul>
-        <span className="right-0 border-white md:w-[40%] absolute top-1/2 w-[25%] -translate-y-1/2 transform border-t"></span>
+        <span className="absolute top-1/2 right-0 w-[25%] -translate-y-1/2 transform border-t border-white md:w-[40%]"></span>
       </div>
       <h3 className="text-xl font-medium text-white">
         Designed & Developed by{' '}
         <Link
           href="#"
-          className="hover:font-bold underline decoration-dashed decoration-1 underline-offset-4 transition-all"
+          className="underline decoration-dashed decoration-1 underline-offset-4 transition-all hover:font-bold"
         >
           Lucas Winkler
         </Link>

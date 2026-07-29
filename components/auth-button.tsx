@@ -8,8 +8,8 @@ function AuthButton() {
   const { user } = useUser();
 
   return (
-    <div className="gap-4 text-white flex items-center">
-      {!user ? null : <div className="lg:block hidden">Welcome, {user.firstName}</div>}
+    <div className="flex items-center gap-4 text-white">
+      {!user ? null : <div className="hidden lg:block">Welcome, {user.firstName}</div>}
       <SignedOut>
         <SignInButton
           mode="modal"

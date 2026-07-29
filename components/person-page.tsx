@@ -44,7 +44,7 @@ const PersonPage = ({
 
   return (
     <>
-      <div className="gap-4 pt-36 container flex flex-col">
+      <div className="container flex flex-col gap-4 pt-36">
         <h1 className="text-xl font-semibold text-white lg:hidden">{personData.name}</h1>
         <div>
           <Image
@@ -54,28 +54,28 @@ const PersonPage = ({
             height={200}
             src={`https://image.tmdb.org/t/p/w342/${personData.profile_path}`}
             alt={`Professional headshot of ${personData.name}`}
-            className="mr-3 lg:mb-4 lg:mr-8 lg:w-72 float-left"
+            className="float-left mr-3 lg:mr-8 lg:mb-4 lg:w-72"
             unoptimized
           />
-          <h1 className="text-3xl font-bold text-white lg:mb-4 lg:block hidden">
+          <h1 className="hidden text-3xl font-bold text-white lg:mb-4 lg:block">
             {personData.name}
           </h1>
           <p className="text-sm text-white lg:w-5/6 lg:text-base xl:w-2/3">
             {personData.biography}
           </p>
-          <section className="mt-8 gap-6 lg:flex hidden">
-            <div className="gap-2 font-medium text-white flex flex-col">
+          <section className="mt-8 hidden gap-6 lg:flex">
+            <div className="flex flex-col gap-2 font-medium text-white">
               <h2>Known For</h2>
               <h2>Born</h2>
               <h2>Place of Birth</h2>
             </div>
-            <div className="gap-2 text-sm leading-6 text-white flex flex-col">
+            <div className="flex flex-col gap-2 text-sm leading-6 text-white">
               <span>{personData?.known_for_department}</span>
               <span>{formattedBirthday}</span>
               <span>{personData?.place_of_birth}</span>
             </div>
           </section>
-          <div className="mt-8 gap-8 text-white lg:flex hidden items-center">
+          <div className="mt-8 hidden items-center gap-8 text-white lg:flex">
             <Link
               href={`https://www.facebook.com/${personID?.facebook_id}`}
               className={`${personID?.facebook_id != null ? 'text-white transition hover:text-primary' : 'hidden'}`}
@@ -113,19 +113,19 @@ const PersonPage = ({
             </Link>
           </div>
         </div>
-        <section className="mt-8 gap-6 lg:hidden flex">
-          <div className="gap-2 font-medium text-white flex flex-col">
+        <section className="mt-8 flex gap-6 lg:hidden">
+          <div className="flex flex-col gap-2 font-medium text-white">
             <h2>Known For</h2>
             <h2>Born</h2>
             <h2>Place of Birth</h2>
           </div>
-          <div className="gap-2 text-sm leading-6 text-white flex flex-col">
+          <div className="flex flex-col gap-2 text-sm leading-6 text-white">
             <span>{personData?.known_for_department}</span>
             <span>{formattedBirthday}</span>
             <span>{personData?.place_of_birth}</span>
           </div>
         </section>
-        <div className="mt-8 gap-8 lg:hidden flex items-center">
+        <div className="mt-8 flex items-center gap-8 lg:hidden">
           <Link
             href={`https://www.facebook.com/${personID?.facebook_id}`}
             className={`${personID?.facebook_id != null ? 'text-white transition hover:text-primary' : 'hidden'}`}
@@ -163,12 +163,12 @@ const PersonPage = ({
           </Link>
         </div>
       </div>
-      <div className="mt-12 pt-12 container flex w-full justify-center border-t border-t-primary">
+      <div className="container mt-12 flex w-full justify-center border-t border-t-primary pt-12">
         <h2 className="text-3xl font-semibold tracking-widest text-white uppercase">Filmography</h2>
       </div>
       {personCredit.length > 0 ? (
         <>
-          <section className="mt-8 gap-2 md:grid-cols-4 md:gap-4 lg:grid-cols-6 xl:grid-cols-8 container grid grid-cols-3">
+          <section className="container mt-8 grid grid-cols-3 gap-2 md:grid-cols-4 md:gap-4 lg:grid-cols-6 xl:grid-cols-8">
             {personCredit?.map(
               (
                 movie: {
@@ -214,7 +214,7 @@ const PersonPage = ({
           </section>
         </>
       ) : (
-        <div className="mt-8 text-xl text-white container">
+        <div className="container mt-8 text-xl text-white">
           Sorry, there is no Data Available for {personData.name}...
         </div>
       )}

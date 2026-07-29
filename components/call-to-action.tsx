@@ -2,7 +2,7 @@ import { getSingle } from '@/lib/api';
 import Link from 'next/link';
 
 interface CallToActionTypes {
-  id: number;
+  id: string;
   color: string;
   mediaType: string;
 }
@@ -26,7 +26,7 @@ async function CallToAction({ id, color, mediaType }: CallToActionTypes) {
     return (
       <>
         <section
-          className="py-24 text-white lg:block hidden w-full"
+          className="hidden w-full py-24 text-white lg:block"
           style={{
             backgroundImage: `linear-gradient(to right, ${color} 30%, transparent 60%), url(https://image.tmdb.org/t/p/original/${mediaData?.backdrop_path})`,
             backgroundPosition: '0% 10%',
@@ -35,7 +35,7 @@ async function CallToAction({ id, color, mediaType }: CallToActionTypes) {
           }}
         >
           <div className="container">
-            <div className="gap-8 flex w-1/2 flex-col">
+            <div className="flex w-1/2 flex-col gap-8">
               <h3 className="text-2xl font-bold tracking-wider">
                 {mediaType === 'tv' ? mediaData?.name : mediaData?.title}
               </h3>
@@ -66,7 +66,7 @@ async function CallToAction({ id, color, mediaType }: CallToActionTypes) {
               <div className="w-1/2">{mediaData?.overview}</div>
               <Link
                 href={`${mediaType}/${id}/${formattedTitle}`}
-                className="h-8 bg-white px-4 text-base font-semibold inline-flex w-fit items-center justify-center rounded-md whitespace-nowrap text-secondary-foreground transition-colors hover:bg-secondary/80"
+                className="inline-flex h-8 w-fit items-center justify-center rounded-md bg-white px-4 text-base font-semibold whitespace-nowrap text-secondary-foreground transition-colors hover:bg-secondary/80"
               >
                 Explore
               </Link>
@@ -74,7 +74,7 @@ async function CallToAction({ id, color, mediaType }: CallToActionTypes) {
           </div>
         </section>
         <section
-          className="py-24 text-white lg:hidden w-full"
+          className="w-full py-24 text-white lg:hidden"
           style={{
             backgroundImage: `linear-gradient(to top, ${color} 45%, transparent 80%), url(https://image.tmdb.org/t/p/original/${mediaData?.backdrop_path})`,
             backgroundPosition: 'top',
@@ -83,7 +83,7 @@ async function CallToAction({ id, color, mediaType }: CallToActionTypes) {
           }}
         >
           <div className="container">
-            <div className="gap-8 flex flex-col">
+            <div className="flex flex-col gap-8">
               <h3 className="dark-shadow text-2xl font-bold tracking-wider">
                 {mediaType === 'tv' ? mediaData?.name : mediaData?.title}
               </h3>
@@ -110,7 +110,7 @@ async function CallToAction({ id, color, mediaType }: CallToActionTypes) {
               <div className="dark-shadow">{mediaData?.overview}</div>
               <Link
                 href={`${mediaType}/${id}/${formattedTitle}`}
-                className="h-8 bg-white px-4 text-base font-semibold inline-flex w-fit items-center justify-center rounded-md whitespace-nowrap text-secondary-foreground transition-colors hover:bg-secondary/80"
+                className="inline-flex h-8 w-fit items-center justify-center rounded-md bg-white px-4 text-base font-semibold whitespace-nowrap text-secondary-foreground transition-colors hover:bg-secondary/80"
               >
                 Explore
               </Link>

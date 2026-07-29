@@ -1,21 +1,26 @@
 import { apiUrl, fetchData } from './utils';
 
-export const getPerson = async (id: number) => {
+export const getPerson = async (id: string) => {
   const url = `${apiUrl}/person/${id}&append_to_response=combined_credits`;
   return await fetchData(url);
 };
 
-export const getPersonCredit = async (id: number) => {
+export const getList = async (id: string) => {
+  const url = `${apiUrl}/list/${id}?language=en-US&page=1`;
+  return await fetchData(url);
+};
+
+export const getPersonCredit = async (id: string) => {
   const url = `${apiUrl}/person/${id}/combined_credits`;
   return await fetchData(url);
 };
 
-export const getPersonExternalId = async (id: number) => {
+export const getPersonExternalId = async (id: string) => {
   const url = `${apiUrl}/person/${id}/external_ids`;
   return await fetchData(url);
 };
 
-export const getRecommended = async (id: number, mediaType: string) => {
+export const getRecommended = async (id: string, mediaType: string) => {
   const url = `${apiUrl}/${mediaType}/${id}/recommendations`;
   return await fetchData(url);
 };
@@ -25,22 +30,22 @@ export const getTop10 = async () => {
   return await fetchData(url);
 };
 
-export const getRelease = async (mediaType: string, id: number) => {
+export const getRelease = async (mediaType: string, id: string) => {
   const url = `${apiUrl}/${mediaType}/${id}/release_dates`;
   return await fetchData(url);
 };
 
-export const getContentRating = async (mediaType: string, id: number) => {
+export const getContentRating = async (mediaType: string, id: string) => {
   const url = `${apiUrl}/${mediaType}/${id}/content_ratings`;
   return await fetchData(url);
 };
 
-export const getSingle = async (mediaType: string, id: number) => {
+export const getSingle = async (mediaType: string, id: string) => {
   const url = `${apiUrl}/${mediaType}/${id}`;
   return await fetchData(url);
 };
 
-export const getTvShowEpisodes = async (id: number, season: number) => {
+export const getTvShowEpisodes = async (id: string, season: number) => {
   const url = `${apiUrl}/tv/${id}/season/${season}`;
   return await fetchData(url);
 };
@@ -85,22 +90,22 @@ export const searchSpecificMedia = async (mediaType: string, query: string, page
   return await fetchData(url);
 };
 
-export const getExternalId = async (id: number, mediaType: string) => {
+export const getExternalId = async (id: string, mediaType: string) => {
   const url = `${apiUrl}/${mediaType}/${id}/external_ids`;
   return await fetchData(url);
 };
 
-export const getYouTubeVideo = async (id: number, mediaType: string) => {
+export const getYouTubeVideo = async (id: string, mediaType: string) => {
   const url = `${apiUrl}/${mediaType}/${id}/videos`;
   return await fetchData(url);
 };
 
-export const getCredits = async (id: number, mediaType: string) => {
+export const getCredits = async (id: string, mediaType: string) => {
   const url = `${apiUrl}/${mediaType}/${id}/credits`;
   return await fetchData(url);
 };
 
-export const getWatchProviders = async (id: number) => {
+export const getWatchProviders = async (id: string) => {
   const url = `${apiUrl}/movie/${id}/watch/providers`;
   return await fetchData(url);
 };

@@ -2,7 +2,7 @@
 
 import { useEffect, SetStateAction, useState, useCallback } from 'react';
 import { searchSpecificMedia } from '@/lib/api';
-import ProductCarousel from '@/components/productCarousel';
+import ProductCarousel from '@/components/product-carousel';
 import { Button } from '@/components/ui/button';
 import { Movie, Person, TV } from '@/types/api';
 
@@ -39,40 +39,43 @@ export default function SearchFilter() {
   }, [isSearchClicked, handleSubmit]);
 
   return (
-    <div className="p-6 w-full rounded-3xl bg-foreground">
-      <div className="gap-4 lg:flex-row lg:justify-between lg:gap-8 flex flex-col">
-        <div className="px-2 py-4 md:gap-6 lg:px-6 flex flex-row justify-between rounded-2xl bg-background">
+    <div className="w-full rounded-3xl bg-[rgb(32,32,32)] p-6">
+      <div className="flex flex-col gap-4 lg:flex-row lg:justify-between lg:gap-8">
+        <div className="flex flex-row justify-between rounded-2xl bg-[rgb(22,22,22)] px-2 py-4 md:gap-6 lg:px-6">
           <Button
             variant={mediaType === 'movie' ? 'default' : 'ghost'}
             onClick={() => setMediaType('movie')}
+            className="text-white"
           >
             Movies
           </Button>
           <Button
             variant={mediaType === 'tv' ? 'default' : 'ghost'}
             onClick={() => setMediaType('tv')}
+            className="text-white"
           >
             Series
           </Button>
           <Button
             variant={mediaType === 'person' ? 'default' : 'ghost'}
             onClick={() => setMediaType('person')}
+            className="text-white"
           >
             Person
           </Button>
         </div>
-        <div className="gap-4 lg:flex-row lg:gap-6 flex w-full flex-col">
+        <div className="flex w-full flex-col gap-4 lg:flex-row lg:gap-6">
           <input
             type="text"
             placeholder="Enter a keyword"
             value={searchTerm}
             onChange={handleSearchChange}
             onKeyDown={(e) => (e.key === 'Enter' ? setIsSearchClicked(true) : null)}
-            className="px-6 text-white lg:h-auto h-[68px] w-full rounded-2xl bg-background ring-offset-background transition-colors focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50"
+            className="h-17 w-full rounded-2xl bg-[rgb(22,22,22)] px-6 text-white ring-offset-background transition-colors focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50 lg:h-auto"
           />
           <Button
             size="lg"
-            className="lg:h-auto h-[68px] rounded-2xl"
+            className="h-17 rounded-2xl lg:h-auto"
             onClick={() => setIsSearchClicked(true)}
           >
             Search

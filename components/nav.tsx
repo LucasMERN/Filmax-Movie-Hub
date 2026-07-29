@@ -15,20 +15,20 @@ import {
 } from '@/components/ui/sheet';
 import { Button } from '@/components/ui/button';
 import { SignedIn, SignedOut, SignOutButton, UserButton } from '@clerk/nextjs';
-import AuthButton from '@/components/authButton';
+import AuthButton from '@/components/auth-button';
 
 export default function Nav() {
   const pathname = usePathname();
 
   return (
     <nav
-      className="pb-8 pt-8 md:pb-12 fixed z-50 w-full"
+      className="fixed z-50 w-full pt-8 pb-8 md:pb-12"
       style={{
         background:
           'linear-gradient(180deg, rgba(0, 0, 0, 1) 10%, rgb(0 0 0 / 76%) 54%, rgb(0 0 0 / 38%) 86%, rgba(255, 255, 255, 0) 100%)',
       }}
     >
-      <div className="gap-4 md:gap-0 container mx-auto flex flex-row items-center justify-between">
+      <div className="container mx-auto flex flex-row items-center justify-between gap-4 md:gap-0">
         <Sheet>
           <SheetTrigger asChild>
             <Button variant="outline" size="icon" className="md:hidden">
@@ -42,7 +42,7 @@ export default function Nav() {
                 Pick from our route selection to navigate the site!
               </SheetDescription>
             </SheetHeader>
-            <ul className="gap-6 flex flex-col">
+            <ul className="flex flex-col gap-6">
               <li>
                 <Link
                   className={`link ${
@@ -138,8 +138,8 @@ export default function Nav() {
           </SignedOut>
         </div>
 
-        <ul className="gap-6 md:flex hidden flex-row items-center">
-          <li className="mr-4 h-12 w-12 md:block hidden">
+        <ul className="hidden flex-row items-center gap-6 md:flex">
+          <li className="mr-4 hidden h-12 w-12 md:block">
             <Link href="/dashboard">
               <Image
                 src="/logo.svg"
@@ -222,7 +222,7 @@ export default function Nav() {
             </li>
           </SignedIn>
         </ul>
-        <div className="md:block hidden">
+        <div className="hidden md:block">
           <AuthButton />
         </div>
       </div>

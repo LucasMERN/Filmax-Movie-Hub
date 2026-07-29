@@ -4,7 +4,7 @@ import React, { useRef, useState, useCallback, useEffect } from 'react';
 import Video from 'next-video';
 import Link from 'next/link';
 import clsx from 'clsx';
-import VideoTilesSkeleton from '@/components/skeletons/videoTilesSkeleton';
+import VideoTilesSkeleton from '@/components/skeletons/video-tiles-skeleton';
 import { Asset } from 'next-video/dist/assets.js';
 
 type VideoTilesProps = {
@@ -54,7 +54,7 @@ const VideoTiles = ({ data }: VideoTilesProps) => {
       <VideoTilesSkeleton className={clsx(isLoading ? '' : 'hidden')} />
       <section
         className={clsx(
-          'gap-3 pt-24 md:flex-nowrap md:justify-between md:gap-0 md:pt-48 container flex flex-row flex-wrap',
+          'container flex flex-row flex-wrap gap-3 pt-24 md:flex-nowrap md:justify-between md:gap-0 md:pt-48',
           isLoading ? 'opacity-0' : 'opacity-100',
           'transition-opacity'
         )}
@@ -64,13 +64,13 @@ const VideoTiles = ({ data }: VideoTilesProps) => {
             key={index}
             href={video.url}
             className={clsx(
-              'ease-in-out relative h-[500px] w-[30%] transition-all duration-300',
+              'relative h-125 w-[30%] transition-all duration-300 ease-in-out',
               video.margin,
               activeIndex === null
-                ? 'md:w-[12%] h-[12%]'
+                ? 'md:w-[12%]'
                 : activeIndex === index
-                  ? 'md:w-[25%] h-[25%]'
-                  : 'md:w-[10%] h-[10%]'
+                  ? 'md:w-[25%]'
+                  : 'md:w-[10%]'
             )}
             onMouseEnter={() => handleMouseEnter(index)}
             onMouseLeave={handleMouseLeave}
@@ -80,7 +80,7 @@ const VideoTiles = ({ data }: VideoTilesProps) => {
               controls={false}
               autoPlay={false}
               muted
-              className="left-0 top-0 ease-in-out absolute h-full w-full object-cover transition-all duration-300"
+              className="absolute top-0 left-0 h-full w-full object-cover transition-all duration-300 ease-in-out"
               ref={(el: HTMLVideoElement | null) => {
                 videoRefs.current[index] = el;
               }}
@@ -89,7 +89,7 @@ const VideoTiles = ({ data }: VideoTilesProps) => {
             />
             <span
               className={clsx(
-                'dark-shadow text-sm font-semibold text-white ease-in-out md:text-xl absolute top-1/2 w-full text-center transition-all duration-300',
+                'dark-shadow absolute top-1/2 w-full text-center text-sm font-semibold text-white transition-all duration-300 ease-in-out md:text-xl',
                 video.alignment
               )}
             >

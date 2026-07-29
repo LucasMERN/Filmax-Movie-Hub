@@ -1,11 +1,11 @@
-import PersonPage from '@/components/personPage';
+import PersonPage from '@/components/person-page';
 import { getPerson, getPersonCredit, getPersonExternalId } from '@/lib/api';
 import type { Metadata } from 'next';
 
 export async function generateMetadata({
   params,
 }: {
-  params: { name: string };
+  params: Promise<{ name: string }>;
 }): Promise<Metadata> {
   const { name } = await params;
   const formattedTitle = name
@@ -18,7 +18,7 @@ export async function generateMetadata({
   };
 }
 
-export default async function Page({ params }: { params: { id: number } }) {
+export default async function Page({ params }: { params: Promise<{ id: string }> }) {
   try {
     const { id } = await params;
     const personData = await getPerson(id);

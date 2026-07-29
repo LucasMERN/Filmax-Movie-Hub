@@ -1,8 +1,8 @@
-import CallToAction from '@/components/callToAction';
-import CarouselHeader from '@/components/carouselHeader';
+import CallToAction from '@/components/call-to-action';
+import CarouselHeader from '@/components/carousel-header';
 import Hero from '@/components/hero';
-import ProductCarousel from '@/components/productCarousel';
-import SearchFilter from '@/components/searchFilter';
+import ProductCarousel from '@/components/product-carousel';
+import SearchFilter from '@/components/search-filter';
 import { getAnimated, getNewMovie, getNewTV, getPopular, getTop10 } from '@/lib/api';
 import type { Metadata } from 'next';
 
@@ -32,11 +32,11 @@ export default async function Dashboard() {
     return (
       <main className="min-h-screen overflow-hidden">
         <Hero data={data?.results.slice(0, 10)} />
-        <div className="gap-20 flex flex-col items-center">
+        <div className="flex flex-col items-center gap-20">
           <div className="container">
             <SearchFilter />
           </div>
-          <div className="pr-0 container">
+          <div className="container pr-0">
             <CarouselHeader title="New Movies" link="/trending" />
             <ProductCarousel
               mediaType="movie"
@@ -44,7 +44,7 @@ export default async function Dashboard() {
               width="min-[475px]:basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/6"
             />
           </div>
-          <div className="pr-0 container">
+          <div className="container pr-0">
             <CarouselHeader title="Popular Movies" link="/movies" />
             <ProductCarousel
               mediaType="movie"
@@ -52,8 +52,8 @@ export default async function Dashboard() {
               width="min-[475px]:basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/6"
             />
           </div>
-          <CallToAction id={95396} color="#007D4D" mediaType={'tv'} />
-          <div className="pr-0 container">
+          <CallToAction id={'95396'} color="#007D4D" mediaType={'tv'} />
+          <div className="container pr-0">
             <CarouselHeader title="New TV Shows" link="/shows" />
             <ProductCarousel
               mediaType="tv"
@@ -61,7 +61,7 @@ export default async function Dashboard() {
               width="min-[475px]:basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/6"
             />
           </div>
-          <div className="pr-0 container">
+          <div className="container pr-0">
             <CarouselHeader title="Animated Movies" link="categories/16/animated" />
             <ProductCarousel
               mediaType="movie"

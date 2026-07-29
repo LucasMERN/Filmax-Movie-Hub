@@ -21,20 +21,17 @@ export function RadialChart({
     },
     safari: {
       label: 'Safari',
-      color: 'hsl(var(--chart-2))',
+      color: 'var(--chart-2)',
     },
   } satisfies ChartConfig;
 
   return (
-    <Card className="-top-24 right-0 lg:flex absolute hidden flex-col shadow-none">
-      <CardTitle className="dark-shadow pb-2 text-lg font-semibold text-white text-center">
+    <Card className="absolute -top-24 right-0 hidden flex-col shadow-none lg:flex">
+      <CardTitle className="dark-shadow pb-2 text-center text-lg font-semibold text-white">
         Audience Score
       </CardTitle>
-      <CardContent className="pb-0 flex-1">
-        <ChartContainer
-          config={chartConfig}
-          className="mx-auto aspect-square max-h-[250px] min-h-[180px]"
-        >
+      <CardContent className="flex-1 pb-0">
+        <ChartContainer config={chartConfig} className="mx-auto aspect-square max-h-62.5 min-h-45">
           <RadialBarChart
             data={chartData}
             startAngle={0}

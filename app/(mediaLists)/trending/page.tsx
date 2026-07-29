@@ -1,4 +1,4 @@
-import MediaGrid from '@/components/mediaGrid';
+import MediaGrid from '@/components/media-grid';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
