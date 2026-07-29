@@ -6,8 +6,31 @@ export const getPerson = async (id: string) => {
 };
 
 export const getList = async (id: string) => {
-  const url = `${apiUrl}/list/${id}?language=en-US&page=1`;
-  return await fetchData(url);
+  const firstUrl = `${apiUrl}/list/${id}?language=en-US&page=1`;
+
+  const firstPage = await fetchData(firstUrl);
+  const totalPages = firstPage.total_pages;
+
+  if (totalPages === 1) {
+    return firstPage;
+  }
+
+  const urls = [];
+  for (let p = 2; p <= totalPages; p++) {
+    urls.push(`${apiUrl}/list/${id}?language=en-US&page=${p}`);
+  }
+
+  const remainingPages = await Promise.all(urls.map(fetchData));
+
+  const allResults = {
+    ...firstPage,
+    items: [
+      ...firstPage.items,
+      ...remainingPages.flatMap(page => page.items),
+    ],
+  };
+
+  return allResults;
 };
 
 export const getPersonCredit = async (id: string) => {

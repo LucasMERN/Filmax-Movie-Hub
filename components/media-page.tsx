@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import EpisodeGrid from '@/components/episode-grid';
 import { Cast, ContentRating, ExternalID, Movie, ReleaseDate, TV, YouTubeVideo } from '@/types/api';
 import ProductCarousel from '@/components/product-carousel';
@@ -11,8 +11,9 @@ import {
   Clapperboard,
   Link2,
   Dot,
-  Plus,
   ChevronsRight,
+  CopyIcon,
+  CheckCheckIcon,
 } from 'lucide-react';
 import { RadialChart } from '@/components/radial-chart';
 import BackgroundImage from '@/components/ui/background-image';
@@ -23,6 +24,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { AddToWatchlist } from '@/components/watchlist-button';
 import { useUser } from '@clerk/nextjs';
+import { Button } from './ui/button';
 
 function MediaPage({
   mediaType,
@@ -49,6 +51,19 @@ function MediaPage({
 }) {
   const userId = useUser();
   const castSectionRef = useRef<HTMLDivElement | null>(null);
+  const [hasCopiedLink, setHasCopiedLink] = useState(false);
+
+  const handleShareClick = () => {
+    navigator.clipboard.writeText(id).catch((err) => {
+      console.error('Failed to copy: ', err);
+    })
+    
+    setHasCopiedLink(true);
+
+      setTimeout(() => {
+          setHasCopiedLink(false);
+      }, 2000);
+  };
 
   const scrollToCast = () => {
     if (castSectionRef.current) {
@@ -164,6 +179,15 @@ function MediaPage({
             >
               <Link2 />
             </Link>
+            <Button
+              variant="ghost"
+              className="p-0 hover:bg-transparent hover:text-white"
+              title="Click to copy TMDB ID"
+              aria-label="Click to copy TMDB ID"
+              onClick={() => handleShareClick()}
+            >
+              {hasCopiedLink ? <CheckCheckIcon /> : <CopyIcon />}
+            </Button>
           </div>
           <div className="relative flex flex-row items-center gap-2">
             <Badge

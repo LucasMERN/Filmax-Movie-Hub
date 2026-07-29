@@ -14,6 +14,7 @@ export type Person = {
 export type PersonCredit = {
   id: number;
   adult: boolean;
+  softcore: boolean;
   poster_path: string;
   title: string;
   media_type: string;
@@ -44,6 +45,7 @@ export type BaseMedia = {
   id: number;
   overview: string;
   adult: boolean;
+  softcore: boolean;
   poster_path: string;
   backdrop_path: string;
   vote_average: number;

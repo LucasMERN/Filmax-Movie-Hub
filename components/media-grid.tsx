@@ -28,6 +28,7 @@ type Data = {
   name: string;
   title: string;
   adult: boolean;
+  softcore: boolean;
   currentPage: string;
 };
 
@@ -151,7 +152,7 @@ const GridItems = ({ data, mediaType }: { data: Data[]; mediaType: 'movie' | 'tv
 
         return (
           <React.Fragment key={index}>
-            {item.poster_path !== null && item.adult !== true && (
+            {item.poster_path !== null && item.adult !== true && item.softcore !== true && (
               <Link
                 href={`/${mediaType}/${item.id}/${formattedTitle}`}
                 className="group w-full overflow-hidden"
