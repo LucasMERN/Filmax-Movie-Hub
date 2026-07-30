@@ -154,8 +154,8 @@ const GridItems = ({ data, mediaType }: { data: Data[]; mediaType: 'movie' | 'tv
           <React.Fragment key={index}>
             {item.poster_path !== null && item.adult !== true && item.softcore !== true && (
               <Link
-                aria-label={`Click to go to the ${formattedTitle} page`}
-                title={`Click to go to the ${formattedTitle} page`}
+                aria-label={`Click to go to the ${mediaType === 'movie' ? item?.title : item?.name} page`}
+                title={`Click to go to the ${mediaType === 'movie' ? item?.title : item?.name} page`}
                 href={`/${mediaType}/${item.id}/${formattedTitle}`}
                 prefetch={false}
                 className="group w-full overflow-hidden"
@@ -165,7 +165,7 @@ const GridItems = ({ data, mediaType }: { data: Data[]; mediaType: 'movie' | 'tv
                   width={342}
                   height={513}
                   className="h-full object-cover transition-transform group-hover:scale-105"
-                  alt={`Poster image for ${item.title ?? item.name}`}
+                  alt={`Poster image for ${mediaType === 'movie' ? item?.title : item?.name}`}
                   loading="lazy"
                   unoptimized
                 />

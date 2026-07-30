@@ -202,7 +202,7 @@ const PersonPage = ({
                 },
                 key: number
               ) => {
-                const formattedTitle = (movie?.title || movie?.name)
+                const formattedTitle = (movie.media_type === 'tv' ? movie?.name : movie?.title)
                   .toLowerCase()
                   .replace(/[^\w\s]/gi, '')
                   .replace(/\s+/g, '-');
@@ -215,15 +215,15 @@ const PersonPage = ({
                         <Link
                           prefetch={false}
                           key={movie.id}
-                          aria-label={`Click to go to the ${formattedTitle} page`}
-                          title={`Click to go to the ${formattedTitle} page`}
+                          aria-label={`Click to go to the ${movie.media_type === 'tv' ? movie?.name : movie?.title} page`}
+                          title={`Click to go to the ${movie.media_type === 'tv' ? movie?.name : movie?.title} page`}
                           href={`${movie.media_type === 'movie' ? `/movie/${movie.id}/${formattedTitle}` : `/tv/${movie.id}/${formattedTitle}`}`}
                           className="group overflow-hidden"
                         >
                           <Card className="relative h-full transition-transform group-hover:scale-105">
                             <Image
                               src={`https://image.tmdb.org/t/p/w342/${movie.poster_path}`}
-                              alt={`Poster image for ${movie.title}`}
+                              alt={`Poster image for ${movie.media_type === 'tv' ? movie?.name : movie?.title}`}
                               loading="lazy"
                               width={200}
                               height={200}

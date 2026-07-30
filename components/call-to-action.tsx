@@ -76,8 +76,8 @@ async function CallToAction({ id, color, mediaType }: CallToActionTypes) {
               <div className="w-1/2">{mediaData?.overview}</div>
               <Link
                 prefetch={false}
-                aria-label={`Click to go to the ${formattedTitle} page`}
-                title={`Click to go to the ${formattedTitle} page`}
+                aria-label={`Click to go to the ${mediaType === 'tv' ? mediaData?.name : mediaData?.title} page`}
+                title={`Click to go to the ${mediaType === 'tv' ? mediaData?.name : mediaData?.title} page`}
                 href={`${mediaType}/${id}/${formattedTitle}`}
                 className="inline-flex h-8 w-fit items-center justify-center rounded-md bg-white px-4 text-base font-semibold whitespace-nowrap text-secondary-foreground transition-colors hover:bg-secondary/80"
               >
@@ -130,8 +130,8 @@ async function CallToAction({ id, color, mediaType }: CallToActionTypes) {
               <div className="dark-shadow">{mediaData?.overview}</div>
               <Link
                 prefetch={false}
-                aria-label={`Click to go to the ${formattedTitle} page`}
-                title={`Click to go to the ${formattedTitle} page`}
+                aria-label={`Click to go to the ${mediaType === 'tv' ? mediaData?.name : mediaData?.title} page`}
+                title={`Click to go to the ${mediaType === 'tv' ? mediaData?.name : mediaData?.title} page`}
                 href={`${mediaType}/${id}/${formattedTitle}`}
                 className="inline-flex h-8 w-fit items-center justify-center rounded-md bg-white px-4 text-base font-semibold whitespace-nowrap text-secondary-foreground transition-colors hover:bg-secondary/80"
               >
