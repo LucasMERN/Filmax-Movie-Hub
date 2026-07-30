@@ -32,7 +32,11 @@ export default async function Home() {
       <section className="min-h-screen bg-black">
         <nav className="absolute z-20 w-full bg-linear-to-b from-black pt-8 pb-8">
           <div className="container mx-auto flex justify-between">
-            <Link href="/">
+            <Link
+              aria-label="Click to go to the homepage"
+              title="Click to go to the homepage"
+              href="/"
+            >
               <Image
                 src="/logo.svg"
                 height={50}
@@ -65,7 +69,11 @@ export default async function Home() {
               Ready to find your next binge?
             </p>
             <Button asChild>
-              <Link href="/dashboard">
+              <Link
+                aria-label="Click to enter Filmax Cinema Hub dashboard"
+                title="Click to enter Filmax Cinema Hub dashboard"
+                href="/dashboard"
+              >
                 Enter Site
                 <ChevronRight className="-mr-1 pl-1" size={22} strokeWidth={3} />
               </Link>

@@ -63,6 +63,7 @@ const AddToWatchlist = ({ item, userId }: AddToWatchlistProps) => {
     <>
       {onWatchlist === null ? (
         <Button
+          aria-disabled={true}
           size="lg"
           variant="outline"
           className="flex w-fit items-center gap-2 bg-transparent px-3 text-white shadow-lg"
@@ -73,11 +74,14 @@ const AddToWatchlist = ({ item, userId }: AddToWatchlistProps) => {
         </Button>
       ) : onWatchlist ? (
         <Button
+          aria-label="Click to remove from watchlist"
+          title="Click to remove from watchlist"
           size="lg"
           variant="destructive"
           className="flex w-fit items-center gap-2 border-white bg-transparent px-3 text-white shadow-lg"
           onClick={handleRemoveFromWatchlist}
           disabled={isPending}
+          aria-disabled={isPending}
         >
           {isPending ? (
             <>
@@ -93,11 +97,14 @@ const AddToWatchlist = ({ item, userId }: AddToWatchlistProps) => {
         </Button>
       ) : (
         <Button
+          aria-label="Click to add to watchlist"
+          title="Click to add to watchlist"
           size="lg"
           variant="outline"
           className="flex w-fit items-center gap-2 bg-transparent px-3 text-white shadow-lg"
           onClick={handleAddToWatchlist}
           disabled={isPending}
+          aria-disabled={isPending}
         >
           {isPending ? (
             <>
@@ -135,10 +142,13 @@ const RemoveFromWatchlist = ({ item, userId }: AddToWatchlistProps) => {
       className={`absolute bottom-0 z-10 flex w-full justify-center bg-transparent from-black transition-all duration-200 group-hover:bg-linear-to-t ${isPending ? 'bg-linear-to-t from-black' : ''}`}
     >
       <Button
+        aria-label="Click to remove from watchlist"
+        title="Click to remove from watchlist"
         variant="destructive"
         className={`h-10 w-10 animate-bounce rounded-full bg-destructive p-0 opacity-0 transition-all duration-500 group-hover:mb-8 group-hover:opacity-100 ${isPending ? 'mb-8 opacity-100' : ''}`}
         onClick={handleRemoveFromWatchlist}
         disabled={isPending}
+        aria-disabled={isPending}
       >
         {isPending ? (
           <Loader2 size={18} strokeWidth={3} className="animate-spin text-white" />

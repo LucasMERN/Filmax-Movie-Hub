@@ -154,6 +154,8 @@ const GridItems = ({ data, mediaType }: { data: Data[]; mediaType: 'movie' | 'tv
           <React.Fragment key={index}>
             {item.poster_path !== null && item.adult !== true && item.softcore !== true && (
               <Link
+                aria-label={`Click to go to the ${formattedTitle} page`}
+                title={`Click to go to the ${formattedTitle} page`}
                 href={`/${mediaType}/${item.id}/${formattedTitle}`}
                 prefetch={false}
                 className="group w-full overflow-hidden"

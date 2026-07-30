@@ -22,7 +22,14 @@ function AuthButton() {
             },
           }}
         >
-          <Button type="submit" variant="secondary" size="sm" className="h-8 px-2 lg:h-10 lg:px-4">
+          <Button
+            aria-label="Click to sign in"
+            title="click to sign in"
+            type="submit"
+            variant="secondary"
+            size="sm"
+            className="h-8 px-2 lg:h-10 lg:px-4"
+          >
             Sign In
           </Button>
         </SignInButton>

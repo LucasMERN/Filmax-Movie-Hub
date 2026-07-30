@@ -35,7 +35,8 @@ export default function BackToTopButton() {
         onClick={scrollToTop}
         variant="outline"
         className="fixed right-8 bottom-24 z-50 size-12 animate-bounce rounded-full border border-primary bg-primary text-white shadow-lg focus:outline-none lg:right-20"
-        aria-label="click to return to the top of the page"
+        aria-label="Click to return to the top of the page"
+        title="Click to return to the top of the page"
       >
         <ArrowUp className="size-6" />
       </Button>

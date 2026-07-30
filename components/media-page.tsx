@@ -56,13 +56,13 @@ function MediaPage({
   const handleShareClick = () => {
     navigator.clipboard.writeText(id).catch((err) => {
       console.error('Failed to copy: ', err);
-    })
-    
+    });
+
     setHasCopiedLink(true);
 
-      setTimeout(() => {
-          setHasCopiedLink(false);
-      }, 2000);
+    setTimeout(() => {
+      setHasCopiedLink(false);
+    }, 2000);
   };
 
   const scrollToCast = () => {
@@ -146,6 +146,8 @@ function MediaPage({
           <div className="flex items-center gap-4 text-white">
             <Link
               className={`${externalData?.facebook_id ? '' : 'hidden'}`}
+              aria-label={`Click to go to the Facebook page for ${mediaData?.title || mediaData?.name}`}
+              title={`Click to go to the Facebook page for ${mediaData?.title || mediaData?.name}`}
               href={`https://www.facebook.com/${externalData?.facebook_id}`}
               target="_blank"
             >
@@ -153,6 +155,8 @@ function MediaPage({
             </Link>
             <Link
               href={`https://www.x.com/${externalData?.twitter_id}`}
+              aria-label={`Click to go to the Twitter page for ${mediaData?.title || mediaData?.name}`}
+              title={`Click to go to the Twitter page for ${mediaData?.title || mediaData?.name}`}
               className={`${externalData?.twitter_id ? '' : 'hidden'}`}
               target="_blank"
             >
@@ -160,6 +164,8 @@ function MediaPage({
             </Link>
             <Link
               className={`${externalData?.instagram_id ? '' : 'hidden'}`}
+              aria-label={`Click to go to the Instagram page for ${mediaData?.title || mediaData?.name}`}
+              title={`Click to go to the Instagram page for ${mediaData?.title || mediaData?.name}`}
               href={`https://www.instagram.com/${externalData?.instagram_id}`}
               target="_blank"
             >
@@ -167,6 +173,8 @@ function MediaPage({
             </Link>
             <Link
               href={`https://www.imdb.com/title/${externalData?.imdb_id}`}
+              aria-label={`Click to go to the IMDB page for ${mediaData?.title || mediaData?.name}`}
+              title={`Click to go to the IMDB page for ${mediaData?.title || mediaData?.name}`}
               className={`${externalData?.imdb_id ? '' : 'hidden'}`}
               target="_blank"
             >
@@ -174,6 +182,8 @@ function MediaPage({
             </Link>
             <Link
               href={`${mediaData?.homepage}`}
+              aria-label={`Click to go to the homepage for ${mediaData?.title || mediaData?.name}`}
+              title={`Click to go to the homepage for ${mediaData?.title || mediaData?.name}`}
               className={`${mediaData?.homepage ? '' : 'hidden'}`}
               target="_blank"
             >
@@ -204,7 +214,13 @@ function MediaPage({
                   key={index}
                   className="dark-shadow text-sm font-semibold whitespace-nowrap text-white/60"
                 >
-                  <Link href={`/person/${person?.id}/${person?.name}`} prefetch={false} className="hover:text-white">
+                  <Link
+                    aria-label={`Click to go to the page for ${person?.name}`}
+                    title={`Click to go to the page for ${person?.name}`}
+                    href={`/person/${person?.id}/${person?.name}`}
+                    prefetch={false}
+                    className="hover:text-white"
+                  >
                     {index === 2 ? person?.name : `${person?.name}, `}
                   </Link>
                 </li>
@@ -214,6 +230,8 @@ function MediaPage({
               |
             </span>
             <button
+              aria-label="Click to scroll to the full cast section"
+              title="Click to scroll to the full cast section"
               onClick={scrollToCast}
               className="dark-shadow group group flex items-center gap-1 text-sm font-semibold text-white/60 underline-offset-2 hover:text-white hover:underline"
             >
@@ -259,6 +277,8 @@ function MediaPage({
               {mediaData?.genres.map((name: any, index: number) => (
                 <Link
                   key={index}
+                  aria-label={`Click to go to the categories page for ${name?.name}`}
+                  title={`Click to go to the categories page for ${name?.name}`}
                   href={`/categories/${name?.id}/${name?.name}`}
                   prefetch={false}
                   className={`${badgeVariants({ variant: 'outline' })} w-fit border-white px-3 py-1 text-sm font-medium text-white shadow-lg transition-all hover:bg-primary`}

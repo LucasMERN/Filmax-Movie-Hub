@@ -94,8 +94,20 @@ const LandingPromo = ({ color, promoMovies }: { color: string; promoMovies: Movi
               {line} <br />
             </h4>
           ))}
-          <Button variant="secondary" className="mt-4 mb-4 w-fit font-medium! lg:mt-8" asChild>
-            <Link href="/dashboard">ENTER SITE</Link>
+          <Button
+            aria-label="Click to enter Filmax Cinema Hub dashboard"
+            title="Click to enter Filmax Cinema Hub dashboard"
+            variant="secondary"
+            className="mt-4 mb-4 w-fit font-medium! lg:mt-8"
+            asChild
+          >
+            <Link
+              aria-label="Click to go to the Filmax Cinema Hub dashboard"
+              title="Click to go to the Filmax Cinema Hub dashboard"
+              href="/dashboard"
+            >
+              ENTER SITE
+            </Link>
           </Button>
         </div>
       </div>

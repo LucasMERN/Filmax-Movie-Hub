@@ -32,7 +32,11 @@ export default async function Watchlist() {
           {records.length > 0 &&
             records.map((item, index) => (
               <div className="group relative w-full overflow-hidden" key={index}>
-                <Link href={item.link}>
+                <Link
+                  href={item.link}
+                  aria-label={`Click to go to the ${item.title} page`}
+                  title={`Click to go to the ${item.title} page`}
+                >
                   <Image
                     src={`https://image.tmdb.org/t/p/w342/${item.poster_image}`}
                     width={342}

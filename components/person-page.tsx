@@ -78,6 +78,8 @@ const PersonPage = ({
           <div className="mt-8 hidden items-center gap-8 text-white lg:flex">
             <Link
               href={`https://www.facebook.com/${personID?.facebook_id}`}
+              aria-label={`Click to open ${personData?.name}'s Facebook page`}
+              title={`Click to open ${personData?.name}'s Facebook page`}
               className={`${personID?.facebook_id != null ? 'text-white transition hover:text-primary' : 'hidden'}`}
               target="_blank"
             >
@@ -85,6 +87,8 @@ const PersonPage = ({
             </Link>
             <Link
               href={`https://www.x.com/${personID?.twitter_id}`}
+              aria-label={`Click to open ${personData?.name}'s Twitter page`}
+              title={`Click to open ${personData?.name}'s Twitter page`}
               className={`${personID?.twitter_id != null ? 'text-white transition hover:text-primary' : 'hidden'}`}
               target="_blank"
             >
@@ -92,6 +96,8 @@ const PersonPage = ({
             </Link>
             <Link
               href={`https://www.instagram.com/${personID?.instagram_id}`}
+              aria-label={`Click to open ${personData?.name}'s Instagram page`}
+              title={`Click to open ${personData?.name}'s Instagram page`}
               className={`${personID?.instagram_id != null ? 'text-white transition hover:text-primary' : 'hidden'}`}
               target="_blank"
             >
@@ -99,6 +105,8 @@ const PersonPage = ({
             </Link>
             <Link
               href={`https://www.imdb.com/title/${personID?.imdb_id}`}
+              aria-label={`Click to open ${personData?.name}'s IMDB page`}
+              title={`Click to open ${personData?.name}'s IMDB page`}
               className={`${personID?.imdb_id != null ? 'text-white transition hover:text-primary' : 'hidden'}`}
               target="_blank"
             >
@@ -106,6 +114,8 @@ const PersonPage = ({
             </Link>
             <Link
               href={`${personData?.homepage}`}
+              aria-label={`Click to open ${personData?.name}'s personal website`}
+              title={`Click to open ${personData?.name}'s personal website`}
               className={`${personData?.homepage != null ? 'text-white transition hover:text-primary' : 'hidden'}`}
               target="_blank"
             >
@@ -128,6 +138,8 @@ const PersonPage = ({
         <div className="mt-8 flex items-center gap-8 lg:hidden">
           <Link
             href={`https://www.facebook.com/${personID?.facebook_id}`}
+            aria-label={`Click to open ${personData?.name}'s Facebook page`}
+            title={`Click to open ${personData?.name}'s Facebook page`}
             className={`${personID?.facebook_id != null ? 'text-white transition hover:text-primary' : 'hidden'}`}
             target="_blank"
           >
@@ -135,6 +147,8 @@ const PersonPage = ({
           </Link>
           <Link
             href={`https://www.x.com/${personID?.twitter_id}`}
+            aria-label={`Click to open ${personData?.name}'s Twitter page`}
+            title={`Click to open ${personData?.name}'s Twitter page`}
             className={`${personID?.twitter_id != null ? 'text-white transition hover:text-primary' : 'hidden'}`}
             target="_blank"
           >
@@ -142,6 +156,8 @@ const PersonPage = ({
           </Link>
           <Link
             href={`https://www.instagram.com/${personID?.instagram_id}`}
+            aria-label={`Click to open ${personData?.name}'s Instagram page`}
+            title={`Click to open ${personData?.name}'s Instagram page`}
             className={`${personID?.instagram_id != null ? 'text-white transition hover:text-primary' : 'hidden'}`}
             target="_blank"
           >
@@ -149,6 +165,8 @@ const PersonPage = ({
           </Link>
           <Link
             href={`https://www.imdb.com/title/${personID?.imdb_id}`}
+            aria-label={`Click to open ${personData?.name}'s IMDB page`}
+            title={`Click to open ${personData?.name}'s IMDB page`}
             className={`${personID?.imdb_id != null ? 'text-white transition hover:text-primary' : 'hidden'}`}
             target="_blank"
           >
@@ -156,6 +174,8 @@ const PersonPage = ({
           </Link>
           <Link
             href={`${personData?.homepage}`}
+            aria-label={`Click to open ${personData?.name}'s personal website`}
+            title={`Click to open ${personData?.name}'s personal website`}
             className={`${personData?.homepage != null ? 'text-white transition hover:text-primary' : 'hidden'}`}
             target="_blank"
           >
@@ -189,26 +209,30 @@ const PersonPage = ({
 
                 return (
                   <React.Fragment key={key}>
-                    {movie.poster_path !== null && movie.adult !== true && movie.softcore !== true && (
-                      <Link
-                        prefetch={false}
-                        key={movie.id}
-                        href={`${movie.media_type === 'movie' ? `/movie/${movie.id}/${formattedTitle}` : `/tv/${movie.id}/${formattedTitle}`}`}
-                        className="group overflow-hidden"
-                      >
-                        <Card className="relative h-full transition-transform group-hover:scale-105">
-                          <Image
-                            src={`https://image.tmdb.org/t/p/w342/${movie.poster_path}`}
-                            alt={`Poster image for ${movie.title}`}
-                            loading="lazy"
-                            width={200}
-                            height={200}
-                            className="h-full"
-                            unoptimized
-                          />
-                        </Card>
-                      </Link>
-                    )}
+                    {movie.poster_path !== null &&
+                      movie.adult !== true &&
+                      movie.softcore !== true && (
+                        <Link
+                          prefetch={false}
+                          key={movie.id}
+                          aria-label={`Click to go to the ${formattedTitle} page`}
+                          title={`Click to go to the ${formattedTitle} page`}
+                          href={`${movie.media_type === 'movie' ? `/movie/${movie.id}/${formattedTitle}` : `/tv/${movie.id}/${formattedTitle}`}`}
+                          className="group overflow-hidden"
+                        >
+                          <Card className="relative h-full transition-transform group-hover:scale-105">
+                            <Image
+                              src={`https://image.tmdb.org/t/p/w342/${movie.poster_path}`}
+                              alt={`Poster image for ${movie.title}`}
+                              loading="lazy"
+                              width={200}
+                              height={200}
+                              className="h-full"
+                              unoptimized
+                            />
+                          </Card>
+                        </Link>
+                      )}
                   </React.Fragment>
                 );
               }

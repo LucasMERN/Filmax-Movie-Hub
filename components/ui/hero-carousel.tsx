@@ -183,6 +183,8 @@ const CarouselPrevious = React.forwardRef<HTMLButtonElement, React.ComponentProp
 
     return (
       <Button
+        aria-label="Click to scroll to the previous slide"
+        title="Click to scroll to the previous slide"
         ref={ref}
         variant={variant}
         size={size}
@@ -195,6 +197,7 @@ const CarouselPrevious = React.forwardRef<HTMLButtonElement, React.ComponentProp
           className
         )}
         disabled={!canScrollPrev}
+        aria-disabled={!canScrollPrev}
         onClick={scrollPrev}
         {...props}
       >
@@ -212,6 +215,8 @@ const CarouselNext = React.forwardRef<HTMLButtonElement, React.ComponentProps<ty
 
     return (
       <Button
+        aria-label="Click to scroll to the next slide"
+        title="Click to scroll to the next slide"
         ref={ref}
         variant={variant}
         size={size}
@@ -224,6 +229,7 @@ const CarouselNext = React.forwardRef<HTMLButtonElement, React.ComponentProps<ty
           className
         )}
         disabled={!canScrollNext}
+        aria-disabled={!canScrollNext}
         onClick={scrollNext}
         {...props}
       >

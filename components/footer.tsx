@@ -8,7 +8,13 @@ const Footer = () => {
         <span className="absolute top-1/2 left-0 w-[25%] -translate-y-1/2 transform border-t border-white md:w-[40%]"></span>
         <ul className="z-10 flex gap-8">
           <li>
-            <Link href="https://github.com/LucasMERN" className="group" target="_blank">
+            <Link
+              aria-label="Click to go to Lucas Winkler's GitHub profile"
+              title="Click to go to Lucas Winkler's GitHub profile"
+              href="https://github.com/LucasMERN"
+              className="group"
+              target="_blank"
+            >
               <Github
                 size={40}
                 color="white"
@@ -18,6 +24,8 @@ const Footer = () => {
           </li>
           <li>
             <Link
+              aria-label="Click to go to Lucas Winkler's Linkedin profile"
+              title="Click to go to Lucas Winkler's Linkedin profile"
               href="https://www.linkedin.com/in/lucaswinklerdev/"
               className="group"
               target="_blank"
@@ -35,6 +43,8 @@ const Footer = () => {
       <h3 className="text-xl font-medium text-white">
         Designed & Developed by{' '}
         <Link
+          aria-label="Click to go to Lucas Winkler's portfolio site"
+          title="Click to go to Lucas Winkler's portfolio site"
           href="#"
           className="underline decoration-dashed decoration-1 underline-offset-4 transition-all hover:font-bold"
         >

@@ -18,6 +18,8 @@ const SelectTrigger = React.forwardRef<
 >(({ className, children, ...props }, ref) => (
   <SelectPrimitive.Trigger
     ref={ref}
+    aria-label="Click to open select options"
+    title="Click to open select options"
     className={cn(
       'flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-white focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1',
       className
@@ -37,6 +39,8 @@ const SelectScrollUpButton = React.forwardRef<
   React.ComponentPropsWithoutRef<typeof SelectPrimitive.ScrollUpButton>
 >(({ className, ...props }, ref) => (
   <SelectPrimitive.ScrollUpButton
+    aria-label="Click to scroll up in the options menu"
+    title="Click to scroll up in the options menu"
     ref={ref}
     className={cn('flex cursor-default items-center justify-center py-1', className)}
     {...props}
@@ -51,6 +55,8 @@ const SelectScrollDownButton = React.forwardRef<
   React.ComponentPropsWithoutRef<typeof SelectPrimitive.ScrollDownButton>
 >(({ className, ...props }, ref) => (
   <SelectPrimitive.ScrollDownButton
+    aria-label="Click to scroll down in the options menu"
+    title="Click to scroll down in the options menu"
     ref={ref}
     className={cn('flex cursor-default items-center justify-center py-1', className)}
     {...props}

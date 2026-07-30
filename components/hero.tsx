@@ -138,6 +138,8 @@ const Hero = ({ data }: { data: Movie[] & TV[] }) => {
               : ''}
           </p>
           <Link
+            aria-label={`Click to go to the ${data[currentMovieIndex]?.title || data[currentMovieIndex]?.name} page`}
+            title={`Click to go to the ${data[currentMovieIndex]?.title || data[currentMovieIndex]?.name} page`}
             href={`${data[currentMovieIndex]?.media_type === 'movie' ? `movie/${data[currentMovieIndex]?.id}/${formattedTitle}` : `tv/${data[currentMovieIndex]?.id}/${formattedTitle}`}`}
             className="inline-flex h-8 w-fit items-center justify-center rounded-md bg-white px-4 text-base font-semibold whitespace-nowrap text-secondary-foreground transition-colors hover:bg-secondary/80"
           >
@@ -163,6 +165,8 @@ const Hero = ({ data }: { data: Movie[] & TV[] }) => {
 
               return (
                 <CarouselItem
+                  aria-label={`Click to go to the ${formattedTitle} page`}
+                  title={`Click to go to the ${formattedTitle} page`}
                   href={`${movie.media_type === 'movie' ? `movie/${movie?.id}/${formattedTitle}` : `tv/${movie?.id}/${formattedTitle}`}`}
                   key={index}
                   className="basis-1/3"

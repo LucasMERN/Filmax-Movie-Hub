@@ -173,7 +173,7 @@ const CarouselItem = React.forwardRef<
         className
       )}
       prefetch={false}
-      href={href || "#"}
+      href={href || '#'}
       {...props}
     />
   );
@@ -186,6 +186,8 @@ const CarouselPrevious = React.forwardRef<HTMLButtonElement, React.ComponentProp
 
     return (
       <Button
+        aria-label="Click to scroll to the previous carousel item"
+        title="Click to scroll to the previous carousel item"
         ref={ref}
         variant={variant}
         size={size}
@@ -197,6 +199,7 @@ const CarouselPrevious = React.forwardRef<HTMLButtonElement, React.ComponentProp
           className
         )}
         disabled={!canScrollPrev}
+        aria-disabled={!canScrollPrev}
         onClick={scrollPrev}
         {...props}
       >
@@ -214,6 +217,8 @@ const CarouselNext = React.forwardRef<HTMLButtonElement, React.ComponentProps<ty
 
     return (
       <Button
+        aria-label="Click to scroll to the next carousel item"
+        title="Click to scroll to the next carousel item"
         ref={ref}
         variant={variant}
         size={size}
@@ -225,6 +230,7 @@ const CarouselNext = React.forwardRef<HTMLButtonElement, React.ComponentProps<ty
           className
         )}
         disabled={!canScrollNext}
+        aria-disabled={!canScrollNext}
         onClick={scrollNext}
         {...props}
       >

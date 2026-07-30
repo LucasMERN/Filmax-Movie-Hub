@@ -43,6 +43,8 @@ export default function SearchFilter() {
       <div className="flex flex-col gap-4 lg:flex-row lg:justify-between lg:gap-8">
         <div className="flex flex-row justify-between rounded-2xl bg-[rgb(22,22,22)] px-2 py-4 md:gap-6 lg:px-6">
           <Button
+            aria-label="Click to filter search results by movies"
+            title="Click to filter search results by movies"
             variant={mediaType === 'movie' ? 'default' : 'ghost'}
             onClick={() => setMediaType('movie')}
             className="text-white"
@@ -50,6 +52,8 @@ export default function SearchFilter() {
             Movies
           </Button>
           <Button
+            aria-label="Click to filter search results by series"
+            title="Click to filter search results by series"
             variant={mediaType === 'tv' ? 'default' : 'ghost'}
             onClick={() => setMediaType('tv')}
             className="text-white"
@@ -57,6 +61,8 @@ export default function SearchFilter() {
             Series
           </Button>
           <Button
+            aria-label="Click to filter search results by person"
+            title="Click to filter search results by person"
             variant={mediaType === 'person' ? 'default' : 'ghost'}
             onClick={() => setMediaType('person')}
             className="text-white"
@@ -74,6 +80,8 @@ export default function SearchFilter() {
             className="h-17 w-full rounded-2xl bg-[rgb(22,22,22)] px-6 text-white ring-offset-background transition-colors focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50 lg:h-auto"
           />
           <Button
+            aria-label="Click to submit search"
+            title="Click to submit search"
             size="lg"
             className="h-17 rounded-2xl lg:h-auto"
             onClick={() => setIsSearchClicked(true)}

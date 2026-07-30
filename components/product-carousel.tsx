@@ -42,6 +42,8 @@ const ProductCarousel: React.FC<CarouselProps> = ({
               <React.Fragment key={index}>
                 {content?.profile_path !== null && content?.poster_path !== null && (
                   <CarouselItem
+                    aria-label={`Click to go to the ${formattedTitle} page`}
+                    title={`Click to go to the ${formattedTitle} page`}
                     href={`/${mediaType || content?.media_type}/${content?.id}/${formattedTitle}`}
                     key={content?.id}
                     className={`group mt-6 ${width} h-fit`}

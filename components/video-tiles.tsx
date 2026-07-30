@@ -63,6 +63,8 @@ const VideoTiles = ({ data }: VideoTilesProps) => {
           <Link
             key={index}
             href={video.url}
+            aria-label="Hover to watch a snippet of a film or tv show associated with this category"
+            title="Hover to watch a snippet of a film or tv show associated with this category"
             className={clsx(
               'relative h-125 w-[30%] transition-all duration-300 ease-in-out',
               video.margin,
