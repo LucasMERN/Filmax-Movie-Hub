@@ -22,15 +22,15 @@ export default async function Page({ params }: { params: Promise<{ id: string; g
   const formattedGenre = decodeURIComponent(genre);
 
   const canonical = `${baseUrl}/categories/${id}/${genre}`;
-  
+
   return (
     <>
       <head>
         <link rel="canonical" href={canonical} />
       </head>
-      <main className="min-h-screen overflow-hidden">
+      <section className="min-h-screen overflow-hidden">
         <MediaGrid title={formattedGenre} fetchType="genre" subtitle="movies" genreID={id} />
-      </main>
+      </section>
     </>
   );
 }

@@ -5,10 +5,10 @@ import Footer from '@/components/footer';
 
 export default function MoviesLayout({ children }: { children: React.ReactNode }) {
   return (
-    <main className="relative min-h-screen">
+    <section className="relative min-h-screen">
       <Nav />
       <Suspense fallback={<Loading />}>{children}</Suspense>
       <Footer />
-    </main>
+    </section>
   );
 }

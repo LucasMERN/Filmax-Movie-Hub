@@ -6,7 +6,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 
 export default function Loading() {
   return (
-    <main className="min-h-screen overflow-hidden">
+    <section className="min-h-screen overflow-hidden">
       <HeroSkeleton />
       <div className="flex flex-col items-center gap-20">
         <div className="container">
@@ -42,6 +42,6 @@ export default function Loading() {
           <ProductCarouselSkeleton />
         </div>
       </div>
-    </main>
+    </section>
   );
 }

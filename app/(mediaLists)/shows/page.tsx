@@ -1,4 +1,5 @@
 import MediaGrid from '@/components/media-grid';
+import { baseUrl } from '@/lib/base-url';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -7,9 +8,16 @@ export const metadata: Metadata = {
 };
 
 export default function Shows() {
+  const canonical = `${baseUrl}/shows`;
+
   return (
-    <main className="min-h-screen overflow-hidden">
-      <MediaGrid title="Popular" subtitle="tv series" fetchType="popular" mediaType="tv" />
-    </main>
+    <>
+      <head>
+        <link rel="canonical" href={canonical} />
+      </head>
+      <section className="min-h-screen overflow-hidden">
+        <MediaGrid title="Popular" subtitle="tv series" fetchType="popular" mediaType="tv" />
+      </section>
+    </>
   );
 }

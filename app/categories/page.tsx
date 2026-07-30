@@ -18,6 +18,7 @@ import VideoTiles from '@/components/video-tiles';
 import type { Metadata } from 'next';
 import { Suspense } from 'react';
 import VideoTilesSkeleton from '@/components/skeletons/video-tiles-skeleton';
+import { baseUrl } from '@/lib/base-url';
 
 export const metadata: Metadata = {
   title: 'Filmax | Categories',
@@ -99,10 +100,16 @@ export default function Categories() {
       url: '/categories/27/horror',
     },
   ];
+  const canonical = `${baseUrl}/categories`;
 
   return (
-    <Suspense fallback={<VideoTilesSkeleton />}>
-      <VideoTiles data={videos} />
-    </Suspense>
+    <>
+      <head>
+        <link rel="canonical" href={canonical} />
+      </head>
+      <Suspense fallback={<VideoTilesSkeleton />}>
+        <VideoTiles data={videos} />
+      </Suspense>
+    </>
   );
 }
