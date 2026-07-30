@@ -44,6 +44,7 @@ async function CallToAction({ id, color, mediaType }: CallToActionTypes) {
                   <span className="text-lg font-medium">Category:</span>
                   {mediaData?.genres.map((genres: any, index: number) => (
                     <Link
+                      prefetch={false}
                       key={index}
                       href={`/categories/${genres.id}/${genres.name}`}
                       className={`${mediaData.genres.length - 1 === index ? '' : 'border-r-2'} px-2 leading-none hover:underline`}
@@ -58,6 +59,7 @@ async function CallToAction({ id, color, mediaType }: CallToActionTypes) {
                   <span className="text-lg font-medium">Director:</span>
                   {mediaData?.created_by.map((director: any, index: number) => (
                     <Link
+                      prefetch={false}
                       href={`/person/${director.id}/${director.name}`}
                       key={index}
                       className="px-2 hover:underline"
@@ -69,6 +71,7 @@ async function CallToAction({ id, color, mediaType }: CallToActionTypes) {
               )}
               <div className="w-1/2">{mediaData?.overview}</div>
               <Link
+                prefetch={false}
                 href={`${mediaType}/${id}/${formattedTitle}`}
                 className="inline-flex h-8 w-fit items-center justify-center rounded-md bg-white px-4 text-base font-semibold whitespace-nowrap text-secondary-foreground transition-colors hover:bg-secondary/80"
               >
@@ -96,6 +99,7 @@ async function CallToAction({ id, color, mediaType }: CallToActionTypes) {
                   <span className="dark-shadow text-lg font-medium">Category:</span>
                   {mediaData?.genres.map((genres: any, index: number) => (
                     <Link
+                      prefetch={false}
                       key={index}
                       href={`/categories/${genres.id}/${genres.name}`}
                       className={`${mediaData.genres.length - 1 === index ? '' : 'border-r-2'} px-2 leading-none hover:underline`}
@@ -117,6 +121,7 @@ async function CallToAction({ id, color, mediaType }: CallToActionTypes) {
               )}
               <div className="dark-shadow">{mediaData?.overview}</div>
               <Link
+                prefetch={false}
                 href={`${mediaType}/${id}/${formattedTitle}`}
                 className="inline-flex h-8 w-fit items-center justify-center rounded-md bg-white px-4 text-base font-semibold whitespace-nowrap text-secondary-foreground transition-colors hover:bg-secondary/80"
               >

@@ -155,6 +155,7 @@ const GridItems = ({ data, mediaType }: { data: Data[]; mediaType: 'movie' | 'tv
             {item.poster_path !== null && item.adult !== true && item.softcore !== true && (
               <Link
                 href={`/${mediaType}/${item.id}/${formattedTitle}`}
+                prefetch={false}
                 className="group w-full overflow-hidden"
               >
                 <Image

@@ -204,7 +204,7 @@ function MediaPage({
                   key={index}
                   className="dark-shadow text-sm font-semibold whitespace-nowrap text-white/60"
                 >
-                  <Link href={`/person/${person?.id}/${person?.name}`} className="hover:text-white">
+                  <Link href={`/person/${person?.id}/${person?.name}`} prefetch={false} className="hover:text-white">
                     {index === 2 ? person?.name : `${person?.name}, `}
                   </Link>
                 </li>
@@ -260,6 +260,7 @@ function MediaPage({
                 <Link
                   key={index}
                   href={`/categories/${name?.id}/${name?.name}`}
+                  prefetch={false}
                   className={`${badgeVariants({ variant: 'outline' })} w-fit border-white px-3 py-1 text-sm font-medium text-white shadow-lg transition-all hover:bg-primary`}
                 >
                   {name?.name}

@@ -7,7 +7,10 @@ import {
   getSingle,
   getYouTubeVideo,
 } from '@/lib/api';
+import { baseUrl } from '@/lib/base-url';
 import type { Metadata } from 'next';
+
+export const revalidate = 86400;
 
 export async function generateMetadata({
   params,
@@ -28,6 +31,10 @@ export async function generateMetadata({
 export default async function Page({ params }: { params: Promise<{ name: string; id: string }> }) {
   try {
     const { id, name } = await params;
+    const formattedTitle = name
+      .split('-')
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
     const mediaData = await getSingle('tv', id);
     const recommendedShows = await getRecommended(id, 'tv');
     const castData = await getCredits(id, 'tv');
@@ -35,19 +42,24 @@ export default async function Page({ params }: { params: Promise<{ name: string;
     const externalData = await getExternalId(id, 'tv');
     const youtubeData = await getYouTubeVideo(id, 'tv');
 
-    console.log(name);
+    const canonical = `${baseUrl}/tv/${id}/${formattedTitle}`;
 
     return (
-      <MediaPage
-        mediaType="tv"
-        id={id}
-        mediaData={mediaData}
-        recommendedShows={recommendedShows?.results}
-        cast={castData?.cast}
-        tvRatingData={ratingData?.results}
-        externalData={externalData}
-        youtubeData={youtubeData?.results}
-      />
+      <>
+        <head>
+          <link rel="canonical" href={canonical} />
+        </head>
+        <MediaPage
+          mediaType="tv"
+          id={id}
+          mediaData={mediaData}
+          recommendedShows={recommendedShows?.results}
+          cast={castData?.cast}
+          tvRatingData={ratingData?.results}
+          externalData={externalData}
+          youtubeData={youtubeData?.results}
+        />
+      </>
     );
   } catch (error) {
     console.error('Error fetching Data:', error);

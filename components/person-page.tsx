@@ -191,6 +191,7 @@ const PersonPage = ({
                   <React.Fragment key={key}>
                     {movie.poster_path !== null && movie.adult !== true && movie.softcore !== true && (
                       <Link
+                        prefetch={false}
                         key={movie.id}
                         href={`${movie.media_type === 'movie' ? `/movie/${movie.id}/${formattedTitle}` : `/tv/${movie.id}/${formattedTitle}`}`}
                         className="group overflow-hidden"

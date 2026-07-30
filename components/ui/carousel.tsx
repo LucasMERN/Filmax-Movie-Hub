@@ -6,6 +6,7 @@ import { ArrowLeft, ArrowRight } from 'lucide-react';
 
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
+import Link from 'next/link';
 
 type CarouselApi = UseEmblaCarouselType[1];
 type UseCarouselParameters = Parameters<typeof useEmblaCarousel>;
@@ -162,7 +163,7 @@ const CarouselItem = React.forwardRef<
   const { orientation } = useCarousel();
 
   return (
-    <a
+    <Link
       ref={ref}
       role="group"
       aria-roledescription="slide"
@@ -171,7 +172,8 @@ const CarouselItem = React.forwardRef<
         orientation === 'horizontal' ? 'pl-4' : 'pt-4',
         className
       )}
-      href={href}
+      prefetch={false}
+      href={href || "#"}
       {...props}
     />
   );

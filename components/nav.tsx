@@ -31,11 +31,11 @@ export default function Nav() {
       <div className="container mx-auto flex flex-row items-center justify-between gap-4 md:gap-0">
         <Sheet>
           <SheetTrigger asChild>
-            <Button variant="outline" size="icon" className="md:hidden">
-              <Menu size={30} color="white" />
+            <Button variant="outline" size="icon" className="md:hidden bg-transparent hover:text-primary hover:border-primary hover:bg-transparent">
+              <Menu size={30} className="text-white group-hover/button:text-primary" />
             </Button>
           </SheetTrigger>
-          <SheetContent side="left" className="flex h-full flex-col justify-between">
+          <SheetContent side="left" className="flex h-full flex-col justify-between bg-[rgb(22,22,22)]">
             <SheetHeader>
               <SheetTitle>FILMAX CINEMA HUB</SheetTitle>
               <SheetDescription>
@@ -47,7 +47,7 @@ export default function Nav() {
                 <Link
                   className={`link ${
                     pathname === '/dashboard' ? 'text-white' : 'text-white/40'
-                  } tracking-widest`}
+                    } text-sm tracking-widest hover:text-white`}
                   href="/dashboard"
                 >
                   Home
@@ -58,7 +58,7 @@ export default function Nav() {
                 <Link
                   className={`link ${
                     pathname === '/trending' ? 'text-white' : 'text-white/40'
-                  } tracking-widest`}
+                    } text-sm tracking-widest hover:text-white`}
                   href="/trending"
                 >
                   Trending
@@ -69,7 +69,7 @@ export default function Nav() {
                 <Link
                   className={`link ${
                     pathname === '/categories' ? 'text-white' : 'text-white/40'
-                  } tracking-widest`}
+                    } text-sm tracking-widest hover:text-white`}
                   href="/categories"
                 >
                   Categories
@@ -80,7 +80,7 @@ export default function Nav() {
                 <Link
                   className={`link ${
                     pathname === '/movies' ? 'text-white' : 'text-white/40'
-                  } tracking-widest`}
+                    } text-sm tracking-widest hover:text-white`}
                   href="/movies"
                 >
                   Movies
@@ -91,7 +91,7 @@ export default function Nav() {
                 <Link
                   className={`link ${
                     pathname === '/shows' ? 'text-white' : 'text-white/40'
-                  } tracking-widest`}
+                    } text-sm tracking-widest hover:text-white`}
                   href="/shows"
                 >
                   Shows

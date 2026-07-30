@@ -141,9 +141,9 @@ const RemoveFromWatchlist = ({ item, userId }: AddToWatchlistProps) => {
         disabled={isPending}
       >
         {isPending ? (
-          <Loader2 size={18} strokeWidth={3} className="animate-spin" />
+          <Loader2 size={18} strokeWidth={3} className="animate-spin text-white" />
         ) : (
-          <Trash2 size={18} strokeWidth={3} />
+          <Trash2 size={18} strokeWidth={3} className="text-white" />
         )}
       </Button>
     </div>

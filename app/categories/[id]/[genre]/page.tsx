@@ -1,5 +1,8 @@
 import MediaGrid from '@/components/media-grid';
+import { baseUrl } from '@/lib/base-url';
 import type { Metadata } from 'next';
+
+export const revalidate = 86400;
 
 export async function generateMetadata({
   params,
@@ -17,9 +20,17 @@ export async function generateMetadata({
 export default async function Page({ params }: { params: Promise<{ id: string; genre: string }> }) {
   const { id, genre } = await params;
   const formattedGenre = decodeURIComponent(genre);
+
+  const canonical = `${baseUrl}/categories/${id}/${genre}`;
+  
   return (
-    <main className="min-h-screen overflow-hidden">
-      <MediaGrid title={formattedGenre} fetchType="genre" subtitle="movies" genreID={id} />
-    </main>
+    <>
+      <head>
+        <link rel="canonical" href={canonical} />
+      </head>
+      <main className="min-h-screen overflow-hidden">
+        <MediaGrid title={formattedGenre} fetchType="genre" subtitle="movies" genreID={id} />
+      </main>
+    </>
   );
 }
