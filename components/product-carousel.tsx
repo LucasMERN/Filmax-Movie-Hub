@@ -2,7 +2,6 @@ import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carouse
 import { Card } from '@/components/ui/card';
 import BackgroundImage from '@/components/ui/background-image';
 import React from 'react';
-import { TV, Movie, Person } from '@/types/api';
 
 interface CarouselProps {
   data: any;
