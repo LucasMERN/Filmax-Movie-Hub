@@ -7,7 +7,7 @@ import { Analytics } from '@vercel/analytics/react';
 import { ClerkProvider } from '@clerk/nextjs';
 import BackToTopButton from '@/components/back-to-top';
 import { baseUrl } from '@/lib/base-url';
-import { OGImage } from '@/assets/OGImage.png';
+import OGImage from '@/assets/OGImage.png';
 
 const inter = Inter({ subsets: ['latin'] });
 
