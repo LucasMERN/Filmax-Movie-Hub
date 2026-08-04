@@ -24,10 +24,7 @@ export const getList = async (id: string) => {
 
   const allResults = {
     ...firstPage,
-    items: [
-      ...firstPage.items,
-      ...remainingPages.flatMap(page => page.items),
-    ],
+    items: [...firstPage.items, ...remainingPages.flatMap((page) => page.items)],
   };
 
   return allResults;
@@ -83,8 +80,8 @@ export const getNewMovie = async (media: string, page: number) => {
   return await fetchData(url);
 };
 
-export const getNewTV = async (media: string, page: number, formattedDate: string) => {
-  const url = `${apiUrl}/discover/${media}?&include_adult=false&include_video=false&language=en-US&page=${page}&sort_by=popularity.desc&first_air_date.gte=2022-11-01&first_air_date.lte=${formattedDate}&with_original_language=en`;
+export const getNewTV = async (media: string, page: number) => {
+  const url = `${apiUrl}/discover/${media}?&include_adult=false&include_video=false&language=en-US&page=${page}&sort_by=popularity.desc&first_air_date.gte=2022-11-01&first_air_date.lte&with_original_language=en`;
   return await fetchData(url);
 };
 

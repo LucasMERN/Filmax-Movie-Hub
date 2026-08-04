@@ -167,7 +167,6 @@ const GridItems = ({ data, mediaType }: { data: Data[]; mediaType: 'movie' | 'tv
                   className="h-full object-cover transition-transform group-hover:scale-105"
                   alt={`Poster image for ${mediaType === 'movie' ? item?.title : item?.name}`}
                   loading="lazy"
-                  unoptimized
                 />
               </Link>
             )}

@@ -13,7 +13,7 @@ export const fetchData = async (url: string) => {
         accept: 'application/json',
         Authorization: `Bearer ${process.env.NEXT_PUBLIC_TMDB_ACCESS_TOKEN}`,
       },
-      next: { revalidate: 30600 },
+      next: { revalidate: 86400 },
     });
 
     if (!res.ok) {
@@ -29,4 +29,3 @@ export const fetchData = async (url: string) => {
 };
 
 export const apiUrl = 'https://api.themoviedb.org/3';
-

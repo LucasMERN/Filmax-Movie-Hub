@@ -56,7 +56,6 @@ const LandingPromo = ({ color, promoMovies }: { color: string; promoMovies: Movi
         fill
         priority
         loading="eager"
-        unoptimized
         src={`https://image.tmdb.org/t/p/original/${promoMovies[carousel[activeIndex].activeImage]?.backdrop_path}`}
         style={{
           opacity: isImageVisible ? 1 : 0,

@@ -10,31 +10,30 @@ import {
 import { baseUrl } from '@/lib/base-url';
 import type { Metadata } from 'next';
 
-export const revalidate = 86400;
-
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ name: string }>;
+  params: Promise<{ id: string; name: string }>;
 }): Promise<Metadata> {
-  const { name } = await params;
+  const { id, name } = await params;
   const formattedTitle = name
     .split('-')
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
     .join(' ');
+  const canonical = `${baseUrl}/tv/${id}/${formattedTitle}`;
+
   return {
     title: `Filmax | ${formattedTitle}`,
     description: `TV Series page for '${formattedTitle}'`,
+    alternates: {
+      canonical,
+    },
   };
 }
 
-export default async function Page({ params }: { params: Promise<{ name: string; id: string }> }) {
+export default async function Page({ params }: { params: Promise<{ id: string }> }) {
   try {
-    const { id, name } = await params;
-    const formattedTitle = name
-      .split('-')
-      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-      .join(' ');
+    const { id } = await params;
     const mediaData = await getSingle('tv', id);
     const recommendedShows = await getRecommended(id, 'tv');
     const castData = await getCredits(id, 'tv');
@@ -42,24 +41,17 @@ export default async function Page({ params }: { params: Promise<{ name: string;
     const externalData = await getExternalId(id, 'tv');
     const youtubeData = await getYouTubeVideo(id, 'tv');
 
-    const canonical = `${baseUrl}/tv/${id}/${formattedTitle}`;
-
     return (
-      <>
-        <head>
-          <link rel="canonical" href={canonical} />
-        </head>
-        <MediaPage
-          mediaType="tv"
-          id={id}
-          mediaData={mediaData}
-          recommendedShows={recommendedShows?.results}
-          cast={castData?.cast}
-          tvRatingData={ratingData?.results}
-          externalData={externalData}
-          youtubeData={youtubeData?.results}
-        />
-      </>
+      <MediaPage
+        mediaType="tv"
+        id={id}
+        mediaData={mediaData}
+        recommendedShows={recommendedShows?.results}
+        cast={castData?.cast}
+        tvRatingData={ratingData?.results}
+        externalData={externalData}
+        youtubeData={youtubeData?.results}
+      />
     );
   } catch (error) {
     console.error('Error fetching Data:', error);

@@ -1,9 +1,12 @@
 import { Github, Linkedin } from 'lucide-react';
 import Link from 'next/link';
 
-const Footer = () => {
+const Footer = ({ className, ...props }: React.ComponentProps<'footer'>) => {
   return (
-    <footer className="container mx-auto flex flex-col gap-8 pt-24 pb-12 text-center">
+    <footer
+      className={`${className} container mx-auto flex flex-col gap-8 pt-24 pb-12 text-center`}
+      {...props}
+    >
       <div className="relative flex items-center justify-center">
         <span className="absolute top-1/2 left-0 w-[25%] -translate-y-1/2 transform border-t border-white md:w-[40%]"></span>
         <ul className="z-10 flex gap-8">

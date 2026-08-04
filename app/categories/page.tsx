@@ -20,9 +20,14 @@ import { Suspense } from 'react';
 import VideoTilesSkeleton from '@/components/skeletons/video-tiles-skeleton';
 import { baseUrl } from '@/lib/base-url';
 
+const canonical = `${baseUrl}/categories`;
+
 export const metadata: Metadata = {
   title: 'Filmax | Categories',
   description: 'Filmax Categories Page for choosing movie categories',
+  alternates: {
+    canonical,
+  },
 };
 
 export default function Categories() {
@@ -100,16 +105,10 @@ export default function Categories() {
       url: '/categories/27/horror',
     },
   ];
-  const canonical = `${baseUrl}/categories`;
 
   return (
-    <>
-      <head>
-        <link rel="canonical" href={canonical} />
-      </head>
-      <Suspense fallback={<VideoTilesSkeleton />}>
-        <VideoTiles data={videos} />
-      </Suspense>
-    </>
+    <Suspense fallback={<VideoTilesSkeleton />}>
+      <VideoTiles data={videos} />
+    </Suspense>
   );
 }

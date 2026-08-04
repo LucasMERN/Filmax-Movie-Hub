@@ -98,6 +98,7 @@ export async function checkIfItemInWatchlist(userId: string, link: string): Prom
         link: link,
       },
     });
+
     return !!existingWatchlistItem;
   } catch (error) {
     console.error('Error checking watchlist:', error);

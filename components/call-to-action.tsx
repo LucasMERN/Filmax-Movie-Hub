@@ -15,7 +15,13 @@ interface CallToActionData {
   overview: string;
 }
 
-async function CallToAction({ id, color, mediaType }: CallToActionTypes) {
+async function CallToAction({
+  id,
+  color,
+  mediaType,
+  className,
+  ...props
+}: CallToActionTypes & React.ComponentProps<'div'>) {
   try {
     const mediaData = await getSingle(mediaType, id);
     const formattedTitle = (mediaType === 'tv' ? mediaData?.name : mediaData?.title)
@@ -26,13 +32,14 @@ async function CallToAction({ id, color, mediaType }: CallToActionTypes) {
     return (
       <>
         <section
-          className="hidden w-full py-24 text-white lg:block"
+          className={`${className} hidden w-full py-24 text-white lg:block`}
           style={{
             backgroundImage: `linear-gradient(to right, ${color} 30%, transparent 60%), url(https://image.tmdb.org/t/p/original/${mediaData?.backdrop_path})`,
             backgroundPosition: '0% 10%',
             backgroundRepeat: 'no-repeat',
             backgroundSize: 'cover',
           }}
+          {...props}
         >
           <div className="container">
             <div className="flex w-1/2 flex-col gap-8">

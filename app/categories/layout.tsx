@@ -3,10 +3,12 @@ import Footer from '@/components/footer';
 
 export default function CategoriesLayout({ children }: { children: React.ReactNode }) {
   return (
-    <section className="w-full">
-      <Nav />
-      {children}
-      <Footer />
-    </section>
+    <>
+      <header className="w-full">
+        <Nav />
+      </header>
+      <section className="w-full">{children}</section>
+      <Footer className="w-full" />
+    </>
   );
 }
