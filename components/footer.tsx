@@ -48,13 +48,29 @@ const Footer = ({ className, ...props }: React.ComponentProps<'footer'>) => {
         <Link
           aria-label="Click to go to Lucas Winkler's portfolio site"
           title="Click to go to Lucas Winkler's portfolio site"
-          href="#"
+          href="https://www.lucaswinklerdev.com/"
+          target="_blank"
           className="underline decoration-dashed decoration-1 underline-offset-4 transition-all hover:font-bold"
         >
           Lucas Winkler
         </Link>
       </h3>
-      <h4 className="-mt-4 text-white">Copyright © 2024 Lucas Winkler</h4>
+
+      <ul className="mx-auto -mt-4 flex w-fit gap-4">
+        <li>
+          <h4 className="text-white">Copyright © 2024 Lucas Winkler</h4>
+        </li>
+        <li>
+          <Link href="/privacy-policy" className="text-white">
+            Privacy Policy
+          </Link>
+        </li>
+        <li>
+          <Link href="/terms-of-service" className="text-white">
+            Terms of Service
+          </Link>
+        </li>
+      </ul>
     </footer>
   );
 };

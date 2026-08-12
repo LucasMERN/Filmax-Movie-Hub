@@ -1,43 +1,45 @@
-import { baseUrl } from "@/lib/base-url";
+import { baseUrl } from '@/lib/base-url';
 
 export default function robots() {
   return {
     rules: [
       {
-        userAgent: "*",
+        userAgent: '*',
 
         crawlDelay: 10,
 
         allow: [
-          "/", 
-          "/movies", 
-          "/shows", 
-          "/trending", 
-          "/watchlist", 
-          "/dashboard", 
-          "/categories"
+          '/',
+          '/movies',
+          '/shows',
+          '/trending',
+          '/watchlist',
+          '/dashboard',
+          '/categories',
+          '/privacy-policy',
+          '/terms-of-service',
         ],
 
         disallow: [
-          "/movie/*",
-          "/tv/*",
-          "/person/*",
+          '/movie/*',
+          '/tv/*',
+          '/person/*',
 
-          "/categories/*",
+          '/categories/*',
 
-          "/search/*",
-          "/search",
+          '/search/*',
+          '/search',
 
-          "/*?page=",
-          "/*page=",
+          '/*?page=',
+          '/*page=',
 
-          "/*?genre=",
-          "/*genre=",
-          "/*?sort=",
-          "/*sort=",
+          '/*?genre=',
+          '/*genre=',
+          '/*?sort=',
+          '/*sort=',
 
           // API routes
-          "/api/"
+          '/api/',
         ],
       },
     ],
