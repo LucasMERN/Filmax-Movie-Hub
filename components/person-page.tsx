@@ -49,12 +49,15 @@ const PersonPage = ({
         <div>
           <Image
             priority
+            fetchPriority="high"
             loading="eager"
             width={150}
             height={200}
             src={`https://image.tmdb.org/t/p/w342/${personData.profile_path}`}
             alt={`Professional headshot of ${personData.name}`}
             className="float-left mr-3 lg:mr-8 lg:mb-4 lg:w-72"
+            sizes="20vw"
+            quality={80}
           />
           <h1 className="hidden text-3xl font-bold text-white lg:mb-4 lg:block">
             {personData.name}
@@ -226,6 +229,8 @@ const PersonPage = ({
                               loading="lazy"
                               width={200}
                               height={200}
+                              quality={50}
+                              sizes="25vw"
                               className="h-full"
                             />
                           </Card>

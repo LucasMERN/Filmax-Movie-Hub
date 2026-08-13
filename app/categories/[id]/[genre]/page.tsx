@@ -12,10 +12,15 @@ export async function generateMetadata({
   const canonical = `${baseUrl}/categories/${id}/${genre}`;
 
   return {
-    title: `Filmax | ${formattedTitle}`,
+    title: formattedTitle,
     description: `List of titles under the '${formattedTitle}' category`,
     alternates: {
       canonical,
+    },
+    openGraph: {
+      title: formattedTitle,
+      description: `List of titles under the '${formattedTitle}' category`,
+      url: canonical,
     },
   };
 }

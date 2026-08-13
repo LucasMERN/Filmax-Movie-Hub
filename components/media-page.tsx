@@ -14,6 +14,7 @@ import {
   ChevronsRight,
   CopyIcon,
   CheckCheckIcon,
+  PlayCircle,
 } from 'lucide-react';
 import { RadialChart } from '@/components/radial-chart';
 import BackgroundImage from '@/components/ui/background-image';
@@ -25,6 +26,7 @@ import Link from 'next/link';
 import { AddToWatchlist } from '@/components/watchlist-button';
 import { useUser } from '@clerk/nextjs';
 import { Button } from './ui/button';
+import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 
 function MediaPage({
   mediaType,
@@ -49,7 +51,7 @@ function MediaPage({
   youtubeData: YouTubeVideo[];
   externalData: ExternalID;
 }) {
-  const userId = useUser();
+  const { user } = useUser();
   const castSectionRef = useRef<HTMLDivElement | null>(null);
   const [hasCopiedLink, setHasCopiedLink] = useState(false);
 
@@ -133,8 +135,7 @@ function MediaPage({
         <BackgroundImage
           src={`https://image.tmdb.org/t/p/original/${mediaData?.backdrop_path}`}
           alt={`Backdrop image for ${mediaType === 'movie' ? mediaData?.title : mediaData?.name}`}
-          lazy="eager"
-          priority
+          loading="eager"
         />
         <section className="relative z-10 container mb-14 flex flex-col gap-6 border-b border-white pt-24 pb-14">
           <span className="dark-shadow -mb-6 text-sm font-semibold tracking-widest text-white/60 uppercase">
@@ -254,7 +255,7 @@ function MediaPage({
               poster_image: mediaData?.poster_path,
               link: `/${mediaType}/${mediaData?.id}/${formattedTitle}`,
             }}
-            userId={userId.user?.id}
+            userId={!user ? null : user?.id}
           />
         </section>
         <section className="relative z-10 container flex w-full flex-col gap-8 lg:flex-row lg:gap-6">
@@ -292,12 +293,37 @@ function MediaPage({
               <CardTitle className="dark-shadow p-0 text-lg font-semibold tracking-widest text-white">
                 Watch Trailer
               </CardTitle>
-              <iframe
-                src={`https://www.youtube.com/embed/${trailerVideo[0]?.key}`}
-                loading="eager"
-                title={trailerVideo[0]?.name}
-                className="aspect-video w-full rounded-lg border border-white object-contain shadow-lg md:w-1/2 lg:w-100"
-              />
+              <Dialog>
+                <DialogTrigger asChild>
+                  <button
+                    className="group/trailer relative cursor-pointer overflow-hidden"
+                    aria-label={`click to watch the trailer for ${formattedTitle}`}
+                    title={`click to watch the trailer for ${formattedTitle}`}
+                  >
+                    <Image
+                      src={`https://img.youtube.com/vi/${trailerVideo[0]?.key}/maxresdefault.jpg`}
+                      alt={`Trailer thumbnail for ${formattedTitle}`}
+                      width={400}
+                      height={400}
+                      quality={80}
+                      loading="eager"
+                      className="aspect-video w-full rounded-lg border border-white object-contain shadow-lg md:w-1/2 lg:w-100"
+                    />
+                    <PlayCircle className="absolute inset-0 m-auto h-16 w-16 text-white/65 transition-all group-hover/trailer:text-red-600" />
+                  </button>
+                </DialogTrigger>
+                <DialogContent
+                  showCloseButton={false}
+                  className="rounded-none bg-black md:max-h-[60vh] md:min-h-[60vh] md:max-w-[60vw] md:min-w-[60vw]!"
+                >
+                  <iframe
+                    src={`https://www.youtube.com/embed/${trailerVideo[0]?.key}?autoplay=1`}
+                    allow="autoplay; encrypted-media"
+                    title={trailerVideo[0]?.name}
+                    className="h-[-webkit-fill-available] w-[-webkit-fill-available]"
+                  />
+                </DialogContent>
+              </Dialog>
             </Card>
           )}
         </section>
@@ -312,7 +338,7 @@ function MediaPage({
             mediaType="person"
             loop={false}
             data={cast}
-            width="min-[475px]:basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/6"
+            width="basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/6"
           />
         </div>
       </div>
@@ -326,7 +352,7 @@ function MediaPage({
             <ProductCarousel
               mediaType={mediaType}
               data={mediaType === 'tv' ? recommendedShows : recommendedMovies}
-              width="min-[475px]:basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/6"
+              width="basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/6"
             />
           </div>
         </div>

@@ -105,6 +105,8 @@ const EpisodeGrid = ({ mediaData, id }: { mediaData: TV; id: string }) => {
                         alt={`Thumbnail image for ${episode?.name}`}
                         width={300}
                         height={200}
+                        quality={50}
+                        sizes="25vw"
                         className="aspect-video w-full"
                         loading="lazy"
                       />
@@ -114,6 +116,8 @@ const EpisodeGrid = ({ mediaData, id }: { mediaData: TV; id: string }) => {
                         alt={`This Image is not available`}
                         width={300}
                         height={200}
+                        quality={50}
+                        sizes="25vw"
                         className="aspect-video w-full"
                         loading="lazy"
                       />

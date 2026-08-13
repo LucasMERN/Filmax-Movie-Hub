@@ -1,32 +1,16 @@
-import Image, { StaticImageData } from 'next/image';
+import Image, { ImageProps } from 'next/image';
 
-type BackgroundImageProps = {
-  src: string | StaticImageData;
-  alt: string;
-  className?: string;
-  lazy?: 'lazy' | 'eager';
-  priority?: boolean;
-};
-
-const BackgroundImage = ({
-  src,
-  alt,
-  className,
-  lazy = 'lazy',
-  priority = false,
-}: BackgroundImageProps) => (
+const BackgroundImage = ({ src, alt, className, ...props }: ImageProps) => (
   <Image
     alt={alt}
     src={src}
-    quality={80}
+    quality={props.quality ? props.quality : 100}
+    {...props}
     fill
-    loading={lazy}
-    priority={priority}
-    sizes="100%"
-    style={{
-      objectFit: 'cover',
-    }}
-    className={className}
+    priority={props.loading === 'eager' ? true : false}
+    sizes={props.sizes ? props.sizes : '100vw'}
+    fetchPriority="high"
+    className={`${className} object-cover!`}
   />
 );
 

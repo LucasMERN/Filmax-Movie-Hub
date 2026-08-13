@@ -5,10 +5,15 @@ import type { Metadata } from 'next';
 const canonical = `${baseUrl}/shows`;
 
 export const metadata: Metadata = {
-  title: 'Filmax | Popular TV Series',
+  title: 'Popular TV Series',
   description: 'Filmax Popular TV Series page',
   alternates: {
     canonical,
+  },
+  openGraph: {
+    title: 'Popular TV Series',
+    description: 'Filmax Popular TV Series page',
+    url: canonical,
   },
 };
 

@@ -21,12 +21,34 @@ export async function generateMetadata({
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
     .join(' ');
   const canonical = `${baseUrl}/tv/${id}/${formattedTitle}`;
+  const mediaData = await getSingle('tv', id);
 
   return {
-    title: `Filmax | ${formattedTitle}`,
+    title: formattedTitle,
     description: `TV Series page for '${formattedTitle}'`,
     alternates: {
       canonical,
+    },
+    openGraph: {
+      title: formattedTitle,
+      description: `TV Series page for '${formattedTitle}'`,
+      url: canonical,
+      images: [
+        {
+          url: `https://image.tmdb.org/t/p/original${mediaData?.backdrop_path}`,
+          alt: `Backdrop image for ${formattedTitle}`,
+        },
+      ],
+    },
+    twitter: {
+      title: formattedTitle,
+      description: `TV Series page for '${formattedTitle}'`,
+      images: [
+        {
+          url: `https://image.tmdb.org/t/p/original${mediaData?.backdrop_path}`,
+          alt: `Backdrop image for ${formattedTitle}`,
+        },
+      ],
     },
   };
 }

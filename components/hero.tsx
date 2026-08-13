@@ -13,6 +13,7 @@ import { Card } from '@/components/ui/card';
 import BackgroundImage from '@/components/ui/background-image';
 import Link from 'next/link';
 import { Movie, TV } from '@/types/api';
+import Image from 'next/image';
 
 const Hero = ({ data }: { data: Movie[] & TV[] }) => {
   const [currentMovieIndex, setCurrentMovieIndex] = useState(8);
@@ -85,11 +86,11 @@ const Hero = ({ data }: { data: Movie[] & TV[] }) => {
 
   return (
     <>
-      <div
+      <BackgroundImage
         onTransitionEnd={() => setIsImageVisible(true)}
+        alt={`Backdrop image for ${data[currentMovieIndex]?.title || data[currentMovieIndex]?.name}`}
+        src={`https://image.tmdb.org/t/p/original/${data[currentMovieIndex]?.backdrop_path}`}
         style={{
-          backgroundImage: `url(https://image.tmdb.org/t/p/original/${data[currentMovieIndex]?.backdrop_path})`,
-          backgroundPosition: 'center',
           opacity: isImageVisible ? 1 : 0,
           transition: 'opacity 1s ease-in-out',
           position: 'absolute',
@@ -99,8 +100,8 @@ const Hero = ({ data }: { data: Movie[] & TV[] }) => {
           bottom: 0,
           zIndex: -1,
         }}
-        className="h-168.75 w-full bg-cover bg-center lg:h-212.5"
-      ></div>
+        className="-z-10 h-168.75! w-full bg-cover bg-center lg:h-212.5!"
+      />
       <div className="relative container mx-auto h-162.5 pt-36 text-3xl font-bold text-white lg:h-197.5 lg:text-6xl">
         <h1
           className="dark-shadow mb-4 tracking-widest"
@@ -186,7 +187,9 @@ const Hero = ({ data }: { data: Movie[] & TV[] }) => {
                       <BackgroundImage
                         src={`https://image.tmdb.org/t/p/w342/${movie?.poster_path}`}
                         alt={`Poster image for ${movie?.title}`}
-                        lazy="eager"
+                        loading="eager"
+                        sizes="25vw"
+                        fetchPriority="high"
                       />
                     </Card>
                     {index == currentMovieIndex && (

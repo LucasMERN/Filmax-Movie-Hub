@@ -16,6 +16,7 @@ export async function generateMetadata({
   params: Promise<{ id: string; name: string }>;
 }): Promise<Metadata> {
   const { id, name } = await params;
+  const mediaData = await getSingle('movie', id);
   const formattedTitle = name
     .split('-')
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
@@ -23,10 +24,31 @@ export async function generateMetadata({
   const canonical = `${baseUrl}/movie/${id}/${formattedTitle}`;
 
   return {
-    title: `Filmax | ${formattedTitle}`,
+    title: formattedTitle,
     description: `Movie page for '${formattedTitle}'`,
     alternates: {
       canonical,
+    },
+    openGraph: {
+      title: formattedTitle,
+      description: `Movie page for '${formattedTitle}'`,
+      url: canonical,
+      images: [
+        {
+          url: `https://image.tmdb.org/t/p/original${mediaData?.backdrop_path}`,
+          alt: `Backdrop image for ${formattedTitle}`,
+        },
+      ],
+    },
+    twitter: {
+      title: formattedTitle,
+      description: `Movie page for '${formattedTitle}'`,
+      images: [
+        {
+          url: `https://image.tmdb.org/t/p/original${mediaData?.backdrop_path}`,
+          alt: `Backdrop image for ${formattedTitle}`,
+        },
+      ],
     },
   };
 }

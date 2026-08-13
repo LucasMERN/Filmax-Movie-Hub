@@ -1,18 +1,12 @@
 import { getSingle } from '@/lib/api';
 import Link from 'next/link';
+import BackgroundImage from './ui/background-image';
 
 interface CallToActionTypes {
   id: string;
   color: string;
+  backgroundImageTopPosition?: string;
   mediaType: 'movie' | 'tv';
-}
-
-interface CallToActionData {
-  backdrop_path: string;
-  name: string;
-  genres: [];
-  created_by: [];
-  overview: string;
 }
 
 async function CallToAction({
@@ -20,6 +14,7 @@ async function CallToAction({
   color,
   mediaType,
   className,
+  backgroundImageTopPosition,
   ...props
 }: CallToActionTypes & React.ComponentProps<'div'>) {
   try {
@@ -32,15 +27,20 @@ async function CallToAction({
     return (
       <>
         <section
-          className={`${className} hidden w-full py-24 text-white lg:block`}
+          className={`${className} relative hidden w-full overflow-hidden py-24 text-white lg:block`}
           style={{
-            backgroundImage: `linear-gradient(to right, ${color} 30%, transparent 60%), url(https://image.tmdb.org/t/p/original/${mediaData?.backdrop_path})`,
-            backgroundPosition: '0% 10%',
-            backgroundRepeat: 'no-repeat',
-            backgroundSize: 'cover',
+            background: `linear-gradient(to right, ${color} 30%, transparent 60%)`,
           }}
           {...props}
         >
+          <BackgroundImage
+            alt={`Backdrop image for ${mediaData?.title || mediaData?.name}`}
+            src={`https://image.tmdb.org/t/p/original/${mediaData?.backdrop_path}`}
+            quality={100}
+            loading="lazy"
+            className="-z-1 h-auto!"
+            style={{ top: backgroundImageTopPosition ?? undefined }}
+          />
           <div className="container">
             <div className="flex w-1/2 flex-col gap-8">
               <h3 className="text-2xl font-bold tracking-wider">
@@ -94,14 +94,19 @@ async function CallToAction({
           </div>
         </section>
         <section
-          className="w-full py-24 text-white lg:hidden"
+          className="relative w-full overflow-hidden py-24 text-white lg:hidden"
           style={{
-            backgroundImage: `linear-gradient(to top, ${color} 45%, transparent 80%), url(https://image.tmdb.org/t/p/original/${mediaData?.backdrop_path})`,
-            backgroundPosition: 'top',
-            backgroundRepeat: 'no-repeat',
-            backgroundSize: 'cover',
+            backgroundImage: `linear-gradient(to top, ${color} 45%, transparent 80%)`,
           }}
         >
+          <BackgroundImage
+            alt={`Backdrop image for ${mediaData?.title || mediaData?.name}`}
+            src={`https://image.tmdb.org/t/p/original/${mediaData?.backdrop_path}`}
+            quality={100}
+            loading="lazy"
+            className="-z-1 h-auto!"
+            style={{ top: backgroundImageTopPosition ?? undefined }}
+          />
           <div className="container">
             <div className="flex flex-col gap-8">
               <h3 className="dark-shadow text-2xl font-bold tracking-wider">

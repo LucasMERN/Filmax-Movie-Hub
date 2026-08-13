@@ -12,20 +12,56 @@ import OGImage from '@/assets/OGImage.png';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Filmax Cinema Hub',
-  description: 'Welcome to Filmax Cinema Hub! Browse Movies and TV Shows and find your next watch!',
+  metadataBase: new URL(baseUrl),
+  title: {
+    default: 'Filmax Cinema Hub',
+    template: '%s | Filmax Cinema Hub',
+  },
+  description:
+    'Welcome to Filmax Cinema Hub! Browse Movies and TV Shows to discover your next watch.',
+  applicationName: 'Filmax Cinema Hub',
+  keywords: [
+    'movies',
+    'tv shows',
+    'cinema',
+    'streaming',
+    'movie database',
+    'film discovery',
+    'tmdb',
+  ],
+  authors: [
+    {
+      name: 'Lucas Winkler',
+    },
+  ],
+  creator: 'Lucas Winkler',
   openGraph: {
-    title: 'Filmax Cinema Hub',
+    title: {
+      default: 'Filmax Cinema Hub',
+      template: '%s | Filmax Cinema Hub',
+    },
     description:
-      'Welcome to Filmax Cinema Hub! Browse Movies and TV Shows and find your next watch!',
-    url: baseUrl,
+      'Welcome to Filmax Cinema Hub! Browse Movies and TV Shows to discover your next watch.',
+    type: 'website',
+    locale: 'en_US',
+    siteName: 'Filmax Cinema Hub',
     images: [
       {
         url: OGImage.src,
         width: 1200,
         height: 630,
+        alt: 'Filmax Cinema Hub',
       },
     ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: {
+      default: 'Filmax Cinema Hub',
+      template: '%s | Filmax Cinema Hub',
+    },
+    description: 'Browse Movies and TV Shows to discover your next favorite watch.',
+    images: OGImage.src,
   },
 };
 

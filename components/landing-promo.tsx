@@ -28,35 +28,30 @@ const LandingPromo = ({ color, promoMovies }: { color: string; promoMovies: Movi
       id: 0,
       headline: "SEE WHAT'S NEXT",
       tagline: ['WATCH ANYTIME.', 'FROM ANYWHERE.'],
-      stuff: 'border-l-neutral-700',
-      activeImage: 0,
     },
     {
       id: 1,
       headline: 'WATCH FROM ANYWHERE',
       tagline: ['SMART TVS, PLAYSTATION.', 'XBOX, APPLE TV, AND MORE.'],
-      stuff: 'neutral-700',
-      activeImage: 1,
     },
     {
       id: 2,
       headline: 'GET STARTED',
       tagline: ['YOU WANT IT?', 'WE GOT IT!'],
-      stuff: 'neutral-700',
-      activeImage: 2,
     },
   ];
 
   return (
     <div className="relative h-112.5 w-full overflow-hidden lg:h-175">
       <Image
-        alt={`Backdrop image for ${promoMovies[carousel[activeIndex].activeImage]?.title}`}
+        alt={`Backdrop image for ${promoMovies[carousel[activeIndex].id]?.title}`}
         decoding="async"
         className="absolute inset-0 z-10 h-full w-full object-cover grayscale"
         fill
         priority
+        fetchPriority="high"
         loading="eager"
-        src={`https://image.tmdb.org/t/p/original/${promoMovies[carousel[activeIndex].activeImage]?.backdrop_path}`}
+        src={`https://image.tmdb.org/t/p/original/${promoMovies[carousel[activeIndex].id]?.backdrop_path}`}
         style={{
           opacity: isImageVisible ? 1 : 0,
           transition: 'opacity 1s ease-in-out',
@@ -120,9 +115,12 @@ const LandingPromo = ({ color, promoMovies }: { color: string; promoMovies: Movi
           }}
         >
           <BackgroundImage
-            src={`https://image.tmdb.org/t/p/original/${promoMovies[carousel[activeIndex].activeImage]?.backdrop_path}`}
-            alt={`Poster image for ${promoMovies[carousel[activeIndex].activeImage]?.title}`}
-            lazy="eager"
+            src={`https://image.tmdb.org/t/p/original/${promoMovies[carousel[activeIndex].id]?.backdrop_path}`}
+            alt={`Poster image for ${promoMovies[carousel[activeIndex].id]?.title}`}
+            priority
+            fetchPriority="high"
+            loading="eager"
+            sizes="40vw"
           />
         </div>
       </div>

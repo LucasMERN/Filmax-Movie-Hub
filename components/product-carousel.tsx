@@ -56,6 +56,9 @@ const ProductCarousel: React.FC<CarouselProps> = ({
                               ? 'Poster image for' + content?.title
                               : 'Poster image for' + content?.name
                           }
+                          sizes="25vw"
+                          quality={50}
+                          loading="lazy"
                           className="transition-transform group-hover:scale-105"
                         />
                       </Card>

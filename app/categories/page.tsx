@@ -23,10 +23,15 @@ import { baseUrl } from '@/lib/base-url';
 const canonical = `${baseUrl}/categories`;
 
 export const metadata: Metadata = {
-  title: 'Filmax | Categories',
+  title: 'Categories',
   description: 'Filmax Categories Page for choosing movie categories',
   alternates: {
     canonical,
+  },
+  openGraph: {
+    title: 'Categories',
+    description: 'Filmax Categories Page for choosing movie categories',
+    url: canonical,
   },
 };
 

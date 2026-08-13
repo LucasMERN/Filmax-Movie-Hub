@@ -9,6 +9,7 @@ export async function generateMetadata({
   params: Promise<{ id: string; name: string }>;
 }): Promise<Metadata> {
   const { id, name } = await params;
+  const personData = await getPerson(id);
   const formattedTitle = name
     .split('-')
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
@@ -16,10 +17,31 @@ export async function generateMetadata({
   const canonical = `${baseUrl}/person/${id}/${formattedTitle}`;
 
   return {
-    title: `Filmax | ${formattedTitle}`,
+    title: formattedTitle,
     description: `Biography page for '${formattedTitle}'`,
     alternates: {
       canonical,
+    },
+    openGraph: {
+      title: formattedTitle,
+      description: `TV Series page for '${formattedTitle}'`,
+      url: canonical,
+      images: [
+        {
+          url: `https://image.tmdb.org/t/p/w342/${personData.profile_path}`,
+          alt: `Backdrop image for ${formattedTitle}`,
+        },
+      ],
+    },
+    twitter: {
+      title: formattedTitle,
+      description: `TV Series page for '${formattedTitle}'`,
+      images: [
+        {
+          url: `https://image.tmdb.org/t/p/w342/${personData.profile_path}`,
+          alt: `Backdrop image for ${formattedTitle}`,
+        },
+      ],
     },
   };
 }

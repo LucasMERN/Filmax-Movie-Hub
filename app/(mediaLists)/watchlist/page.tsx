@@ -8,10 +8,15 @@ import { baseUrl } from '@/lib/base-url';
 const canonical = `${baseUrl}/movies`;
 
 export const metadata: Metadata = {
-  title: 'Filmax | Watchlist',
+  title: 'Watchlist',
   description: 'Add Media to Your Watchlist',
   alternates: {
     canonical: canonical,
+  },
+  openGraph: {
+    title: 'Watchlist',
+    description: 'Add Media to Your Watchlist',
+    url: canonical,
   },
 };
 
@@ -45,7 +50,7 @@ export default async function Watchlist() {
                   loading="lazy"
                 />
               </Link>
-              <RemoveFromWatchlist item={item} userId={id} />
+              <RemoveFromWatchlist item={item} userId={id !== undefined ? id : null} />
             </div>
           ))}
         {records.length === 0 && (

@@ -10,10 +10,15 @@ import type { Metadata } from 'next';
 const canonical = `${baseUrl}/dashboard`;
 
 export const metadata: Metadata = {
-  title: 'Filmax | Home',
-  description: 'Home page for Filmax Cinema Hub',
+  title: 'Home',
+  description: 'Browse Movies and TV Shows...',
   alternates: {
     canonical,
+  },
+  openGraph: {
+    title: 'Home',
+    description: 'Browse Movies and TV Shows...',
+    url: canonical,
   },
 };
 
@@ -72,14 +77,14 @@ export default async function Dashboard() {
             <ProductCarousel
               mediaType="movie"
               data={newMovieData?.results}
-              width="min-[475px]:basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/6"
+              width="basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/6"
             />
           </div>
           <div className="container pr-0">
             <CarouselHeader title="The GOAT List" link="/movies" />
             <ProductCarousel
               data={popularData?.items}
-              width="min-[475px]:basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/6"
+              width="basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/6"
             />
           </div>
           <CallToAction id={'95396'} color="#00b2be" mediaType={'tv'} />
@@ -88,21 +93,21 @@ export default async function Dashboard() {
             <ProductCarousel
               mediaType="tv"
               data={newTVData?.results}
-              width="min-[475px]:basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/6"
+              width="basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/6"
             />
           </div>
           <div className="container pr-0">
             <CarouselHeader title="When The World Went Weird..." link="/movies" />
             <ProductCarousel
               data={weirdWorldData?.items}
-              width="min-[475px]:basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/6"
+              width="basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/6"
             />
           </div>
           <div className="container pr-0">
             <CarouselHeader title="Slow-Burn Sci-Fi" link="/movies" />
             <ProductCarousel
               data={scifiData?.items}
-              width="min-[475px]:basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/6"
+              width="basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/6"
             />
           </div>
           <CallToAction id={'969681'} color="#898b16" mediaType={'movie'} />
@@ -110,21 +115,21 @@ export default async function Dashboard() {
             <CarouselHeader title="Absolute Tear Jerkers" link="/movies" />
             <ProductCarousel
               data={sadData?.items}
-              width="min-[475px]:basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/6"
+              width="basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/6"
             />
           </div>
           <div className="container pr-0">
             <CarouselHeader title="Cold Case Thrillers" link="/movies" />
             <ProductCarousel
               data={coldCaseThrillersData?.items}
-              width="min-[475px]:basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/6"
+              width="basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/6"
             />
           </div>
           <div className="container pr-0">
             <CarouselHeader title="White-Knuckle Watchlist" link="/movies" />
             <ProductCarousel
               data={whiteKnuckleData?.items}
-              width="min-[475px]:basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/6"
+              width="basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/6"
             />
           </div>
           <div className="container pr-0">
@@ -132,7 +137,7 @@ export default async function Dashboard() {
             <ProductCarousel
               mediaType="movie"
               data={animatedMovieData?.results}
-              width="min-[475px]:basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/6"
+              width="basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/6"
             />
           </div>
           <CallToAction id={'1423191'} color="#8b1616" mediaType={'movie'} />
@@ -140,50 +145,55 @@ export default async function Dashboard() {
             <CarouselHeader title="Action Packed All-Stars" link="/movies" />
             <ProductCarousel
               data={actionData?.items}
-              width="min-[475px]:basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/6"
+              width="basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/6"
             />
           </div>
           <div className="container pr-0">
             <CarouselHeader title="Guilty Pleasure Laughs" link="/movies" />
             <ProductCarousel
               data={funnyData?.items}
-              width="min-[475px]:basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/6"
+              width="basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/6"
             />
           </div>
           <div className="container pr-0">
             <CarouselHeader title="Rewind & Rewatch" link="/movies" />
             <ProductCarousel
               data={rewindRewatchData?.items}
-              width="min-[475px]:basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/6"
+              width="basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/6"
             />
           </div>
           <div className="container pr-0">
             <CarouselHeader title="Mind-Bending Mania" link="/movies" />
             <ProductCarousel
               data={mindBenderData?.items}
-              width="min-[475px]:basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/6"
+              width="basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/6"
             />
           </div>
-          <CallToAction id={'215943'} color="#0090b4" mediaType={'tv'} />
+          <CallToAction
+            id={'215943'}
+            color="#0090b4"
+            mediaType={'tv'}
+            backgroundImageTopPosition="-203px"
+          />
           <div className="container pr-0">
             <CarouselHeader title="One More Episode..." link="/movies" />
             <ProductCarousel
               data={goodTVData?.items}
-              width="min-[475px]:basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/6"
+              width="basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/6"
             />
           </div>
           <div className="container pr-0">
             <CarouselHeader title="Fright Night Favorites" link="/movies" />
             <ProductCarousel
               data={horrorData?.items}
-              width="min-[475px]:basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/6"
+              width="basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/6"
             />
           </div>
           <div className="container pr-0">
             <CarouselHeader title="Oldies, but Goldies" link="/movies" />
             <ProductCarousel
               data={classicData?.items}
-              width="min-[475px]:basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/6"
+              width="basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/6"
             />
           </div>
         </div>

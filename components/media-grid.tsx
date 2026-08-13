@@ -164,6 +164,8 @@ const GridItems = ({ data, mediaType }: { data: Data[]; mediaType: 'movie' | 'tv
                   src={`https://image.tmdb.org/t/p/w342/${item.poster_path}`}
                   width={342}
                   height={513}
+                  quality={50}
+                  sizes="25vw"
                   className="h-full object-cover transition-transform group-hover:scale-105"
                   alt={`Poster image for ${mediaType === 'movie' ? item?.title : item?.name}`}
                   loading="lazy"

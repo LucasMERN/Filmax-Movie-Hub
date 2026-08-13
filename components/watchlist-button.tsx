@@ -6,6 +6,16 @@ import {
   removeFromWatchlist,
 } from '@/app/actions/watchlist.action';
 import { Button } from '@/components/ui/button';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog';
+import { SignInButton } from '@clerk/nextjs';
 import { Loader2, Plus, Trash2 } from 'lucide-react';
 import { useState, useTransition, useEffect } from 'react';
 
@@ -15,7 +25,7 @@ interface AddToWatchlistProps {
     poster_image: string;
     link: string;
   };
-  userId: string | undefined;
+  userId: string | null;
 }
 
 const AddToWatchlist = ({ item, userId }: AddToWatchlistProps) => {
@@ -61,17 +71,31 @@ const AddToWatchlist = ({ item, userId }: AddToWatchlistProps) => {
 
   return (
     <>
-      {onWatchlist === null ? (
-        <Button
-          aria-disabled={true}
-          size="lg"
-          variant="outline"
-          className="flex w-fit items-center gap-2 bg-transparent px-3 text-white shadow-lg"
-          disabled={true}
-        >
-          Loading...
-          <Loader2 size={18} strokeWidth={3} className="animate-spin" />
-        </Button>
+      {userId === null ? (
+        <Dialog>
+          <DialogTrigger asChild>
+            <Button
+              size="lg"
+              variant="outline"
+              className="flex w-fit items-center gap-2 bg-transparent px-3 text-white shadow-lg"
+            >
+              Add to Watchlist
+            </Button>
+          </DialogTrigger>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>Woah there, pal. Slow down</DialogTitle>
+              <DialogDescription>
+                If you want to add things to your watchlist, you need to sign in first!
+              </DialogDescription>
+            </DialogHeader>
+            <DialogFooter>
+              <Button variant="outline" asChild className="mr-auto text-white">
+                <SignInButton />
+              </Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
       ) : onWatchlist ? (
         <Button
           aria-label="Click to remove from watchlist"
